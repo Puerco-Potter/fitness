@@ -2,3 +2,6 @@ easy_admin:
     entities:
         # change the following to the namespaces of your own entities
         - App\Entity\Cliente
+        - App\Entity\FichaMedica
+    list:
+        actions: ['show']

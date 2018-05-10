@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +62,16 @@ class Cliente
      * @ORM\Column(type="float")
      */
     private $cuenta;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FichaMedica", mappedBy="Cliente", orphanRemoval=true)
+     */
+    private $FichaMedica;
+
+    public function __construct()
+    {
+        $this->FichaMedica = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -172,5 +184,41 @@ class Cliente
         $this->cuenta = $cuenta;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|FichaMedica[]
+     */
+    public function getFichaMedica(): Collection
+    {
+        return $this->FichaMedica;
+    }
+
+    public function addFichaMedica(FichaMedica $fichaMedica): self
+    {
+        if (!$this->FichaMedica->contains($fichaMedica)) {
+            $this->FichaMedica[] = $fichaMedica;
+            $fichaMedica->setCliente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFichaMedica(FichaMedica $fichaMedica): self
+    {
+        if ($this->FichaMedica->contains($fichaMedica)) {
+            $this->FichaMedica->removeElement($fichaMedica);
+            // set the owning side to null (unless already changed)
+            if ($fichaMedica->getCliente() === $this) {
+                $fichaMedica->setCliente(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getNombre();
     }
 }
