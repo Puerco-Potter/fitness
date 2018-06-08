@@ -5,7 +5,6 @@ easy_admin:
         - App\Entity\FichaMedica
         - App\Entity\User
         - App\Entity\Sala
-
         - App\Entity\Empleado
     list:
         actions: ['show']
