@@ -7,6 +7,11 @@ parameters:
 
 doctrine:
     dbal:
+        dbname:               fitness
+        host:                 localhost
+        port:                 
+        user:                 root
+        password:             
         # configure these for your database server
         driver: 'pdo_mysql'
         server_version: '5.7'

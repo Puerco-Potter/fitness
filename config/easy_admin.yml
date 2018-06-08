@@ -3,6 +3,9 @@ easy_admin:
         # change the following to the namespaces of your own entities
         - App\Entity\Cliente
         - App\Entity\FichaMedica
+        - App\Entity\User
+        - App\Entity\Sala
+
         - App\Entity\Empleado
     list:
         actions: ['show']
