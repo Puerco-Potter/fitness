@@ -7,5 +7,6 @@ easy_admin:
         - App\Entity\Sala
         - App\Entity\Empleado
         - App\Entity\Telefono
+        - App\Entity\Profesor
     list:
         actions: ['show']
