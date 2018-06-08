@@ -20,27 +20,27 @@ class Profesor
      * @ORM\OneToOne(targetEntity="App\Entity\Empleado", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $idEmpleado;
+    private $Empleado;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getIdEmpleado(): ?Empleado
+    public function getEmpleado(): ?Empleado
     {
-        return $this->idEmpleado;
+        return $this->Empleado;
     }
 
-    public function setIdEmpleado(Empleado $idEmpleado): self
+    public function setEmpleado(Empleado $Empleado): self
     {
-        $this->idEmpleado = $idEmpleado;
+        $this->Empleado = $Empleado;
 
         return $this;
     }
 	public function __toString()
     {
-        return $this->getIdEmpleado();
+        return $this->getEmpleado();
     }
 
 }

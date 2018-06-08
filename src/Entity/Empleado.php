@@ -158,7 +158,7 @@ class Empleado
     }
 	public function __toString()
     {
-        return $this->getApellido()+' '+$this->getNombre();
+        return $this->getApellido().' '.$this->getNombre();
     }
 
 }
