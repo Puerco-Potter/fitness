@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\EquipamientoRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ElementoRepository")
  */
-class Equipamiento
+class Elemento
 {
     /**
      * @ORM\Id()
@@ -17,7 +17,7 @@ class Equipamiento
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="text")
      */
     private $descripcion;
 
@@ -27,19 +27,14 @@ class Equipamiento
     private $proxMantenimiento;
 
     /**
-     * @ORM\Column(type="string", length=45)
-     */
-    private $estado;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $mantenimientoDias;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="integer")
      */
-    private $fechaAdquisicion;
+    private $cantidad;
 
     public function getId()
     {
@@ -70,39 +65,34 @@ class Equipamiento
         return $this;
     }
 
-    public function getEstado(): ?string
-    {
-        return $this->estado;
-    }
-
-    public function setEstado(string $estado): self
-    {
-        $this->estado = $estado;
-
-        return $this;
-    }
-
     public function getMantenimientoDias(): ?int
     {
         return $this->mantenimientoDias;
     }
 
-    public function setMantenimientoDias(int $mantenimientoDias): self
+    public function setMantenimientoDias(?int $mantenimientoDias): self
     {
         $this->mantenimientoDias = $mantenimientoDias;
 
         return $this;
     }
 
-    public function getFechaAdquisicion(): ?\DateTimeInterface
+    public function getCantidad(): ?int
     {
-        return $this->fechaAdquisicion;
+        return $this->cantidad;
     }
 
-    public function setFechaAdquisicion(\DateTimeInterface $fechaAdquisicion): self
+    public function setCantidad(int $cantidad): self
     {
-        $this->fechaAdquisicion = $fechaAdquisicion;
+        $this->cantidad = $cantidad;
 
         return $this;
     }
+	
+	public function __toString()
+    {
+        return $this->getNombre();
+    }
+
+	
 }
