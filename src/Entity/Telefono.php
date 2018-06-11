@@ -31,16 +31,6 @@ class Telefono
      */
     private $numero;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Alumno", inversedBy="telefonos")
-     */
-    private $alumno;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\FichaMedica", inversedBy="telefonos")
-     */
-    private $fichaMedica;
-
     public function getId()
     {
         return $this->id;
@@ -81,28 +71,9 @@ class Telefono
 
         return $this;
     }
-
-    public function getAlumno(): ?Alumno
+	public function __toString()
     {
-        return $this->alumno;
+        return $this->getNombre();
     }
 
-    public function setAlumno(?Alumno $alumno): self
-    {
-        $this->alumno = $alumno;
-
-        return $this;
-    }
-
-    public function getFichaMedica(): ?FichaMedica
-    {
-        return $this->fichaMedica;
-    }
-
-    public function setFichaMedica(?FichaMedica $fichaMedica): self
-    {
-        $this->fichaMedica = $fichaMedica;
-
-        return $this;
-    }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -147,22 +145,6 @@ class FichaMedica
      * @ORM\Column(type="text", nullable=true)
      */
     private $listaEnfermedades;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Alumno", inversedBy="fichasMedicas")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $alumno;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="fichaMedica")
-     */
-    private $telefonos;
-
-    public function __construct()
-    {
-        $this->telefonos = new ArrayCollection();
-    }
 
     public function getId()
     {
@@ -480,47 +462,9 @@ class FichaMedica
 
         return $this;
     }
-
-    public function getAlumno(): ?Alumno
+	public function __toString()
     {
-        return $this->alumno;
+        return $this->getNombre();
     }
 
-    public function setAlumno(?Alumno $alumno): self
-    {
-        $this->alumno = $alumno;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Telefono[]
-     */
-    public function getTelefonos(): Collection
-    {
-        return $this->telefonos;
-    }
-
-    public function addTelefono(Telefono $telefono): self
-    {
-        if (!$this->telefonos->contains($telefono)) {
-            $this->telefonos[] = $telefono;
-            $telefono->setFichaMedica($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTelefono(Telefono $telefono): self
-    {
-        if ($this->telefonos->contains($telefono)) {
-            $this->telefonos->removeElement($telefono);
-            // set the owning side to null (unless already changed)
-            if ($telefono->getFichaMedica() === $this) {
-                $telefono->setFichaMedica(null);
-            }
-        }
-
-        return $this;
-    }
 }
