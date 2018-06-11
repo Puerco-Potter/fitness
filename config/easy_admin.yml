@@ -5,6 +5,8 @@ easy_admin:
         menu:
             # Entidades de Damian
             # Entidades de Emiliano
+            - { entity: 'Empleado', icon: 'address-card' }
+            - { entity: 'Profesor', icon: 'user' }
             # Entidades de Maty
             - { entity: 'User', icon: 'child' }
             # Entidades de Maxi
