@@ -5,6 +5,8 @@ easy_admin:
         - App\Entity\User
         # Entidades de Damian
         # Entidades de Emiliano
+        - App\Entity\Empleado
+        - App\Entity\Profesor
         # Entidades de Maty
         # Entidades de Maxi
 
