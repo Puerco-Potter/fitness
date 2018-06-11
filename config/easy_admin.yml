@@ -1,24 +1,8 @@
 easy_admin:
     site_name: 'Fussion Fitnnes Gym'
     entities:
- 
         # change the following to the namespaces of your own entities
- 
-        - App\Entity\Cliente
- 
-        - App\Entity\FichaMedica
- 
         - App\Entity\User
- 
-        - App\Entity\Empleado
- 
-        - App\Entity\Telefono
- 
-        - App\Entity\Profesor
- 
-        - App\Entity\Equipamiento
- 
-        - App\Entity\Elemento
  
     list:
  
