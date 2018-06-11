@@ -3,6 +3,11 @@ easy_admin:
     entities:
         # change the following to the namespaces of your own entities
         - App\Entity\User
+        # Entidades de Damian
+        # Entidades de Emiliano
+        # Entidades de Maty
+        # Entidades de Maxi
+
  
     list:
  
