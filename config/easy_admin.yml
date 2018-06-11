@@ -9,8 +9,9 @@ easy_admin:
         - App\Entity\Profesor
         # Entidades de Maty
         # Entidades de Maxi
-
- 
+        - App\Entity\Actividad
+        - App\Entity\Equipamiento
+        - App\Entity\Elemento
     list:
  
         actions: ['show']
