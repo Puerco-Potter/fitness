@@ -122,6 +122,12 @@ class FichaMedica
      */
     private $Cliente;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Alumno", inversedBy="fichasMedicas")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $alumno;
+
     public function getId()
     {
         return $this->id;
@@ -381,5 +387,17 @@ class FichaMedica
     public function __toString()
     {
         return strval($this->getId());
+    }
+
+    public function getAlumno(): ?Alumno
+    {
+        return $this->alumno;
+    }
+
+    public function setAlumno(?Alumno $alumno): self
+    {
+        $this->alumno = $alumno;
+
+        return $this;
     }
 }
