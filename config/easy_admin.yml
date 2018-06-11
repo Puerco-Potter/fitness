@@ -1,5 +1,14 @@
 easy_admin:
     site_name: 'Fussion Fitnnes Gym'
+    design:
+        brand_color: '#e2048d'
+        menu:
+            # Entidades de Damian
+            # Entidades de Emiliano
+            # Entidades de Maty
+            - { entity: 'User', icon: 'child' }
+            # Entidades de Maxi
+
     entities:
         # change the following to the namespaces of your own entities
         - App\Entity\User
