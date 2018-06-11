@@ -73,15 +73,9 @@ class Cliente
      */
     private $Observacion;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sala", mappedBy="cliente")
-     */
-    private $salas;
-
     public function __construct()
     {
         $this->FichaMedica = new ArrayCollection();
-        $this->salas = new ArrayCollection();
     }
 
     public function getId()
@@ -241,37 +235,6 @@ class Cliente
     public function setObservacion(?string $Observacion): self
     {
         $this->Observacion = $Observacion;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Sala[]
-     */
-    public function getSalas(): Collection
-    {
-        return $this->salas;
-    }
-
-    public function addSala(Sala $sala): self
-    {
-        if (!$this->salas->contains($sala)) {
-            $this->salas[] = $sala;
-            $sala->setCliente($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSala(Sala $sala): self
-    {
-        if ($this->salas->contains($sala)) {
-            $this->salas->removeElement($sala);
-            // set the owning side to null (unless already changed)
-            if ($sala->getCliente() === $this) {
-                $sala->setCliente(null);
-            }
-        }
 
         return $this;
     }
