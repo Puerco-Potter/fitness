@@ -18,6 +18,10 @@ easy_admin:
  
         - App\Entity\Profesor
  
+        - App\Entity\Equipamiento
+ 
+        - App\Entity\Elemento
+ 
     list:
  
         actions: ['show']
