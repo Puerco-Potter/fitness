@@ -3,18 +3,27 @@ easy_admin:
     design:
         brand_color: '#e2048d'
         menu:
-            # Entidades de Damian
-            # Entidades de Emiliano
-            - { entity: 'Empleado', icon: 'address-card' }
-            - { entity: 'Profesor', icon: 'user' }
             # Entidades de Maty
             - { entity: 'User', icon: 'child' }
             # Entidades de Maxi
+            - { entity: 'Actividad', icon: 'bolt' }
+            - { entity: 'Equipamiento', icon: 'cogs' }
+            - { entity: 'Elemento', icon: 'list' }
+            # Entidades de Damian
+            - { entity: 'Alumno', icon: 'address-card' }
+            - { entity: 'FichaMedica', icon: 'clipboard' }
+            - { entity: 'Telefono', icon: 'phone' }
+            # Entidades de Emiliano
+            - { entity: 'Empleado', icon: 'users' }
+            - { entity: 'Profesor', icon: 'user' }
 
     entities:
         # change the following to the namespaces of your own entities
         - App\Entity\User
         # Entidades de Damian
+        - App\Entity\Alumno
+        - App\Entity\FichaMedica
+        - App\Entity\Telefono
         # Entidades de Emiliano
         - App\Entity\Empleado
         - App\Entity\Profesor
