@@ -3,19 +3,30 @@ easy_admin:
     design:
         brand_color: '#e2048d'
         menu:
-            # Entidades de Maty
-            - { entity: 'User', icon: 'child' }
+            # Entidades de Damian A
+            - label: 'Gestión de alumnos'
+              icon: 'address-card'
+              children:
+                - { entity: 'Alumno', icon: 'address-card' }
+                - { entity: 'FichaMedica', icon: 'clipboard' }
+                - { entity: 'Telefono', icon: 'phone' }
             # Entidades de Maxi
             - { entity: 'Actividad', icon: 'bolt' }
-            - { entity: 'Equipamiento', icon: 'cogs' }
-            - { entity: 'Elemento', icon: 'list' }
-            # Entidades de Damian
-            - { entity: 'Alumno', icon: 'address-card' }
-            - { entity: 'FichaMedica', icon: 'clipboard' }
-            - { entity: 'Telefono', icon: 'phone' }
+            - label: 'Gestión de elementos'
+              icon: 'cogs'
+              children:
+                - { entity: 'Equipamiento', icon: 'cogs' }
+                - { entity: 'Elemento', icon: 'list' }
             # Entidades de Emiliano
-            - { entity: 'Empleado', icon: 'users' }
-            - { entity: 'Profesor', icon: 'user' }
+            - label: 'Gestión de Empleados'
+              icon: 'users'
+              children:
+                - { entity: 'Empleado', icon: 'users' }
+                - { entity: 'Profesor', icon: 'user' }
+                - { entity: 'Telefono', icon: 'phone' }
+            # Entidades de Matias
+            - { label: "Usuarios" , entity: 'User', icon: 'child' }
+            
 
     entities:
         # change the following to the namespaces of your own entities
