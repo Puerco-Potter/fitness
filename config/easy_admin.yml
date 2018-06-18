@@ -31,6 +31,15 @@ easy_admin:
         # Entidades de Emiliano
         Empleado:
             class: App\Entity\Empleado
+            form:
+                fields:
+                    - { property: 'dni', type: 'text', label: 'DNI'}
+                    - { property: 'apellido', type: 'text', label: 'Apellido'}
+                    - { property: 'nombre', type: 'text', label: 'Nombres'}                    
+                    - { property: 'cuit', type: 'text', label: 'CUIT'}
+                    - { property: 'relacion', type: 'text', label: 'Relación laboral'}
+                    - { property: 'direccion', type: 'text', label: 'Dirección'}
+                    - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
         Profesor:
             class: App\Entity\Profesor
         # Entidades de Maty
