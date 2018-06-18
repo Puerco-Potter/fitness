@@ -19,19 +19,28 @@ easy_admin:
 
     entities:
         # change the following to the namespaces of your own entities
-        - App\Entity\User
+        User:
+            class: App\Entity\User 
         # Entidades de Damian
-        - App\Entity\Alumno
-        - App\Entity\FichaMedica
-        - App\Entity\Telefono
+        Alumno:
+            class: App\Entity\Alumno
+        FichaMedica:
+            class: App\Entity\FichaMedica
+        Telefono:
+            class: App\Entity\Telefono
         # Entidades de Emiliano
-        - App\Entity\Empleado
-        - App\Entity\Profesor
+        Empleado:
+            class: App\Entity\Empleado
+        Profesor:
+            class: App\Entity\Profesor
         # Entidades de Maty
         # Entidades de Maxi
-        - App\Entity\Actividad
-        - App\Entity\Equipamiento
-        - App\Entity\Elemento
+        Actividad:
+            class: App\Entity\Actividad
+        Equipamiento:
+            class: App\Entity\Equipamiento
+        Elemento:
+            class: App\Entity\Elemento
     list:
  
         actions: ['show']
