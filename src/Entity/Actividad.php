@@ -26,6 +26,21 @@ class Actividad
      */
     private $grupal;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $fechaInicio;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $estado;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descripcion;
+
     public function getId()
     {
         return $this->id;
@@ -51,6 +66,42 @@ class Actividad
     public function setGrupal(bool $grupal): self
     {
         $this->grupal = $grupal;
+
+        return $this;
+    }
+
+    public function getFechaInicio(): ?\DateTimeInterface
+    {
+        return $this->fechaInicio;
+    }
+
+    public function setFechaInicio(\DateTimeInterface $fechaInicio): self
+    {
+        $this->fechaInicio = $fechaInicio;
+
+        return $this;
+    }
+
+    public function getEstado(): ?bool
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(bool $estado): self
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(?string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
 
         return $this;
     }
