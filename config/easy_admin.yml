@@ -48,7 +48,7 @@ easy_admin:
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'}                    
                     - { property: 'cuit', type: 'text', label: 'CUIT'}
-                    - { property: 'relacion', type: 'text', label: 'Relación laboral'}
+                    - { property: 'relacion', type: 'choice', label: 'Relación laboral',type_options:{choices:{'Monotributista':'Monotributista','En relación de dependencia':'En relación de dependencia'}}}
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
         Profesor:
@@ -57,6 +57,13 @@ easy_admin:
         # Entidades de Maxi
         Actividad:
             class: App\Entity\Actividad
+            form:
+                fields:
+                    - { property: 'nombre', type: 'text', label: 'Nombre'}
+                    - { property: 'grupal', type: 'checkbox', label: '¿Es grupal?'}
+                    - { property: 'fechaInicio', type: 'date', label: 'Fecha de creación de la actividad',type_options: {widget: 'single_text'}}                    
+                    - { property: 'estado', type: 'checkbox', label: '¿Se realiza actualmente?'}
+                    - { property: 'descripciOn', type: 'textarea', label: 'Descripción'}
         Equipamiento:
             class: App\Entity\Equipamiento
         Elemento:
