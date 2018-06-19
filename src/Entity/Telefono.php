@@ -31,6 +31,8 @@ class Telefono
      */
     private $numero;
 
+    
+
     public function getId()
     {
         return $this->id;
@@ -73,7 +75,54 @@ class Telefono
     }
 	public function __toString()
     {
-        return $this->getNombre();
+        return $this->getCaracteristica().' - '.$this->getNumero();
     }
+	 /**
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Alumno")
+	 */
+	private $Alumno;
+	public function getAlumno(): ?Alumno
+	{
+		return $this->Alumno;
+	}
+	public function setAlumno(?Alumno $Alumno): self
+	 {
+		 $this->Alumno = $Alumno;
+		 return $this;
+	 }
+ 
+ 
+	/**
+	* @ORM\ManyToOne(targetEntity="App\Entity\Empleado")
+	*/
+	private $Empleado;
+
+
+	public function getEmpleado(): ?Empleado
+	{
+		return $this->Empleado;
+	}
+	public function setEmpleado(?Empleado $Empleado): self
+	{
+		$this->Empleado = $Empleado;
+		return $this;
+	}
+ 
+	/**
+	* @ORM\ManyToOne(targetEntity="App\Entity\FichaMedica")
+	*/
+	private $FichaMedica;
+
+
+	public function getFichaMedica(): ?FichaMedica
+	{
+		return $this->FichaMedica;
+	}
+
+	public function setFichaMedica(?FichaMedica $FichaMedica): self
+	{
+		$this->FichaMedica = $FichaMedica;
+		return $this;
+	}
 
 }

@@ -11,8 +11,8 @@ easy_admin:
                 - { entity: 'FichaMedica', icon: 'clipboard' }
                 - { entity: 'Telefono', icon: 'phone' }
             # Entidades de Maxi
-            - { entity: 'Actividad', icon: 'bolt' }
-            - label: 'Gestión de elementos'
+            - { label: "Actividades" , entity: 'Actividad', icon: 'bolt' }
+            - label: 'Gestión de Inventario'
               icon: 'cogs'
               children:
                 - { entity: 'Equipamiento', icon: 'cogs' }
@@ -39,6 +39,14 @@ easy_admin:
             class: App\Entity\FichaMedica
         Telefono:
             class: App\Entity\Telefono
+            form:
+                fields:
+                    - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
+                    - { property: 'caracteristica', type: 'text', label: 'Característica'}
+                    - { property: 'numero', type: 'text', label: 'Número'}                    
+                    - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}                   
+                    - { property: 'empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Empleado'}                   
+                    - { property: 'fichaMedica', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\FichaMedica'}, label: 'Emergencia'}   
         # Entidades de Emiliano
         Empleado:
             class: App\Entity\Empleado
@@ -63,7 +71,7 @@ easy_admin:
                     - { property: 'grupal', type: 'checkbox', label: '¿Es grupal?'}
                     - { property: 'fechaInicio', type: 'date', label: 'Fecha de creación de la actividad',type_options: {widget: 'single_text'}}                    
                     - { property: 'estado', type: 'checkbox', label: '¿Se realiza actualmente?'}
-                    - { property: 'descripciOn', type: 'textarea', label: 'Descripción'}
+                    - { property: 'descripcion', type: 'textarea', label: 'Descripción'}
         Equipamiento:
             class: App\Entity\Equipamiento
         Elemento:
