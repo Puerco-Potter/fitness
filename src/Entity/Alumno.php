@@ -81,7 +81,13 @@ class Alumno
      */
     private $balance;
 
-    /**
+	/**
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 8,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(type="string", length=8)
      */
     private $dni;
@@ -97,15 +103,10 @@ class Alumno
     private $diasPrueba;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FichaMedica", mappedBy="alumno", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FichaMedica", mappedBy="Alumno")
      */
-    private $fichasMedicas;
+    private $fichaMedicas;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="alumno")
-     */
-    private $telefonos;
-	
 	public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('cp', new Assert\Length(array(
@@ -120,6 +121,7 @@ class Alumno
     {
         $this->fichasMedicas = new ArrayCollection();
         $this->telefonos = new ArrayCollection();
+        $this->fichaMedicas = new ArrayCollection();
     }
 
     public function getId()
@@ -296,70 +298,36 @@ class Alumno
         return $this;
     }
 
-    /**
-     * @return Collection|FichaMedica[]
-     */
-    public function getFichasMedicas(): Collection
-    {
-        return $this->fichasMedicas;
-    }
-
-    public function addFichasMedica(FichaMedica $fichasMedica): self
-    {
-        if (!$this->fichasMedicas->contains($fichasMedica)) {
-            $this->fichasMedicas[] = $fichasMedica;
-            $fichasMedica->setAlumno($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFichasMedica(FichaMedica $fichasMedica): self
-    {
-        if ($this->fichasMedicas->contains($fichasMedica)) {
-            $this->fichasMedicas->removeElement($fichasMedica);
-            // set the owning side to null (unless already changed)
-            if ($fichasMedica->getAlumno() === $this) {
-                $fichasMedica->setAlumno(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Telefono[]
-     */
-    public function getTelefonos(): Collection
-    {
-        return $this->telefonos;
-    }
-
-    public function addTelefono(Telefono $telefono): self
-    {
-        if (!$this->telefonos->contains($telefono)) {
-            $this->telefonos[] = $telefono;
-            $telefono->setAlumno($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTelefono(Telefono $telefono): self
-    {
-        if ($this->telefonos->contains($telefono)) {
-            $this->telefonos->removeElement($telefono);
-            // set the owning side to null (unless already changed)
-            if ($telefono->getAlumno() === $this) {
-                $telefono->setAlumno(null);
-            }
-        }
-
-        return $this;
-    }
 	public function __toString()
     {
         return $this->getNombre();
     }
+	
+	/**
+	* @return Collection|FichaMedica[]
+	*/
+	public function getFichaMedicas(): Collection
+	{
+		return $this->fichaMedicas;
+	}
+	public function addFichaMedica(FichaMedica $fichaMedica): self
+	{
+		if (!$this->fichaMedicas->contains($fichaMedica)) {
+			$this->fichaMedicas[] = $fichaMedica;
+			$fichaMedica->setAlumno($this);
+		}
+		return $this;
+	}
+	public function removeFichaMedica(FichaMedica $fichaMedica): self
+	{
+		if ($this->fichaMedicas->contains($fichaMedica)) {
+			$this->fichaMedicas->removeElement($fichaMedica);
+			// set the owning side to null (unless already changed)
+			if ($fichaMedica->getAlumno() === $this) {
+				$fichaMedica->setAlumno(null);
+				}
+			}
+		return $this;
+	}
 
 }

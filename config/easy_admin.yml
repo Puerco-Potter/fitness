@@ -48,7 +48,7 @@ easy_admin:
                     - { property: 'cuenta', type: 'text', label: 'Cuenta'}
                     - { property: 'correo', type: 'text', label: 'Correo electrónico'}
                     - { property: 'ocupacion', type: 'text', label: 'Ocupación'}
-                    - { property: 'balance', type: 'text', label: 'Balance de cuenta'}
+                    - { property: 'balance', type: 'money', label: 'Balance de cuenta', type_options: { currency: 'USD' }}
                     - { property: 'genero', type: 'text', label: 'Género'}
                     - { property: 'diasPrueba', type: 'text', label: 'Días de prueba'}
         FichaMedica:
