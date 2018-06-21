@@ -83,10 +83,10 @@ class Alumno
 
 	/**
      * @Assert\Length(
-     *      min = 5,
+     *      min = 6,
      *      max = 8,
-     *      minMessage = "Your first name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     *      minMessage = "El DNI debe tener como mínimo 6 dígitos",
+     *      maxMessage = "El DNI debe tener como máximo 8 dígitos"
      * )
      * @ORM\Column(type="string", length=8)
      */
