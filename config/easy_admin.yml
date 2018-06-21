@@ -35,6 +35,22 @@ easy_admin:
         # Entidades de Damian
         Alumno:
             class: App\Entity\Alumno
+            form:
+                fields:
+                    - { property: 'dni', type: 'text', label: 'DNI'}
+                    - { property: 'apellido', type: 'text', label: 'Apellido'}
+                    - { property: 'nombre', type: 'text', label: 'Nombres'}    
+                    - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
+                    - { property: 'direccion', type: 'text', label: 'Dirección'}
+                    - { property: 'localidad', type: 'text', label: 'Localidad'}
+                    - { property: 'cp', type: 'text', label: 'Código Postal'}
+                    - { property: 'observaciones', type: 'textarea', label: 'Observaciones'}
+                    - { property: 'cuenta', type: 'text', label: 'Cuenta'}
+                    - { property: 'correo', type: 'text', label: 'Correo electrónico'}
+                    - { property: 'ocupacion', type: 'text', label: 'Ocupación'}
+                    - { property: 'balance', type: 'text', label: 'Balance de cuenta'}
+                    - { property: 'genero', type: 'text', label: 'Género'}
+                    - { property: 'diasPrueba', type: 'text', label: 'Días de prueba'}
         FichaMedica:
             class: App\Entity\FichaMedica
         Telefono:
@@ -46,7 +62,7 @@ easy_admin:
                     - { property: 'numero', type: 'text', label: 'Número'}                    
                     - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}                   
                     - { property: 'empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Empleado'}                   
-                    - { property: 'fichaMedica', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\FichaMedica'}, label: 'Emergencia'}   
+                    - { property: 'fichaMedica', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\FichaMedica'}, label: 'Emergencia'} 
         # Entidades de Emiliano
         Empleado:
             class: App\Entity\Empleado

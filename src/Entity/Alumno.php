@@ -6,8 +6,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlumnoRepository")
+ * @UniqueEntity("dni") 
  */
 class Alumno
 {
@@ -17,7 +24,8 @@ class Alumno
      * @ORM\Column(type="integer")
      */
     private $id;
-
+	
+	
     /**
      * @ORM\Column(type="string", length=45)
      */
@@ -42,12 +50,7 @@ class Alumno
      * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $cp;
-
-    /**
-     * @ORM\Column(type="string", length=20, nullable=true)
-     */
-    private $telefono;
-
+	
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -102,7 +105,17 @@ class Alumno
      * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="alumno")
      */
     private $telefonos;
-
+	
+	public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('cp', new Assert\Length(array(
+            'min'        => 1,
+            'max'        => 10,
+            'minMessage' => 'Your first name must be at least {{ limit }} characters long',
+            'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
+        )));
+    }
+	
     public function __construct()
     {
         $this->fichasMedicas = new ArrayCollection();
@@ -131,6 +144,7 @@ class Alumno
         return $this->apellido;
     }
 
+	
     public function setApellido(string $apellido): self
     {
         $this->apellido = $apellido;
@@ -170,18 +184,6 @@ class Alumno
     public function setCp(?string $cp): self
     {
         $this->cp = $cp;
-
-        return $this;
-    }
-
-    public function getTelefono(): ?string
-    {
-        return $this->telefono;
-    }
-
-    public function setTelefono(?string $telefono): self
-    {
-        $this->telefono = $telefono;
 
         return $this;
     }
