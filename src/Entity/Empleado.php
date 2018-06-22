@@ -32,11 +32,24 @@ class Empleado
     private $apellido;
 
     /**
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 8,
+     *      minMessage = "El DNI debe tener como mínimo 6 dígitos",
+     *      maxMessage = "El DNI debe tener como máximo 8 dígitos"
+     * )
      * @ORM\Column(type="string", length=8)
      */
     private $DNI;
 
     /**
+     * @Assert\Length(
+     *      min = 11,
+     *      max = 11,
+     *      minMessage = "El CUIT debe tener 11 dígitos",
+     *      maxMessage = "El CUIT debe tener 11 dígitos",
+     *      exactMessage = "El CUIT debe tener 11 dígitos"
+     * )
      * @ORM\Column(type="string", length=11)
      */
     private $CUIT;

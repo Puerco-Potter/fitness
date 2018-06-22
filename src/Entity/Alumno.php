@@ -62,6 +62,10 @@ class Alumno
     private $cuenta;
 
     /**
+     * @Assert\Email(
+     *     message = "El correo ingresado '{{ value }}' no es válido",
+     *     checkMX = true
+     * )
      * @ORM\Column(type="string", length=45, nullable=true)
      */
     private $correo;
