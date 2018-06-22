@@ -111,19 +111,13 @@ class Alumno
      */
     private $fichaMedicas;
 
-	public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        $metadata->addPropertyConstraint('cp', new Assert\Length(array(
-            'min'        => 1,
-            'max'        => 10,
-            'minMessage' => 'Your first name must be at least {{ limit }} characters long',
-            'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
-        )));
-    }
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="Alumno")
+     */
+    private $telefonos;
 	
     public function __construct()
     {
-        $this->fichasMedicas = new ArrayCollection();
         $this->telefonos = new ArrayCollection();
         $this->fichaMedicas = new ArrayCollection();
     }
@@ -304,7 +298,7 @@ class Alumno
 
 	public function __toString()
     {
-        return $this->getNombre();
+        return $this->getApellido().', '.$this->getNombre();
     }
 	
 	/**
@@ -329,6 +323,33 @@ class Alumno
 			// set the owning side to null (unless already changed)
 			if ($fichaMedica->getAlumno() === $this) {
 				$fichaMedica->setAlumno(null);
+				}
+			}
+		return $this;
+	}
+	
+	/**
+	* @return Collection|Telefono[]
+	*/
+	public function getTelefonos(): Collection
+	{
+		return $this->telefonos;
+	}
+	public function addTelefono(Telefono $telefono): self
+	{
+		if (!$this->telefonos->contains($telefono)) {
+			$this->telefonos[] = $telefono;
+			$telefono->setAlumno($this);
+		}
+		return $this;
+	}
+	public function removeTelefono(Telefono $telefono): self
+	{
+		if ($this->telefonos->contains($telefono)) {
+			$this->telefonos->removeElement($telefono);
+			// set the owning side to null (unless already changed)
+			if ($telefono->getAlumno() === $this) {
+				$telefono->setAlumno(null);
 				}
 			}
 		return $this;
