@@ -36,7 +36,7 @@ easy_admin:
         Alumno:
             class: App\Entity\Alumno
             list:
-                fields: ['dni', 'apellido', 'nombre','balance']
+                fields: [ { property: 'dni', label: 'DNI' }, 'apellido', 'nombre','balance']
             form:
                 fields:
                     - { property: 'dni', type: 'text', label: 'DNI'}
@@ -102,7 +102,7 @@ easy_admin:
         Empleado:
             class: App\Entity\Empleado
             list:
-                fields: ['cuit', 'apellido', 'nombre']
+                fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
             form:
                 fields:
                     - { property: 'dni', type: 'text', label: 'DNI'}
@@ -119,7 +119,7 @@ easy_admin:
         Actividad:
             class: App\Entity\Actividad
             list:
-                fields: ['nombre', 'grupal', 'descripcion','estado','fechaInicio']
+                fields: ['nombre', 'grupal', 'descripcion','estado', { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }]
             form:
                 fields:
                     - { property: 'nombre', type: 'text', label: 'Nombre'}
@@ -130,7 +130,7 @@ easy_admin:
         Equipamiento:
             class: App\Entity\Equipamiento
             list:
-                fields: ['descripcion', 'estado', 'fechaAdquisicion','proxMantenimiento','MantenimientoDias']
+                fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'proxMantenimiento', label: 'Fecha de próx. mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
@@ -141,7 +141,7 @@ easy_admin:
         Elemento:
             class: App\Entity\Elemento
             list:
-                fields: ['descripcion', 'cantidad', 'proxMantenimiento','MantenimientoDias']
+                fields: ['descripcion', 'cantidad', { property: 'proxMantenimiento', label: 'Fecha de próx. mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
