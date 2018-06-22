@@ -35,6 +35,8 @@ easy_admin:
         # Entidades de Damian
         Alumno:
             class: App\Entity\Alumno
+            list:
+                fields: ['dni', 'apellido', 'nombre','balance']
             form:
                 fields:
                     - { property: 'dni', type: 'text', label: 'DNI'}
@@ -53,6 +55,8 @@ easy_admin:
                     - { property: 'diasPrueba', type: 'text', label: 'Días de prueba'}
         FichaMedica:
             class: App\Entity\FichaMedica
+            list:
+                fields: ['alumno', 'fecha']
             form:
                 fields:
                     - { property: 'fecha', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha'}
@@ -84,6 +88,8 @@ easy_admin:
                     - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}                              
         Telefono:
             class: App\Entity\Telefono
+            list:
+                fields: ['caracteristica', 'numero', 'tipo','alumno','empleado','fichaMedica']
             form:
                 fields:
                     - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
@@ -95,6 +101,8 @@ easy_admin:
         # Entidades de Emiliano
         Empleado:
             class: App\Entity\Empleado
+            list:
+                fields: ['cuit', 'apellido', 'nombre']
             form:
                 fields:
                     - { property: 'dni', type: 'text', label: 'DNI'}
@@ -110,6 +118,8 @@ easy_admin:
         # Entidades de Maxi
         Actividad:
             class: App\Entity\Actividad
+            list:
+                fields: ['nombre', 'grupal', 'descripcion','estado','fechaInicio']
             form:
                 fields:
                     - { property: 'nombre', type: 'text', label: 'Nombre'}
@@ -119,6 +129,8 @@ easy_admin:
                     - { property: 'descripcion', type: 'textarea', label: 'Descripción'}
         Equipamiento:
             class: App\Entity\Equipamiento
+            list:
+                fields: ['descripcion', 'estado', 'fechaAdquisicion','proxMantenimiento','MantenimientoDias']
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
@@ -128,6 +140,8 @@ easy_admin:
                     - { property: 'MantenimientoDias', type: 'text', label: 'Periodicidad del mantenimiento'}  
         Elemento:
             class: App\Entity\Elemento
+            list:
+                fields: ['descripcion', 'cantidad', 'proxMantenimiento','MantenimientoDias']
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
