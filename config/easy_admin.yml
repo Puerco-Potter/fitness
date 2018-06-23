@@ -59,7 +59,10 @@ easy_admin:
                 fields: ['alumno', 'fecha']
             form:
                 fields:
+                    - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}
                     - { property: 'fecha', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha'}
+                    - { property: 'peso', type: 'text', label: 'Peso'}                  
+                    - { property: 'altura', type: 'text', label: 'Altura'}      
                     - { property: 'enfermedadesCardiacas',type: 'checkbox', label: '¿Posee enfermedades cardíacas?'}
                     - { property: 'lesionesCronicas',type: 'checkbox', label: '¿Posee lesiones crónicas?'}
                     - { property: 'rehabilitacion',type: 'checkbox', label: '¿Se encuentra en rehabilitación?'}
@@ -70,22 +73,20 @@ easy_admin:
                     - { property: 'conoceImc',type: 'checkbox', label: '¿Conoce su IMC?'}
                     - { property: 'dieta',type: 'checkbox', label: '¿Se encuentra a dieta?'}
                     - { property: 'perderPeso',type: 'checkbox', label: '¿Se encuentra en un plan de perder peso?'}
-                    - { property: 'peso', type: 'text', label: 'Peso'}                  
-                    - { property: 'altura', type: 'text', label: 'Altura'}      
                     - { property: 'problemasArticulares',type: 'checkbox', label: '¿Posee problemas articulares?'}
                     - { property: 'problemasEspalda',type: 'checkbox', label: '¿Posee problemas de espalda?'}
                     - { property: 'dolores',type: 'checkbox', label: '¿Posee algún tipo de dolor crónico?'}
                     - { property: 'hipertenso',type: 'checkbox', label: '¿Es hipertenso?'}
+                    - { property: 'hernias',type: 'checkbox', label: '¿Posee algun tipo de hernia?'}
+                    - { property: 'hidratado',type: 'checkbox', label: '¿Se encuentra bien hidratado?'}
                     - { property: 'medicamentos',type: 'checkbox', label: '¿Toma algún tipo de medicamento?'}                
                     - { property: 'listaMedicamentos', type: 'textarea', label: 'Lista de medicamentos'}  
                     - { property: 'embarazada',type: 'checkbox', label: '¿Se encuentra embarazada?'}       
                     - { property: 'tiempoEmbarazo', type: 'text', label: 'Tiempo de embarazo'}     
-                    - { property: 'hernias',type: 'checkbox', label: '¿Posee algun tipo de hernia?'}
-                    - { property: 'hidratado',type: 'checkbox', label: '¿Se encuentra bien hidratado?'}            
                     - { property: 'Talla', type: 'text', label: 'Talla'}                                        
                     - { property: 'listaEnfermedades', type: 'textarea', label: 'Lista de enfermedades'}
                     - { property: 'observaciones', type: 'textarea', label: 'Obervaciones particulares'}  
-                    - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}                              
+                                                  
         Telefono:
             class: App\Entity\Telefono
             list:

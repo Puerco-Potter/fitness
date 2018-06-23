@@ -7,6 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FichaMedicaRepository")
  */
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+ 
 class FichaMedica
 {
     /**
@@ -15,7 +20,12 @@ class FichaMedica
      * @ORM\Column(type="integer")
      */
     private $id;
-
+	/**
+	 * @Assert\NotBlank()
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Alumno", inversedBy="fichaMedicas")
+	 * @ORM\JoinColumn(nullable=false)
+     */
+    private $Alumno;
     /**
      * @ORM\Column(type="date")
      */
@@ -112,11 +122,13 @@ class FichaMedica
     private $hidratado;
 
     /**
+	 * @Assert\NotBlank()
      * @ORM\Column(type="float", nullable=true)
      */
     private $peso;
 
     /**
+	 * @Assert\NotBlank()
      * @ORM\Column(type="float", nullable=true)
      */
     private $altura;
@@ -145,12 +157,6 @@ class FichaMedica
      * @ORM\Column(type="text", nullable=true)
      */
     private $listaEnfermedades;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Alumno", inversedBy="fichaMedicas")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Alumno;
 
     public function getId()
     {
