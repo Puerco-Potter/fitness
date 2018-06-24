@@ -31,6 +31,7 @@ security:
                 default_target_path: /admin
             pattern:    ^/
             provider: our_db_provider
+            logout:       true
 
             # activate different ways to authenticate
 

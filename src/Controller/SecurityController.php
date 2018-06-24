@@ -25,4 +25,20 @@ class SecurityController extends Controller
         'error'         => $error,
     ));
     }
+
+     /**
+     * @Route("/logout" , name="cerrarSesion")
+     */
+    public function logout(Request $request){
+
+        $this->get('session')->clear();
+        $session = $this->get('session');
+        $ses_vars = $session->all();
+        foreach ($ses_vars as $key => $value) {
+            $session->remove($key);
+        }
+        session_destroy();
+          return $this->redirectToRoute('login');
+
+    }
 }
