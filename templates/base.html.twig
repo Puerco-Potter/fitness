@@ -3,10 +3,33 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="/{{ root }}/bootstrap/bootstrap.min.css" />
+        {% block stylesheets %}
+        {% endblock %}
+        <style>
+            body, html, .container {
+                height: 100%;
+            }
+            .bg {
+                /* The image used */
+                background-image: url("/{{ root }}{{ imagenes }}/fondologin.jpg");
+
+                /* Full height */
+                height: 100%;
+
+                /* Center and scale the image nicely */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        </style>
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div class="bg">
+            <div class="container">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}         
+            </div>
+        <div>
     </body>
 </html>

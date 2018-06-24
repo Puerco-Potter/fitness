@@ -1,4 +1,13 @@
+parameters:
+    locale: es
+    path.root: fitness/public
+    path.imagenes: /imagenes
+
+
 twig:
     paths: ['%kernel.project_dir%/templates']
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        root: '%path.root%'
+        imagenes: '%path.imagenes%'
