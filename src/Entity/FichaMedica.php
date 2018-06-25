@@ -175,7 +175,7 @@ class FichaMedica
         return $this;
     }
 
-    public function getEnfermedadesCardiacas(): ?int
+    public function getEnfermedadesCardiacas(): ?bool
     {
         return $this->enfermedadesCardiacas;
     }
