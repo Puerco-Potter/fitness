@@ -141,7 +141,7 @@ easy_admin:
                     - { property: 'estado', type: 'choice', label: 'Descripcion',type_options:{choices:{'En mantenimiento':'En mantenimiento','Listo para usar':'Listo para usar'}}}
                     - { property: 'fechaAdquisicion', type: 'date', label: 'Fecha de adquisición',type_options: {widget: 'single_text'}}
                     - { property: 'proxMantenimiento', type: 'date', label: 'Fecha del próximo mantenimiento',type_options: {widget: 'single_text'}}
-                    - { property: 'MantenimientoDias', type: 'text', label: 'Periodicidad del mantenimiento'}  
+                    - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'}  
         Elemento:
             class: App\Entity\Elemento
             list:
@@ -150,8 +150,8 @@ easy_admin:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
                     - { property: 'proxMantenimiento', type: 'date', label: 'Fecha del próximo mantenimiento',type_options: {widget: 'single_text'}}
-                    - { property: 'MantenimientoDias', type: 'text', label: 'Periodicidad del mantenimiento'}                    
-                    - { property: 'cantidad', type: 'text', label: 'Cantidad disponible'}
+                    - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'}                    
+                    - { property: 'cantidad', type: 'integer', label: 'Cantidad disponible'}
     list:
  
         actions: ['show']

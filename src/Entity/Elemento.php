@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ElementoRepository")
@@ -27,6 +28,10 @@ class Elemento
     private $proxMantenimiento;
 
     /**
+	 * @Assert\Type(
+     *     type="int",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      * @ORM\Column(type="integer", nullable=true)
      */
     private $mantenimientoDias;
