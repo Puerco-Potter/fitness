@@ -42,7 +42,7 @@ easy_admin:
                 fields: [ { property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }]
             form:
                 fields:
-                    - { property: 'dni', type: 'text', label: 'DNI'}
+                    - { property: 'dni', type: 'integer', label: 'DNI'}
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'}    
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
@@ -53,8 +53,8 @@ easy_admin:
                     - { property: 'cuenta', type: 'text', label: 'Cuenta'}
                     - { property: 'correo', type: 'text', label: 'Correo electrónico'}
                     - { property: 'ocupacion', type: 'text', label: 'Ocupación'}
-                    - { property: 'balance', type: 'money', label: 'Balance de cuenta', type_options: { currency: 'ARS' }}
-                    - { property: 'genero', type: 'text', label: 'Género'}
+                    - { property: 'balance', type: 'money', label: 'Saldo', type_options: { currency: 'ARS' }}
+                    - { property: 'genero', type: 'choice', label: 'Género',type_options:{choices:{'Masculino':'Masculino','Femenino':'Femenino','Otro':'Otro'}}}
                     - { property: 'diasPrueba', type: 'text', label: 'Días de prueba'}
         FichaMedica:
             class: App\Entity\FichaMedica
@@ -64,8 +64,8 @@ easy_admin:
                 fields:
                     - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}
                     - { property: 'fecha', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha'}
-                    - { property: 'peso', type: 'text', label: 'Peso'}                  
-                    - { property: 'altura', type: 'text', label: 'Altura'}      
+                    - { property: 'peso', type: 'integer', label: 'Peso (kilogramos)'}                  
+                    - { property: 'altura', type: 'integer', label: 'Altura (centímetros)'}      
                     - { property: 'enfermedadesCardiacas',type: 'checkbox', label: '¿Posee enfermedades cardíacas?'}
                     - { property: 'lesionesCronicas',type: 'checkbox', label: '¿Posee lesiones crónicas?'}
                     - { property: 'rehabilitacion',type: 'checkbox', label: '¿Se encuentra en rehabilitación?'}
@@ -109,10 +109,10 @@ easy_admin:
                 fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
             form:
                 fields:
-                    - { property: 'dni', type: 'text', label: 'DNI'}
+                    - { property: 'dni', type: 'integer', label: 'DNI'}
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'}                    
-                    - { property: 'cuit', type: 'text', label: 'CUIT'}
+                    - { property: 'cuit', type: 'integer', label: 'CUIT (seguido sin espacios)'}
                     - { property: 'relacion', type: 'choice', label: 'Relación laboral',type_options:{choices:{'Monotributista':'Monotributista','En relación de dependencia':'En relación de dependencia'}}}
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
