@@ -78,38 +78,6 @@ class Telefono
         return $this->getCaracteristica().' - '.$this->getNumero();
     }
 	/**
-	* @ORM\ManyToOne(targetEntity="App\Entity\Empleado")
-	*/
-	private $Empleado;
-
-
-	public function getEmpleado(): ?Empleado
-	{
-		return $this->Empleado;
-	}
-	public function setEmpleado(?Empleado $Empleado): self
-	{
-		$this->Empleado = $Empleado;
-		return $this;
-	}
- 
-	/**
-	* @ORM\ManyToOne(targetEntity="App\Entity\FichaMedica")
-	*/
-	private $FichaMedica;
-	
-	public function getFichaMedica(): ?FichaMedica
-	{
-		return $this->FichaMedica;
-	}
-
-	public function setFichaMedica(?FichaMedica $FichaMedica): self
-	{
-		$this->FichaMedica = $FichaMedica;
-		return $this;
-	}
- 
-	/**
 	* @ORM\ManyToOne(targetEntity="App\Entity\Alumno")
 	*/
 	private $Alumno;

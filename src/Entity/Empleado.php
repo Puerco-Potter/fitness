@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -68,6 +70,16 @@ class Empleado
      * @ORM\Column(type="date")
      */
     private $fechaNacimiento;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TelefonoEmpleado", mappedBy="Empleado", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $Telefonos;
+
+    public function __construct()
+    {
+        $this->Telefonos = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -160,6 +172,37 @@ class Empleado
 	public function __toString()
     {
         return $this->getApellido().', '.$this->getNombre();
+    }
+    private $__EXTRA__LINE;
+    /**
+     * @return Collection|TelefonoEmpleado[]
+    */
+    public function getTelefonos(): Collection
+    {
+        return $this->Telefonos;
+    }
+
+    public function addTelefono(TelefonoEmpleado $telefono): self
+    {
+        if (!$this->Telefonos->contains($telefono)) {
+            $this->Telefonos[] = $telefono;
+            $telefono->setEmpleado($this);
+        }
+        $__EXTRA__LINE;
+        return $this;
+    }
+
+    public function removeTelefono(TelefonoEmpleado $telefono): self
+    {
+        if ($this->Telefonos->contains($telefono)) {
+            $this->Telefonos->removeElement($telefono);
+            // set the owning side to null (unless already changed)
+            if ($telefono->getEmpleado() === $this) {
+                $telefono->setEmpleado(null);
+            }
+        }
+        $__EXTRA__LINE;
+        return $this;
     }
 
 }
