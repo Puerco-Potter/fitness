@@ -26,7 +26,7 @@ easy_admin:
               children:
                 - { entity: 'Empleado', icon: 'users' }
                 - { entity: 'Profesor', icon: 'user' }
-                - { entity: 'Telefono', icon: 'phone' }
+                - { entity: 'TelefonoEmpleado', icon: 'phone' }
             # Entidades de Matias
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             
@@ -96,15 +96,13 @@ easy_admin:
         Telefono:
             class: App\Entity\Telefono
             list:
-                fields: ['caracteristica', 'numero', 'tipo','alumno','empleado','fichaMedica']
+                fields: ['caracteristica', 'numero', 'tipo','alumno']
             form:
                 fields:
                     - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
                     - { property: 'caracteristica', type: 'text', label: 'Característica'}
                     - { property: 'numero', type: 'text', label: 'Número'}                    
                     - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}                   
-                    - { property: 'empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Empleado'}                   
-                    - { property: 'fichaMedica', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\FichaMedica'}, label: 'Emergencia'} 
         # Entidades de Emiliano
         Empleado:
             class: App\Entity\Empleado
@@ -119,9 +117,20 @@ easy_admin:
                     - { property: 'relacion', type: 'choice', label: 'Relación laboral',type_options:{choices:{'Monotributista':'Monotributista','En relación de dependencia':'En relación de dependencia'}}}
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
+                    - { property: 'telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoEmpleadoType', by_reference: false }}
         Profesor:
             class: App\Entity\Profesor
         # Entidades de Maty
+        TelefonoEmpleado:
+            class: App\Entity\TelefonoEmpleado
+            list:
+                fields: ['caracteristica', 'numero', 'tipo','empleado']
+            form:
+                fields:
+                    - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
+                    - { property: 'caracteristica', type: 'text', label: 'Característica'}
+                    - { property: 'numero', type: 'text', label: 'Número'}                    
+                    - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Alumno'} 
         # Entidades de Maxi
         Actividad:
             class: App\Entity\Actividad
