@@ -158,6 +158,16 @@ class FichaMedica
      */
     private $listaEnfermedades;
 
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $telefonoEmergencia;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     */
+    private $grupoSanguineo;
+
     public function getId()
     {
         return $this->id;
@@ -490,6 +500,30 @@ class FichaMedica
     public function __toString()
     {
         return (string) $this->getAlumno().' - '. (string) $this->getFecha()->format('Y-m-d');
+    }
+
+    public function getTelefonoEmergencia(): ?string
+    {
+        return $this->telefonoEmergencia;
+    }
+
+    public function setTelefonoEmergencia(?string $TelefonoEmergencia): self
+    {
+        $this->telefonoEmergencia = $TelefonoEmergencia;
+
+        return $this;
+    }
+
+    public function getGrupoSanguineo(): ?string
+    {
+        return $this->grupoSanguineo;
+    }
+
+    public function setGrupoSanguineo(?string $grupoSanguineo): self
+    {
+        $this->grupoSanguineo = $grupoSanguineo;
+
+        return $this;
     }
 
 }
