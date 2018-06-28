@@ -133,6 +133,10 @@ easy_admin:
                     - { property: 'descripcion', type: 'textarea', label: 'Descripción'}
         Equipamiento:
             class: App\Entity\Equipamiento
+            show:
+                title: Equipamiento
+                fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'proxMantenimiento', label: 'Fecha de próx. mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
+                
             list:
                 fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'proxMantenimiento', label: 'Fecha de próx. mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
             form:
