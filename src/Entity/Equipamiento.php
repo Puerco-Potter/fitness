@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EquipamientoRepository")
@@ -22,9 +23,9 @@ class Equipamiento
     private $descripcion;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date", nullable=false)
      */
-    private $prox_mantenimiento;
+    private $ultimoMantenimiento;
 
     /**
      * @ORM\Column(type="string", length=45)
@@ -37,9 +38,15 @@ class Equipamiento
     private $mantenimientoDias;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date", nullable=false)
      */
     private $fechaAdquisicion;
+
+    public function __construct()
+    {
+        $this->ultimoMantenimiento = new \DateTime(); 
+        $this->fechaAdquisicion = new \DateTime(); 
+    }
 
     public function getId()
     {
@@ -58,14 +65,14 @@ class Equipamiento
         return $this;
     }
 
-    public function getProxMantenimiento(): ?\DateTimeInterface
+    public function getUltimoMantenimiento(): ?\DateTimeInterface
     {
-        return $this->prox_mantenimiento;
+        return $this->ultimoMantenimiento;
     }
 
-    public function setProxMantenimiento(?\DateTimeInterface $prox_mantenimiento): self
+    public function setUltimoMantenimiento(?\DateTimeInterface $ultimoMantenimiento): self
     {
-        $this->prox_mantenimiento = $prox_mantenimiento;
+        $this->ultimoMantenimiento = $ultimoMantenimiento;
 
         return $this;
     }
