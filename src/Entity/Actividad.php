@@ -41,6 +41,12 @@ class Actividad
      */
     private $descripcion;
 
+    public function __construct()
+    {
+        $this->fechaInicio = new \DateTime();
+        $this->estado = true;
+    }
+
     public function getId()
     {
         return $this->id;

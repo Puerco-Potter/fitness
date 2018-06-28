@@ -45,7 +45,8 @@ class Equipamiento
     public function __construct()
     {
         $this->ultimoMantenimiento = new \DateTime(); 
-        $this->fechaAdquisicion = new \DateTime(); 
+        $this->fechaAdquisicion = new \DateTime();
+        $this->mantenimientoDias = 15;
     }
 
     public function getId()
