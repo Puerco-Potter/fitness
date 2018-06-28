@@ -56,6 +56,7 @@ easy_admin:
                     - { property: 'balance', type: 'money', label: 'Saldo', type_options: { currency: 'ARS' }}
                     - { property: 'genero', type: 'choice', label: 'Género',type_options:{choices:{'Masculino':'Masculino','Femenino':'Femenino','Otro':'Otro'}}}
                     - { property: 'diasPrueba', type: 'text', label: 'Días de prueba'}
+                    - { property: 'telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoType', by_reference: false }}
         FichaMedica:
             class: App\Entity\FichaMedica
             list:
