@@ -112,7 +112,7 @@ class Alumno
     private $fichaMedicas;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="Alumno")
+     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="Alumno",  cascade={"persist", "remove"})
      */
     private $telefonos;
 	

@@ -56,6 +56,7 @@ easy_admin:
                     - { property: 'balance', type: 'money', label: 'Saldo', type_options: { currency: 'ARS' }}
                     - { property: 'genero', type: 'choice', label: 'Género',type_options:{choices:{'Masculino':'Masculino','Femenino':'Femenino','Otro':'Otro'}}}
                     - { property: 'diasPrueba', type: 'text', label: 'Días de prueba'}
+                    - { property: 'telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoType', by_reference: false }}
         FichaMedica:
             class: App\Entity\FichaMedica
             list:
@@ -88,7 +89,9 @@ easy_admin:
                     - { property: 'tiempoEmbarazo', type: 'text', label: 'Tiempo de embarazo'}     
                     - { property: 'Talla', type: 'text', label: 'Talla'}                                        
                     - { property: 'listaEnfermedades', type: 'textarea', label: 'Lista de enfermedades'}
-                    - { property: 'observaciones', type: 'textarea', label: 'Obervaciones particulares'}  
+                    - { property: 'observaciones', type: 'textarea', label: 'Obervaciones particulares'} 
+                    - { property: 'telefonoEmergencia', type: 'text', label: 'Teléfono de emergencia'}  
+                    - { property: 'grupoSanguineo', type: 'choice', label: 'Grupo Sanguíneo', type_options:{choices:{'A-':'A-','A+':'A+','B-':'B-','B+':'B+','AB-':'AB-','AB+':'AB+','0-':'0-','0+':'0+','Otro':'Otro'}}}
                                                   
         Telefono:
             class: App\Entity\Telefono
@@ -142,7 +145,7 @@ easy_admin:
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
-                    - { property: 'estado', type: 'choice', label: 'Descripcion',type_options:{choices:{'En mantenimiento':'En mantenimiento','Listo para usar':'Listo para usar'}}}
+                    - { property: 'estado', type: 'choice', label: 'Descripcion',type_options:{choices:{'En mantenimiento':'En mantenimiento','Necesita mantenimiento':'Necesita mantenimiento','Listo para usar':'Listo para usar'}}}
                     - { property: 'fechaAdquisicion', type: 'date', label: 'Fecha de adquisición',type_options: {widget: 'single_text'}}
                     - { property: 'proxMantenimiento', type: 'date', label: 'Fecha del próximo mantenimiento',type_options: {widget: 'single_text'}}
                     - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'}  
