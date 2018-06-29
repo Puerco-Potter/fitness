@@ -91,7 +91,7 @@ easy_admin:
                     - { property: 'tiempoEmbarazo', type: 'text', label: 'Tiempo de embarazo'}     
                     - { property: 'Talla', type: 'text', label: 'Talla'}                                        
                     - { property: 'listaEnfermedades', type: 'textarea', label: 'Lista de enfermedades'}
-                    - { property: 'observaciones', type: 'textarea', label: 'Obervaciones particulares'} 
+                    - { property: 'observaciones', type: 'textarea', label: 'Observaciones particulares'} 
                     - { property: 'telefonoEmergencia', type: 'text', label: 'Teléfono de emergencia'}  
                     - { property: 'grupoSanguineo', type: 'choice', label: 'Grupo Sanguíneo', type_options:{choices:{'A-':'A-','A+':'A+','B-':'B-','B+':'B+','AB-':'AB-','AB+':'AB+','0-':'0-','0+':'0+','Otro':'Otro'}}}
                                                   
@@ -149,16 +149,16 @@ easy_admin:
             class: App\Entity\Equipamiento
             show:
                 title: Equipamiento
-                fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'proxMantenimiento', label: 'Fecha de próx. mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
+                fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
                 
             list:
-                fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'proxMantenimiento', label: 'Fecha de próx. mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
+                fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
-                    - { property: 'estado', type: 'choice', label: 'Descripcion',type_options:{choices:{'En mantenimiento':'En mantenimiento','Necesita mantenimiento':'Necesita mantenimiento','Listo para usar':'Listo para usar'}}}
+                    - { property: 'estado', type: 'choice', label: 'Estado del equipamiento',type_options:{choices:{'En mantenimiento':'En mantenimiento','Necesita mantenimiento':'Necesita mantenimiento','Listo para usar':'Listo para usar'}}}
                     - { property: 'fechaAdquisicion', type: 'date', label: 'Fecha de adquisición',type_options: {widget: 'single_text'}}
-                    - { property: 'proxMantenimiento', type: 'date', label: 'Fecha del próximo mantenimiento',type_options: {widget: 'single_text'}}
+                    - { property: 'ultimoMantenimiento', type: 'date', label: 'Fecha del último mantenimiento',type_options: {widget: 'single_text'}}
                     - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'}  
         Elemento:
             class: App\Entity\Elemento
