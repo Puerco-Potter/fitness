@@ -2,6 +2,8 @@ easy_admin:
     site_name: '<img src="/fitness/public/imagenes/fitnesConFondo.png">Administración Fussion Fitnnes Gym'
     design:
         brand_color: '#e2048d'
+        templates:
+            label_null: 'null.html.twig'
         assets:
             favicon:
                 path: '/fitness/public/imagenes/favito.png'
