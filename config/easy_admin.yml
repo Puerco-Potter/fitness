@@ -40,6 +40,9 @@ easy_admin:
         # Entidades de Damian
         Alumno:
             class: App\Entity\Alumno
+            show:
+                title: 'Alumno'
+                fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }, 'localidad', 'direccion', 'cp', { property: 'correo', label: 'E-Mail'}, 'ocupacion', 'genero', 'telefonos', { property: 'diasPrueba', label: 'Días de prueba'}]
             list:
                 fields: [ { property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }]
             form:
@@ -61,6 +64,9 @@ easy_admin:
                     - { property: 'telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoType', by_reference: false }}
         FichaMedica:
             class: App\Entity\FichaMedica
+            show:
+                title: 'Ficha Médica'
+                fields: ['alumno', 'fecha', 'altura', 'talla', 'peso', { property: 'enfermedadesCardiacas', label: 'Enfermedades Cardíacas'}, { property: 'lesionesCronicas', label: 'Lesiones Crónicas'}, { property: 'rehabilitacion', label: 'Rehabilitación'}, 'diabetes', { property: 'bajoTratamiento', label: '¿Bajo Tratamiento?'}, { property: 'cirugia', label: 'Cirugías'}, 'sobrepeso', { property: 'conoceImc', label: '¿Conoce su IMC?'}, { property: 'dieta', label: '¿Se encuentra a dieta?'}, { property: 'perderPeso', label: '¿Se encuentra en un plan de perder peso?'}, { property: 'problemasArticulares', label: '¿Posee problemas articulares?'}, { property: 'problemasEspalda', label: '¿Posee problemas de espalda?'}, { property: 'dolores', label: '¿Dolores crónicos?'}, 'hipertenso', 'hernias', 'hidratado', 'medicamentos', { property: 'listaMedicamentos', label: 'Lista de medicamentos'}, 'embarazada', { property: 'tiempoEmbarazo', label: 'Tiempo de embarazo'}, { property: 'listaEnfermedades', label: 'Lista de enfermedades'}, 'observaciones', { property: 'telefonoEmergencia', label: 'Teléfono de emergencia'}, { property: 'grupoSanguineo', label: 'Grupo Sanguíneo'}]
             list:
                 fields: ['alumno', 'fecha']
             form:
@@ -97,6 +103,9 @@ easy_admin:
                                                   
         Telefono:
             class: App\Entity\Telefono
+            show:
+                title: Telefono
+                fields: ['caracteristica', 'numero', 'tipo','alumno','empleado','fichaMedica']
             list:
                 fields: ['caracteristica', 'numero', 'tipo','alumno']
             form:
@@ -108,6 +117,9 @@ easy_admin:
         # Entidades de Emiliano
         Empleado:
             class: App\Entity\Empleado
+            show:
+                title: Empleado
+                fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
             list:
                 fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
             form:
@@ -125,6 +137,9 @@ easy_admin:
         # Entidades de Maty
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
+            show:
+                title: 'Telefono de Empleado'
+                fields: ['empleado', 'caracteristica', 'numero', 'tipo']
             list:
                 fields: ['caracteristica', 'numero', 'tipo','empleado']
             form:
@@ -136,6 +151,9 @@ easy_admin:
         # Entidades de Maxi
         Actividad:
             class: App\Entity\Actividad
+            show:
+                title: Actividad
+                fields: ['nombre', 'grupal', 'descripcion', { property: 'estado', label: '¿Se realiza actualmente?' }, { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }]
             list:
                 fields: ['nombre', 'grupal', 'descripcion','estado', { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }]
             form:
@@ -162,6 +180,9 @@ easy_admin:
                     - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'}  
         Elemento:
             class: App\Entity\Elemento
+            show:
+                title: Elemento
+                fields: ['descripcion', 'cantidad', { property: 'proxMantenimiento', label: 'Fecha de última reposición' }]
             list:
                 fields: ['descripcion', 'cantidad', { property: 'proxMantenimiento', label: 'Fecha de próx. mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
             form:
