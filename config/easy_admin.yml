@@ -168,6 +168,18 @@ easy_admin:
                 title: 'Crear nuevo empleado'
         Profesor:
             class: App\Entity\Profesor
+            show:
+                title: 'Profesor'
+                fields: 
+                    - { property: 'empleado', type: 'text', label: 'Apellido y nombre'}
+            list:
+                title: 'Lista de profesores'
+                fields: 
+                    - { property: 'empleado', type: 'text', label: 'Apellido y nombre'}
+            form:
+                title: 'Profesor'
+                fields: 
+                    - { property: 'empleado', type: 'text', label: 'Empleado'}
         # Entidades de Maty
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado

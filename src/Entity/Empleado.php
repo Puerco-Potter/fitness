@@ -75,7 +75,7 @@ class Empleado
      * @ORM\OneToMany(targetEntity="App\Entity\TelefonoEmpleado", mappedBy="Empleado", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $Telefonos;
-
+    
     public function __construct()
     {
         $this->Telefonos = new ArrayCollection();
@@ -173,7 +173,7 @@ class Empleado
     {
         return $this->getApellido().', '.$this->getNombre();
     }
-    private $__EXTRA__LINE;
+    
     /**
      * @return Collection|TelefonoEmpleado[]
     */
@@ -188,7 +188,6 @@ class Empleado
             $this->Telefonos[] = $telefono;
             $telefono->setEmpleado($this);
         }
-        $__EXTRA__LINE;
         return $this;
     }
 
@@ -201,7 +200,6 @@ class Empleado
                 $telefono->setEmpleado(null);
             }
         }
-        $__EXTRA__LINE;
         return $this;
     }
 
