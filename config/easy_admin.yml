@@ -14,7 +14,7 @@ easy_admin:
               children:
                 - { entity: 'Alumno', icon: 'address-card' }
                 - { entity: 'AlumnoInactivo', icon: 'address-card', label: 'Alumnos inactivos'}
-                - { entity: 'FichaMedica', icon: 'clipboard' }
+                - { entity: 'FichaMedica', icon: 'clipboard', label: 'Fichas médicas'}
                 - { entity: 'Telefono', icon: 'phone' }
             # Entidades de Maxi
             - { label: "Actividades" , entity: 'Actividad', icon: 'bolt' }
@@ -22,14 +22,14 @@ easy_admin:
               icon: 'cogs'
               children:
                 - { entity: 'Equipamiento', icon: 'cogs' }
-                - { entity: 'Elemento', icon: 'list' }
+                - { entity: 'Elemento', icon: 'list', label: 'Elemento de gimnasio' }
             # Entidades de Emiliano
             - label: 'Gestión de Empleados'
               icon: 'users'
               children:
                 - { entity: 'Empleado', icon: 'users' }
                 - { entity: 'Profesor', icon: 'user' }
-                - { entity: 'TelefonoEmpleado', icon: 'phone' }
+                - { entity: 'TelefonoEmpleado', icon: 'phone', label: 'Teléfonos de empleados'}
             # Entidades de Matias
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             
@@ -43,9 +43,10 @@ easy_admin:
             class: App\Entity\Alumno
             disabled_actions: ['new','delete']
             show:
-                title: 'Alumnos inactivos'
+                title: 'Alumno inactivo'
                 fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
             list:
+                title: 'Alumnos inactivos'
                 fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
                 dql_filter: 'entity.inactivo!=0'
             edit:
@@ -62,6 +63,7 @@ easy_admin:
                 title: 'Alumno'
                 fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }, 'localidad', 'direccion', 'cp', { property: 'correo', label: 'E-Mail'}, 'ocupacion', 'genero', 'telefonos', { property: 'diasPrueba', label: 'Días de prueba'}]
             list:
+                title: 'Lista de alumnos'
                 dql_filter: 'entity.inactivo=0'
                 fields: [ { property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }]
             form:
@@ -92,6 +94,7 @@ easy_admin:
                 title: 'Ficha Médica'
                 fields: ['alumno', 'fecha', 'altura', 'talla', 'peso', { property: 'enfermedadesCardiacas', label: 'Enfermedades Cardíacas'}, { property: 'lesionesCronicas', label: 'Lesiones Crónicas'}, { property: 'rehabilitacion', label: 'Rehabilitación'}, 'diabetes', { property: 'bajoTratamiento', label: '¿Bajo Tratamiento?'}, { property: 'cirugia', label: 'Cirugías'}, 'sobrepeso', { property: 'conoceImc', label: '¿Conoce su IMC?'}, { property: 'dieta', label: '¿Se encuentra a dieta?'}, { property: 'perderPeso', label: '¿Se encuentra en un plan de perder peso?'}, { property: 'problemasArticulares', label: '¿Posee problemas articulares?'}, { property: 'problemasEspalda', label: '¿Posee problemas de espalda?'}, { property: 'dolores', label: '¿Dolores crónicos?'}, 'hipertenso', 'hernias', 'hidratado', 'medicamentos', { property: 'listaMedicamentos', label: 'Lista de medicamentos'}, 'embarazada', { property: 'tiempoEmbarazo', label: 'Tiempo de embarazo'}, { property: 'listaEnfermedades', label: 'Lista de enfermedades'}, 'observaciones', { property: 'telefonoEmergencia', label: 'Teléfono de emergencia'}, { property: 'grupoSanguineo', label: 'Grupo Sanguíneo'}]
             list:
+                title: 'Lista de Fichas médicas'
                 fields: ['alumno', 'fecha']
             form:
                 fields:
@@ -128,11 +131,13 @@ easy_admin:
         Telefono:
             class: App\Entity\Telefono
             show:
-                title: Telefono
-                fields: ['caracteristica', 'numero', 'tipo','alumno','empleado','fichaMedica']
+                title: 'Teléfono de alumno'
+                fields: ['caracteristica', 'numero', 'tipo','alumno']
             list:
+                title: 'Lista de teléfonos de alumnos'
                 fields: ['caracteristica', 'numero', 'tipo','alumno']
             form:
+                title: 'Teléfono'
                 fields:
                     - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
                     - { property: 'caracteristica', type: 'text', label: 'Característica'}
@@ -142,9 +147,10 @@ easy_admin:
         Empleado:
             class: App\Entity\Empleado
             show:
-                title: Empleado
+                title: 'Empleado'
                 fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
             list:
+                title: 'Lista de empleados'
                 fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
             form:
                 fields:
@@ -156,29 +162,36 @@ easy_admin:
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
                     - { property: 'telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoEmpleadoType', by_reference: false }}
+            edit:
+                title: 'Modificar empleado'
+            new:
+                title: 'Crear nuevo empleado'
         Profesor:
             class: App\Entity\Profesor
         # Entidades de Maty
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
+            title: 'Teléfono de empleado'
             show:
-                title: 'Telefono de Empleado'
+                title: 'Teléfono de Empleado'
                 fields: ['empleado', 'caracteristica', 'numero', 'tipo']
             list:
+                title: 'Teléfonos de empleados'
                 fields: ['caracteristica', 'numero', 'tipo','empleado']
             form:
                 fields:
                     - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
                     - { property: 'caracteristica', type: 'text', label: 'Característica'}
                     - { property: 'numero', type: 'text', label: 'Número'}                    
-                    - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Alumno'} 
+                    - { property: 'empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Empleado'} 
         # Entidades de Maxi
         Actividad:
             class: App\Entity\Actividad
             show:
-                title: Actividad
+                title: 'Actividad'
                 fields: ['nombre', 'grupal', 'descripcion', { property: 'estado', label: '¿Se realiza actualmente?' }, { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }]
             list:
+                title: 'Lista de actividades'
                 fields: ['nombre', 'grupal', 'descripcion','estado', { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }]
             form:
                 fields:
@@ -188,13 +201,17 @@ easy_admin:
                     - { property: 'fechaInicio', type: 'date', label: 'Fecha de creación de la actividad',type_options: {widget: 'single_text'}}                    
                     - { property: 'estado', type: 'checkbox', label: '¿Se realiza actualmente?'}
                     - { property: 'descripcion', type: 'textarea', label: 'Descripción'}
+            edit:
+                title: 'Modificar Actividad'
+            new:
+                title: 'Crear nueva Actividad'
         Equipamiento:
             class: App\Entity\Equipamiento
             show:
-                title: Equipamiento
+                title: 'Equipamiento'
                 fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
-                
             list:
+                title: 'Lista de equipamientos del gimnasio'
                 fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
             form:
                 fields:
@@ -202,13 +219,18 @@ easy_admin:
                     - { property: 'estado', type: 'choice', label: 'Estado del equipamiento',type_options:{choices:{'En mantenimiento':'En mantenimiento','Necesita mantenimiento':'Necesita mantenimiento','Listo para usar':'Listo para usar'}}}
                     - { property: 'fechaAdquisicion', type: 'date', label: 'Fecha de adquisición',type_options: {widget: 'single_text'}}
                     - { property: 'ultimoMantenimiento', type: 'date', label: 'Fecha del último mantenimiento',type_options: {widget: 'single_text'}}
-                    - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'}  
+                    - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'} 
+            edit:
+                title: 'Modificar equipamiento'
+            new:
+                title: 'Añadir nuevo equipamiento'
         Elemento:
             class: App\Entity\Elemento
             show:
-                title: Elemento
+                title: 'Elemento'
                 fields: ['descripcion', 'cantidad', { property: 'proxMantenimiento', label: 'Fecha de última reposición' }]
             list:
+                title: 'Lista de elementos del gimnasio'
                 fields: ['descripcion', 'cantidad', { property: 'proxMantenimiento', label: 'Fecha de próx. mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
             form:
                 fields:
@@ -216,6 +238,13 @@ easy_admin:
                     - { property: 'proxMantenimiento', type: 'date', label: 'Fecha del próximo mantenimiento',type_options: {widget: 'single_text'}}
                     - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'}                    
                     - { property: 'cantidad', type: 'integer', label: 'Cantidad disponible'}
+            edit:
+                title: 'Modificar elemento'
+            new:
+                title: 'Añadir nuevo elemento del gimnasio'
     list:
- 
-        actions: ['show']
+        actions:
+            - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
+            - { name: 'show', icon: 'eye', label: '', title: 'Buscar' }
+            - { name: 'edit', icon: 'pencil', label: '', title: 'Modificar' }
+            - { name: 'delete', icon: 'trash', label: '', title: 'Eliminar' }
