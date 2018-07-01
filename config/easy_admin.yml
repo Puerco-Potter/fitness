@@ -13,6 +13,7 @@ easy_admin:
               icon: 'address-card'
               children:
                 - { entity: 'Alumno', icon: 'address-card' }
+                - { entity: 'AlumnoInactivo', icon: 'address-card', label: 'Alumnos inactivos'}
                 - { entity: 'FichaMedica', icon: 'clipboard' }
                 - { entity: 'Telefono', icon: 'phone' }
             # Entidades de Maxi
@@ -38,12 +39,30 @@ easy_admin:
         User:
             class: App\Entity\User 
         # Entidades de Damian
+        AlumnoInactivo:
+            class: App\Entity\Alumno
+            disabled_actions: ['new','delete']
+            show:
+                title: 'Alumnos inactivos'
+                fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
+            list:
+                fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
+                dql_filter: 'entity.inactivo!=0'
+            edit:
+                fields:
+                    - { property: 'dni', type: 'integer', label: 'DNI'}
+                    - { property: 'apellido', type: 'text', label: 'Apellido'}
+                    - { property: 'nombre', type: 'text', label: 'Nombres'} 
+                    - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
+                    
         Alumno:
             class: App\Entity\Alumno
+            disabled_actions: ['delete']
             show:
                 title: 'Alumno'
                 fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }, 'localidad', 'direccion', 'cp', { property: 'correo', label: 'E-Mail'}, 'ocupacion', 'genero', 'telefonos', { property: 'diasPrueba', label: 'Días de prueba'}]
             list:
+                dql_filter: 'entity.inactivo=0'
                 fields: [ { property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }]
             form:
                 fields:
@@ -52,7 +71,7 @@ easy_admin:
                     - { property: 'nombre', type: 'text', label: 'Nombres'}    
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
-                    - { property: 'localidad', type: 'text', label: 'Localidad'}
+                    - { property: 'localidad', type: 'choice', label: 'Localidad',type_options:{choices:{'Puerto Vilelas':'Puerto Vilelas','La Liguria':'La Liguria','Resistencia':'Resistencia','Fontana':'Fontana','Barranqueras':'Barranqueras'}}}
                     - { property: 'cp', type: 'text', label: 'Código Postal'}
                     - { property: 'observaciones', type: 'textarea', label: 'Observaciones'}
                     - { property: 'cuenta', type: 'text', label: 'Cuenta'}
@@ -62,6 +81,11 @@ easy_admin:
                     - { property: 'genero', type: 'choice', label: 'Género',type_options:{choices:{'Masculino':'Masculino','Femenino':'Femenino','Otro':'Otro'}}}
                     - { property: 'diasPrueba', type: 'text', label: 'Días de prueba'}
                     - { property: 'telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoType', by_reference: false }}
+            edit:
+                title:  'Modificar Alumno'
+                fields:
+                    - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
+
         FichaMedica:
             class: App\Entity\FichaMedica
             show:
@@ -158,6 +182,7 @@ easy_admin:
                 fields: ['nombre', 'grupal', 'descripcion','estado', { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }]
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-12'}
                     - { property: 'nombre', type: 'text', label: 'Nombre'}
                     - { property: 'grupal', type: 'checkbox', label: '¿Es grupal?'}
                     - { property: 'fechaInicio', type: 'date', label: 'Fecha de creación de la actividad',type_options: {widget: 'single_text'}}                    

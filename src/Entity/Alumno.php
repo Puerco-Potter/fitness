@@ -115,9 +115,15 @@ class Alumno
      * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="Alumno",  cascade={"persist", "remove"})
      */
     private $telefonos;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $inactivo;
 	
     public function __construct()
     {
+        $this->inactivo = 0;
         $this->telefonos = new ArrayCollection();
         $this->fichaMedicas = new ArrayCollection();
     }
@@ -296,6 +302,18 @@ class Alumno
         return $this;
     }
 
+    public function getInactivo(): ?bool
+    {
+        return $this->inactivo;
+    }
+
+    public function setInactivo(bool $inactivo): self
+    {
+        $this->inactivo = $inactivo;
+
+        return $this;
+    }
+
 	public function __toString()
     {
         return $this->getApellido().', '.$this->getNombre();
@@ -354,5 +372,4 @@ class Alumno
 			}
 		return $this;
 	}
-
 }
