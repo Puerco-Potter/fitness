@@ -23,14 +23,19 @@ class Elemento
     private $descripcion;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date")
      */
     private $ultReposicion;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $cantidad;
+    private $cantidad;	
+
+    public function __construct()
+    {
+        $this->ultReposicion = new \DateTime();
+    }
 
     public function getId()
     {
