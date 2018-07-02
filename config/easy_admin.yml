@@ -177,16 +177,16 @@ easy_admin:
             class: App\Entity\Empleado
             show:
                 title: 'Empleado'
-                fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
+                fields: [ { property: 'CUIT', label: 'CUIT' }, { property: 'DNI', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
             list:
                 title: 'Lista de empleados'
-                fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
+                fields: [ { property: 'CUIT', label: 'CUIT' }, 'apellido', 'nombre']
             form:
                 fields:
-                    - { property: 'dni', type: 'integer', label: 'DNI'}
+                    - { property: 'DNI', type: 'integer', label: 'DNI'}
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'}                    
-                    - { property: 'cuit', type: 'integer', label: 'CUIT (seguido sin espacios)'}
+                    - { property: 'CUIT', type: 'integer', label: 'CUIT (seguido sin espacios)'}
                     - { property: 'relacion', type: 'choice', label: 'Relación laboral',type_options:{choices:{'Monotributista':'Monotributista','En relación de dependencia':'En relación de dependencia'}}}
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}

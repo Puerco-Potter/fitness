@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -34,13 +35,15 @@ class Empleado
     private $apellido;
 
     /**
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 6,
      *      max = 8,
      *      minMessage = "El DNI debe tener como mínimo 6 dígitos",
      *      maxMessage = "El DNI debe tener como máximo 8 dígitos"
      * )
-     * @ORM\Column(type="string", length=8)
+     * @ORM\Column(type="string", length=8, nullable=false)
      */
     private $DNI;
 
