@@ -92,7 +92,36 @@ easy_admin:
             class: App\Entity\FichaMedica
             show:
                 title: 'Ficha Médica'
-                fields: ['alumno', 'fecha', 'altura', 'talla', 'peso', { property: 'enfermedadesCardiacas', label: 'Enfermedades Cardíacas'}, { property: 'lesionesCronicas', label: 'Lesiones Crónicas'}, { property: 'rehabilitacion', label: 'Rehabilitación'}, 'diabetes', { property: 'bajoTratamiento', label: '¿Bajo Tratamiento?'}, { property: 'cirugia', label: 'Cirugías'}, 'sobrepeso', { property: 'conoceImc', label: '¿Conoce su IMC?'}, { property: 'dieta', label: '¿Se encuentra a dieta?'}, { property: 'perderPeso', label: '¿Se encuentra en un plan de perder peso?'}, { property: 'problemasArticulares', label: '¿Posee problemas articulares?'}, { property: 'problemasEspalda', label: '¿Posee problemas de espalda?'}, { property: 'dolores', label: '¿Dolores crónicos?'}, 'hipertenso', 'hernias', 'hidratado', 'medicamentos', { property: 'listaMedicamentos', label: 'Lista de medicamentos'}, 'embarazada', { property: 'tiempoEmbarazo', label: 'Tiempo de embarazo'}, { property: 'listaEnfermedades', label: 'Lista de enfermedades'}, 'observaciones', { property: 'telefonoEmergencia', label: 'Teléfono de emergencia'}, { property: 'grupoSanguineo', label: 'Grupo Sanguíneo'}]
+                fields:
+                    - 'alumno'
+                    - 'fecha'
+                    - { property: 'grupoSanguineo', label: 'Grupo Sanguíneo'}
+                    - 'peso'
+                    - 'altura'
+                    - { property: 'enfermedadesCardiacas', label: 'Enfermedades Cardíacas'}
+                    - { property: 'lesionesCronicas', label: 'Lesiones Crónicas'}
+                    - { property: 'rehabilitacion', label: 'Rehabilitación'}
+                    - 'diabetes'
+                    - { property: 'bajoTratamiento', label: '¿Bajo Tratamiento?'}
+                    - { property: 'cirugia', label: 'Cirugías'}
+                    - 'sobrepeso'
+                    - { property: 'conoceImc', label: '¿Conoce su IMC?'}
+                    - { property: 'dieta', label: '¿Se encuentra a dieta?'}
+                    - { property: 'perderPeso', label: '¿Se encuentra en un plan de perder peso?'}
+                    - { property: 'problemasArticulares', label: '¿Posee problemas articulares?'}
+                    - { property: 'problemasEspalda', label: '¿Posee problemas de espalda?'}
+                    - { property: 'dolores', label: '¿Dolores crónicos?'}
+                    - 'hipertenso'
+                    - 'hernias'
+                    - 'hidratado'
+                    - 'medicamentos'
+                    - { property: 'listaMedicamentos', label: 'Lista de medicamentos'}
+                    - 'embarazada'
+                    - { property: 'tiempoEmbarazo', label: 'Tiempo de embarazo'}
+                    - 'talla'
+                    - { property: 'listaEnfermedades', label: 'Lista de enfermedades'}
+                    - 'observaciones'
+                    - { property: 'telefonoEmergencia', label: 'Teléfono de emergencia'}
             list:
                 title: 'Lista de Fichas médicas'
                 fields: ['alumno', 'fecha']
@@ -100,6 +129,7 @@ easy_admin:
                 fields:
                     - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}
                     - { property: 'fecha', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha'}
+                    - { property: 'grupoSanguineo', type: 'choice', label: 'Grupo Sanguíneo', type_options:{choices:{'A-':'A-','A+':'A+','B-':'B-','B+':'B+','AB-':'AB-','AB+':'AB+','0-':'0-','0+':'0+','Otro':'Otro'}}}
                     - { property: 'peso', type: 'integer', label: 'Peso (kilogramos)'}                  
                     - { property: 'altura', type: 'integer', label: 'Altura (centímetros)'}      
                     - { property: 'enfermedadesCardiacas',type: 'checkbox', label: '¿Posee enfermedades cardíacas?'}
@@ -126,7 +156,6 @@ easy_admin:
                     - { property: 'listaEnfermedades', type: 'textarea', label: 'Lista de enfermedades'}
                     - { property: 'observaciones', type: 'textarea', label: 'Observaciones particulares'} 
                     - { property: 'telefonoEmergencia', type: 'text', label: 'Teléfono de emergencia'}  
-                    - { property: 'grupoSanguineo', type: 'choice', label: 'Grupo Sanguíneo', type_options:{choices:{'A-':'A-','A+':'A+','B-':'B-','B+':'B+','AB-':'AB-','AB+':'AB+','0-':'0-','0+':'0+','Otro':'Otro'}}}
                                                   
         Telefono:
             class: App\Entity\Telefono
@@ -179,7 +208,7 @@ easy_admin:
             form:
                 title: 'Profesor'
                 fields: 
-                    - { property: 'empleado', type: 'text', label: 'Empleado'}
+                    - { property: 'empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Empleado'}  
         # Entidades de Maty
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
@@ -240,15 +269,14 @@ easy_admin:
             class: App\Entity\Elemento
             show:
                 title: 'Elemento'
-                fields: ['descripcion', 'cantidad', { property: 'proxMantenimiento', label: 'Fecha de última reposición' }]
+                fields: ['descripcion', 'cantidad', { property: 'ultReposicion', label: 'Fecha de última reposición' }]
             list:
                 title: 'Lista de elementos del gimnasio'
-                fields: ['descripcion', 'cantidad', { property: 'proxMantenimiento', label: 'Fecha de próx. mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
+                fields: ['descripcion', 'cantidad', { property: 'ultReposicion', label: 'Fecha de última reposición' }]
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
-                    - { property: 'proxMantenimiento', type: 'date', label: 'Fecha del próximo mantenimiento',type_options: {widget: 'single_text'}}
-                    - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'}                    
+                    - { property: 'ultReposicion', type: 'date', label: 'Fecha de última reposición',type_options: {widget: 'single_text'}}                  
                     - { property: 'cantidad', type: 'integer', label: 'Cantidad disponible'}
             edit:
                 title: 'Modificar elemento'
@@ -257,6 +285,6 @@ easy_admin:
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
-            - { name: 'show', icon: 'eye', label: '', title: 'Buscar' }
-            - { name: 'edit', icon: 'pencil', label: '', title: 'Modificar' }
-            - { name: 'delete', icon: 'trash', label: '', title: 'Eliminar' }
+            - { name: 'show', icon: 'eye', label: 'Ver', title: 'Buscar' }
+            - { name: 'edit', icon: 'pencil', label: 'Editar', title: 'Modificar' }
+            - { name: 'delete', icon: 'trash', label: 'Borrar', title: 'Eliminar' }

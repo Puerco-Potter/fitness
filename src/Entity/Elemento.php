@@ -25,16 +25,7 @@ class Elemento
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $proxMantenimiento;
-
-    /**
-	 * @Assert\Type(
-     *     type="int",
-     *     message="The value {{ value }} is not a valid {{ type }}."
-     * )
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $mantenimientoDias;
+    private $ultReposicion;
 
     /**
      * @ORM\Column(type="integer")
@@ -58,26 +49,14 @@ class Elemento
         return $this;
     }
 
-    public function getProxMantenimiento(): ?\DateTimeInterface
+    public function getUltReposicion(): ?\DateTimeInterface
     {
-        return $this->proxMantenimiento;
+        return $this->ultReposicion;
     }
 
-    public function setProxMantenimiento(?\DateTimeInterface $proxMantenimiento): self
+    public function setUltReposicion(?\DateTimeInterface $ultReposicion): self
     {
-        $this->proxMantenimiento = $proxMantenimiento;
-
-        return $this;
-    }
-
-    public function getMantenimientoDias(): ?int
-    {
-        return $this->mantenimientoDias;
-    }
-
-    public function setMantenimientoDias(?int $mantenimientoDias): self
-    {
-        $this->mantenimientoDias = $mantenimientoDias;
+        $this->ultReposicion = $ultReposicion;
 
         return $this;
     }
@@ -92,5 +71,9 @@ class Elemento
         $this->cantidad = $cantidad;
 
         return $this;
+    }
+	public function __toString()
+    {
+        return $this->getDescripcion();
     }
 }

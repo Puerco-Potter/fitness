@@ -40,7 +40,7 @@ class Profesor
     }
 	public function __toString()
     {
-        return $this->getEmpleado();
+        return $this->getEmpleado()->__toString();
     }
 
 }
