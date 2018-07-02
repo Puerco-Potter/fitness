@@ -14,10 +14,7 @@ class ProfesorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Empleado', EmpleadoType::class, [
-                'label' => 'Empleado',
-            ])
-        ;
+            ->add('Empleado');
     }
 
     public function configureOptions(OptionsResolver $resolver)

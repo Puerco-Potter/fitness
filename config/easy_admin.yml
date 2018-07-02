@@ -190,7 +190,7 @@ easy_admin:
                     - { property: 'relacion', type: 'choice', label: 'Relación laboral',type_options:{choices:{'Monotributista':'Monotributista','En relación de dependencia':'En relación de dependencia'}}}
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
-                    - { property: 'telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoEmpleadoType', by_reference: false }}
+                    - { property: 'telefonos', label: 'Telefonos' ,type: 'collection' , type_options: { entry_type: 'App\Form\TelefonoEmpleadoType', by_reference: false }}
             edit:
                 title: 'Modificar empleado'
             new:

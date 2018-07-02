@@ -75,23 +75,6 @@ class Empleado
      * @ORM\OneToMany(targetEntity="App\Entity\TelefonoEmpleado", mappedBy="Empleado", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $Telefonos;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Profesor", mappedBy="Empleado", orphanRemoval=true, cascade={"persist", "remove"})
-     */
-    private $Profesor;
-
-    public function getProfesor(): ?Profesor
-    {
-        return $this->Profesor;
-    }
-
-    public function setProfesor(Profesor $Profesor): self
-    {
-        $this->Profesor = $Profesor;
-
-        return $this;
-    }
     
     public function __construct()
     {
