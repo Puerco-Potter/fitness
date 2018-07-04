@@ -18,6 +18,10 @@ class Elemento
     private $id;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "La descripción debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $descripcion;
@@ -25,16 +29,17 @@ class Elemento
     /**
      * @ORM\Column(type="date")
      */
-    private $ultReposicion;
+    private $ultimaReposicion;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options= {"default": 1})
      */
     private $cantidad;	
 
     public function __construct()
     {
-        $this->ultReposicion = new \DateTime();
+        $this->ultimaReposicion = new \DateTime();
+        $this->cantidad = 1;
     }
 
     public function getId()
@@ -54,14 +59,14 @@ class Elemento
         return $this;
     }
 
-    public function getUltReposicion(): ?\DateTimeInterface
+    public function getUltimaReposicion(): ?\DateTimeInterface
     {
-        return $this->ultReposicion;
+        return $this->ultimaReposicion;
     }
 
-    public function setUltReposicion(?\DateTimeInterface $ultReposicion): self
+    public function setUltimaReposicion(?\DateTimeInterface $ultimaReposicion): self
     {
-        $this->ultReposicion = $ultReposicion;
+        $this->ultimaReposicion = $ultimaReposicion;
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EquipamientoRepository")
@@ -18,6 +19,10 @@ class Equipamiento
     private $id;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "La descripción debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $descripcion;
@@ -28,12 +33,12 @@ class Equipamiento
     private $ultimoMantenimiento;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45, options={"default" : "Listo para usar"})
      */
     private $estado;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options= {"default": 15})
      */
     private $mantenimientoDias;
 
@@ -47,6 +52,7 @@ class Equipamiento
         $this->ultimoMantenimiento = new \DateTime(); 
         $this->fechaAdquisicion = new \DateTime();
         $this->mantenimientoDias = 15;
+        $this->estado = "Listo para usar";
     }
 
     public function getId()

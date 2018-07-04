@@ -25,28 +25,47 @@ class Alumno
      */
     private $id;
 	
-	
     /**
-     * @ORM\Column(type="string", length=45)
+     * @Assert\Length(
+     *      max = 60,
+     *      maxMessage = "El nombre debe tener como máximo 60 caracteres"
+     * )
+     * @ORM\Column(type="string", length=60)
      */
     private $nombre;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "El apellido debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $apellido;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "La dirección debe tener como máximo 50 caracteres"
+     * )
+     * @ORM\Column(type="string", length=50)
      */
     private $direccion;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "La localidad debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $localidad;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "El CP debe tener como máximo 10 caracteres"
+     * )
      * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $cp;
@@ -71,6 +90,10 @@ class Alumno
     private $correo;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "La ocupación debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45, nullable=true)
      */
     private $ocupacion;
@@ -81,7 +104,7 @@ class Alumno
     private $fechaNacimiento;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" : 0})
      */
     private $balance;
 
@@ -97,35 +120,42 @@ class Alumno
     private $dni;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "El género debe tener como máximo 10 caracteres"
+     * )
      * @ORM\Column(type="string", length=10)
      */
     private $genero;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
      */
     private $diasPrueba;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\FichaMedica", mappedBy="Alumno")
      */
-    private $fichaMedicas;
+    private $FichasMedicas;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Telefono", mappedBy="Alumno",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\TelefonoAlumno", mappedBy="Alumno", orphanRemoval=true,  cascade={"persist", "remove"})
      */
-    private $telefonos;
+    private $Telefonos;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : false})
      */
     private $inactivo;
 	
     public function __construct()
     {
+        $this->localidad = "Resistencia";
+        $this->balance = 0;
+        $this->cp = 3500;
         $this->inactivo = 0;
-        $this->telefonos = new ArrayCollection();
-        $this->fichaMedicas = new ArrayCollection();
+        $this->Telefonos = new ArrayCollection();
+        $this->FichasMedicas = new ArrayCollection();
     }
 
     public function getId()
@@ -322,22 +352,22 @@ class Alumno
 	/**
 	* @return Collection|FichaMedica[]
 	*/
-	public function getFichaMedicas(): Collection
+	public function getFichasMedicas(): Collection
 	{
-		return $this->fichaMedicas;
+		return $this->FichasMedicas;
 	}
 	public function addFichaMedica(FichaMedica $fichaMedica): self
 	{
-		if (!$this->fichaMedicas->contains($fichaMedica)) {
-			$this->fichaMedicas[] = $fichaMedica;
+		if (!$this->FichasMedicas->contains($fichaMedica)) {
+			$this->FichasMedicas[] = $fichaMedica;
 			$fichaMedica->setAlumno($this);
 		}
 		return $this;
 	}
 	public function removeFichaMedica(FichaMedica $fichaMedica): self
 	{
-		if ($this->fichaMedicas->contains($fichaMedica)) {
-			$this->fichaMedicas->removeElement($fichaMedica);
+		if ($this->FichasMedicas->contains($fichaMedica)) {
+			$this->FichasMedicas->removeElement($fichaMedica);
 			// set the owning side to null (unless already changed)
 			if ($fichaMedica->getAlumno() === $this) {
 				$fichaMedica->setAlumno(null);
@@ -347,24 +377,24 @@ class Alumno
 	}
 	
 	/**
-	* @return Collection|Telefono[]
+	* @return Collection|TelefonoAlumno[]
 	*/
 	public function getTelefonos(): Collection
 	{
-		return $this->telefonos;
+		return $this->Telefonos;
 	}
-	public function addTelefono(Telefono $telefono): self
+	public function addTelefono(TelefonoAlumno $telefono): self
 	{
-		if (!$this->telefonos->contains($telefono)) {
-			$this->telefonos[] = $telefono;
+		if (!$this->Telefonos->contains($telefono)) {
+			$this->Telefonos[] = $telefono;
 			$telefono->setAlumno($this);
 		}
 		return $this;
 	}
-	public function removeTelefono(Telefono $telefono): self
+	public function removeTelefono(TelefonoAlumno $telefono): self
 	{
-		if ($this->telefonos->contains($telefono)) {
-			$this->telefonos->removeElement($telefono);
+		if ($this->Telefonos->contains($telefono)) {
+			$this->Telefonos->removeElement($telefono);
 			// set the owning side to null (unless already changed)
 			if ($telefono->getAlumno() === $this) {
 				$telefono->setAlumno(null);
