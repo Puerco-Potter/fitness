@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActividadRepository")
@@ -17,12 +18,16 @@ class Actividad
     private $id;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "El nombre debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $nombre;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : true})
      */
     private $grupal;
 
@@ -32,7 +37,7 @@ class Actividad
     private $fechaInicio;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : true})
      */
     private $estado;
 
@@ -45,6 +50,7 @@ class Actividad
     {
         $this->fechaInicio = new \DateTime();
         $this->estado = true;
+        $this->grupal = true;
     }
 
     public function getId()
@@ -110,5 +116,10 @@ class Actividad
         $this->descripcion = $descripcion;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getNombre();
     }
 }

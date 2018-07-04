@@ -12,8 +12,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EmpleadoRepository")
- * @UniqueEntity("DNI") 
- * @UniqueEntity("CUIT") 
+ * @UniqueEntity("dni") 
+ * @UniqueEntity("cuit") 
  */
 class Empleado
 {
@@ -25,11 +25,19 @@ class Empleado
     private $id;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "El nombre debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $nombre;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "El apellido debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $apellido;
@@ -45,7 +53,7 @@ class Empleado
      * )
      * @ORM\Column(type="string", length=8, nullable=false)
      */
-    private $DNI;
+    private $dni;
 
     /**
      * @Assert\Length(
@@ -57,14 +65,22 @@ class Empleado
      * )
      * @ORM\Column(type="string", length=11)
      */
-    private $CUIT;
+    private $cuit;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "La relación debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $relacion;
 
     /**
+     * @Assert\Length(
+     *      max = 45,
+     *      maxMessage = "La dirección debe tener como máximo 45 caracteres"
+     * )
      * @ORM\Column(type="string", length=45)
      */
     private $direccion;
@@ -81,6 +97,7 @@ class Empleado
     
     public function __construct()
     {
+        $this->relacion = "Por contrato";
         $this->Telefonos = new ArrayCollection();
     }
 
@@ -113,26 +130,26 @@ class Empleado
         return $this;
     }
 
-    public function getDNI(): ?string
+    public function getDni(): ?string
     {
-        return $this->DNI;
+        return $this->dni;
     }
 
-    public function setDNI(string $DNI): self
+    public function setDni(string $dni): self
     {
-        $this->DNI = $DNI;
+        $this->dni = $dni;
 
         return $this;
     }
 
-    public function getCUIT(): ?string
+    public function getCuit(): ?string
     {
-        return $this->CUIT;
+        return $this->cuit;
     }
 
-    public function setCUIT(string $CUIT): self
+    public function setCuit(string $cuit): self
     {
-        $this->CUIT = $CUIT;
+        $this->cuit = $cuit;
 
         return $this;
     }

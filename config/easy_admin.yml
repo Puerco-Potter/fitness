@@ -15,7 +15,7 @@ easy_admin:
                 - { entity: 'Alumno', icon: 'address-card' }
                 - { entity: 'AlumnoInactivo', icon: 'address-card', label: 'Alumnos inactivos'}
                 - { entity: 'FichaMedica', icon: 'clipboard', label: 'Fichas médicas'}
-                - { entity: 'Telefono', icon: 'phone' }
+                - { entity: 'TelefonoAlumno', icon: 'phone', label: 'Teléfonos de alumnos' }
             # Entidades de Maxi
             - { label: "Actividades" , entity: 'Actividad', icon: 'bolt' }
             - label: 'Gestión de Inventario'
@@ -56,13 +56,12 @@ easy_admin:
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'} 
                     - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
-                    
         Alumno:
             class: App\Entity\Alumno
             disabled_actions: ['delete']
             show:
                 title: 'Alumno'
-                fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }, 'localidad', 'direccion', 'cp', { property: 'correo', label: 'E-Mail'}, 'ocupacion', 'genero', 'telefonos', { property: 'diasPrueba', label: 'Días de prueba'}]
+                fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }, 'localidad', 'direccion', 'cp', { property: 'correo', label: 'E-Mail'}, 'ocupacion', 'genero', 'Telefonos','FichasMedicas', { property: 'diasPrueba', label: 'Días de prueba'}]
             list:
                 title: 'Lista de alumnos'
                 dql_filter: 'entity.inactivo=0'
@@ -83,7 +82,7 @@ easy_admin:
                     - { property: 'balance', type: 'money', label: 'Saldo', type_options: { currency: 'ARS' }}
                     - { property: 'genero', type: 'choice', label: 'Género',type_options:{choices:{'Masculino':'Masculino','Femenino':'Femenino','Otro':'Otro'}}}
                     - { property: 'diasPrueba', type: 'text', label: 'Días de prueba'}
-                    - { property: 'telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoType', by_reference: false }}
+                    - { property: 'Telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoAlumnoType', by_reference: false }}
             edit:
                 title:  'Modificar Alumno'
                 fields:
@@ -153,47 +152,46 @@ easy_admin:
                     - { property: 'listaMedicamentos', type: 'textarea', label: 'Lista de medicamentos'}  
                     - { property: 'embarazada',type: 'checkbox', label: '¿Se encuentra embarazada?'}       
                     - { property: 'tiempoEmbarazo', type: 'text', label: 'Tiempo de embarazo'}     
-                    - { property: 'Talla', type: 'text', label: 'Talla'}                                        
+                    - { property: 'talla', type: 'text', label: 'Talla'}                                        
                     - { property: 'listaEnfermedades', type: 'textarea', label: 'Lista de enfermedades'}
                     - { property: 'observaciones', type: 'textarea', label: 'Observaciones particulares'} 
                     - { property: 'telefonoEmergencia', type: 'text', label: 'Teléfono de emergencia'}  
-                                                  
-        Telefono:
-            class: App\Entity\Telefono
+        TelefonoAlumno:
+            class: App\Entity\TelefonoAlumno
             show:
                 title: 'Teléfono de alumno'
-                fields: ['caracteristica', 'numero', 'tipo','alumno']
+                fields: ['Alumno', 'tipo', 'caracteristica', 'numero']
             list:
                 title: 'Lista de teléfonos de alumnos'
-                fields: ['caracteristica', 'numero', 'tipo','alumno']
+                fields: ['caracteristica', 'numero', 'tipo','Alumno']
             form:
                 title: 'Teléfono'
                 fields:
                     - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
                     - { property: 'caracteristica', type: 'text', label: 'Característica'}
                     - { property: 'numero', type: 'text', label: 'Número'}                    
-                    - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}                   
+                    - { property: 'Alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}                   
         # Entidades de Emiliano
         Empleado:
             class: App\Entity\Empleado
             show:
                 title: 'Profesor'
-                fields: [ { property: 'CUIT', label: 'CUIT' }, { property: 'DNI', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
+                fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
             list:
                 title: 'Lista de profesores'
-                fields: [ { property: 'CUIT', label: 'CUIT' }, 'apellido', 'nombre']
+                fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Agregar Profesor', title: 'Agregar Profesor'}
             form:
                 fields:
-                    - { property: 'DNI', type: 'integer', label: 'DNI'}
+                    - { property: 'dni', type: 'integer', label: 'DNI'}
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'}                    
-                    - { property: 'CUIT', type: 'integer', label: 'CUIT (seguido sin espacios)'}
-                    - { property: 'relacion', type: 'choice', label: 'Relación laboral',type_options:{choices:{'Monotributista':'Monotributista','En relación de dependencia':'En relación de dependencia'}}}
+                    - { property: 'cuit', type: 'integer', label: 'CUIT (seguido sin espacios)'}
+                    - { property: 'relacion', type: 'choice', label: 'Relación laboral',type_options:{choices:{'Por contrato': 'Por contrato', 'Monotributista': 'Monotributista','En relación de dependencia': 'En relación de dependencia'}}}
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
-                    - { property: 'telefonos', label: 'Telefonos' ,type: 'collection' , type_options: { entry_type: 'App\Form\TelefonoEmpleadoType', by_reference: false }}
+                    - { property: 'Telefonos', label: 'Telefonos' ,type: 'collection' , type_options: { entry_type: 'App\Form\TelefonoEmpleadoType', by_reference: false }}
             edit:
                 title: 'Modificar profesor'
             new:
@@ -218,10 +216,10 @@ easy_admin:
             title: 'Teléfono de profesor'
             show:
                 title: 'Teléfono de Profesor'
-                fields: [{ property: 'empleado', label: 'Profesor'}, 'caracteristica', 'numero', 'tipo']
+                fields: [{ property: 'Empleado', label: 'Profesor'}, 'tipo', 'caracteristica', 'numero']
             list:
                 title: 'Teléfonos de profesores'
-                fields: ['caracteristica', 'numero', 'tipo', { property: 'empleado', label: 'Profesor'}]
+                fields: ['caracteristica', 'numero', 'tipo', { property: 'Empleado', label: 'Profesor'}]
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Agregar Teléfono', title: 'Agregar Teléfono'}
             form:
@@ -229,7 +227,7 @@ easy_admin:
                     - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
                     - { property: 'caracteristica', type: 'text', label: 'Característica'}
                     - { property: 'numero', type: 'text', label: 'Número'}                    
-                    - { property: 'empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Profesor'}
+                    - { property: 'Empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Profesor'}
             edit:
                 title: 'Modificar teléfono'
             new:
@@ -278,14 +276,14 @@ easy_admin:
             class: App\Entity\Elemento
             show:
                 title: 'Elemento'
-                fields: ['descripcion', 'cantidad', { property: 'ultReposicion', label: 'Fecha de última reposición' }]
+                fields: ['descripcion', 'cantidad', { property: 'ultimaReposicion', label: 'Fecha de última reposición' }]
             list:
                 title: 'Lista de elementos del gimnasio'
-                fields: ['descripcion', 'cantidad', { property: 'ultReposicion', label: 'Fecha de última reposición' }]
+                fields: ['descripcion', 'cantidad', { property: 'ultimaReposicion', label: 'Fecha de última reposición' }]
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
-                    - { property: 'ultReposicion', type: 'date', label: 'Fecha de última reposición',type_options: {widget: 'single_text'}}                  
+                    - { property: 'ultimaReposicion', type: 'date', label: 'Fecha de última reposición',type_options: {widget: 'single_text'}}                  
                     - { property: 'cantidad', type: 'integer', label: 'Cantidad disponible'}
             edit:
                 title: 'Modificar elemento'
@@ -294,6 +292,6 @@ easy_admin:
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
-            - { name: 'show', icon: 'eye', label: 'Ver', title: 'Buscar' }
-            - { name: 'edit', icon: 'pencil', label: 'Editar', title: 'Modificar' }
-            - { name: 'delete', icon: 'trash', label: 'Borrar', title: 'Eliminar' }
+            - { name: 'show', icon: 'eye', label: '', title: 'Ver' }
+            - { name: 'edit', icon: 'pencil', label: '', title: 'Modificar' }
+            - { name: 'delete', icon: 'trash', label: '', title: 'Eliminar' }

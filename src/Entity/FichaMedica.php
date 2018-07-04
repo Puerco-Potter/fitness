@@ -22,7 +22,7 @@ class FichaMedica
     private $id;
 	/**
 	 * @Assert\NotBlank()
-	 * @ORM\ManyToOne(targetEntity="App\Entity\Alumno", inversedBy="fichaMedicas")
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Alumno", inversedBy="FichasMedicas")
 	 * @ORM\JoinColumn(nullable=false)
      */
     private $Alumno;
@@ -167,6 +167,11 @@ class FichaMedica
      * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $grupoSanguineo;
+
+    public function __construct()
+    {
+        $this->fecha = new \DateTime();
+    }
 
     public function getId()
     {

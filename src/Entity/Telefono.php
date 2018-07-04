@@ -3,35 +3,35 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Mapping;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TelefonoRepository")
+ * @ORM\MappedSuperclass
  */
-class Telefono
+abstract class Telefono
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=15)
      */
-    private $tipo;
+    protected $tipo;
 
     /**
      * @ORM\Column(type="string", length=6)
      */
-    private $caracteristica;
+    protected $caracteristica;
 
     /**
      * @ORM\Column(type="string", length=12)
      */
-    private $numero;
-
-    
+    protected $numero;
 
     public function getId()
     {
@@ -77,20 +77,5 @@ class Telefono
     {
         return $this->getCaracteristica().' - '.$this->getNumero();
     }
-	/**
-	* @ORM\ManyToOne(targetEntity="App\Entity\Alumno")
-	*/
-	private $Alumno;
-	
-	public function getAlumno(): ?Alumno
-	{
-		return $this->Alumno;
-	}
-
-	public function setAlumno(?Alumno $Alumno): self
-	{
-		$this->Alumno = $Alumno;
-		return $this;
-	}
 
 }
