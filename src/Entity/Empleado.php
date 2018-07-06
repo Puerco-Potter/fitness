@@ -12,6 +12,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EmpleadoRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="cargo", type="string")
+ * @ORM\DiscriminatorMap( {"empleado" = "Empleado", "profesor" = "Profesor"} )
  * @UniqueEntity("dni") 
  * @UniqueEntity("cuit") 
  */
@@ -22,7 +25,7 @@ class Empleado
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @Assert\Length(
@@ -31,7 +34,7 @@ class Empleado
      * )
      * @ORM\Column(type="string", length=45)
      */
-    private $nombre;
+    protected $nombre;
 
     /**
      * @Assert\Length(
@@ -40,7 +43,7 @@ class Empleado
      * )
      * @ORM\Column(type="string", length=45)
      */
-    private $apellido;
+    protected $apellido;
 
     /**
      * @Assert\NotNull()
@@ -53,7 +56,7 @@ class Empleado
      * )
      * @ORM\Column(type="string", length=8, nullable=false)
      */
-    private $dni;
+    protected $dni;
 
     /**
      * @Assert\Length(
@@ -65,7 +68,7 @@ class Empleado
      * )
      * @ORM\Column(type="string", length=11)
      */
-    private $cuit;
+    protected $cuit;
 
     /**
      * @Assert\Length(
@@ -74,7 +77,7 @@ class Empleado
      * )
      * @ORM\Column(type="string", length=45)
      */
-    private $relacion;
+    protected $relacion;
 
     /**
      * @Assert\Length(
@@ -83,17 +86,17 @@ class Empleado
      * )
      * @ORM\Column(type="string", length=45)
      */
-    private $direccion;
+    protected $direccion;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $fechaNacimiento;
+    protected $fechaNacimiento;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\TelefonoEmpleado", mappedBy="Empleado", orphanRemoval=true, cascade={"persist", "remove"})
      */
-    private $Telefonos;
+    protected $Telefonos;
     
     public function __construct()
     {

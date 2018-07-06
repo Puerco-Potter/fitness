@@ -24,12 +24,12 @@ easy_admin:
                 - { entity: 'Equipamiento', icon: 'cogs' }
                 - { entity: 'Elemento', icon: 'list', label: 'Elemento de gimnasio' }
             # Entidades de Emiliano
-            - label: 'Gestión de Profesores'
+            - label: 'Gestión del Personal'
               icon: 'users'
               children:
-                - { entity: 'Empleado', label: 'Profesores', icon: 'users' }
-            #    - { entity: 'Profesor', icon: 'user' }
-                - { entity: 'TelefonoEmpleado', icon: 'phone', label: 'Teléfonos de profesores'}
+                - { entity: 'Empleado', label: 'Empleados', icon: 'users' }
+                - { entity: 'Profesor', label: 'Profesores', icon: 'user' }
+                - { entity: 'TelefonoEmpleado', icon: 'phone', label: 'Teléfonos de empleados'}
             # Entidades de Matias
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             
@@ -60,7 +60,7 @@ easy_admin:
             class: App\Entity\Alumno
             disabled_actions: ['delete']
             show:
-                title: 'Alumno'
+                title: 'Datos del alumno'
                 fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }, 'localidad', 'direccion', 'cp', { property: 'correo', label: 'E-Mail'}, 'ocupacion', 'genero', 'Telefonos','FichasMedicas', { property: 'diasPrueba', label: 'Días de prueba'}]
             list:
                 title: 'Lista de alumnos'
@@ -91,7 +91,7 @@ easy_admin:
         FichaMedica:
             class: App\Entity\FichaMedica
             show:
-                title: 'Ficha Médica'
+                title: 'Contenido de la Ficha Médica'
                 fields:
                     - 'alumno'
                     - 'fecha'
@@ -159,7 +159,7 @@ easy_admin:
         TelefonoAlumno:
             class: App\Entity\TelefonoAlumno
             show:
-                title: 'Teléfono de alumno'
+                title: 'Teléfono del alumno'
                 fields: ['Alumno', 'tipo', 'caracteristica', 'numero']
             list:
                 title: 'Lista de teléfonos de alumnos'
@@ -175,7 +175,31 @@ easy_admin:
         Empleado:
             class: App\Entity\Empleado
             show:
-                title: 'Profesor'
+                title: 'Datos del empleado'
+                fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
+            list:
+                title: 'Lista de empleados'
+                fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Agregar Empleado', title: 'Agregar Empleado'}
+            form:
+                fields:
+                    - { property: 'dni', type: 'integer', label: 'DNI'}
+                    - { property: 'apellido', type: 'text', label: 'Apellido'}
+                    - { property: 'nombre', type: 'text', label: 'Nombres'}                    
+                    - { property: 'cuit', type: 'integer', label: 'CUIT (seguido sin espacios)'}
+                    - { property: 'relacion', type: 'choice', label: 'Relación laboral',type_options:{choices:{'Por contrato': 'Por contrato', 'Monotributista': 'Monotributista','En relación de dependencia': 'En relación de dependencia'}}}
+                    - { property: 'direccion', type: 'text', label: 'Dirección'}
+                    - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
+                    - { property: 'Telefonos', label: 'Telefonos' ,type: 'collection' , type_options: { entry_type: 'App\Form\TelefonoEmpleadoType', by_reference: false }}
+            edit:
+                title: 'Modificar empleado'
+            new:
+                title: 'Agregar nuevo empleado'
+        Profesor:
+            class: App\Entity\Profesor
+            show:
+                title: 'Datos del profesor'
                 fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
             list:
                 title: 'Lista de profesores'
@@ -196,29 +220,14 @@ easy_admin:
                 title: 'Modificar profesor'
             new:
                 title: 'Agregar nuevo profesor'
-        Profesor:
-            class: App\Entity\Profesor
-            show:
-                title: 'Profesor'
-                fields: 
-                    - { property: 'empleado', type: 'text', label: 'Apellido y nombre'}
-            list:
-                title: 'Lista de profesores'
-                fields: 
-                    - { property: 'empleado', type: 'text', label: 'Apellido y nombre'}
-            form:
-                title: 'Profesor'
-                fields: 
-                    - { property: 'empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Empleado'}  
         # Entidades de Maty
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
-            title: 'Teléfono de profesor'
             show:
-                title: 'Teléfono de Profesor'
+                title: 'Teléfono del empleado'
                 fields: [{ property: 'Empleado', label: 'Profesor'}, 'tipo', 'caracteristica', 'numero']
             list:
-                title: 'Teléfonos de profesores'
+                title: 'Teléfonos de empleados'
                 fields: ['caracteristica', 'numero', 'tipo', { property: 'Empleado', label: 'Profesor'}]
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Agregar Teléfono', title: 'Agregar Teléfono'}
