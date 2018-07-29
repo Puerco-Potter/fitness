@@ -1,47 +1,34 @@
 "# fitness" 
 "#Sólo estoy cambiando el Readme para ver si anda"
 
-<b>Tareas e historias de usuario - Primer release</b></br>
+<b>Tareas e historias de usuario</b></br>
+<b>Primer release</b></br>
 <b>Alumnos</b></br>
 Registro de datos personales</br>
-Como secretaria deseo poder registrar los datos personales de un alumno.</br>
 Modificación de datos personales</br>
-Como secretaria deseo modificar los datos personales de un alumno.</br>
 Registro de ficha médica</br>
-Como secretaria deseo registrar la ficha médica de un alumno.</br>
 Consulta de datos personales</br>
-Como secretaria deseo poder consultar los datos personales de un alumno.</br>
 Baja de alumno</br>
-Como secretaria quiero poder dar de baja un alumno.</br>
 
 <b>Profesores</b></br>
 Registro de datos personales</br>
-Como profesor quiero poder registrar mis datos personales</br>
 Modificación de datos</br>
-Como profesor quiero poder modificar mis datos personales</br>
 Consulta de datos</br>
-Como profesor quiero poder consultar mis datos personales</br>
 Baja de profesor</br>
-Como profesor quiero poder realizar una baja lógica a mi registro.</br>
 
 <b>Inventario</b></br>
 Alta de equipamiento/elemento</br>
-Como secretaria quiero registrar ingreso de equipamiento/elemento nuevo.</br>
 Baja de equipamiento/elemento</br>
-Como secretaria quiero registrar la baja de un equipamiento/elemento.</br>
 Modificación de equipamiento/elemento</br>
-Como secretaria quiero modificar los datos de un equipamiento/elemento.</br>
 
-<b>Actividades</b>
+<b>Actividades</b></br>
 Registrar actividad</br>
-Como socia quiero poder registrar una actividad nueva.</br>
 Eliminar actividad</br>
-Como socia quiero poder dar de baja una actividad.</br>
 Modificar actividad</br>
-Como socia quiero poder modificar una actividad.</br>
 
-Segundo Release: </br>
+Segundo Release </br>
 </br>
+<b>Gestión de planes de entrenamiento</b></br>
 Registrar plantillas de planes de entrenamiento</br>
 Registrar plan de entrenamiento de Alumno</br>
 <b>Gestión de Clases:</b></br>
@@ -49,12 +36,12 @@ Registro de clases</br>
 Modificar clases</br>
 Inscripción a clases</br>
 Asignación de profesores</br>
-Gestión de salas</br>
+<b>Gestión de salas</b></br>
 
 
 
 Tercer Release:</br>
-
+</br>
 <b>Control de Asistencias:</b></br>
 Registro de asistencias de alumnos</br>
 Registro de entrada de profesores</br>
@@ -76,7 +63,7 @@ Asignación de suplentes</br>
 
 
 Cuarto Release:</br>
-
+</br>
 <b>Gestión de caja</b></br>
 Gestión de Ingresos de Caja</br>
 Gestión de Egresos de Caja</br>
