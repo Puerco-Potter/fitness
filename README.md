@@ -26,7 +26,7 @@ Registrar actividad</br>
 Eliminar actividad</br>
 Modificar actividad</br>
 
-Segundo Release </br>
+<b>Segundo Release</b></br>
 </br>
 <b>Gestión de planes de entrenamiento</b></br>
 Registrar plantillas de planes de entrenamiento</br>
@@ -40,7 +40,7 @@ Asignación de profesores</br>
 
 
 
-Tercer Release:</br>
+<b>Tercer Release/</b>:</br>
 </br>
 <b>Control de Asistencias:</b></br>
 Registro de asistencias de alumnos</br>
@@ -62,7 +62,7 @@ Asignación de suplentes</br>
 
 
 
-Cuarto Release:</br>
+<b>Cuarto Release</b></br>
 </br>
 <b>Gestión de caja</b></br>
 Gestión de Ingresos de Caja</br>

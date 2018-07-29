@@ -198,13 +198,13 @@ class Empleado
     }
     
     /**
-     * @return Collection|TelefonoEmpleado[]
+    * @return Collection|TelefonoEmpleado[]
     */
     public function getTelefonos(): Collection
     {
         return $this->Telefonos;
     }
-
+    
     public function addTelefono(TelefonoEmpleado $telefono): self
     {
         if (!$this->Telefonos->contains($telefono)) {
