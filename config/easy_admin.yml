@@ -17,7 +17,6 @@ easy_admin:
                 - { entity: 'FichaMedica', icon: 'clipboard', label: 'Fichas médicas'}
                 - { entity: 'TelefonoAlumno', icon: 'phone', label: 'Teléfonos de alumnos' }
             # Entidades de Maxi
-            - { label: "Actividades" , entity: 'Actividad', icon: 'bolt' }
             - label: 'Gestión de Inventario'
               icon: 'cogs'
               children:
@@ -30,6 +29,12 @@ easy_admin:
                 - { entity: 'Empleado', label: 'Empleados', icon: 'users' }
                 - { entity: 'Profesor', label: 'Profesores', icon: 'user' }
                 - { entity: 'TelefonoEmpleado', icon: 'phone', label: 'Teléfonos de empleados'}
+            - label: 'Gestión de Actividades'
+              icon: 'bolt'
+              children:
+                - { label: "Actividades" , entity: 'Actividad', icon: 'bug' }
+                - {entity: 'Clase', icon: 'bug', label: 'Clases'}
+                - {entity: 'Sala', icon: 'building', label: 'Salas'}
             # Entidades de Matias
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             
@@ -87,7 +92,6 @@ easy_admin:
                 title:  'Modificar Alumno'
                 fields:
                     - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
-
         FichaMedica:
             class: App\Entity\FichaMedica
             show:
@@ -176,7 +180,7 @@ easy_admin:
             class: App\Entity\Empleado
             show:
                 title: 'Datos del empleado'
-                fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
+                fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}, 'Telefonos']
             list:
                 title: 'Lista de empleados'
                 fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
@@ -200,7 +204,7 @@ easy_admin:
             class: App\Entity\Profesor
             show:
                 title: 'Datos del profesor'
-                fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}]
+                fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}, 'Telefonos', 'Clases']
             list:
                 title: 'Lista de profesores'
                 fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
@@ -220,6 +224,62 @@ easy_admin:
                 title: 'Modificar profesor'
             new:
                 title: 'Agregar nuevo profesor'
+        Sala:
+            class: App\Entity\Sala
+            show:
+                title: 'Sala'
+                fields: ['descripcion', 'capacidad', 'Clases']
+            list:
+                title: 'Salas'
+                fields: ['descripcion', 'capacidad']
+            form:
+                fields: ['descripcion', 'capacidad']
+        Clase:
+            class: App\Entity\Clase
+            show:
+                title: 'Clase'
+                fields:
+                    - {property: 'Profesor'}
+                    - {property: 'Actividad'}
+                    - {property: 'Sala'}
+                    - {property: 'precio'}
+                    - {property: 'cupo'}
+                    - {property: 'lunes'}
+                    - {property: 'martes'}
+                    - {property: 'miercoles'}
+                    - {property: 'jueves'}
+                    - {property: 'viernes'}
+                    - {property: 'sabado'}
+                    - {property: 'horario'}
+                    - {property: 'duracion', label: 'Duración (minutos)'}    
+            list:
+                title: 'Clases'
+                fields:
+                    - {property: 'Profesor'}
+                    - {property: 'Actividad'}
+                    - {property: 'Sala'}
+                    - {property: 'lunes'}
+                    - {property: 'martes'}
+                    - {property: 'miercoles'}
+                    - {property: 'jueves'}
+                    - {property: 'viernes'}
+                    - {property: 'sabado'}
+                    - {property: 'horario'}
+            form:
+                fields:
+                    - {property: 'Profesor'}
+                    - {property: 'Actividad'}
+                    - {property: 'Sala'}
+                    - {property: 'precio', type: 'money', type_options: { currency: 'ARS' }}
+                    - {property: 'cupo'}
+                    - {property: 'lunes'}
+                    - {property: 'martes'}
+                    - {property: 'miercoles'}
+                    - {property: 'jueves'}
+                    - {property: 'viernes'}
+                    - {property: 'sabado'}
+                    - {property: 'horario'}
+                    - {property: 'duracion', label: 'Duración (minutos)'}                
         # Entidades de Maty
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado

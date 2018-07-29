@@ -382,7 +382,8 @@ class Alumno
 	public function getTelefonos(): Collection
 	{
 		return $this->Telefonos;
-	}
+    }
+    
 	public function addTelefono(TelefonoAlumno $telefono): self
 	{
 		if (!$this->Telefonos->contains($telefono)) {
@@ -390,7 +391,8 @@ class Alumno
 			$telefono->setAlumno($this);
 		}
 		return $this;
-	}
+    }
+    
 	public function removeTelefono(TelefonoAlumno $telefono): self
 	{
 		if ($this->Telefonos->contains($telefono)) {
