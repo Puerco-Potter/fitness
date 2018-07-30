@@ -98,6 +98,36 @@ class Clase
         $this->sabado = FALSE;
     }
 
+    private function getDias(): ?string
+    {
+        $answer = '';
+        if ($this->lunes)
+        {
+            $answer = $answer.'Lunes ';
+        }
+        if ($this->martes)
+        {
+            $answer = $answer.'Martes ';
+        }
+        if ($this->miercoles)
+        {
+            $answer = $answer.'Miércoles ';
+        }
+        if ($this->jueves)
+        {
+            $answer = $answer.'Jueves ';
+        }
+        if ($this->viernes)
+        {
+            $answer = $answer.'Viernes ';
+        }
+        if ($this->sabado)
+        {
+            $answer = $answer.'Sábado ';
+        }
+        return $answer;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -260,6 +290,6 @@ class Clase
     }
 	public function __toString()
     {
-        return $this->getProfesor().' - '.$this->getActividad().' - '.(string) $this->getHorario()->format('H:i');
+        return $this->getProfesor().' - '.$this->getActividad().' - '.$this->getDias().' - '.(string) $this->getHorario()->format('H:i');
     }
 }

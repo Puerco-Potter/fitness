@@ -38,8 +38,6 @@ Inscripción a clases</br>
 Asignación de profesores</br>
 <b>Gestión de salas</b></br>
 
-
-
 <b>Tercer Release/</b>:</br>
 </br>
 <b>Control de Asistencias:</b></br>
@@ -59,8 +57,6 @@ Registro aviso de faltas futuras</br>
 <b>Gestión de suplencias de profesores:</b></br>
 Asentamiento de licencia de profesores</br>
 Asignación de suplentes</br>
-
-
 
 <b>Cuarto Release</b></br>
 </br>
