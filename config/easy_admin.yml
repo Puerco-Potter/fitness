@@ -32,10 +32,10 @@ easy_admin:
             - label: 'Gestión de Actividades'
               icon: 'bolt'
               children:
-                - { label: "Actividades" , entity: 'Actividad', icon: 'bug' }
-                - {entity: 'Clase', icon: 'bug', label: 'Clases'}
+                - { label: "Actividades" , entity: 'Actividad', icon: 'heartbeat' }
+                - {entity: 'Clase', icon: 'clipboard', label: 'Clases'}
                 - {entity: 'Sala', icon: 'building', label: 'Salas'}
-                - {entity: 'Inscripcion', icon: 'bug', label: 'Inscripciones'}
+                - {entity: 'Inscripcion', icon: 'edit', label: 'Inscripciones'}
             # Entidades de Matias
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             
