@@ -76,23 +76,26 @@ easy_admin:
                 fields: [ { property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }]
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Informacion Basica' }
+                    - { type: 'tab' , label: 'Informacion del Alumno', icon: 'user' }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Información Basica' }
                     - { property: 'dni', type: 'integer', label: 'DNI'}
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'}    
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
                     - { property: 'localidad', type: 'choice', label: 'Localidad',type_options:{choices:{'Puerto Vilelas':'Puerto Vilelas','La Liguria':'La Liguria','Resistencia':'Resistencia','Fontana':'Fontana','Barranqueras':'Barranqueras'}}}
-                    - { property: 'cp', type: 'text', label: 'Código Postal'}
                     - { property: 'genero', type: 'choice', label: 'Género',type_options:{choices:{'Masculino':'Masculino','Femenino':'Femenino','Otro':'Otro'}}}
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Basic information' }
-                    - { property: 'cuenta', type: 'text', label: 'Cuenta'}
-                    - { property: 'correo', type: 'text', label: 'Correo electrónico'}
-                    - { property: 'ocupacion', type: 'text', label: 'Ocupación'}
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Información de Cuenta' }
                     - { property: 'balance', type: 'money', label: 'Saldo', type_options: { currency: 'ARS' }}
+                    - { property: 'cuenta', type: 'text', label: 'Numero de Cuenta'}
+                    - { property: 'ocupacion', type: 'text', label: 'Ocupación'}
                     - { property: 'diasPrueba', type: 'text', label: 'Días de prueba'}
+                    - { type: 'tab' , label: 'Informacion de Contacto', icon: 'phone' }
+                    - { type: 'group', css_class: 'col-sm-8 new-row', label: 'Informacion de Contacto' }
+                    - { property: 'cp', type: 'text', label: 'Código Postal'}
+                    - { property: 'correo', type: 'text', label: 'Correo electrónico'}
                     - { property: 'Telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoAlumnoType', by_reference: false }}
-                    - { type: 'group', css_class: 'col-sm-12', label: '' }
+                    - { type: 'tab' , label: 'Observaciones', icon: 'sticky-note' }
                     - { property: 'observaciones', type: 'textarea', label: 'Observaciones'}
 
             edit:
