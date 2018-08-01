@@ -38,7 +38,7 @@ Inscripción a clases</br>
 Asignación de profesores</br>
 <b>Gestión de salas</b></br>
 
-<b>Tercer Release/</b>:</br>
+<b>Tercer Release</b></br>
 </br>
 <b>Control de Asistencias:</b></br>
 Registro de asistencias de alumnos</br>

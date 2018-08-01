@@ -38,6 +38,17 @@ easy_admin:
                 - {entity: 'Inscripcion', icon: 'edit', label: 'Inscripciones'}
             # Entidades de Matias
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
+            - label: 'Gestión de Entrenamientos'
+              icon: 'bug'
+              children:
+                - { label: "Planes de Entrenamiento" , entity: 'PlanEntrenamiento', icon: 'bug' }
+                - { label: "Rutinas" , entity: 'Rutina', icon: 'bug' }
+                - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'bug' }
+                - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'bug' }
+            - label: "Testing"
+              icon: 'exclamation'
+              children:
+                - {label: 'Dirección externa', url: 'http://www.google.com.ar', target: '_blank'}
             
 
     entities:
@@ -50,7 +61,7 @@ easy_admin:
             disabled_actions: ['new','delete']
             show:
                 title: 'Alumno inactivo'
-                fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
+                fields: [{ property: 'dni', label: 'DNI'}, 'apellido', 'nombre']
             list:
                 title: 'Alumnos inactivos'
                 fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
@@ -325,6 +336,7 @@ easy_admin:
             list:
                 title: 'Clases'
                 actions:
+                    - { name: 'export', icon: 'copy', title: 'Informe de alumnos', label: 'Informe de alumnos'}
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Clase', title: 'Crear nueva Clase'}
                 fields:
                     - {property: 'Profesor'}
@@ -353,7 +365,8 @@ easy_admin:
                     - {property: 'horario'}
                     - {property: 'duracion', label: 'Duración (minutos)'}  
             new:
-                title: 'Crear nueva clase'               
+                title: 'Crear nueva clase'
+            controller: App\Controller\ClaseController            
         # Entidades de Maty
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
@@ -438,6 +451,19 @@ easy_admin:
                 title: 'Modificar elemento'
             new:
                 title: 'Añadir nuevo elemento del gimnasio'
+        PlanEntrenamiento:
+            class: App\Entity\PlanEntrenamiento
+            form:
+                fields:
+                    - { property: 'descripcion', type: 'text', label: 'D'}
+                    - { property: 'duracion', type: 'text', label: 'Du'}
+                    - { property: 'rutinas', label: 'Rutinas'}
+        Rutina:
+            class: App\Entity\Rutina
+        Entrenamiento:
+            class: App\Entity\Entrenamiento
+        Ejercicio:
+            class: App\Entity\Ejercicio
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
