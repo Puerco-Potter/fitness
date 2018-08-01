@@ -29,7 +29,7 @@ class PlanEntrenamiento
     private $duracion;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Rutina", mappedBy="PlanEntrenamiento")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Rutina", mappedBy="PlanEntrenamiento", cascade={"persist", "remove"})
      */
     private $rutinas;
 

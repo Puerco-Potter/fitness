@@ -127,6 +127,6 @@ class Entrenamiento
 
     public function __toString()
     {
-        return $this->getRutina()->__toString().' - '.(string) $this->getSeries();
+        return (string) $this->getSeries().' series de '.$this->getEjercicio();
     }
 }
