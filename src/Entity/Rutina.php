@@ -68,6 +68,7 @@ class Rutina
     {
         if (!$this->PlanEntrenamiento->contains($planEntrenamiento)) {
             $this->PlanEntrenamiento[] = $planEntrenamiento;
+            $planEntrenamiento->addRutina($this);
         }
 
         return $this;

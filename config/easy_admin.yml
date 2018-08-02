@@ -457,7 +457,7 @@ easy_admin:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'D'}
                     - { property: 'duracion', type: 'text', label: 'Du'}
-                    - { property: 'rutinas', label: 'Rutinas'}
+                    - { property: 'rutinas', label: 'Rutinas', type_options: { by_reference: false}}
         Rutina:
             class: App\Entity\Rutina
         Entrenamiento:
