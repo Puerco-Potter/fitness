@@ -156,33 +156,38 @@ easy_admin:
                 fields: ['alumno', 'fecha']
             form:
                 fields:
+                    - { type: 'tab' , label: 'Informacion Basica', icon: 'user' }
                     - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}
                     - { property: 'fecha', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha'}
                     - { property: 'grupoSanguineo', type: 'choice', label: 'Grupo Sanguíneo', type_options:{choices:{'A-':'A-','A+':'A+','B-':'B-','B+':'B+','AB-':'AB-','AB+':'AB+','0-':'0-','0+':'0+','Otro':'Otro'}}}
                     - { property: 'peso', type: 'integer', label: 'Peso (kilogramos)'}                  
-                    - { property: 'altura', type: 'integer', label: 'Altura (centímetros)'}      
+                    - { property: 'altura', type: 'integer', label: 'Altura (centímetros)'}
+                    - { property: 'talla', type: 'text', label: 'Talla'}  
+                    - { type: 'tab' , label: 'Informacion Medica', icon: 'user' }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Enfermedades' }      
                     - { property: 'enfermedadesCardiacas',type: 'checkbox', label: '¿Posee enfermedades cardíacas?'}
-                    - { property: 'lesionesCronicas',type: 'checkbox', label: '¿Posee lesiones crónicas?'}
-                    - { property: 'rehabilitacion',type: 'checkbox', label: '¿Se encuentra en rehabilitación?'}
+                    - { property: 'hipertenso',type: 'checkbox', label: '¿Es hipertenso?'}
                     - { property: 'diabetes',type: 'checkbox', label: '¿Es diabético/a?'}
                     - { property: 'bajoTratamiento',type: 'checkbox', label: '¿Se encuentra bajo algún tipo de tratamiento?'}
-                    - { property: 'cirugia',type: 'checkbox', label: '¿Posee cirugías?'}
                     - { property: 'sobrepeso',type: 'checkbox', label: '¿Tiene sobrepeso?'}
-                    - { property: 'conoceImc',type: 'checkbox', label: '¿Conoce su IMC?'}
+                    - { property: 'listaEnfermedades', type: 'textarea', label: 'Lista de enfermedades'}
+                    - { property: 'medicamentos',type: 'checkbox', label: '¿Toma algún tipo de medicamento?'}
+                    - { property: 'listaMedicamentos', type: 'textarea', label: 'Lista de medicamentos'} 
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Fisicas' }
                     - { property: 'dieta',type: 'checkbox', label: '¿Se encuentra a dieta?'}
                     - { property: 'perderPeso',type: 'checkbox', label: '¿Se encuentra en un plan de perder peso?'}
-                    - { property: 'problemasArticulares',type: 'checkbox', label: '¿Posee problemas articulares?'}
-                    - { property: 'problemasEspalda',type: 'checkbox', label: '¿Posee problemas de espalda?'}
+                    - { property: 'lesionesCronicas',type: 'checkbox', label: '¿Posee lesiones crónicas?'}
                     - { property: 'dolores',type: 'checkbox', label: '¿Posee algún tipo de dolor crónico?'}
-                    - { property: 'hipertenso',type: 'checkbox', label: '¿Es hipertenso?'}
                     - { property: 'hernias',type: 'checkbox', label: '¿Posee algun tipo de hernia?'}
+                    - { property: 'problemasEspalda',type: 'checkbox', label: '¿Posee problemas de espalda?'}
+                    - { property: 'problemasArticulares',type: 'checkbox', label: '¿Posee problemas articulares?'}
+                    - { property: 'cirugia',type: 'checkbox', label: '¿Posee cirugías?'}
+                    - { property: 'rehabilitacion',type: 'checkbox', label: '¿Se encuentra en rehabilitación?'}
                     - { property: 'hidratado',type: 'checkbox', label: '¿Se encuentra bien hidratado?'}
-                    - { property: 'medicamentos',type: 'checkbox', label: '¿Toma algún tipo de medicamento?'}                
-                    - { property: 'listaMedicamentos', type: 'textarea', label: 'Lista de medicamentos'}  
+                    - { property: 'conoceImc',type: 'checkbox', label: '¿Conoce su IMC?'}
                     - { property: 'embarazada',type: 'checkbox', label: '¿Se encuentra embarazada?'}       
-                    - { property: 'tiempoEmbarazo', type: 'text', label: 'Tiempo de embarazo'}     
-                    - { property: 'talla', type: 'text', label: 'Talla'}                                        
-                    - { property: 'listaEnfermedades', type: 'textarea', label: 'Lista de enfermedades'}
+                    - { property: 'tiempoEmbarazo', type: 'text', label: 'Tiempo de embarazo'}               
+                    - { type: 'tab' , label: 'Observaciones y Contacto de Emergencia', icon: 'user' }
                     - { property: 'observaciones', type: 'textarea', label: 'Observaciones particulares'} 
                     - { property: 'telefonoEmergencia', type: 'text', label: 'Teléfono de emergencia'}  
             new:
