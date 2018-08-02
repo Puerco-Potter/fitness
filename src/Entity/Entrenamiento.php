@@ -37,7 +37,7 @@ class Entrenamiento
     private $observaciones;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Rutina", inversedBy="entrenamientos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Rutina", inversedBy="entrenamientos", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $Rutina;

@@ -29,7 +29,7 @@ class Rutina
     private $PlanEntrenamiento;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Entrenamiento", mappedBy="Rutina", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Entrenamiento", mappedBy="Rutina", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $entrenamientos;
 
