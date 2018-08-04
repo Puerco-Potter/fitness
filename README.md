@@ -1,5 +1,7 @@
 "# fitness" 
 "#Sólo estoy cambiando el Readme para ver si anda"
+php bin/console make:entity
+php bin/console doctrine:schema:update --force
 
 <b>Tareas e historias de usuario</b></br>
 <b>Primer release</b></br>

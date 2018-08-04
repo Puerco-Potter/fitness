@@ -33,6 +33,17 @@ class PlanEntrenamiento
      */
     private $rutinas;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Alumno")
+     */
+    private $Alumno;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Profesor")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Profesor;
+
     public function __construct()
     {
         $this->rutinas = new ArrayCollection();
@@ -98,5 +109,29 @@ class PlanEntrenamiento
     public function __toString()
     {
         return $this->getDescripcion();
+    }
+
+    public function getAlumno(): ?Alumno
+    {
+        return $this->Alumno;
+    }
+
+    public function setAlumno(?Alumno $Alumno): self
+    {
+        $this->Alumno = $Alumno;
+
+        return $this;
+    }
+
+    public function getProfesor(): ?Profesor
+    {
+        return $this->Profesor;
+    }
+
+    public function setProfesor(?Profesor $Profesor): self
+    {
+        $this->Profesor = $Profesor;
+
+        return $this;
     }
 }

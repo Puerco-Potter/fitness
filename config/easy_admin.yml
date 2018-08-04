@@ -470,15 +470,115 @@ easy_admin:
             class: App\Entity\PlanEntrenamiento
             form:
                 fields:
-                    - { property: 'descripcion', type: 'text', label: 'D'}
-                    - { property: 'duracion', type: 'text', label: 'Du'}
-                    - { property: 'Rutinas', label: 'Rutinas' ,type: 'collection' , type_options: { entry_type: 'App\Form\RutinaType', by_reference: false }}
+                    - { property: 'descripcion', type: 'text', label: 'Descripción'}
+                    - { property: 'duracion', type: 'text', label: 'Duración (semanas)'}
+                    - { property: 'rutinas', label: 'Rutinas', type: 'collection' , type_options: { entry_type: 'App\Form\RutinaType', by_reference: false }}
+                    - {property: 'Alumno'}
+                    - {property: 'Profesor'}
+            edit:
+                title: 'Editar plan de entrenamiento'
+            new:
+                title: 'Crear nuevo plan de entrenamiento'
+            list:
+                title: 'Lista de planes de entrenamiento'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Crear nuevo Plan de entrenamiento', title: 'Crear nuevo Plan de entrenamiento'}
+                fields:
+                    - { property: 'descripcion', type: 'text', label: 'Descripción'}
+                    - { property: 'duracion', type: 'text', label: 'Duración (semanas)'}
+                    - { property: 'rutinas', label: 'Rutinas', type: 'array'}
+                    - {property: 'Alumno'}
+                    - {property: 'Profesor'}
+            show:
+                title: 'Ver plan de entrenamiento'
+                fields:
+                    - { property: 'descripcion', type: 'text', label: 'Descripción'}
+                    - { property: 'duracion', type: 'text', label: 'Duración (semanas)'}
+                    - { property: 'rutinas', label: 'Rutinas'}
+                    - {property: 'Alumno'}
+                    - {property: 'Profesor'}
         Rutina:
             class: App\Entity\Rutina
+            form:
+                fields:
+                    - { property: 'descripcion', label: 'Descripción'}
+                    - { property: 'PlanEntrenamiento', label: 'Planes de entrenamiento'}
+                    - { property: 'entrenamientos', label: 'Entrenamientos', type_options: {by_reference: false}}
+            edit:
+                title: 'Modificar Rutina'
+            new:
+                title: 'Crear nueva rutina'
+            list:
+                title: 'Lista de rutinas'
+                fields:
+                    - { property: 'descripcion', label: 'Descripción'}
+                    - { property: 'PlanEntrenamiento', label: 'Planes de entrenamiento', type: 'array'}
+                    - { property: 'entrenamientos', label: 'Entrenamientos', type: 'array'}
+            show:
+                title: 'Rutina'
+                fields:
+                    - { property: 'descripcion', label: 'Descripción'}
+                    - { property: 'PlanEntrenamiento', label: 'Planes de entrenamiento'}
+                    - { property: 'entrenamientos', label: 'Entrenamientos'}
+            
         Entrenamiento:
             class: App\Entity\Entrenamiento
+            form:
+                fields:
+                    - {property: 'Rutina'}
+                    - {property: 'Ejercicio'}
+                    - {property: 'series'}
+                    - {property: 'descansos'}
+                    - {property: 'peso'}
+                    - {property: 'observaciones'}
+            edit:
+                title: 'Modificar entrenamiento'
+            new:
+                title: 'Nuevo entrenamiento'
+            list:
+                title: 'Lista de entrenamientos'
+                fields:
+                    - {property: 'Rutina'}
+                    - {property: 'Ejercicio'}
+                    - {property: 'series'}
+                    - {property: 'descansos'}
+                    - {property: 'peso'}
+                    - {property: 'observaciones'}
+            show:
+                title: 'Ver Entrenamiento'
+                fields:
+                    - {property: 'Rutina'}
+                    - {property: 'Ejercicio'}
+                    - {property: 'series'}
+                    - {property: 'descansos'}
+                    - {property: 'peso'}
+                    - {property: 'observaciones'}
         Ejercicio:
             class: App\Entity\Ejercicio
+            form:
+                fields:
+                    - {property: 'descripcion', label: 'Descripción'}
+                    - {property: 'Zona muscular'}
+                    - {property: 'Equipamiento'}
+                    - {property: 'Elemento'}
+            edit:
+                title: 'Editar ejercicio'
+            new:
+                title: 'Crear nuevo ejercicio'
+            show:
+                title: 'Ver ejercicio'
+                fields:
+                    - {property: 'descripcion', label: 'Descripción'}
+                    - {property: 'Zona muscular'}
+                    - {property: 'Equipamiento'}
+                    - {property: 'Elemento'}
+            list:
+                title: 'Lista de ejercicios'
+                fields:
+                    - {property: 'descripcion', label: 'Descripción'}
+                    - {property: 'Zona muscular'}
+                    - {property: 'Equipamiento'}
+                    - {property: 'Elemento'}
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
