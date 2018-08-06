@@ -24,6 +24,15 @@ class EntrenamientoType extends AbstractType
             ->add('Series', NumberType::class, [
                 'label' => 'Series',
             ])
+            ->add('Peso', NumberType::class, [
+                'label' => 'Peso (kg)',
+            ])
+            ->add('Descansos', NumberType::class, [
+                'label' => 'Descansos (segundos)',
+            ])
+            ->add('Observaciones', TextType::class, [
+                'label' => 'Observaciones',
+            ])
         ;
     }
 

@@ -24,7 +24,7 @@ class Rutina
     private $descripcion;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\PlanEntrenamiento", inversedBy="rutinas", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\PlanEntrenamiento", inversedBy="rutinas", cascade={"persist"})
      */
     private $PlanEntrenamiento;
 

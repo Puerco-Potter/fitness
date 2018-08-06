@@ -37,7 +37,7 @@ class Entrenamiento
     private $observaciones;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Rutina", inversedBy="entrenamientos", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Rutina", inversedBy="entrenamientos", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $Rutina;
@@ -127,6 +127,27 @@ class Entrenamiento
 
     public function __toString()
     {
-        return (string) $this->getSeries().' series de '.$this->getEjercicio();
+        $a1 = '';
+        $b1 = '';
+        $c1 = '';
+        $cadena = '';
+        if ($this->getObservaciones() )
+        {
+            $a1 = $this->getObservaciones();
+        }
+        if ($this->getDescansos())
+        {
+            $b1 = ' '.$this->getDescansos(). ' s';
+        }
+        if ($this->getPeso())
+        {
+            $c1 = ' ' .$this->getPeso(). ' kg';
+        }
+        if ($this->getObservaciones() or $this->getPeso() or $this->getObservaciones())
+        {
+            $cadena = ' ('.$a1.$b1.$c1.')';
+        }
+        
+        return (string) $this->getSeries().' series de '.$this->getEjercicio().$cadena;
     }
 }

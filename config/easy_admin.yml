@@ -39,16 +39,16 @@ easy_admin:
             # Entidades de Matias
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             - label: 'Gestión de Entrenamientos'
-              icon: 'bug'
+              icon: 'tasks'
               children:
-                - { label: "Planes de Entrenamiento" , entity: 'PlanEntrenamiento', icon: 'bug' }
-                - { label: "Rutinas" , entity: 'Rutina', icon: 'bug' }
-                - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'bug' }
-                - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'bug' }
-            - label: "Testing"
-              icon: 'exclamation'
-              children:
-                - {label: 'Dirección externa', url: 'http://www.google.com.ar', target: '_blank'}
+                - { label: "Planes de Entrenamiento" , entity: 'PlanEntrenamiento', icon: 'pinterest-p' }
+                - { label: "Rutinas" , entity: 'Rutina', icon: 'registered' }
+                - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'deviantart' }
+                - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'deaf' }
+            #- label: "Testing"
+            #  icon: 'exclamation'
+            #  children:
+            #    - {label: 'Dirección externa', url: 'http://www.google.com.ar', target: '_blank'}
             
 
     entities:
@@ -351,7 +351,7 @@ easy_admin:
             list:
                 title: 'Clases'
                 actions:
-                    - { name: 'export', icon: 'copy', title: 'Informe de alumnos', label: 'Informe de alumnos'}
+                    #- { name: 'export', icon: 'copy', title: 'Informe de alumnos', label: 'Informe de alumnos'}
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Clase', title: 'Crear nueva Clase'}
                 fields:
                     - {property: 'Profesor'}
@@ -381,7 +381,9 @@ easy_admin:
                     - {property: 'duracion', label: 'Duración (minutos)'}  
             new:
                 title: 'Crear nueva clase'
-            controller: App\Controller\ClaseController            
+            edit:
+                title: 'Modificar clase'
+            #controller: App\Controller\ClaseController            
         # Entidades de Maty
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
@@ -503,7 +505,7 @@ easy_admin:
                 fields:
                     - { property: 'descripcion', label: 'Descripción'}
                     - { property: 'PlanEntrenamiento', label: 'Planes de entrenamiento'}
-                    - { property: 'entrenamientos', label: 'Entrenamientos', type_options: {by_reference: false}}
+                    - { property: 'entrenamientos', label: 'Entrenamientos', type: 'collection' , type_options: { entry_type: 'App\Form\EntrenamientoType', by_reference: false }}
             edit:
                 title: 'Modificar Rutina'
             new:
@@ -513,7 +515,7 @@ easy_admin:
                 fields:
                     - { property: 'descripcion', label: 'Descripción'}
                     - { property: 'PlanEntrenamiento', label: 'Planes de entrenamiento', type: 'array'}
-                    - { property: 'entrenamientos', label: 'Entrenamientos', type: 'array'}
+                    - { property: 'entrenamientos', label: 'Entrenamientos', type: 'array' }
             show:
                 title: 'Rutina'
                 fields:
@@ -528,8 +530,8 @@ easy_admin:
                     - {property: 'Rutina'}
                     - {property: 'Ejercicio'}
                     - {property: 'series'}
-                    - {property: 'descansos'}
-                    - {property: 'peso'}
+                    - {property: 'descansos', label: 'Descansos (segundos)'}
+                    - {property: 'peso', label: 'Peso (kg)'}
                     - {property: 'observaciones'}
             edit:
                 title: 'Modificar entrenamiento'
@@ -541,8 +543,8 @@ easy_admin:
                     - {property: 'Rutina'}
                     - {property: 'Ejercicio'}
                     - {property: 'series'}
-                    - {property: 'descansos'}
-                    - {property: 'peso'}
+                    - {property: 'descansos', label: 'Descansos (segundos)'}
+                    - {property: 'peso', label: 'Peso (kg)'}
                     - {property: 'observaciones'}
             show:
                 title: 'Ver Entrenamiento'
@@ -550,15 +552,15 @@ easy_admin:
                     - {property: 'Rutina'}
                     - {property: 'Ejercicio'}
                     - {property: 'series'}
-                    - {property: 'descansos'}
-                    - {property: 'peso'}
+                    - {property: 'descansos', label: 'Descansos (segundos)'}
+                    - {property: 'peso', label: 'Peso (kg)'}
                     - {property: 'observaciones'}
         Ejercicio:
             class: App\Entity\Ejercicio
             form:
                 fields:
                     - {property: 'descripcion', label: 'Descripción'}
-                    - {property: 'Zona muscular'}
+                    - {property: 'zonaMuscular'}
                     - {property: 'Equipamiento'}
                     - {property: 'Elemento'}
             edit:
@@ -569,14 +571,14 @@ easy_admin:
                 title: 'Ver ejercicio'
                 fields:
                     - {property: 'descripcion', label: 'Descripción'}
-                    - {property: 'Zona muscular'}
+                    - {property: 'zonaMuscular'}
                     - {property: 'Equipamiento'}
                     - {property: 'Elemento'}
             list:
                 title: 'Lista de ejercicios'
                 fields:
                     - {property: 'descripcion', label: 'Descripción'}
-                    - {property: 'Zona muscular'}
+                    - {property: 'zonaMuscular'}
                     - {property: 'Equipamiento'}
                     - {property: 'Elemento'}
     list:
