@@ -1,5 +1,7 @@
 <?php
 
+// TODO hacer algo con el precio, poner cuota básica o por default
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

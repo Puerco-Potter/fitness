@@ -56,35 +56,35 @@ easy_admin:
         User:
             class: App\Entity\User 
         # Entidades de Damian
-        AlumnoInactivo:
-            class: App\Entity\Alumno
-            disabled_actions: ['new','delete']
-            show:
-                title: 'Alumno inactivo'
-                fields: [{ property: 'dni', label: 'DNI'}, 'apellido', 'nombre']
-            list:
-                title: 'Alumnos inactivos'
-                fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
-                dql_filter: 'entity.inactivo!=0'
-            edit:
-                title: 'Modificar alumno'
-                fields:
-                    - { property: 'dni', type: 'integer', label: 'DNI'}
-                    - { property: 'apellido', type: 'text', label: 'Apellido'}
-                    - { property: 'nombre', type: 'text', label: 'Nombres'} 
-                    - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
         Alumno:
             class: App\Entity\Alumno
             disabled_actions: ['delete']
             show:
                 title: 'Datos del alumno'
-                fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }, 'localidad', 'direccion', 'cp', { property: 'correo', label: 'E-Mail'}, 'ocupacion', 'genero', 'Telefonos','FichasMedicas', { property: 'diasPrueba', label: 'Días de prueba'}]
+                fields:
+                    - { property: 'dni', label: 'DNI' }
+                    - 'apellido'
+                    - 'nombre'
+                    - { property: 'balance', label: 'Saldo' }
+                    - 'localidad'
+                    - 'direccion'
+                    - 'cp'
+                    - { property: 'correo', label: 'E-Mail'}
+                    - 'ocupacion'
+                    - 'genero'
+                    - 'Telefonos'
+                    - 'FichasMedicas'
+                    - { property: 'diasPrueba', label: 'Días de prueba'}
             list:
                 title: 'Lista de alumnos'
                 dql_filter: 'entity.inactivo=0'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registar Alumno', title: 'Registrar Alumno'}
-                fields: [ { property: 'dni', label: 'DNI' }, 'apellido', 'nombre',{ property: 'balance', label: 'Saldo' }]
+                fields:
+                    - { property: 'dni', label: 'DNI' }
+                    - 'apellido'
+                    - 'nombre'
+                    - { property: 'balance', label: 'Saldo' }
             form:
                 fields:
                     - { type: 'tab' , label: 'Informacion del Alumno', icon: 'user' }
@@ -108,47 +108,69 @@ easy_admin:
                     - { property: 'Telefonos' , label: "Telefonos" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoAlumnoType', by_reference: false }}
                     - { type: 'tab' , label: 'Observaciones', icon: 'sticky-note' }
                     - { property: 'observaciones', type: 'textarea', label: 'Observaciones'}
-
             edit:
                 title:  'Modificar Alumno'
                 fields:
                     - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
             new:
-                title: 'Registrar nuevo alumno' 
+                title: 'Registrar nuevo alumno'
+        AlumnoInactivo:
+            class: App\Entity\Alumno
+            disabled_actions: ['new','delete']
+            show:
+                title: 'Alumno inactivo'
+                fields: [{ property: 'dni', label: 'DNI'}, 'apellido', 'nombre']
+            list:
+                title: 'Alumnos inactivos'
+                fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
+                dql_filter: 'entity.inactivo!=0'
+            edit:
+                title: 'Modificar alumno'
+                fields:
+                    - { property: 'dni', type: 'integer', label: 'DNI'}
+                    - { property: 'apellido', type: 'text', label: 'Apellido'}
+                    - { property: 'nombre', type: 'text', label: 'Nombres'} 
+                    - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
         FichaMedica:
             class: App\Entity\FichaMedica
             show:
                 title: 'Contenido de la Ficha Médica'
                 fields:
+                    #TODO Ver porqué no andan acá las tabs
+                    #- { type: 'tab' , label: 'Informacion Basica', icon: 'user' }
                     - 'alumno'
                     - 'fecha'
                     - { property: 'grupoSanguineo', label: 'Grupo Sanguíneo'}
                     - 'peso'
                     - 'altura'
+                    - 'talla'
+                    - { property: 'telefonoEmergencia', label: 'Teléfono de emergencia'}
+                    #- { type: 'tab' , label: 'Informacion Medica', icon: 'user' }
+                    #- { type: 'group', css_class: 'col-sm-6', label: 'Enfermedades' }      
                     - { property: 'enfermedadesCardiacas', label: 'Enfermedades Cardíacas'}
-                    - { property: 'lesionesCronicas', label: 'Lesiones Crónicas'}
-                    - { property: 'rehabilitacion', label: 'Rehabilitación'}
+                    - 'hipertenso'
                     - 'diabetes'
                     - { property: 'bajoTratamiento', label: '¿Bajo Tratamiento?'}
-                    - { property: 'cirugia', label: 'Cirugías'}
                     - 'sobrepeso'
-                    - { property: 'conoceImc', label: '¿Conoce su IMC?'}
-                    - { property: 'dieta', label: '¿Se encuentra a dieta?'}
-                    - { property: 'perderPeso', label: '¿Se encuentra en un plan de perder peso?'}
-                    - { property: 'problemasArticulares', label: '¿Posee problemas articulares?'}
-                    - { property: 'problemasEspalda', label: '¿Posee problemas de espalda?'}
-                    - { property: 'dolores', label: '¿Dolores crónicos?'}
-                    - 'hipertenso'
-                    - 'hernias'
-                    - 'hidratado'
+                    - { property: 'listaEnfermedades', label: 'Lista de enfermedades'}    
                     - 'medicamentos'
                     - { property: 'listaMedicamentos', label: 'Lista de medicamentos'}
+                    #- { type: 'group', css_class: 'col-sm-6', label: 'Particularidades Fisicas' }
+                    - { property: 'dieta', label: '¿Se encuentra a dieta?'}
+                    - { property: 'perderPeso', label: '¿Se encuentra en un plan de perder peso?'}
+                    - { property: 'lesionesCronicas', label: 'Lesiones Crónicas'}
+                    - { property: 'dolores', label: '¿Dolores crónicos?'}
+                    - 'hernias'
+                    - { property: 'problemasArticulares', label: '¿Posee problemas articulares?'}
+                    - { property: 'problemasEspalda', label: '¿Posee problemas de espalda?'}
+                    - { property: 'cirugia', label: 'Cirugías'}
+                    - { property: 'rehabilitacion', label: 'Rehabilitación'}
+                    - 'hidratado'
+                    - { property: 'conoceImc', label: '¿Conoce su IMC?'}
                     - 'embarazada'
-                    - { property: 'tiempoEmbarazo', label: 'Tiempo de embarazo'}
-                    - 'talla'
-                    - { property: 'listaEnfermedades', label: 'Lista de enfermedades'}
+                    - { property: 'tiempoEmbarazo', label: 'Tiempo de embarazo'}         
+                    #- { type: 'tab' , label: 'Observaciones', icon: 'user' }
                     - 'observaciones'
-                    - { property: 'telefonoEmergencia', label: 'Teléfono de emergencia'}
             list:
                 title: 'Lista de Fichas médicas'
                 actions:
@@ -163,6 +185,7 @@ easy_admin:
                     - { property: 'peso', type: 'integer', label: 'Peso (kilogramos)'}                  
                     - { property: 'altura', type: 'integer', label: 'Altura (centímetros)'}
                     - { property: 'talla', type: 'text', label: 'Talla'}  
+                    - { property: 'telefonoEmergencia', type: 'text', label: 'Teléfono de emergencia'}  
                     - { type: 'tab' , label: 'Informacion Medica', icon: 'user' }
                     - { type: 'group', css_class: 'col-sm-6', label: 'Enfermedades' }      
                     - { property: 'enfermedadesCardiacas',type: 'checkbox', label: '¿Posee enfermedades cardíacas?'}
@@ -173,7 +196,7 @@ easy_admin:
                     - { property: 'listaEnfermedades', type: 'textarea', label: 'Lista de enfermedades'}
                     - { property: 'medicamentos',type: 'checkbox', label: '¿Toma algún tipo de medicamento?'}
                     - { property: 'listaMedicamentos', type: 'textarea', label: 'Lista de medicamentos'} 
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Particulares Fisicas' }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Particularidades Fisicas' }
                     - { property: 'dieta',type: 'checkbox', label: '¿Se encuentra a dieta?'}
                     - { property: 'perderPeso',type: 'checkbox', label: '¿Se encuentra en un plan de perder peso?'}
                     - { property: 'lesionesCronicas',type: 'checkbox', label: '¿Posee lesiones crónicas?'}
@@ -187,11 +210,12 @@ easy_admin:
                     - { property: 'conoceImc',type: 'checkbox', label: '¿Conoce su IMC?'}
                     - { property: 'embarazada',type: 'checkbox', label: '¿Se encuentra embarazada?'}       
                     - { property: 'tiempoEmbarazo', type: 'text', label: 'Tiempo de embarazo'}               
-                    - { type: 'tab' , label: 'Observaciones y Contacto de Emergencia', icon: 'user' }
+                    - { type: 'tab' , label: 'Observaciones', icon: 'user' }
                     - { property: 'observaciones', type: 'textarea', label: 'Observaciones particulares'} 
-                    - { property: 'telefonoEmergencia', type: 'text', label: 'Teléfono de emergencia'}  
             new:
-                title: 'Agregar nueva ficha médica' 
+                title: 'Agregar nueva ficha médica'
+            edit:
+                title: 'Modificar ficha médica'    
         TelefonoAlumno:
             class: App\Entity\TelefonoAlumno
             show:
@@ -203,14 +227,15 @@ easy_admin:
                     - { name: 'new', icon: 'plus-circle', label: 'Agregar Teléfono', title: 'Agregar Teléfono'}
                 fields: ['caracteristica', 'numero', 'tipo','Alumno']
             form:
-                title: 'Teléfono'
                 fields:
                     - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
                     - { property: 'caracteristica', type: 'text', label: 'Característica'}
                     - { property: 'numero', type: 'text', label: 'Número'}                    
                     - { property: 'Alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'} 
             new:
-                title: 'Agregar nuevo teléfono'                   
+                title: 'Agregar nuevo teléfono'
+            edit:
+                title: 'Modificar teléfono'                   
         # Entidades de Emiliano
         Empleado:
             class: App\Entity\Empleado
@@ -272,13 +297,25 @@ easy_admin:
             class: App\Entity\Sala
             show:
                 title: 'Sala'
-                fields: ['descripcion', 'capacidad', 'Clases']
+                fields:
+                    - 'descripcion'
+                    - 'capacidad'
+                    - 'Clases'
             list:
                 title: 'Salas'
-                fields: ['descripcion', 'capacidad']
+                fields:
+                    - 'descripcion'
+                    - 'capacidad'
             form:
-                fields: ['descripcion', 'capacidad']
+                fields:
+                    - 'descripcion'
+                    - 'capacidad'
+            new:
+                title: 'Agregar nueva sala'
+            edit:
+                title: 'Modificar sala'
         Inscripcion:
+        #FIXME reemplazar atributos a posteriori
             class: App\Entity\Inscripcion
             show:
                 title: 'Ver inscripción'
@@ -331,6 +368,7 @@ easy_admin:
             new:
                 title: 'Registrar Inscripción' 
         Clase:
+        #FIXME reemplazar atributos a posteriori
             class: App\Entity\Clase
             show:
                 title: 'Clase'
@@ -415,7 +453,12 @@ easy_admin:
                 title: 'Lista de actividades'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Actividad', title: 'Crear nueva Actividad'}
-                fields: ['nombre', 'grupal', 'descripcion', {property: 'estado', label: '¿Activa?'}, { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }]
+                fields:
+                    - 'nombre'
+                    - 'grupal'
+                    - 'descripcion'
+                    - {property: 'estado', label: '¿Activa?'}
+                    - { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-12'}
@@ -432,12 +475,22 @@ easy_admin:
             class: App\Entity\Equipamiento
             show:
                 title: 'Equipamiento'
-                fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
+                fields:
+                    - 'descripcion'
+                    - 'estado'
+                    - { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }
+                    - { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }
+                    - { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }
             list:
                 title: 'Lista de equipamientos del gimnasio'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar nuevo Equipamiento', title: 'Registrar nuevo Equipamiento'}
-                fields: ['descripcion', 'estado',  { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }, { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }, { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }]
+                fields:
+                    - 'descripcion'
+                    - 'estado'
+                    - { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }
+                    - { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }
+                    - { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
@@ -453,12 +506,18 @@ easy_admin:
             class: App\Entity\Elemento
             show:
                 title: 'Elemento'
-                fields: ['descripcion', 'cantidad', { property: 'ultimaReposicion', label: 'Fecha de última reposición' }]
+                fields:
+                    - 'descripcion'
+                    - 'cantidad'
+                    - { property: 'ultimaReposicion', label: 'Fecha de última reposición' }
             list:
                 title: 'Lista de elementos del gimnasio'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Añadir nuevo Elemento', title: 'Añadir nuevo Elemento'}
-                fields: ['descripcion', 'cantidad', { property: 'ultimaReposicion', label: 'Fecha de última reposición' }]
+                fields:
+                    - 'descripcion'
+                    - 'cantidad'
+                    - { property: 'ultimaReposicion', label: 'Fecha de última reposición' }
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
@@ -522,7 +581,6 @@ easy_admin:
                     - { property: 'descripcion', label: 'Descripción'}
                     - { property: 'PlanEntrenamiento', label: 'Planes de entrenamiento'}
                     - { property: 'entrenamientos', label: 'Entrenamientos'}
-            
         Entrenamiento:
             class: App\Entity\Entrenamiento
             form:

@@ -1,5 +1,7 @@
 <?php
 
+// TODO cambiar nombre a precioFinal, clases y clasesDisponibles
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
