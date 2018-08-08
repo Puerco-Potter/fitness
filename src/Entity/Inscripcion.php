@@ -1,6 +1,6 @@
 <?php
 
-// TODO cambiar nombre a precioFinal, clases y clasesDisponibles
+// DONE cambiar nombre a precioFinal, clasesTotales y clasesRestantes
 
 namespace App\Entity;
 
@@ -38,12 +38,12 @@ class Inscripcion
     /**
      * @ORM\Column(type="integer")
      */
-    private $clases;
+    private $clasesTotales;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $clasesDisponibles;
+    private $clasesRestantes;
 
     /**
      * @ORM\Column(type="boolean")
@@ -78,7 +78,7 @@ class Inscripcion
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
      */
-    private $precioFinal;
+    private $cuota;
 
     public function __construct()
     {
@@ -89,9 +89,9 @@ class Inscripcion
         $this->jueves = FALSE;
         $this->viernes = FALSE;
         $this->sabado = FALSE;
-        $this->clases = 12;
-        $this->clasesDisponibles = 12;
-        $this->precioFinal = 300;
+        $this->clasesTotales = 12;
+        $this->clasesRestantes = 12;
+        $this->cuota = 300;
     }
 
     public function getId()
@@ -135,26 +135,26 @@ class Inscripcion
         return $this;
     }
 
-    public function getClases(): ?int
+    public function getClasesTotales(): ?int
     {
-        return $this->clases;
+        return $this->clasesTotales;
     }
 
-    public function setClases(int $clases): self
+    public function setClasesTotales(int $clasesTotales): self
     {
-        $this->clases = $clases;
+        $this->clasesTotales = $clasesTotales;
 
         return $this;
     }
 
-    public function getClasesDisponibles(): ?int
+    public function getclasesRestantes(): ?int
     {
-        return $this->clasesDisponibles;
+        return $this->clasesRestantes;
     }
 
-    public function setClasesDisponibles(int $clasesDisponibles): self
+    public function setClasesRestantes(int $clasesRestantes): self
     {
-        $this->clasesDisponibles = $clasesDisponibles;
+        $this->clasesRestantes = $clasesRestantes;
 
         return $this;
     }
@@ -231,14 +231,14 @@ class Inscripcion
         return $this;
     }
 
-    public function getPrecioFinal()
+    public function getCuota()
     {
-        return $this->precioFinal;
+        return $this->cuota;
     }
 
-    public function setPrecioFinal($precioFinal): self
+    public function setCuota($cuota): self
     {
-        $this->precioFinal = $precioFinal;
+        $this->cuota = $cuota;
 
         return $this;
     }

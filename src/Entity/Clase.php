@@ -1,6 +1,6 @@
 <?php
 
-// TODO hacer algo con el precio, poner cuota básica o por default
+// DONE hacer algo con el precio, poner cuota básica o por default
 
 namespace App\Entity;
 
@@ -44,7 +44,7 @@ class Clase
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
      */
-    private $precio;
+    private $cuotaBase;
 
     /**
      * @ORM\Column(type="boolean")
@@ -89,7 +89,7 @@ class Clase
     public function __construct()
     {
         $this->cupo = 50;
-        $this->precio = 500;
+        $this->cuotaBase = 500;
         $this->horario = new \DateTime('14:00:00');
         $this->duracion = 120;
         $this->lunes = FALSE;
@@ -183,14 +183,14 @@ class Clase
         return $this;
     }
 
-    public function getPrecio()
+    public function getCuotaBase()
     {
-        return $this->precio;
+        return $this->cuotaBase;
     }
 
-    public function setPrecio($precio): self
+    public function setCuotaBase($cuotaBase): self
     {
-        $this->precio = $precio;
+        $this->cuotaBase = $cuotaBase;
 
         return $this;
     }

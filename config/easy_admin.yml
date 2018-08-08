@@ -315,7 +315,7 @@ easy_admin:
             edit:
                 title: 'Modificar sala'
         Inscripcion:
-        #FIXME reemplazar atributos a posteriori
+        #DONE reemplazar atributos a posteriori
             class: App\Entity\Inscripcion
             show:
                 title: 'Ver inscripción'
@@ -323,9 +323,9 @@ easy_admin:
                     - {property: 'fechaInscripcion', label: 'Fecha'}
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
-                    - {property: 'precioFinal'}
-                    - {property: 'clases'}
-                    - {property: 'clasesDisponibles'}
+                    - {property: 'cuota'}
+                    - {property: 'clasesTotales'}
+                    - {property: 'clasesRestantes'}
                     - {property: 'lunes'}
                     - {property: 'martes'}
                     - {property: 'miercoles'}
@@ -340,9 +340,9 @@ easy_admin:
                     - {property: 'fechaInscripcion', label: 'Fecha'}
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
-                    - {property: 'precioFinal', label: 'Precio'}
-                    - {property: 'clases'}
-                    - {property: 'clasesDisponibles'}
+                    - {property: 'cuota', label: 'Precio'}
+                    - {property: 'clasesTotales'}
+                    - {property: 'clasesRestantes'}
                     #- {property: 'lunes'}
                     #- {property: 'martes'}
                     #- {property: 'miercoles'}
@@ -355,9 +355,9 @@ easy_admin:
                     - {property: 'fechaInscripcion', label: 'Fecha'}
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
-                    - {property: 'precioFinal', type: 'money', type_options: { currency: 'ARS' }}
-                    - {property: 'clases'}
-                    - {property: 'clasesDisponibles'}
+                    - {property: 'cuota', type: 'money', type_options: { currency: 'ARS' }}
+                    - {property: 'clasesTotales'}
+                    - {property: 'clasesRestantes'}
                     - { type: 'group', css_class: 'col-sm-6', label: 'Días' }
                     - {property: 'lunes'}
                     - {property: 'martes'}
@@ -368,7 +368,7 @@ easy_admin:
             new:
                 title: 'Registrar Inscripción' 
         Clase:
-        #FIXME reemplazar atributos a posteriori
+        #DONE reemplazar atributos a posteriori
             class: App\Entity\Clase
             show:
                 title: 'Clase'
@@ -376,7 +376,7 @@ easy_admin:
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
                     - {property: 'Sala'}
-                    - {property: 'precio'}
+                    - {property: 'cuotaBase'}
                     - {property: 'cupo'}
                     - {property: 'lunes'}
                     - {property: 'martes'}
@@ -407,7 +407,7 @@ easy_admin:
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
                     - {property: 'Sala'}
-                    - {property: 'precio', type: 'money', type_options: { currency: 'ARS' }}
+                    - {property: 'cuotaBase', type: 'money', type_options: { currency: 'ARS' }}
                     - {property: 'cupo'}
                     - {property: 'lunes'}
                     - {property: 'martes'}
