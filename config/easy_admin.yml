@@ -532,7 +532,7 @@ easy_admin:
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripción'}
-                    - { property: 'duracion', type: 'text', label: 'Duración (semanas)'}
+                    - { property: 'duracion', type: 'integer', label: 'Duración (semanas)'}
                     - { property: 'rutinas', label: 'Rutinas', type: 'collection' , type_options: { entry_type: 'App\Form\RutinaType', by_reference: false }}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
@@ -546,7 +546,7 @@ easy_admin:
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nuevo Plan de entrenamiento', title: 'Crear nuevo Plan de entrenamiento'}
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripción'}
-                    - { property: 'duracion', type: 'text', label: 'Duración (semanas)'}
+                    - { property: 'duracion', label: 'Duración (semanas)'}
                     - { property: 'rutinas', label: 'Rutinas', type: 'array'}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
@@ -554,7 +554,7 @@ easy_admin:
                 title: 'Ver plan de entrenamiento'
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripción'}
-                    - { property: 'duracion', type: 'text', label: 'Duración (semanas)'}
+                    - { property: 'duracion', label: 'Duración (semanas)'}
                     - { property: 'rutinas', label: 'Rutinas'}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
