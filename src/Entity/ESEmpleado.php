@@ -77,8 +77,9 @@ class ESEmpleado
 
         return $this;
     }
+    
     public function __toString()
     {
-        return (string) $this->getFechaYHora();
+        return (string) $this->getFechaYHora()->format('Y-m-d');
     }
 }

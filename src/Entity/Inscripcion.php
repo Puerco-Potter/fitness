@@ -244,6 +244,6 @@ class Inscripcion
     }
 	public function __toString()
     {
-        return $this->getAlumno().' - '.$this->getClase().' - '.$this->getFechaInscripcion();
+        return $this->getAlumno().' - '.$this->getClase().' - '.(string) $this->getFechaInscripcion()->format('Y-m-d');
     }
 }

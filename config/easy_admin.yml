@@ -50,6 +50,10 @@ easy_admin:
               children:
                 - {label: "Asistencias de alumnos", entity: 'AsistenciaAlumno', icon: 'bug'}
                 - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'bug'}
+            - label: 'Gestión de pagos'
+              icon: 'bug'
+              children:
+                - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'bug'}
             #- label: "Testing"
             #  icon: 'exclamation'
             #  children:
@@ -652,6 +656,8 @@ easy_admin:
                 fields:
                     - {property: 'tipo'}
                     - {property: 'Empleado'}
+        PagoCuota:
+            class: App\Entity\PagoCuota
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
