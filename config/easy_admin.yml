@@ -34,10 +34,9 @@ easy_admin:
               children:
                 - { label: "Actividades" , entity: 'Actividad', icon: 'heartbeat' }
                 - {entity: 'Clase', icon: 'clipboard', label: 'Clases'}
-                - {entity: 'Sala', icon: 'building', label: 'Salas'}
+                - {entity: 'Sala', icon: 'building', label: 'Salones'}
                 - {entity: 'Inscripcion', icon: 'edit', label: 'Inscripciones'}
             # Entidades de Matias
-            - { label: "Usuarios" , entity: 'User', icon: 'child' }
             - label: 'Gestión de Entrenamientos'
               icon: 'tasks'
               children:
@@ -55,6 +54,7 @@ easy_admin:
               icon: 'bug'
               children:
                 - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'bug'}
+            - { label: "Usuarios" , entity: 'User', icon: 'child' }
             #- label: "Testing"
             #  icon: 'exclamation'
             #  children:
@@ -306,13 +306,13 @@ easy_admin:
         Sala:
             class: App\Entity\Sala
             show:
-                title: 'Sala'
+                title: 'Salón'
                 fields:
                     - 'descripcion'
                     - 'capacidad'
                     - 'Clases'
             list:
-                title: 'Salas'
+                title: 'Salones'
                 fields:
                     - 'descripcion'
                     - 'capacidad'
@@ -321,9 +321,9 @@ easy_admin:
                     - 'descripcion'
                     - 'capacidad'
             new:
-                title: 'Agregar nueva sala'
+                title: 'Agregar nuevo salón'
             edit:
-                title: 'Modificar sala'
+                title: 'Modificar salón'
         Inscripcion:
         #DONE reemplazar atributos a posteriori
             class: App\Entity\Inscripcion
@@ -385,7 +385,7 @@ easy_admin:
                 fields:
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
-                    - {property: 'Sala'}
+                    - {property: 'Sala', label: 'Salón'}
                     - {property: 'cuotaBase'}
                     - {property: 'cupo'}
                     - {property: 'lunes'}
@@ -404,7 +404,7 @@ easy_admin:
                 fields:
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
-                    - {property: 'Sala'}
+                    - {property: 'Sala', label: 'Salón'}
                     - {property: 'lunes'}
                     - {property: 'martes'}
                     - {property: 'miercoles'}
@@ -416,7 +416,7 @@ easy_admin:
                 fields:
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
-                    - {property: 'Sala'}
+                    - {property: 'Sala', label: 'Salón'}
                     - {property: 'cuotaBase', type: 'money', type_options: { currency: 'ARS' }}
                     - {property: 'cupo'}
                     - {property: 'lunes'}
