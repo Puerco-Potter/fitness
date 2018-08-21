@@ -45,6 +45,11 @@ easy_admin:
                 - { label: "Rutinas" , entity: 'Rutina', icon: 'registered' }
                 - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'deviantart' }
                 - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'deaf' }
+            - label: 'Gestión de Asistencias'
+              icon: 'bug'
+              children:
+                - {label: "Asistencias de alumnos", entity: 'AsistenciaAlumno', icon: 'bug'}
+                - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'bug'}
             #- label: "Testing"
             #  icon: 'exclamation'
             #  children:
@@ -639,6 +644,14 @@ easy_admin:
                     - {property: 'zonaMuscular'}
                     - {property: 'Equipamiento'}
                     - {property: 'Elemento'}
+        AsistenciaAlumno:
+            class: App\Entity\AsistenciaAlumno
+        ESEmpleado:
+            class: App\Entity\ESEmpleado
+            form:
+                fields:
+                    - {property: 'tipo'}
+                    - {property: 'Empleado'}
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }

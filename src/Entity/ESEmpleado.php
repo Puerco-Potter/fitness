@@ -32,6 +32,11 @@ class ESEmpleado
      */
     private $Empleado;
 
+    public function __construct()
+    {
+        $this->fechaYHora = new \DateTime();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -71,5 +76,9 @@ class ESEmpleado
         $this->Empleado = $Empleado;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return (string) $this->getFechaYHora();
     }
 }
