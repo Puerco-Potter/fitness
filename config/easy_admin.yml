@@ -50,6 +50,7 @@ easy_admin:
               children:
                 - {label: "Asistencias de alumnos", entity: 'AsistenciaAlumno', icon: 'bug'}
                 - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'bug'}
+                - {label: "Registro de suplencias", entity: 'RegistroSuplencia', icon: 'bug'}
             - label: 'Gestión de pagos'
               icon: 'bug'
               children:
@@ -658,6 +659,13 @@ easy_admin:
                     - {property: 'Empleado'}
         PagoCuota:
             class: App\Entity\PagoCuota
+        RegistroSuplencia:
+            class: App\Entity\RegistroSuplencia
+            form:
+                fields:
+                    - {property: 'Clase'}
+                    - {property: 'Profesor'}
+                    - {property: 'observaciones'}
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
