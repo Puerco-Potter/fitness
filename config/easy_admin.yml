@@ -651,14 +651,37 @@ easy_admin:
                     - {property: 'Elemento'}
         AsistenciaAlumno:
             class: App\Entity\AsistenciaAlumno
+            new:
+                title: 'Registrar asistencia'
+            edit:
+                title: 'Modificar asistencia'
+            show:
+                title: 'Ver asistencia'
+            list:
+                title: 'Lista de asistencias'
         ESEmpleado:
             class: App\Entity\ESEmpleado
+            disabled_actions: ['edit']
             form:
                 fields:
                     - {property: 'tipo'}
                     - {property: 'Empleado'}
+            new:
+                title: 'Registrar entrada/salida'
+            list:
+                title: 'Lista de entradas/salidas de empleados'
+            show:
+                title: 'Ver Entrada/Salida'
         PagoCuota:
             class: App\Entity\PagoCuota
+            new:
+                title: 'Registrar pago de cuota'
+            edit:
+                title: 'Modificar pago de cuota'
+            list:
+                title: 'Lista de cuotas pagadas'
+            show:
+                title: 'Ver pago de cuota'
         RegistroSuplencia:
             class: App\Entity\RegistroSuplencia
             form:
