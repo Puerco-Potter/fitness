@@ -651,40 +651,99 @@ easy_admin:
                     - {property: 'Elemento'}
         AsistenciaAlumno:
             class: App\Entity\AsistenciaAlumno
+            form:
+                fields:
+                    - {property: 'Inscripcion'}
             new:
                 title: 'Registrar asistencia'
             edit:
                 title: 'Modificar asistencia'
             show:
                 title: 'Ver asistencia'
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'fecha'}
+                    - {property: 'hora'}
             list:
                 title: 'Lista de asistencias'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registar Asistencia', title: 'Registar Asistencia'}
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'fecha'}
+                    - {property: 'hora'}
         ESEmpleado:
             class: App\Entity\ESEmpleado
             disabled_actions: ['edit']
             form:
                 fields:
-                    - {property: 'tipo'}
+                    - {property: 'tipo', type: 'choice', label: 'Localidad',type_options:{choices:{'Entrada': 'Entrada', 'Salida': 'Salida'}}}
                     - {property: 'Empleado'}
             new:
                 title: 'Registrar entrada/salida'
             list:
                 title: 'Lista de entradas/salidas de empleados'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registar Entrada/Salida de Empleado', title: 'Registar Entrada/Salida de Empleado'}
+                fields:
+                    - {property: 'Empleado'}
+                    - {property: 'tipo'}
+                    - {property: 'fechaYHora', label: 'Fecha y hora'}
             show:
                 title: 'Ver Entrada/Salida'
+                fields:
+                    - {property: 'Empleado'}
+                    - {property: 'tipo'}
+                    - {property: 'fechaYHora', label: 'Fecha y hora'}
         PagoCuota:
             class: App\Entity\PagoCuota
+            form:
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'monto', type: 'money', type_options: { currency: 'ARS' }}
+                    - {property: 'mes'}
+                    - {property: 'ano', label: 'Año'}
             new:
                 title: 'Registrar pago de cuota'
             edit:
                 title: 'Modificar pago de cuota'
             list:
                 title: 'Lista de cuotas pagadas'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registar Pago de cuota', title: 'Registar Pago de cuota'}
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'monto'}
+                    - {property: 'mes'}
+                    - {property: 'ano', label: 'Año'}
             show:
                 title: 'Ver pago de cuota'
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'monto'}
+                    - {property: 'mes'}
+                    - {property: 'ano', label: 'Año'}
         RegistroSuplencia:
             class: App\Entity\RegistroSuplencia
             form:
+                fields:
+                    - {property: 'Clase'}
+                    - {property: 'Profesor'}
+                    - {property: 'observaciones'}
+            new:
+                title: 'Registro de suplencia'
+            edit:
+                title: 'Modificar Suplencia'
+            list:
+                title: 'Lista de suplencias registradas'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registar Suplencia', title: 'Registar Suplencia'}
+                fields:
+                    - {property: 'Clase'}
+                    - {property: 'Profesor'}
+                    - {property: 'observaciones'}
+            show:
+                title: 'Ver suplencia registrada'
                 fields:
                     - {property: 'Clase'}
                     - {property: 'Profesor'}

@@ -37,6 +37,13 @@ class PagoCuota
      */
     private $ano;
 
+    public function __construct()
+    {
+        $this->monto = 500;
+        $this->mes =  (new \DateTime())->format('m');
+        $this->ano =  (new \DateTime())->format('y');
+    }
+
     public function getId()
     {
         return $this->id;

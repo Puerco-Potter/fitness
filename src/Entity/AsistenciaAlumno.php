@@ -32,6 +32,12 @@ class AsistenciaAlumno
      */
     private $Inscripcion;
 
+    public function __construct()
+    {
+        $this->fecha = new \DateTime();
+        $this->hora = new \DateTime();
+    }
+
     public function getId()
     {
         return $this->id;
