@@ -7,10 +7,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController;
 
 class ClaseController extends AdminController
 {
-    
-    public function exportAction()
+    public function __construct()
     {
-        return 'Holaaa'; 
+        //print 'Holaaa'; 
     }
 }
 ?>

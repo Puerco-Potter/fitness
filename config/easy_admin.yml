@@ -430,7 +430,7 @@ easy_admin:
                 title: 'Crear nueva clase'
             edit:
                 title: 'Modificar clase'
-            #controller: App\Controller\ClaseController            
+            controller: App\Controller\ClaseController            
         # Entidades de Maty
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
@@ -722,6 +722,7 @@ easy_admin:
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
+            #controller: App\Controller\PagoCuotaController    
         RegistroSuplencia:
             class: App\Entity\RegistroSuplencia
             form:
