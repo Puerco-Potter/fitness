@@ -55,12 +55,11 @@ easy_admin:
               children:
                 - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'bug'}
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
-            #- label: "Testing"
-            #  icon: 'exclamation'
-            #  children:
-            #    - {label: 'Dirección externa', url: 'http://www.google.com.ar', target: '_blank'}
-            
-
+            - label: "Contacto"
+              icon: 'share-square'
+              children:
+                - {icon: 'facebook', label: 'Facebook', url: 'https://instagram.com/fussionfitnessgym', target: '_blank'}
+                - {icon: 'instagram', label: 'Insstagram', url: 'https://www.facebook.com/Fussion-Gym-1098230646958706/', target: '_blank'}
     entities:
         # change the following to the namespaces of your own entities
         User:
