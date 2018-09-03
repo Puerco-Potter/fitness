@@ -6,12 +6,14 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-use App\Controller\PagoCuotaController as theControlador;
+use App\Controller\PagoCuotaController as pepe;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as deController;
 
 class EasyAdminSubscriber implements EventSubscriberInterface
 {
@@ -25,11 +27,11 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     public function onPreShow(GenericEvent $event)
     {
         //dump($event);die;
-        $entity = $event->getSubject();
-        if ($entity['class'] == PagoCuota::class)
-        {
-            print 'Acá en teoría debería andar';
-        }
+        #$entity = $event->getSubject();
+        #if ($entity['class'] == PagoCuota::class)
+        #{
+        #   return pepe::redirigir('login');
+        #}
         
         //$controlador = new theControlador;
         //return $controlador->redirigir();
