@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -47,12 +49,18 @@ class Equipamiento
      */
     private $fechaAdquisicion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RegistroMantenimiento", mappedBy="equipamiento")
+     */
+    private $mantenimientos;
+
     public function __construct()
     {
         $this->ultimoMantenimiento = new \DateTime(); 
         $this->fechaAdquisicion = new \DateTime();
         $this->mantenimientoDias = 15;
         $this->estado = "Listo para usar";
+        $this->mantenimientos = new ArrayCollection();
     }
 
     public function getId()
@@ -123,4 +131,5 @@ class Equipamiento
     {
         return $this->getDescripcion();
     }
+ 
 }

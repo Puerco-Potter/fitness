@@ -22,6 +22,7 @@ easy_admin:
               children:
                 - { entity: 'Equipamiento', icon: 'cogs' }
                 - { entity: 'Elemento', icon: 'list', label: 'Elemento de gimnasio' }
+                - { entity: 'RegistroMantenimiento', icon: 'clipboard', label: 'Registro de Mantenimiento' }
             # Entidades de Emiliano
             - label: 'Gestión del Personal'
               icon: 'users'
@@ -536,6 +537,37 @@ easy_admin:
                 title: 'Modificar elemento'
             new:
                 title: 'Añadir nuevo elemento del gimnasio'
+        RegistroMantenimiento:
+            class: App\Entity\RegistroMantenimiento
+            show:
+                title: 'Registro de mantenimiento'
+                fields:
+                    - { property: 'dia', label: 'Fecha' }
+                    - { property: 'observaciones', label: '' }
+                    - { property: 'empleado', label: 'Profesor' }
+                    - { property: 'Equipamiento', label: 'Equipamiento' }
+
+            list:
+                title: 'Lista de Mantenimientos'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registrar mantenimiento', title: 'Registrar mantenimiento'}
+                fields:
+                    - { property: 'dia', label: 'Fecha' }
+                    - { property: 'empleado', label: 'Profesor' }
+                    - { property: 'Equipamiento', label: 'Equipamiento' }
+                    - { property: 'observaciones', label: 'Observaciones' }
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: '' }
+                    - { property: 'dia', type: 'date', label: 'Fecha',type_options: {widget: 'single_text'}}                 
+                    - { property: 'empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Profesor'}
+                    - { property: 'equipamiento', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Equipamiento'}, label: 'Equipa- miento'}
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Observaciones' }
+                    - { property: 'observaciones', type: 'text', label: '>>>'}  
+            edit:        
+                title: 'Modificar registro de mantenimiento'
+            new:
+                title: 'Registrar mantenimiento'
         PlanEntrenamiento:
             class: App\Entity\PlanEntrenamiento
             form:
