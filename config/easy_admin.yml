@@ -501,7 +501,8 @@ easy_admin:
                 fields:
                     - 'descripcion'
                     - 'estado'
-                    - { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }
+                    - { property: 'alarma', label: '¿Mantenimiento al día?', type: 'boolean'}
+                    #- { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }
                     - { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }
                     - { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }
             form:

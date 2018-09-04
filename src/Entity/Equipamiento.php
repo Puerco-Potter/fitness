@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateInterval;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -56,6 +58,22 @@ class Equipamiento
         $this->mantenimientoDias = 15;
         $this->estado = "Listo para usar";
         $this->mantenimientos = new ArrayCollection();
+    }
+
+    public function getAlarma()
+    {
+        $fechaHoy = new \DateTime();
+        #$fechaHoy = (string) $fechaHoy->format('Y-m-d');
+        $aux = clone $this->getUltimoMantenimiento();
+        $num = (string) $this->getMantenimientoDias();
+        $aux->add(new DateInterval('P'.$num.'D'));
+        #$aux = (string) $aux->format('Y-m-d');
+        #$fechaNueva = date('Y-m-d',$fechaNueva);
+        #$fechaNueva->add(new DateInterval('P10D'));
+        #$fechaNueva = (string) $fechaNueva->format('Y-m-d');
+        #$interval = $fechaHoy->diff($aux);
+        #$interval = (string) $interval->format('%R%a días');
+        return !($fechaHoy>=$aux);
     }
 
     public function getId()
