@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RegistroSuplenciaRepository")
@@ -17,9 +18,9 @@ class RegistroSuplencia
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
-    private $fechaYHora;
+    private $fecha;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -34,12 +35,13 @@ class RegistroSuplencia
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Clase")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $Clase;
 
     public function __construct()
     {
-        $this->fechaYHora = new \DateTime();
+        $this->fecha = new \DateTime();
     }
 
     public function getId()
@@ -47,14 +49,14 @@ class RegistroSuplencia
         return $this->id;
     }
 
-    public function getFechaYHora(): ?\DateTimeInterface
+    public function getFecha(): ?\DateTimeInterface
     {
-        return $this->fechaYHora;
+        return $this->fecha;
     }
 
-    public function setFechaYHora(\DateTimeInterface $fechaYHora): self
+    public function setFecha(\DateTimeInterface $fecha): self
     {
-        $this->fechaYHora = $fechaYHora;
+        $this->fecha = $fecha;
 
         return $this;
     }
@@ -97,6 +99,6 @@ class RegistroSuplencia
     
     public function __toString()
     {
-        return (string) $this->getFechaYHora()->format('Y-m-d').' - '.$this->getProfesor().' / '.$this->getObservaciones();
+        return (string) $this->getFecha()->format('Y-m-d').' - '.$this->getProfesor().' / '.$this->getObservaciones();
     }
 }

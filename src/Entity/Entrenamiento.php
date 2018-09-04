@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EntrenamientoRepository")
@@ -39,12 +40,14 @@ class Entrenamiento
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Rutina", inversedBy="entrenamientos", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $Rutina;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ejercicio")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $Ejercicio;
 

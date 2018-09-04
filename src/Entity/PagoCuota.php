@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PagoCuotaRepository")
@@ -19,6 +20,7 @@ class PagoCuota
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Inscripcion")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $Inscripcion;
 
@@ -37,9 +39,15 @@ class PagoCuota
      */
     private $ano;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $fechaYHora;
+
     public function __construct()
     {
         $this->monto = 500;
+        $this->fechaYHora =  (new \DateTime());
         $this->mes =  (new \DateTime())->format('m');
         $this->ano =  (new \DateTime())->format('y');
     }
@@ -100,5 +108,17 @@ class PagoCuota
     public function __toString()
     {
         return '$ '.(string) $this->getMonto().' - '.$this->getMes().' - '.$this->getAno();
+    }
+
+    public function getFechaYHora(): ?\DateTimeInterface
+    {
+        return $this->fechaYHora;
+    }
+
+    public function setFechaYHora(\DateTimeInterface $fechaYHora): self
+    {
+        $this->fechaYHora = $fechaYHora;
+
+        return $this;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RegistroMantenimientoRepository")
@@ -19,36 +20,45 @@ class RegistroMantenimiento
     /**
      * @ORM\Column(type="date")
      */
-    private $dia;
+    private $fecha;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text")
      */
     private $observaciones;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\empleado")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Empleado")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
-    private $empleado;
+    private $Empleado;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\equipamiento", inversedBy="mantenimientos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Equipamiento")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
-    private $equipamiento;
+    private $Equipamiento;
+
+    public function __construct()
+    {
+        $this->fecha = new \DateTime(); 
+    }
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getDia(): ?\DateTimeInterface
+    public function getFecha(): ?\DateTimeInterface
     {
-        return $this->dia;
+        return $this->fecha;
     }
 
-    public function setDia(\DateTimeInterface $dia): self
+    public function setFecha(\DateTimeInterface $fecha): self
     {
-        $this->dia = $dia;
+        $this->fecha = $fecha;
 
         return $this;
     }
@@ -58,40 +68,39 @@ class RegistroMantenimiento
         return $this->observaciones;
     }
 
-    public function setObservaciones(?string $observaciones): self
+    public function setObservaciones(string $observaciones): self
     {
         $this->observaciones = $observaciones;
 
         return $this;
     }
 
-    public function getEmpleado(): ?empleado
+    public function getEmpleado(): ?Empleado
     {
-        return $this->empleado;
+        return $this->Empleado;
     }
 
-    public function setEmpleado(?empleado $empleado): self
+    public function setEmpleado(?Empleado $Empleado): self
     {
-        $this->empleado = $empleado;
+        $this->Empleado = $Empleado;
 
         return $this;
     }
 
-    public function getEquipamiento(): ?equipamiento
+    public function getEquipamiento(): ?Equipamiento
     {
-        return $this->equipamiento;
+        return $this->Equipamiento;
     }
 
-    public function setEquipamiento(?equipamiento $equipamiento): self
+    public function setEquipamiento(?Equipamiento $Equipamiento): self
     {
-        $this->equipamiento = $equipamiento;
+        $this->Equipamiento = $Equipamiento;
 
         return $this;
     }
-public function __toString()
+
+	public function __toString()
     {
-        return $this->getNombre();
+        return (string) $this->getFecha()->format('Y-m-d').' - '.$this->Equipamiento();
     }
-
-
 }

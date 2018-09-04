@@ -542,28 +542,27 @@ easy_admin:
             show:
                 title: 'Registro de mantenimiento'
                 fields:
-                    - { property: 'dia', label: 'Fecha' }
+                    - { property: 'fecha', label: 'Fecha' }
                     - { property: 'observaciones', label: '' }
-                    - { property: 'empleado', label: 'Profesor' }
+                    - { property: 'Empleado', label: 'Empleado' }
                     - { property: 'Equipamiento', label: 'Equipamiento' }
-
             list:
                 title: 'Lista de Mantenimientos'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar mantenimiento', title: 'Registrar mantenimiento'}
                 fields:
-                    - { property: 'dia', label: 'Fecha' }
-                    - { property: 'empleado', label: 'Profesor' }
+                    - { property: 'fecha', label: 'Fecha' }
+                    - { property: 'Empleado', label: 'Empleado' }
                     - { property: 'Equipamiento', label: 'Equipamiento' }
                     - { property: 'observaciones', label: 'Observaciones' }
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-6', label: '' }
-                    - { property: 'dia', type: 'date', label: 'Fecha',type_options: {widget: 'single_text'}}                 
-                    - { property: 'empleado', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Empleado'}, label: 'Profesor'}
-                    - { property: 'equipamiento', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Equipamiento'}, label: 'Equipa- miento'}
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Observaciones' }
-                    - { property: 'observaciones', type: 'text', label: '>>>'}  
+                    - { type: 'group', css_class: 'col-sm-8', label: '' }
+                    - { property: 'fecha', type: 'date', label: 'Fecha', type_options: {widget: 'single_text'}}                 
+                    - { property: 'Empleado', type: 'easyadmin_autocomplete', type_options: {class: 'App\Entity\Empleado'}, label: 'Empleado'}
+                    - { property: 'Equipamiento', type: 'easyadmin_autocomplete', type_options: {class: 'App\Entity\Equipamiento'}, label: 'Equipamiento'}
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Observaciones' }
+                    - { property: 'observaciones', type: 'textarea', label: '>>>'}  
             edit:        
                 title: 'Modificar registro de mantenimiento'
             new:
@@ -708,7 +707,7 @@ easy_admin:
             disabled_actions: ['edit']
             form:
                 fields:
-                    - {property: 'tipo', type: 'choice', label: 'Localidad',type_options:{choices:{'Entrada': 'Entrada', 'Salida': 'Salida'}}}
+                    - {property: 'tipo', type: 'choice', label: 'Tipo', type_options:{choices:{'Entrada': 'Entrada', 'Salida': 'Salida'}}}
                     - {property: 'Empleado'}
             new:
                 title: 'Registrar entrada/salida'
@@ -744,6 +743,7 @@ easy_admin:
                     - { name: 'new', icon: 'plus-circle', label: 'Registar Pago de cuota', title: 'Registar Pago de cuota'}
                 fields:
                     - {property: 'Inscripcion'}
+                    - {property: 'fechaYHora', label: 'Momento de pago'}
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
@@ -751,6 +751,7 @@ easy_admin:
                 title: 'Ver pago de cuota'
                 fields:
                     - {property: 'Inscripcion'}
+                    - {property: 'fechaYHora', label: 'Momento de pago'}
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
@@ -760,6 +761,7 @@ easy_admin:
             form:
                 fields:
                     - {property: 'Clase'}
+                    - {property: 'fecha'}
                     - {property: 'Profesor'}
                     - {property: 'observaciones'}
             new:
@@ -772,12 +774,14 @@ easy_admin:
                     - { name: 'new', icon: 'plus-circle', label: 'Registar Suplencia', title: 'Registar Suplencia'}
                 fields:
                     - {property: 'Clase'}
+                    - {property: 'fecha'}
                     - {property: 'Profesor'}
                     - {property: 'observaciones'}
             show:
                 title: 'Ver suplencia registrada'
                 fields:
                     - {property: 'Clase'}
+                    - {property: 'fecha'}
                     - {property: 'Profesor'}
                     - {property: 'observaciones'}
     list:

@@ -49,11 +49,6 @@ class Equipamiento
      */
     private $fechaAdquisicion;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\RegistroMantenimiento", mappedBy="equipamiento")
-     */
-    private $mantenimientos;
-
     public function __construct()
     {
         $this->ultimoMantenimiento = new \DateTime(); 
@@ -127,6 +122,7 @@ class Equipamiento
 
         return $this;
     }
+    
 	public function __toString()
     {
         return $this->getDescripcion();
