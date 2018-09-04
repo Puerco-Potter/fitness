@@ -1,4 +1,7 @@
 easy_admin:
+    formats:
+        date:   'd/m/Y'
+        datetime:   'd/m/Y H:i:s'
     site_name: '<img src="/fitness/public/imagenes/fitnesConFondo.png">Administración Fussion Fitnnes Gym'
     design:
         brand_color: '#e2048d'
