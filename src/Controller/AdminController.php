@@ -5,11 +5,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminContr
 
 class AdminController extends BaseAdminController
 {
+    protected function updateEntity($entity)
+    {
+        parent::updateEntity($entity);
+        $this->addFlash('success',sprintf('Se ha actualizado: '.$entity->__toString()));
+    }
+
     protected function persistEntity($entity)
     {
-
-        $this->em->persist($entity);
-        $this->em->flush();
+        parent::persistEntity($entity);
         
         #$id = $this->request->query->get('id');
         #$entity = $this->em->getRepository('App:Alumno')->find($id);
