@@ -121,6 +121,7 @@ easy_admin:
                     - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
             new:
                 title: 'Registrar nuevo alumno'
+            controller: App\Controller\AlumnoController
         AlumnoInactivo:
             class: App\Entity\Alumno
             disabled_actions: ['new','delete']
