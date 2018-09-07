@@ -3,12 +3,11 @@ namespace App\Controller;
 
 use App\Form\AsistenciaType;
 use App\Entity\AsistenciaAlumno;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class AsistenciaController extends Controller
+class AsistenciaController extends AdminController
 {
     /**
      * @Route("/asistencia", name="asistencia")

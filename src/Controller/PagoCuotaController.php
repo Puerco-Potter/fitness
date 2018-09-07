@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use App\Entity\PagoCuota;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-//use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController;
 
-class PagoCuotaController extends Controller
+class PagoCuotaController extends AdminController
 {
     public function __construct()
     {

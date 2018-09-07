@@ -11,7 +11,6 @@ easy_admin:
             favicon:
                 path: '/fitness/public/imagenes/favito.png'
         menu:
-            # Entidades de Damian
             - label: 'Gestión de alumnos'
               icon: 'address-card'
               children:
@@ -19,14 +18,12 @@ easy_admin:
                 - { entity: 'AlumnoInactivo', icon: 'address-card', label: 'Alumnos inactivos'}
                 - { entity: 'FichaMedica', icon: 'clipboard', label: 'Fichas médicas'}
                 - { entity: 'TelefonoAlumno', icon: 'phone', label: 'Teléfonos de alumnos' }
-            # Entidades de Maxi
             - label: 'Gestión de Inventario'
               icon: 'cogs'
               children:
                 - { entity: 'Equipamiento', icon: 'cogs' }
                 - { entity: 'Elemento', icon: 'list', label: 'Elemento de gimnasio' }
                 - { entity: 'RegistroMantenimiento', icon: 'clipboard', label: 'Registro de Mantenimiento' }
-            # Entidades de Emiliano
             - label: 'Gestión del Personal'
               icon: 'users'
               children:
@@ -40,7 +37,6 @@ easy_admin:
                 - {entity: 'Clase', icon: 'clipboard', label: 'Clases'}
                 - {entity: 'Sala', icon: 'building', label: 'Salones'}
                 - {entity: 'Inscripcion', icon: 'edit', label: 'Inscripciones'}
-            # Entidades de Matias
             - label: 'Gestión de Entrenamientos'
               icon: 'tasks'
               children:
@@ -65,10 +61,8 @@ easy_admin:
                 - {icon: 'facebook', label: 'Facebook', url: 'https://instagram.com/fussionfitnessgym', target: '_blank'}
                 - {icon: 'instagram', label: 'Insstagram', url: 'https://www.facebook.com/Fussion-Gym-1098230646958706/', target: '_blank'}
     entities:
-        # change the following to the namespaces of your own entities
         User:
             class: App\Entity\User 
-        # Entidades de Damian
         Alumno:
             class: App\Entity\Alumno
             disabled_actions: ['delete']
@@ -248,8 +242,7 @@ easy_admin:
             new:
                 title: 'Agregar nuevo teléfono'
             edit:
-                title: 'Modificar teléfono'                   
-        # Entidades de Emiliano
+                title: 'Modificar teléfono'     
         Empleado:
             class: App\Entity\Empleado
             show:
@@ -434,8 +427,7 @@ easy_admin:
                 title: 'Crear nueva clase'
             edit:
                 title: 'Modificar clase'
-            controller: App\Controller\ClaseController            
-        # Entidades de Maty
+            #controller: App\Controller\ClaseController
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
             show:
@@ -455,8 +447,7 @@ easy_admin:
             edit:
                 title: 'Modificar teléfono'
             new:
-                title: 'Agregar nuevo teléfono'                
-        # Entidades de Maxi
+                title: 'Agregar nuevo teléfono' 
         Actividad:
             class: App\Entity\Actividad
             show:
@@ -535,12 +526,13 @@ easy_admin:
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
-                    - { property: 'ultimaReposicion', type: 'date', label: 'Fecha de última reposición',type_options: {widget: 'single_text'}}                  
+                 #   - { property: 'ultimaReposicion', type: 'date', label: 'Fecha de última reposición',type_options: {widget: 'single_text'}}                  
                     - { property: 'cantidad', type: 'integer', label: 'Cantidad disponible'}
             edit:
                 title: 'Modificar elemento'
             new:
                 title: 'Añadir nuevo elemento del gimnasio'
+            controller: App\Controller\ElementoController    
         RegistroMantenimiento:
             class: App\Entity\RegistroMantenimiento
             show:
