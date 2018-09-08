@@ -47,7 +47,7 @@ class PagoCuota
     public function __construct()
     {
         $this->monto = 500;
-        $this->fechaYHora =  (new \DateTime());
+        $this->fechaYHora =  new \DateTime();
         $this->mes =  (new \DateTime())->format('m');
         $this->ano =  (new \DateTime())->format('y');
     }
