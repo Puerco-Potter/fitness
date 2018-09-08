@@ -567,6 +567,7 @@ easy_admin:
                 title: 'Modificar registro de mantenimiento'
             new:
                 title: 'Registrar mantenimiento'
+            controller: App\Controller\RegistroMantenimientoController    
         PlanEntrenamiento:
             class: App\Entity\PlanEntrenamiento
             form:

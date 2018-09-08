@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\PagoCuota;
-use App\Entity\Alumno;
+use App\Entity\RegistroMantenimiento;
+use App\Entity\Equipamiento;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class PagoCuotaController extends AdminController
+class RegistroMantenimientoController extends AdminController
 {
     public function __construct()
     {
@@ -17,15 +17,16 @@ class PagoCuotaController extends AdminController
     public function persistEntity($entity)
     {
         parent::persistEntity($entity);
-        $id = $entity->getInscripcion()->getAlumno()->getId();
-        $monto = $entity->getMonto();
+        $id = $entity->getEquipamiento()->getId();
+        $fecha = $entity->getFecha();
+        $fecha = (string)$fecha->format("Ymd");
 
         $em = $this->getDoctrine()->getEntityManager();
 
         $qb = $this->em->createQueryBuilder();
-        $qb->update('App\Entity\Alumno','a')
-            ->set('a.balance','a.balance + '.(string)$monto)
-            ->where('a.id = '.(string)$id);
+        $qb->update('App\Entity\Equipamiento','e')
+            ->set('e.ultimoMantenimiento',$fecha)
+            ->where('e.id = '.(string)$id);
         return $qb->getQuery()->getResult();
 
 
