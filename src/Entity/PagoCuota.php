@@ -44,11 +44,6 @@ class PagoCuota
      */
     private $fechaYHora;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $fechaPago;
-
     public function __construct()
     {
         $this->monto = 500;
@@ -123,18 +118,6 @@ class PagoCuota
     public function setFechaYHora(\DateTimeInterface $fechaYHora): self
     {
         $this->fechaYHora = $fechaYHora;
-
-        return $this;
-    }
-
-    public function getFechaPago(): ?\DateTimeInterface
-    {
-        return $this->fechaPago;
-    }
-
-    public function setFechaPago(\DateTimeInterface $fechaPago): self
-    {
-        $this->fechaPago = $fechaPago;
 
         return $this;
     }

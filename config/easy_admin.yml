@@ -729,6 +729,7 @@ easy_admin:
                 fields:
                     - {property: 'Inscripcion'}
                     - {property: 'monto', type: 'money', type_options: { currency: 'ARS' }}
+                    - {property: 'fechaYHora', label: 'Momento de pago'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
             new:
