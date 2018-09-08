@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Repository\InscripcionRepository;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AsistenciaType extends AbstractType
 {
@@ -25,20 +26,19 @@ class AsistenciaType extends AbstractType
             ->add('fecha', DateType::class)
             ->add('hora', TimeType::class)
             ->add('inscripcion',EntityType::class, array(
-    // looks for choices from this entity
-    'class' => Inscripcion::class,
-    // filtra la entidad
-    'query_builder' => function (InscripcionRepository $er)  use($id) {
-        return $er->createQueryBuilder('u')
-                ->where('u.Alumno = '. $id);
-    },
-    'choice_label' => function (Inscripcion $inscripcion = null) {
-        return null === $inscripcion ? '': $inscripcion->conseguir_asistencia();
-    },
-    // used to render a select box, check boxes or radios
-    // 'multiple' => true,
-    // 'expanded' => true,
+            // looks for choices from this entity
+            'class' => Inscripcion::class,
+            // filtra la entidad
+            'query_builder' => function (InscripcionRepository $er)  use($id) {
+                return $er->createQueryBuilder('u')
+                        ->where('u.Alumno = '. $id);
+            },
+            'choice_label' => function (Inscripcion $inscripcion = null) {
+                return null === $inscripcion ? '': $inscripcion->conseguir_asistencia();
+            },
             ))
+            ->add('save', SubmitType::class, array('label' => 'Confirmar'))
+            
         ;
     }
 

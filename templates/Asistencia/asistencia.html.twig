@@ -1,3 +1,38 @@
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+    {% block stylesheets %}
+    <style>
+        .superior{
+            height: 10%;
+        }
+
+        .superior2{
+            height: 60%;
+        }
+        .contenido{
+            height: 100%;
+        }
+
+        .etiqueta{
+            color:white;
+            text-shadow: 0px 0px 8px rgba(255,64,255,1), -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;
+            font-size: large;
+        }
+    </style>
+    {% endblock %}
+    {% block body %}
+        <div class="text-center contenido">
+            <div class="superior"></div>
+            <label class="font-weight-bold etiqueta" for="username"><h2>SISTEMA DE REGISTRO DE ASISTENCIA</h2></label>
+            <div class="superior2"></div>
+            {{ form_start(form) }}
+                <label class="font-weight-bold etiqueta" for="username">DNI:</label>
+                <div class="row">
+                    <div class="form-group col-sm-4 offset-sm-4">
+                        {{ form_row(form.dni, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+        
+    {% endblock %}
