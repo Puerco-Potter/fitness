@@ -375,7 +375,8 @@ easy_admin:
             new:
                 title: 'Registrar Inscripción' 
             edit:
-                title: 'Modificar Inscripción' 
+                title: 'Modificar Inscripción'
+            controller: App\Controller\InscripcionController     
         Clase:
         #DONE reemplazar atributos a posteriori
             class: App\Entity\Clase
