@@ -756,7 +756,7 @@ easy_admin:
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
-            #controller: App\Controller\PagoCuotaController    
+            controller: App\Controller\PagoCuotaController    
         RegistroSuplencia:
             class: App\Entity\RegistroSuplencia
             form:

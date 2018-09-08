@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\PagoCuota;
+use App\Entity\Alumno;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PagoCuotaController extends AdminController
@@ -13,9 +14,21 @@ class PagoCuotaController extends AdminController
         //print '_PagoCuotaController se creó_';
     }
 
-    public function redirigir()
+    public function persistEntity($entity)
     {
-        return $this->redirectToRoute('login');
+        parent::persistEntity($entity);
+        $id = $entity->getInscripcion()->getAlumno()->getId();
+        $monto = $entity->getMonto();
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $qb = $this->em->createQueryBuilder();
+        $qb->update('App\Entity\Alumno','a')
+            ->set('a.balance','a.balance + '.(string)$monto)
+            ->where('a.id = '.(string)$id);
+        return $qb->getQuery()->getResult();
+
+
     }
 }
 ?>
