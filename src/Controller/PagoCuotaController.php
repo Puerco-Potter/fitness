@@ -8,12 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PagoCuotaController extends AdminController
 {
-    public function __construct()
-    {
-        //parent::__construct();
-        //print '_PagoCuotaController se creó_';
-    }
-
     public function persistEntity($entity)
     {
         parent::persistEntity($entity);
