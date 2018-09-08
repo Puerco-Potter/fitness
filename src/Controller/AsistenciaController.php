@@ -20,7 +20,7 @@ class AsistenciaController extends AdminController
         // 1) build the form
         $defaultData = array('message' => 'Type your message here');
         $form = $this->createFormBuilder($defaultData)
-        ->add('dni', NumberType::class)
+        ->add('dni', NumberType::class, array('label' => false))
         ->add('save', SubmitType::class, array('label' => 'Confirmar'))
             ->getForm();
     

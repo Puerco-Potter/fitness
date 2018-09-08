@@ -252,7 +252,7 @@ class Inscripcion
 
     public function conseguir_asistencia()
     {
-        return $this->getAlumno()->getDni().' - '.$this->getClase();
+        return $this->getClase();
         //return $this->getAlumno().' - '.$this->getClase().' - '.(string) $this->getFechaInscripcion()->format('Y-m-d');
     }
 }
