@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RegistroSuplenciaRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\RegistroMantenimientoRepository")
  */
-class RegistroSuplencia
+class RegistroMantenimiento
 {
     /**
      * @ORM\Id()
@@ -23,25 +23,27 @@ class RegistroSuplencia
     private $fecha;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $observaciones;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Profesor")
-     */
-    private $Profesor;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Clase")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Empleado")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull()
      */
-    private $Clase;
+    private $Empleado;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Equipamiento")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
+     */
+    private $Equipamiento;
 
     public function __construct()
     {
-        $this->fecha = new \DateTime();
+        $this->fecha = new \DateTime(); 
     }
 
     public function getId()
@@ -66,39 +68,39 @@ class RegistroSuplencia
         return $this->observaciones;
     }
 
-    public function setObservaciones(?string $observaciones): self
+    public function setObservaciones(string $observaciones): self
     {
         $this->observaciones = $observaciones;
 
         return $this;
     }
 
-    public function getProfesor(): ?Profesor
+    public function getEmpleado(): ?Empleado
     {
-        return $this->Profesor;
+        return $this->Empleado;
     }
 
-    public function setProfesor(?Profesor $Profesor): self
+    public function setEmpleado(?Empleado $Empleado): self
     {
-        $this->Profesor = $Profesor;
+        $this->Empleado = $Empleado;
 
         return $this;
     }
 
-    public function getClase(): ?Clase
+    public function getEquipamiento(): ?Equipamiento
     {
-        return $this->Clase;
+        return $this->Equipamiento;
     }
 
-    public function setClase(?Clase $Clase): self
+    public function setEquipamiento(?Equipamiento $Equipamiento): self
     {
-        $this->Clase = $Clase;
+        $this->Equipamiento = $Equipamiento;
 
         return $this;
     }
-    
-    public function __toString()
+
+	public function __toString()
     {
-        return (string) $this->getFecha()->format('Y-m-d').' - '.$this->getProfesor().' / '.$this->getObservaciones();
+        return (string) $this->getFecha()->format('Y-m-d').' - '.$this->Equipamiento();
     }
 }

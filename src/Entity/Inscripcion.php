@@ -5,6 +5,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InscripcionRepository")
@@ -26,6 +27,7 @@ class Inscripcion
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Clase")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $Clase;
 

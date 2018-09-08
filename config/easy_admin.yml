@@ -1,4 +1,7 @@
 easy_admin:
+    formats:
+        date:   'd/m/Y'
+        datetime:   'd/m/Y H:i:s'
     site_name: '<img src="/fitness/public/imagenes/fitnesConFondo.png">Administración Fussion Fitnnes Gym'
     design:
         brand_color: '#e2048d'
@@ -8,7 +11,6 @@ easy_admin:
             favicon:
                 path: '/fitness/public/imagenes/favito.png'
         menu:
-            # Entidades de Damian
             - label: 'Gestión de alumnos'
               icon: 'address-card'
               children:
@@ -16,13 +18,12 @@ easy_admin:
                 - { entity: 'AlumnoInactivo', icon: 'address-card', label: 'Alumnos inactivos'}
                 - { entity: 'FichaMedica', icon: 'clipboard', label: 'Fichas médicas'}
                 - { entity: 'TelefonoAlumno', icon: 'phone', label: 'Teléfonos de alumnos' }
-            # Entidades de Maxi
             - label: 'Gestión de Inventario'
               icon: 'cogs'
               children:
                 - { entity: 'Equipamiento', icon: 'cogs' }
                 - { entity: 'Elemento', icon: 'list', label: 'Elemento de gimnasio' }
-            # Entidades de Emiliano
+                - { entity: 'RegistroMantenimiento', icon: 'clipboard', label: 'Registro de Mantenimiento' }
             - label: 'Gestión del Personal'
               icon: 'users'
               children:
@@ -36,7 +37,6 @@ easy_admin:
                 - {entity: 'Clase', icon: 'clipboard', label: 'Clases'}
                 - {entity: 'Sala', icon: 'building', label: 'Salones'}
                 - {entity: 'Inscripcion', icon: 'edit', label: 'Inscripciones'}
-            # Entidades de Matias
             - label: 'Gestión de Entrenamientos'
               icon: 'tasks'
               children:
@@ -55,17 +55,14 @@ easy_admin:
               children:
                 - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'bug'}
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
-            #- label: "Testing"
-            #  icon: 'exclamation'
-            #  children:
-            #    - {label: 'Dirección externa', url: 'http://www.google.com.ar', target: '_blank'}
-            
-
+            - label: "Contacto"
+              icon: 'share-square'
+              children:
+                - {icon: 'facebook', label: 'Facebook', url: 'https://instagram.com/fussionfitnessgym', target: '_blank'}
+                - {icon: 'instagram', label: 'Insstagram', url: 'https://www.facebook.com/Fussion-Gym-1098230646958706/', target: '_blank'}
     entities:
-        # change the following to the namespaces of your own entities
         User:
             class: App\Entity\User 
-        # Entidades de Damian
         Alumno:
             class: App\Entity\Alumno
             disabled_actions: ['delete']
@@ -124,6 +121,7 @@ easy_admin:
                     - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
             new:
                 title: 'Registrar nuevo alumno'
+            controller: App\Controller\AlumnoController
         AlumnoInactivo:
             class: App\Entity\Alumno
             disabled_actions: ['new','delete']
@@ -245,8 +243,7 @@ easy_admin:
             new:
                 title: 'Agregar nuevo teléfono'
             edit:
-                title: 'Modificar teléfono'                   
-        # Entidades de Emiliano
+                title: 'Modificar teléfono'     
         Empleado:
             class: App\Entity\Empleado
             show:
@@ -431,8 +428,7 @@ easy_admin:
                 title: 'Crear nueva clase'
             edit:
                 title: 'Modificar clase'
-            #controller: App\Controller\ClaseController            
-        # Entidades de Maty
+            #controller: App\Controller\ClaseController
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
             show:
@@ -452,8 +448,7 @@ easy_admin:
             edit:
                 title: 'Modificar teléfono'
             new:
-                title: 'Agregar nuevo teléfono'                
-        # Entidades de Maxi
+                title: 'Agregar nuevo teléfono' 
         Actividad:
             class: App\Entity\Actividad
             show:
@@ -498,7 +493,8 @@ easy_admin:
                 fields:
                     - 'descripcion'
                     - 'estado'
-                    - { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }
+                    - { property: 'alarma', label: '¿Mantenimiento al día?', type: 'boolean'}
+                    #- { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }
                     - { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }
                     - { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }
             form:
@@ -531,12 +527,43 @@ easy_admin:
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
-                    - { property: 'ultimaReposicion', type: 'date', label: 'Fecha de última reposición',type_options: {widget: 'single_text'}}                  
+                 #   - { property: 'ultimaReposicion', type: 'date', label: 'Fecha de última reposición',type_options: {widget: 'single_text'}}                  
                     - { property: 'cantidad', type: 'integer', label: 'Cantidad disponible'}
             edit:
                 title: 'Modificar elemento'
             new:
                 title: 'Añadir nuevo elemento del gimnasio'
+            controller: App\Controller\ElementoController    
+        RegistroMantenimiento:
+            class: App\Entity\RegistroMantenimiento
+            show:
+                title: 'Registro de mantenimiento'
+                fields:
+                    - { property: 'fecha', label: 'Fecha' }
+                    - { property: 'observaciones', label: '' }
+                    - { property: 'Empleado', label: 'Empleado' }
+                    - { property: 'Equipamiento', label: 'Equipamiento' }
+            list:
+                title: 'Lista de Mantenimientos'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registrar mantenimiento', title: 'Registrar mantenimiento'}
+                fields:
+                    - { property: 'fecha', label: 'Fecha' }
+                    - { property: 'Empleado', label: 'Empleado' }
+                    - { property: 'Equipamiento', label: 'Equipamiento' }
+                    - { property: 'observaciones', label: 'Observaciones' }
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-8', label: '' }
+                    - { property: 'fecha', type: 'date', label: 'Fecha', type_options: {widget: 'single_text'}}                 
+                    - { property: 'Empleado', type: 'easyadmin_autocomplete', type_options: {class: 'App\Entity\Empleado'}, label: 'Empleado'}
+                    - { property: 'Equipamiento', type: 'easyadmin_autocomplete', type_options: {class: 'App\Entity\Equipamiento'}, label: 'Equipamiento'}
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Observaciones' }
+                    - { property: 'observaciones', type: 'textarea', label: '>>>'}  
+            edit:        
+                title: 'Modificar registro de mantenimiento'
+            new:
+                title: 'Registrar mantenimiento'
         PlanEntrenamiento:
             class: App\Entity\PlanEntrenamiento
             form:
@@ -651,19 +678,107 @@ easy_admin:
                     - {property: 'Elemento'}
         AsistenciaAlumno:
             class: App\Entity\AsistenciaAlumno
-        ESEmpleado:
-            class: App\Entity\ESEmpleado
             form:
                 fields:
-                    - {property: 'tipo'}
+                    - {property: 'Inscripcion'}
+            new:
+                title: 'Registrar asistencia'
+            edit:
+                title: 'Modificar asistencia'
+            show:
+                title: 'Ver asistencia'
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'fecha'}
+                    - {property: 'hora'}
+            list:
+                title: 'Lista de asistencias'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registar Asistencia', title: 'Registar Asistencia'}
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'fecha'}
+                    - {property: 'hora'}
+        ESEmpleado:
+            class: App\Entity\ESEmpleado
+            disabled_actions: ['edit']
+            form:
+                fields:
+                    - {property: 'tipo', type: 'choice', label: 'Tipo', type_options:{choices:{'Entrada': 'Entrada', 'Salida': 'Salida'}}}
                     - {property: 'Empleado'}
+            new:
+                title: 'Registrar entrada/salida'
+            list:
+                title: 'Lista de entradas/salidas de empleados'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registar Entrada/Salida de Empleado', title: 'Registar Entrada/Salida de Empleado'}
+                fields:
+                    - {property: 'Empleado'}
+                    - {property: 'tipo'}
+                    - {property: 'fechaYHora', label: 'Fecha y hora'}
+            show:
+                title: 'Ver Entrada/Salida'
+                fields:
+                    - {property: 'Empleado'}
+                    - {property: 'tipo'}
+                    - {property: 'fechaYHora', label: 'Fecha y hora'}
         PagoCuota:
             class: App\Entity\PagoCuota
+            form:
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'monto', type: 'money', type_options: { currency: 'ARS' }}
+                    - {property: 'mes'}
+                    - {property: 'ano', label: 'Año'}
+            new:
+                title: 'Registrar pago de cuota'
+            edit:
+                title: 'Modificar pago de cuota'
+            list:
+                title: 'Lista de cuotas pagadas'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registar Pago de cuota', title: 'Registar Pago de cuota'}
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'fechaYHora', label: 'Momento de pago'}
+                    - {property: 'monto'}
+                    - {property: 'mes'}
+                    - {property: 'ano', label: 'Año'}
+            show:
+                title: 'Ver pago de cuota'
+                fields:
+                    - {property: 'Inscripcion'}
+                    - {property: 'fechaYHora', label: 'Momento de pago'}
+                    - {property: 'monto'}
+                    - {property: 'mes'}
+                    - {property: 'ano', label: 'Año'}
+            #controller: App\Controller\PagoCuotaController    
         RegistroSuplencia:
             class: App\Entity\RegistroSuplencia
             form:
                 fields:
                     - {property: 'Clase'}
+                    - {property: 'fecha'}
+                    - {property: 'Profesor'}
+                    - {property: 'observaciones'}
+            new:
+                title: 'Registro de suplencia'
+            edit:
+                title: 'Modificar Suplencia'
+            list:
+                title: 'Lista de suplencias registradas'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registar Suplencia', title: 'Registar Suplencia'}
+                fields:
+                    - {property: 'Clase'}
+                    - {property: 'fecha'}
+                    - {property: 'Profesor'}
+                    - {property: 'observaciones'}
+            show:
+                title: 'Ver suplencia registrada'
+                fields:
+                    - {property: 'Clase'}
+                    - {property: 'fecha'}
                     - {property: 'Profesor'}
                     - {property: 'observaciones'}
     list:

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AsistenciaAlumnoRepository")
@@ -29,8 +30,15 @@ class AsistenciaAlumno
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Inscripcion")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $Inscripcion;
+
+    public function __construct()
+    {
+        $this->fecha = new \DateTime();
+        $this->hora = new \DateTime();
+    }
 
     public function getId()
     {
