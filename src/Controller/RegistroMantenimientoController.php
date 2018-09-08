@@ -8,12 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class RegistroMantenimientoController extends AdminController
 {
-    public function __construct()
-    {
-        //parent::__construct();
-        //print '_PagoCuotaController se creó_';
-    }
-
     public function persistEntity($entity)
     {
         parent::persistEntity($entity);
@@ -28,7 +22,5 @@ class RegistroMantenimientoController extends AdminController
             ->set('e.ultimoMantenimiento',$fecha)
             ->where('e.id = '.(string)$id);
         return $qb->getQuery()->getResult();
-
-
     }
 }
