@@ -12,8 +12,8 @@ security:
         in_memory:
             memory:
                 users:
-                    adminfitness:
-                        password: adminfitnes
+                    adminarphos:
+                        password: admin879023
                         roles: 'ROLE_USER'
         our_db_provider:
             entity:
