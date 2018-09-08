@@ -6,11 +6,14 @@ security:
     # ...
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        chain_provider:
+            chain:
+                providers: [in_memory,our_db_provider]
         in_memory:
             memory:
                 users:
-                    admin:
-                        password: admin
+                    adminfitness:
+                        password: adminfitnes
                         roles: 'ROLE_USER'
         our_db_provider:
             entity:
