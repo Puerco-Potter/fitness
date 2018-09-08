@@ -567,6 +567,7 @@ easy_admin:
                 title: 'Modificar registro de mantenimiento'
             new:
                 title: 'Registrar mantenimiento'
+            controller: App\Controller\RegistroMantenimientoController    
         PlanEntrenamiento:
             class: App\Entity\PlanEntrenamiento
             form:
@@ -756,7 +757,7 @@ easy_admin:
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
-            #controller: App\Controller\PagoCuotaController    
+            controller: App\Controller\PagoCuotaController    
         RegistroSuplencia:
             class: App\Entity\RegistroSuplencia
             form:
