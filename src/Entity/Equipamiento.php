@@ -51,13 +51,18 @@ class Equipamiento
      */
     private $fechaAdquisicion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RegistroMantenimiento", mappedBy="Equipamiento")
+     */
+    private $Mantenimientos;
+
     public function __construct()
     {
         $this->ultimoMantenimiento = new \DateTime(); 
         $this->fechaAdquisicion = new \DateTime();
         $this->mantenimientoDias = 15;
         $this->estado = "Listo para usar";
-        $this->mantenimientos = new ArrayCollection();
+        $this->Mantenimientos = new ArrayCollection();
     }
 
     public function getAlarma()
@@ -144,6 +149,35 @@ class Equipamiento
 	public function __toString()
     {
         return $this->getDescripcion();
+    }
+
+    /**
+     * @return Collection|Clase[]
+    */
+    public function getMantenimientos(): Collection
+    {
+        return $this->Mantenimientos;
+    }
+    
+    public function addRegistroMantenimiento(RegistroMantenimiento $registroMantenimiento): self
+    {
+        if (!$this->Mantenimientos->contains($registroMantenimiento)) {
+            $this->Mantenimientos[] = $registroMantenimiento;
+            $registroMantenimiento->setEquipamiento($this);
+        }
+        return $this;
+    }
+    
+    public function removeRegistroMantenimiento(RegistroMantenimiento $registroMantenimiento): self
+    {
+        if ($this->Mantenimientos->contains($registroMantenimiento)) {
+            $this->Mantenimientos->removeElement($registroMantenimiento);
+            // set the owning side to null (unless already changed)
+            if ($registroMantenimiento->getEquipamiento() === $this) {
+                $registroMantenimiento->setEquipamiento(null);
+            }
+        }
+        return $this;
     }
  
 }

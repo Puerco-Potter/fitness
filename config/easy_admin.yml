@@ -486,6 +486,7 @@ easy_admin:
                     - { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }
                     - { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }
                     - { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }
+                    - { property: 'Mantenimientos', label: 'Lista de Mantenimientos' }
             list:
                 title: 'Lista de equipamientos del gimnasio'
                 actions:
