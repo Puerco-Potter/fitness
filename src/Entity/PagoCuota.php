@@ -107,7 +107,7 @@ class PagoCuota
     
     public function __toString()
     {
-        return '$ '.(string) $this->getMonto().' - '.$this->getMes().' - '.$this->getAno();
+        return ' Pago de $ '.(string) $this->getMonto().' del '.$this->getMes().'/'.$this->getAno().'';
     }
 
     public function getFechaYHora(): ?\DateTimeInterface
