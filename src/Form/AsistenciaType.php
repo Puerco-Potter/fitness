@@ -25,8 +25,9 @@ class AsistenciaType extends AbstractType
             ->add('inscripcion',EntityType::class, array(
     // looks for choices from this entity
     'class' => Inscripcion::class,
-    'choice_label' => 'id',
-
+    'choice_label' => function (Inscripcion $inscripcion = null) {
+        return null === $inscripcion ? '': $inscripcion->conseguir_asistencia();
+    },
     // used to render a select box, check boxes or radios
     // 'multiple' => true,
     // 'expanded' => true,

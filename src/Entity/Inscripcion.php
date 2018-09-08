@@ -244,6 +244,13 @@ class Inscripcion
     }
 	public function __toString()
     {
-        return $this->getAlumno().' - '.$this->getClase().' - '.(string) $this->getFechaInscripcion()->format('Y-m-d');
+        return $this->getAlumno()->getDni().' - '. $this->getAlumno().' - '.$this->getClase();
+        //return $this->getAlumno().' - '.$this->getClase().' - '.(string) $this->getFechaInscripcion()->format('Y-m-d');
+    }
+
+    public function conseguir_asistencia()
+    {
+        return $this->getAlumno()->getDni().' - '.$this->getClase();
+        //return $this->getAlumno().' - '.$this->getClase().' - '.(string) $this->getFechaInscripcion()->format('Y-m-d');
     }
 }
