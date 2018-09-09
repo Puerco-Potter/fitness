@@ -79,6 +79,7 @@ class Inscripcion
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @Assert\GreaterThanOrEqual(value = 0, message = "La cuota debe ser mayor a $0")
      */
     private $cuota;
 
