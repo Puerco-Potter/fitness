@@ -15,20 +15,20 @@ easy_admin:
               icon: 'address-card'
               children:
                 - { entity: 'Alumno', icon: 'address-card' }
-                - { entity: 'AlumnoInactivo', icon: 'address-card', label: 'Alumnos inactivos'}
+                - { entity: 'AlumnoInactivo', icon: 'id-badge', label: 'Alumnos inactivos'}
                 - { entity: 'FichaMedica', icon: 'clipboard', label: 'Fichas médicas'}
                 - { entity: 'TelefonoAlumno', icon: 'phone', label: 'Teléfonos de alumnos' }
             - label: 'Gestión de Inventario'
-              icon: 'cogs'
+              icon: 'cubes'
               children:
-                - { entity: 'Equipamiento', icon: 'cogs' }
-                - { entity: 'Elemento', icon: 'list', label: 'Elemento de gimnasio' }
+                - { entity: 'Equipamiento', icon: 'cog' }
+                - { entity: 'Elemento', icon: 'cogs', label: 'Elemento de gimnasio' }
                 - { entity: 'RegistroMantenimiento', icon: 'clipboard', label: 'Registro de Mantenimiento' }
             - label: 'Gestión del Personal'
               icon: 'users'
               children:
-                - { entity: 'Empleado', label: 'Empleados', icon: 'users' }
-                - { entity: 'Profesor', label: 'Profesores', icon: 'user' }
+                - { entity: 'Empleado', label: 'Empleados', icon: 'user' }
+                - { entity: 'Profesor', label: 'Profesores', icon: 'male' }
                 - { entity: 'TelefonoEmpleado', icon: 'phone', label: 'Teléfonos de empleados'}
             - label: 'Gestión de Actividades'
               icon: 'bolt'
@@ -45,15 +45,15 @@ easy_admin:
                 - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'deviantart' }
                 - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'deaf' }
             - label: 'Gestión de Asistencias'
-              icon: 'bug'
+              icon: 'exclamation'
               children:
-                - {label: "Asistencias de alumnos", entity: 'AsistenciaAlumno', icon: 'bug'}
-                - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'bug'}
-                - {label: "Registro de suplencias", entity: 'RegistroSuplencia', icon: 'bug'}
+                - {label: "Asistencias de alumnos", entity: 'AsistenciaAlumno', icon: 'address-card'}
+                - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'users'}
+                - {label: "Registro de suplencias", entity: 'RegistroSuplencia', icon: 'male'}
             - label: 'Gestión de pagos'
-              icon: 'bug'
+              icon: 'money'
               children:
-                - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'bug'}
+                - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'book'}
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             - label: "Contacto"
               icon: 'share-square'
