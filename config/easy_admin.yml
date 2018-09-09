@@ -704,6 +704,7 @@ easy_admin:
                     - {property: 'Inscripcion'}
                     - {property: 'fecha'}
                     - {property: 'hora'}
+            controller: App\Controller\AsistenciaController 
         ESEmpleado:
             class: App\Entity\ESEmpleado
             disabled_actions: ['edit']

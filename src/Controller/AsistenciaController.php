@@ -3,7 +3,7 @@ namespace App\Controller;
 
 use App\Form\AsistenciaType;
 use App\Entity\AsistenciaAlumno;
-use App\Entity\Alumno;
+use App\Entity\Inscripcion;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -12,6 +12,20 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AsistenciaController extends AdminController
 {   
+    public function persistEntity($entity)
+    {
+        parent::persistEntity($entity);
+        $id = $entity->getInscripcion()->getId();
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $qb = $this->em->createQueryBuilder();
+        $qb->update('App\Entity\Inscripcion','i')
+            ->set('i.clasesRestantes','i.clasesRestantes - 1')
+            ->where('i.id = '.(string)$id);
+        return $qb->getQuery()->getResult();
+    }
+
     /**
      * @Route("/asistencia", name="asistencia")
      */

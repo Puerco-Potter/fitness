@@ -35,7 +35,7 @@ class RegistroMantenimiento
     private $Empleado;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Equipamiento")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Equipamiento", inversedBy="Mantenimientos")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull()
      */

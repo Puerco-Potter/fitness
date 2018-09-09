@@ -83,6 +83,6 @@ class AsistenciaAlumno
     
     public function __toString()
     {
-        return (string) $this->getFecha().' - '.(string) $this->getHora();
+        return (string) $this->getFecha()->format('Y/m/d').' - '.(string) $this->getHora()->format('H:i:s');
     }
 }
