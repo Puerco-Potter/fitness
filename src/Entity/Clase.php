@@ -21,6 +21,7 @@ class Clase
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(value = 1, message = "El cupo debe ser mayor o igual que 1")
      */
     private $cupo;
 

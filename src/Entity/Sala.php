@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SalaRepository")
@@ -25,6 +26,7 @@ class Sala
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(value = 1, message = "La capacidad debe ser mayor o igual que 1")
      */
     private $capacidad;
 
