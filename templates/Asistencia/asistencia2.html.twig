@@ -1,3 +1,47 @@
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+    {% block stylesheets %}
+    <style>
+        .superior{
+            height: 10%;
+        }
+
+        .superior2{
+            height: 58%;
+        }
+        .contenido{
+            height: 100%;
+        }
+
+        .etiqueta{
+            color:white;
+            text-shadow: 0px 0px 8px rgba(255,64,255,1), -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;
+            font-size: large;
+        }
+    </style>
+    {% endblock %}
+    {% block body %}
+        <div class="text-center contenido">
+            <div class="superior"></div>
+            <label class="font-weight-bold etiqueta"><h2>SISTEMA DE REGISTRO DE ASISTENCIA</h2></label>
+            
+            <div class="superior2"></div>
+            {{ form_start(form) }}
+                <div class="row">
+                    <div class="form-inline col-sm-4 offset-sm-4">
+                        <label class="font-weight-bold etiqueta" for="username">Fecha:</label>
+                        {{ form_row(form.fecha, { 'attr': {'class': 'from-control', "readonly" : "true"} }) }}
+                        <label class="font-weight-bold etiqueta" for="username">Hora:</label>
+                        {{ form_row(form.hora, { 'attr': {'class': 'from-control', "readonly" : "true"} }) }}
+                    </div>
+                    <div class="form-group col-sm-8 offset-sm-2">
+                            <label class="font-weight-bold etiqueta" for="username">Clase:</label>
+                            {{ form_row(form.inscripcion, { 'attr': {'class': 'form-control text-white bg-secondary'} }) }}
+                            <br>
+                            {{ form_row(form.save, { 'attr': {'class': 'btn btn-dark'} }) }}
+                        </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+        
+    {% endblock %}

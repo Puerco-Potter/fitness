@@ -23,11 +23,20 @@ class AsistenciaType extends AbstractType
     {
         $id = $options["id"];
         $builder
-            ->add('fecha', DateType::class)
-            ->add('hora', TimeType::class)
+            ->add('fecha', DateType::class, array(
+                'widget' => 'single_text',
+                'label' => false,
+                // prevents rendering it as type="date", to avoid HTML5 date pickers
+            ))
+            ->add('hora', TimeType::class, array(
+                'widget' => 'single_text',
+                'label' => false,
+                // prevents rendering it as type="date", to avoid HTML5 date pickers
+            ))
             ->add('inscripcion',EntityType::class, array(
             // looks for choices from this entity
             'class' => Inscripcion::class,
+            'label' => false,
             // filtra la entidad
             'query_builder' => function (InscripcionRepository $er)  use($id) {
                 return $er->createQueryBuilder('u')
