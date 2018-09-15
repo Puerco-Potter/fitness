@@ -82,6 +82,6 @@ class ESEmpleado
     
     public function __toString()
     {
-        return (string) $this->getFechaYHora()->format('Y-m-d');
+        return $this->tipo.' - '.(string) $this->getFechaYHora()->format('Y-m-d');
     }
 }
