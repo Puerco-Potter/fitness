@@ -22,10 +22,9 @@ class AlumnoController extends AdminController
         #$this->addFlash('success',sprintf('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: '.$entity->__toString()));
         //sleep(60);
         /*
-        return coso::redirectToRoute('easyadmin', [
-            'entity' => 'Actividad',
-            'action' => 'list'
-                    ]);
-        */       
+        dump($this->redirectToRoute('easyadmin', ['entity' => 'Actividad', 'action' => 'list']));exit;
+        return $this->redirectToRoute('easyadmin', ['entity' => 'Actividad', 'action' => 'list']);
+        */
+        
     }
 }
