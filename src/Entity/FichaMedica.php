@@ -124,6 +124,7 @@ class FichaMedica
     /**
 	 * @Assert\NotBlank()
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\GreaterThanOrEqual(value = 0, message = "El pesp debe ser un valor positivo")
      */
     private $peso;
 

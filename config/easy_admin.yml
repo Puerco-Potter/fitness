@@ -69,7 +69,7 @@ easy_admin:
             show:
                 title: 'Datos del alumno'
                 fields:
-                    - { property: 'dni', label: 'DNI' }
+                    - { property: 'dni', label: 'DNI'}
                     - 'apellido'
                     - 'nombre'
                     - { property: 'balance', label: 'Saldo' }
@@ -96,7 +96,7 @@ easy_admin:
                 fields:
                     - { type: 'tab' , label: 'Informacion del Alumno', icon: 'user' }
                     - { type: 'group', css_class: 'col-sm-6', label: 'Información Basica' }
-                    - { property: 'dni', type: 'integer', label: 'DNI'}
+                    - { property: 'dni', type: 'integer', label: 'DNI', help: 'Ingrese el DNI seguido sin espacios ni puntos'}
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'}    
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}
@@ -149,8 +149,8 @@ easy_admin:
                     - 'alumno'
                     - 'fecha'
                     - { property: 'grupoSanguineo', label: 'Grupo Sanguíneo'}
-                    - 'peso'
-                    - 'altura'
+                    - { property: 'peso', label: 'Peso'}
+                    - { property: 'altura', label: 'Altura'}
                     - 'talla'
                     - { property: 'telefonoEmergencia', label: 'Teléfono de emergencia'}
                     #- { type: 'tab' , label: 'Informacion Medica', icon: 'user' }
@@ -190,8 +190,8 @@ easy_admin:
                     - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}
                     - { property: 'fecha', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha'}
                     - { property: 'grupoSanguineo', type: 'choice', label: 'Grupo Sanguíneo', type_options:{choices:{'A-':'A-','A+':'A+','B-':'B-','B+':'B+','AB-':'AB-','AB+':'AB+','0-':'0-','0+':'0+','Otro':'Otro'}}}
-                    - { property: 'peso', type: 'integer', label: 'Peso (kilogramos)'}                  
-                    - { property: 'altura', type: 'integer', label: 'Altura (centímetros)'}
+                    - { property: 'peso', type: 'integer', label: 'Peso', help: 'Ingrese el peso en kilogramos'}                  
+                    - { property: 'altura', type: 'integer', label: 'Altura', help: 'Ingrese la altura en centímetros'}
                     - { property: 'talla', type: 'text', label: 'Talla'}  
                     - { property: 'telefonoEmergencia', type: 'text', label: 'Teléfono de emergencia'}  
                     - { type: 'tab' , label: 'Informacion Medica', icon: 'user' }
@@ -258,13 +258,13 @@ easy_admin:
                 fields:
                     - { type: 'tab' , label: 'Información Basica', icon: 'user' }
                     - { type: 'group', css_class: 'col-sm-8', label: '' }
-                    - { property: 'dni', type: 'integer', label: 'DNI'}
+                    - { property: 'dni', type: 'integer', label: 'DNI', help: 'Ingrese el DNI seguido (sin puntos)'}
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}               
                     - { type: 'tab' , label: 'Laboral y de Contacto', icon: 'user' }
                     - { type: 'group', css_class: 'col-sm-9', label: '' }
-                    - { property: 'cuit', type: 'integer', label: 'CUIT (seguido sin espacios)'}
+                    - { property: 'cuit', type: 'integer', label: 'CUIT', help: 'Ingrese el CUIT seguido sin espacios ni puntos'}
                     - { property: 'relacion', type: 'choice', label: 'Relación laboral',type_options:{choices:{'Por contrato': 'Por contrato', 'Monotributista': 'Monotributista','En relación de dependencia': 'En relación de dependencia'}}}
                     - { property: 'direccion', type: 'text', label: 'Dirección'}
                     - { property: 'Telefonos', label: 'Telefonos' ,type: 'collection' , type_options: { entry_type: 'App\Form\TelefonoEmpleadoType', by_reference: false }}
@@ -286,7 +286,7 @@ easy_admin:
                 fields:
                     - { type: 'tab' , label: 'Información Basica', icon: 'user' }
                     - { type: 'group', css_class: 'col-sm-8', label: '' }
-                    - { property: 'dni', type: 'integer', label: 'DNI'}
+                    - { property: 'dni', type: 'integer', label: 'DNI', help: 'Ingrese el DNI seguido sin espacios ni puntos'}
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento'}                    
@@ -507,7 +507,7 @@ easy_admin:
                     - { property: 'estado', type: 'choice', label: 'Estado del equipamiento',type_options:{choices:{'En mantenimiento':'En mantenimiento','Necesita mantenimiento':'Necesita mantenimiento','Listo para usar':'Listo para usar'}}}
                     - { property: 'fechaAdquisicion', type: 'date', label: 'Fecha de adquisición',type_options: {widget: 'single_text'}}
                     - { property: 'ultimoMantenimiento', type: 'date', label: 'Fecha del último mantenimiento',type_options: {widget: 'single_text'}}
-                    - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento'} 
+                    - { property: 'MantenimientoDias', type: 'integer', label: 'Periodicidad del mantenimiento', help: 'Ingrese cada cuántos días debe realizarse mantenimiento'} 
             edit:
                 title: 'Modificar equipamiento'
             new:
@@ -558,11 +558,11 @@ easy_admin:
                     - { property: 'observaciones', label: 'Observaciones' }
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-8', label: '' }
+                    - { type: 'group', css_class: 'col-sm-7', label: '' }
                     - { property: 'fecha', type: 'date', label: 'Fecha', type_options: {widget: 'single_text'}}                 
                     - { property: 'Empleado', type: 'easyadmin_autocomplete', type_options: {class: 'App\Entity\Empleado'}, label: 'Empleado'}
                     - { property: 'Equipamiento', type: 'easyadmin_autocomplete', type_options: {class: 'App\Entity\Equipamiento'}, label: 'Equipamiento'}
-                    - { type: 'group', css_class: 'col-sm-4', label: 'Observaciones' }
+                    - { type: 'group', css_class: 'col-sm-5', label: 'Observaciones' }
                     - { property: 'observaciones', type: 'textarea', label: '>>>'}  
             edit:        
                 title: 'Modificar registro de mantenimiento'
