@@ -710,6 +710,7 @@ easy_admin:
             disabled_actions: ['edit']
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: '' }
                     - {property: 'tipo', type: 'choice', label: 'Tipo', type_options:{choices:{'Entrada': 'Entrada', 'Salida': 'Salida'}}}
                     - {property: 'Empleado'}
             new:
@@ -732,11 +733,14 @@ easy_admin:
             class: App\Entity\PagoCuota
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-8', label: 'Inscripción' }
                     - {property: 'Inscripcion'}
                     - {property: 'monto', type: 'money', type_options: { currency: 'ARS' }}
-                    - {property: 'fechaYHora', label: 'Momento de pago', type: 'datetime', type_options: {widget: 'text'}}
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Mes de inscripción' }
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
+                    - { type: 'group', css_class: 'col-sm-7', label: 'Momento de pago' }
+                    - {property: 'fechaYHora', label: '', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}}
             new:
                 title: 'Registrar pago de cuota'
             edit:
@@ -764,10 +768,12 @@ easy_admin:
             class: App\Entity\RegistroSuplencia
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Clase' }
                     - {property: 'Clase'}
-                    - {property: 'fecha'}
+                    - {property: 'fecha', type_options: {widget: 'single_text'}}
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Observaciones' }
                     - {property: 'Profesor'}
-                    - {property: 'observaciones'}
+                    - {property: 'observaciones',label: '>>>'}
             new:
                 title: 'Registro de suplencia'
             edit:

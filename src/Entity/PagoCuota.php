@@ -26,16 +26,21 @@ class PagoCuota
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @Assert\GreaterThanOrEqual(value = 0, message = "El monto debe ser mayor a $0")
      */
     private $monto;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(value = 1, message = "El mes debe ser entre 1 y 12")
+     * @Assert\LessThanOrEqual(value = 12, message = "El mes debe ser entre 1 y 12")
      */
     private $mes;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(value = 2000, message = "Ingrese un año de 4 dígitos")
+     * @Assert\LessThanOrEqual(value = 9999, message = "Ingrese un año de 4 dígitos")
      */
     private $ano;
 
@@ -49,7 +54,7 @@ class PagoCuota
         $this->monto = 500;
         $this->fechaYHora =  new \DateTime();
         $this->mes =  (new \DateTime())->format('m');
-        $this->ano =  (new \DateTime())->format('y');
+        $this->ano =  (new \DateTime())->format('Y');
     }
 
     public function getId()
