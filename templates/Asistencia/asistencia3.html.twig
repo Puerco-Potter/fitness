@@ -25,18 +25,10 @@
             <div class="superior"></div>
             <label class="font-weight-bold etiqueta"><h2>SISTEMA DE REGISTRO DE ASISTENCIA</h2></label>
             <br>
-            <label class="font-weight-bold etiqueta text-warning" ><h4>{{ aviso }}</h4></label>
+            <label class="font-weight-bold etiqueta text-warning" ><h4>Su asistencia se ha registrado con exito</h4></label>
+            <br>
+            <label class="font-weight-bold etiqueta text-warning" ><h4>Disfrute la clase</h4></label>
             <div class="superior2"></div>
-            {{ form_start(form) }}
-                <label class="font-weight-bold etiqueta" for="username">DNI:</label>
-                <div class="row">
-                    <div class="form-group col-sm-4 offset-sm-4">
-                        {{ form_row(form.dni, { 'attr': {'class': 'form-control'} }) }}
-                        <br>
-                        {{ form_row(form.save, { 'attr': {'class': 'btn btn-dark'} }) }}
-                    </div>
-                </div>
-            {{ form_end(form) }}
         </div>
-        
+        <meta http-equiv="refresh" content="4;url={{ path('asistencia') }}" />
     {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Form\AsistenciaType;
 use App\Entity\AsistenciaAlumno;
 use App\Entity\Inscripcion;
+use App\Entity\Alumno;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -37,32 +38,32 @@ class AsistenciaController extends AdminController
         ->add('dni', NumberType::class, array('label' => false))
         ->add('save', SubmitType::class, array('label' => 'Confirmar'))
             ->getForm();
-    
+        
+        $aviso = "";
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // 4) save the User!
             $data = $form->getData();
             
-            if( 
-                $alumno = $this->getDoctrine()
-                    ->getRepository(Alumno::class)
-                    ->findOneBy([
-                        'dni' => $data["dni"]
-                    ])
+            if(
+                 $alumno = $this->getDoctrine()
+                     ->getRepository(Alumno::class)
+                     ->findOneBy([
+                         'dni' => $data["dni"]
+                     ])
             ){
                 $id= $alumno -> getId();
-    
             return $this->redirectToRoute('asistencia2',array('id' => $id));
             }
-
+            $aviso = "El documento no se encuentra registrado";
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
         }
 
         return $this->render(
             'Asistencia/asistencia.html.twig',
-            array('form' => $form->createView())
+            array('form' => $form->createView(), "aviso" => $aviso)
         );
     }
     /**
@@ -84,13 +85,29 @@ class AsistenciaController extends AdminController
             $entityManager->persist($asistencia);
             $entityManager->flush();
 
+            $inscripcion = $this->getDoctrine()
+                     ->getRepository(Inscripcion::class)
+                     ->find($id);
+            $inscripcion ->setClasesRestantes($inscripcion ->getClasesRestantes() - 1);
+            $entityManager->persist($inscripcion);
+            $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
+            return $this->redirectToRoute('asistencia3');
         }
 
         return $this->render(
-            'Asistencia/asistencia.html.twig',
+            'Asistencia/asistencia2.html.twig',
             array('form' => $form->createView())
+        );
+    }
+    /**
+     * @Route("/asistencia3", name="asistencia3")
+     */
+    public function asistencia3()
+    {
+        return $this->render(
+            'Asistencia/asistencia3.html.twig'
         );
     }
 }
