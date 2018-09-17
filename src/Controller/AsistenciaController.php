@@ -84,10 +84,13 @@ class AsistenciaController extends AdminController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($asistencia);
             $entityManager->flush();
+            
 
+            $id = $asistencia->getInscripcion()->getId();
+            
             $inscripcion = $this->getDoctrine()
                      ->getRepository(Inscripcion::class)
-                     ->find($id);
+                     ->findOneBy(array('id' => $id));
             $inscripcion ->setClasesRestantes($inscripcion ->getClasesRestantes() - 1);
             $entityManager->persist($inscripcion);
             $entityManager->flush();

@@ -5,6 +5,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminContr
 
 class AdminController extends BaseAdminController
 {
+    
+    protected function removeEntity($entity)
+    {
+        parent::removeEntity($entity);
+        $this->addFlash('warning',sprintf('Se ha eliminado correctamente'));
+    }
+
     protected function updateEntity($entity)
     {
         parent::updateEntity($entity);
