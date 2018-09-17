@@ -236,6 +236,7 @@ easy_admin:
                 fields: ['caracteristica', 'numero', 'tipo','Alumno']
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-8', label: '' } 
                     - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
                     - { property: 'caracteristica', type: 'text', label: 'Característica'}
                     - { property: 'numero', type: 'text', label: 'Número'}                    
@@ -310,15 +311,18 @@ easy_admin:
                     - 'Clases'
             list:
                 title: 'Salones'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Crear nuevo Salóm', title: 'Crear nuevo Salón'}
                 fields:
                     - 'descripcion'
                     - 'capacidad'
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-7' }
                     - 'descripcion'
                     - 'capacidad'
             new:
-                title: 'Agregar nuevo salón'
+                title: 'Crear nuevo salón'
             edit:
                 title: 'Modificar salón'
         Inscripcion:
@@ -358,14 +362,13 @@ easy_admin:
                     #- {property: 'sabado'}
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Información Basica' }
+                    - { type: 'group', css_class: 'col-sm-7', label: 'Información Basica' }
                     - {property: 'fechaInscripcion', label: 'Fecha'}
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
                     - {property: 'cuota', type: 'money', type_options: { currency: 'ARS' }}
-                    - {property: 'clasesTotales'}
-                    - {property: 'clasesRestantes'}
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Días' }
+                 
+                    - { type: 'group', css_class: 'col-sm-2', label: 'Días' }
                     - {property: 'lunes'}
                     - {property: 'martes'}
                     - {property: 'miercoles'}
@@ -401,7 +404,7 @@ easy_admin:
                 actions:
                     #- { name: 'export', icon: 'copy', title: 'Informe de alumnos', label: 'Informe de alumnos'}
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Clase', title: 'Crear nueva Clase'}
-                fields:
+                fields: 
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
                     - {property: 'Sala', label: 'Salón'}
@@ -414,19 +417,23 @@ easy_admin:
                     - {property: 'horario'}
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-7' }
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
                     - {property: 'Sala', label: 'Salón'}
-                    - {property: 'cuotaBase', type: 'money', type_options: { currency: 'ARS' }}
                     - {property: 'cupo'}
+                    - {property: 'duracion', label: 'Duración (minutos)'} 
+                    - {property: 'cuotaBase', type: 'money', type_options: { currency: 'ARS' }}
+                    - {property: 'horario'} 
+                    - { type: 'group', css_class: 'col-sm-2' , label: 'Días'}
+
                     - {property: 'lunes'}
                     - {property: 'martes'}
                     - {property: 'miercoles'}
                     - {property: 'jueves'}
                     - {property: 'viernes'}
                     - {property: 'sabado'}
-                    - {property: 'horario'}
-                    - {property: 'duracion', label: 'Duración (minutos)'}  
+
             new:
                 title: 'Crear nueva clase'
             edit:
@@ -444,6 +451,7 @@ easy_admin:
                     - { name: 'new', icon: 'plus-circle', label: 'Agregar Teléfono', title: 'Agregar Teléfono'}
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-8' }
                     - { property: 'tipo', type: 'choice', label: 'Tipo',type_options:{choices:{'Fijo':'Fijo','Celular':'Celular'}}}
                     - { property: 'caracteristica', type: 'text', label: 'Característica'}
                     - { property: 'numero', type: 'text', label: 'Número'}                    
@@ -463,18 +471,20 @@ easy_admin:
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Actividad', title: 'Crear nueva Actividad'}
                 fields:
                     - 'nombre'
-                    - 'grupal'
+                    - {property: 'grupal', label: '¿Grupal?'}
                     - 'descripcion'
                     - {property: 'estado', label: '¿Activa?'}
-                    - { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }
+                    - { property: 'fechaInicio', label: 'Fecha de iniciación' }
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-12'}
+                    - { type: 'group', css_class: 'col-sm-8'}
                     - { property: 'nombre', type: 'text', label: 'Nombre'}
-                    - { property: 'grupal', type: 'checkbox', label: '¿Es grupal?'}
-                    - { property: 'fechaInicio', type: 'date', label: 'Fecha de creación de la actividad',type_options: {widget: 'single_text'}}                    
-                    - { property: 'estado', type: 'checkbox', label: '¿Se realiza actualmente?'}
+                    - { property: 'fechaInicio', type: 'date', label: 'Fecha de iniciación',type_options: {widget: 'single_text'}}                    
                     - { property: 'descripcion', type: 'textarea', label: 'Descripción'}
+                    - { type: 'group', css_class: 'col-sm-4'}
+                    - { property: 'grupal', type: 'checkbox', label: '¿Es grupal?'}
+                    - { property: 'estado', type: 'checkbox', label: '¿Se realiza actualmente?'} 
+
             edit:
                 title: 'Modificar Actividad'
             new:
@@ -503,6 +513,7 @@ easy_admin:
                     - { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-12'}
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
                     - { property: 'estado', type: 'choice', label: 'Estado del equipamiento',type_options:{choices:{'En mantenimiento':'En mantenimiento','Necesita mantenimiento':'Necesita mantenimiento','Listo para usar':'Listo para usar'}}}
                     - { property: 'fechaAdquisicion', type: 'date', label: 'Fecha de adquisición',type_options: {widget: 'single_text'}}
@@ -530,6 +541,7 @@ easy_admin:
                     - { property: 'ultimaReposicion', label: 'Fecha de última reposición' }
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-8'}
                     - { property: 'descripcion', type: 'text', label: 'Descripcion'}
                  #   - { property: 'ultimaReposicion', type: 'date', label: 'Fecha de última reposición',type_options: {widget: 'single_text'}}                  
                     - { property: 'cantidad', type: 'integer', label: 'Cantidad disponible'}
@@ -548,7 +560,7 @@ easy_admin:
                     - { property: 'Empleado', label: 'Empleado' }
                     - { property: 'Equipamiento', label: 'Equipamiento' }
             list:
-                title: 'Lista de Mantenimientos'
+                title: 'Mantenimientos realizados'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar mantenimiento', title: 'Registrar mantenimiento'}
                 fields:
@@ -739,7 +751,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-4', label: 'Mes de inscripción' }
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
-                    - { type: 'group', css_class: 'col-sm-7', label: 'Momento de pago' }
+                    - { type: 'group', css_class: 'col-sm-8', label: 'Momento de pago' }
                     - {property: 'fechaYHora', label: '', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}}
             new:
                 title: 'Registrar pago de cuota'
@@ -773,7 +785,7 @@ easy_admin:
                     - {property: 'fecha', type_options: {widget: 'single_text'}}
                     - { type: 'group', css_class: 'col-sm-6', label: 'Observaciones' }
                     - {property: 'Profesor'}
-                    - {property: 'observaciones',label: '>>>'}
+                    - {property: 'observaciones',label: '>>>'} 
             new:
                 title: 'Registro de suplencia'
             edit:
