@@ -47,7 +47,7 @@ class Movimiento
     private $observaciones;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Empleado")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Empleado;
@@ -135,14 +135,14 @@ class Movimiento
         return $this;
     }
 
-    public function getEmpleado(): ?Empleado
+    public function getEmpleado(): ?User
     {
         return $this->Empleado;
     }
 
-    public function setEmpleado(?Empleado $Empleado): self
+    public function setEmpleado(?User $User): self
     {
-        $this->Empleado = $Empleado;
+        $this->Empleado = $User;
 
         return $this;
     }

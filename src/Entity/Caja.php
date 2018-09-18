@@ -44,13 +44,13 @@ class Caja
     private $saldoFinal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Empleado")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $EmpleadoApertura;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Empleado")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=true)
      */
     private $EmpleadoCierre;
@@ -133,26 +133,26 @@ class Caja
         return $this;
     }
 
-    public function getEmpleadoApertura(): ?Empleado
+    public function getEmpleadoApertura(): ?User
     {
         return $this->EmpleadoApertura;
     }
 
-    public function setEmpleadoApertura(?Empleado $Empleado): self
+    public function setEmpleadoApertura(?User $User): self
     {
-        $this->EmpleadoApertura = $Empleado;
+        $this->EmpleadoApertura = $User;
 
         return $this;
     }
 
-    public function getEmpleadoCierre(): ?Empleado
+    public function getEmpleadoCierre(): ?User
     {
         return $this->EmpleadoCierre;
     }
 
-    public function setEmpleadoCierre(?Empleado $Empleado): self
+    public function setEmpleadoCierre(?User $User): self
     {
-        $this->EmpleadoCierre = $Empleado;
+        $this->EmpleadoCierre = $User;
 
         return $this;
     }

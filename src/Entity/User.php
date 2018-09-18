@@ -147,4 +147,9 @@ class User implements UserInterface, \Serializable
         // You *may* need a real salt if you choose a different encoder.
         return null;
     }
+    
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
 }
