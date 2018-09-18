@@ -1,7 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
     {% block stylesheets %}
     <style>
+       .bg {
+                /* The image used */
+                background-image: url("/{{ root }}{{ imagenes }}/fondoasist.jpg");
+
+                /* Full height */
+                height: 100%;
+
+                /* Center and scale the image nicely */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
         .superior{
             height: 10%;
         }
