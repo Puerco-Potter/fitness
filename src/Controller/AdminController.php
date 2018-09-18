@@ -24,7 +24,8 @@ class AdminController extends BaseAdminController
         
         #$id = $this->request->query->get('id');
         #$entity = $this->em->getRepository('App:Alumno')->find($id);
-
+		$usr = $this->get('security.token_storage')->getToken()->getUser();
+		$usr->getUsername();
         $this->addFlash('success',sprintf('Se ha registrado en el sistema: '.$entity->__toString()));
         /*
         return $this->redirectToRoute('easyadmin', [
@@ -34,4 +35,6 @@ class AdminController extends BaseAdminController
         ]);
         */
     }
+	
+
 }

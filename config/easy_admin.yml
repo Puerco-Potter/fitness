@@ -743,6 +743,7 @@ easy_admin:
                     - {property: 'fechaYHora', label: 'Fecha y hora'}
         PagoCuota:
             class: App\Entity\PagoCuota
+            
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Inscripción' }
@@ -767,6 +768,7 @@ easy_admin:
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
+                    - {property: 'cajero'}
             show:
                 title: 'Ver pago de cuota'
                 fields:
@@ -775,6 +777,7 @@ easy_admin:
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
+                    - {property: 'cajero'}
             controller: App\Controller\PagoCuotaController    
         RegistroSuplencia:
             class: App\Entity\RegistroSuplencia
