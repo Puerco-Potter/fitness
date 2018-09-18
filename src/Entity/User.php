@@ -51,6 +51,11 @@ class User implements UserInterface, \Serializable
      */
     private $roles;
 
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $nombre;
+
     public function __construct() {
         $this->roles = array('ROLE_USER');
     }
@@ -106,6 +111,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getNombre(): ?string
+    {
+        return $this->nombre;
+    }
+
+    public function setNombre(string $nombre): self
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
     public function getPassword(): ?string
     {
         return $this->password;
@@ -150,6 +167,6 @@ class User implements UserInterface, \Serializable
     
     public function __toString()
     {
-        return $this->getUsername();
+        return $this->getUsername().' - '.$this->getNombre();
     }
 }

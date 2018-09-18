@@ -63,8 +63,6 @@ easy_admin:
                 - {icon: 'facebook', label: 'Facebook', url: 'https://instagram.com/fussionfitnessgym', target: '_blank'}
                 - {icon: 'instagram', label: 'Insstagram', url: 'https://www.facebook.com/Fussion-Gym-1098230646958706/', target: '_blank'}
     entities:
-        User:
-            class: App\Entity\User 
         Alumno:
             class: App\Entity\Alumno
             disabled_actions: ['delete']
@@ -840,10 +838,16 @@ easy_admin:
             list:
                 actions:
                     - { name: 'edit', label: 'Cerrar caja', title: 'Cerrar caja'}
-                
         Movimiento:
             class: App\Entity\Movimiento
-            
+        User:
+            class: App\Entity\User
+            disabled_actions: ['new']
+            edit:
+                fields:
+                    - {property: 'username'}
+                    - {property: 'nombre'}
+                    - {property: 'isActive'}
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
