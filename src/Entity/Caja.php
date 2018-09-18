@@ -39,7 +39,7 @@ class Caja
     private $saldoInicial;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      */
     private $saldoFinal;
 
@@ -47,16 +47,25 @@ class Caja
      * @ORM\ManyToOne(targetEntity="App\Entity\Empleado")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Empleado;
+    private $EmpleadoApertura;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Empleado")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $EmpleadoCierre;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Movimiento", mappedBy="Caja")
      */
     private $Movimientos;
-
-    public function __construct()
+    
+	public function __construct()
     {
+        $this->fecha = new \DateTime();
+        $this->apertura = new \DateTime();
         $this->Movimientos = new ArrayCollection();
+        $this->saldoInicial = 0;
     }
 
     public function getId()
@@ -124,14 +133,26 @@ class Caja
         return $this;
     }
 
-    public function getEmpleado(): ?Empleado
+    public function getEmpleadoApertura(): ?Empleado
     {
-        return $this->Empleado;
+        return $this->EmpleadoApertura;
     }
 
-    public function setEmpleado(?Empleado $Empleado): self
+    public function setEmpleadoApertura(?Empleado $Empleado): self
     {
-        $this->Empleado = $Empleado;
+        $this->EmpleadoApertura = $Empleado;
+
+        return $this;
+    }
+
+    public function getEmpleadoCierre(): ?Empleado
+    {
+        return $this->EmpleadoCierre;
+    }
+
+    public function setEmpleadoCierre(?Empleado $Empleado): self
+    {
+        $this->EmpleadoCierre = $Empleado;
 
         return $this;
     }

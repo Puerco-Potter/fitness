@@ -66,7 +66,7 @@ class PagoCuota
 
         $this->ano =  (new \DateTime())->format('Y');
 
-        $this->ano =  (new \DateTime())->format('y');
+        $this->ano =  (new \DateTime())->format('Y');
 		#$this->cajero = getUsername();
 
     }
