@@ -91,12 +91,21 @@ class AsistenciaController extends AdminController
             $inscripcion = $this->getDoctrine()
                      ->getRepository(Inscripcion::class)
                      ->findOneBy(array('id' => $id));
-            $inscripcion ->setClasesRestantes($inscripcion ->getClasesRestantes() - 1);
+           
+            $estado = 1;
+            if ($inscripcion ->getClasesRestantes() <=0):
+                $estado = 2;
+            endif;
+            if ($inscripcion ->getClasesRestantes() - 1 > 0):
+                $inscripcion ->setClasesRestantes($inscripcion ->getClasesRestantes() - 1);
+            endif;
+            
+            
             $entityManager->persist($inscripcion);
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
-            return $this->redirectToRoute('asistencia3');
+            return $this->redirectToRoute('asistencia3',array('estado' => $estado));
         }
 
         return $this->render(
@@ -105,12 +114,13 @@ class AsistenciaController extends AdminController
         );
     }
     /**
-     * @Route("/asistencia3", name="asistencia3")
+     * @Route("/asistencia3/{estado}", name="asistencia3")
      */
-    public function asistencia3()
+    public function asistencia3($estado)
     {
         return $this->render(
-            'Asistencia/asistencia3.html.twig'
+            'Asistencia/asistencia3.html.twig', array("estado" => $estado)
         );
     }
 }
+

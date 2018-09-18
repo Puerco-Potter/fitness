@@ -25,10 +25,18 @@
             <div class="superior"></div>
             <label class="font-weight-bold etiqueta"><h2>SISTEMA DE REGISTRO DE ASISTENCIA</h2></label>
             <br>
-            <label class="font-weight-bold etiqueta text-warning" ><h4>Su asistencia se ha registrado con exito</h4></label>
+            {% if estado == 1 %}
+                <label class="font-weight-bold etiqueta text-warning" ><h4>Su asistencia se ha registrado con exito</h4></label>
+                <label class="font-weight-bold etiqueta text-warning" ><h4>Disfrute la clase</h4></label>
+                <meta http-equiv="refresh" content="4;url={{ path('asistencia') }}" />
+            {% else %}
+                <label class="font-weight-bold etiqueta text-warning" ><h1>USTED NO TIENE CLASES DISPONIBLES.</h1></label>
+                    <br>
+                <label class="font-weight-bold etiqueta text-light" ><h1>REGULARICE SU ESTADO DE CUENTA</h1></label>
+                <meta http-equiv="refresh" content="15;url={{ path('asistencia') }}" />
+            {% endif %}
             <br>
-            <label class="font-weight-bold etiqueta text-warning" ><h4>Disfrute la clase</h4></label>
+            
             <div class="superior2"></div>
         </div>
-        <meta http-equiv="refresh" content="4;url={{ path('asistencia') }}" />
     {% endblock %}
