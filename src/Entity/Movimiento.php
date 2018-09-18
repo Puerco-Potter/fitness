@@ -37,9 +37,9 @@ class Movimiento
     private $tipo;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $valido;
+    private $anulado;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -111,14 +111,14 @@ class Movimiento
         return $this;
     }
 
-    public function getValido(): ?bool
+    public function getAnulado(): ?bool
     {
-        return $this->valido;
+        return $this->anulado;
     }
 
-    public function setValido(bool $valido): self
+    public function setAnulado(bool $anulado): self
     {
-        $this->valido = $valido;
+        $this->anulado = $anulado;
 
         return $this;
     }

@@ -847,6 +847,12 @@ easy_admin:
                 fields:
                     - {property: 'username'}
                     - {property: 'nombre'}
+                    - {property: 'isActive'}    
+            show:
+                fields:
+                    - {property: 'username'}
+                    - {property: 'nombre'}
+                    - {property: 'roles'}
                     - {property: 'isActive'}
     list:
         actions:
