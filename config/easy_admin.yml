@@ -53,6 +53,8 @@ easy_admin:
             - label: 'Gestión de pagos'
               icon: 'money'
               children:
+                - { label: 'Pago de caja', entity: 'Caja', icon: 'bug'}
+                - { label: 'Pago de movimientos', entity: 'Movimiento', icon: 'bug'}
                 - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'book'}
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             - label: "Contacto"
@@ -743,6 +745,7 @@ easy_admin:
                     - {property: 'fechaYHora', label: 'Fecha y hora'}
         PagoCuota:
             class: App\Entity\PagoCuota
+            
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Inscripción' }
@@ -767,6 +770,7 @@ easy_admin:
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
+                    - {property: 'cajero'}
             show:
                 title: 'Ver pago de cuota'
                 fields:
@@ -775,6 +779,7 @@ easy_admin:
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
+                    - {property: 'cajero'}
             controller: App\Controller\PagoCuotaController    
         RegistroSuplencia:
             class: App\Entity\RegistroSuplencia
@@ -806,6 +811,11 @@ easy_admin:
                     - {property: 'fecha'}
                     - {property: 'Profesor'}
                     - {property: 'observaciones'}
+        Caja:
+            class: App\Entity\Caja
+        Movimiento:
+            class: App\Entity\Movimiento
+            
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }

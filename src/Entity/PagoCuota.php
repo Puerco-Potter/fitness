@@ -48,13 +48,27 @@ class PagoCuota
      * @ORM\Column(type="datetime")
      */
     private $fechaYHora;
-
-    public function __construct()
+	
+	/**
+     * @ORM\Column(type="string")
+     */
+    
+	/**
+     * @ORM\Column(type="string", nullable=true)
+     */
+	private $cajero;
+    
+	public function __construct()
     {
         $this->monto = 500;
         $this->fechaYHora =  new \DateTime();
         $this->mes =  (new \DateTime())->format('m');
+
         $this->ano =  (new \DateTime())->format('Y');
+
+        $this->ano =  (new \DateTime())->format('y');
+		#$this->cajero = getUsername();
+
     }
 
     public function getId()
@@ -109,7 +123,19 @@ class PagoCuota
 
         return $this;
     }
-    
+
+	public function getCajero()
+    {
+		return $this->cajero;
+    }
+	
+	#$this->get('security.token_storage')->getToken()->getUser();
+	
+	public function setCajero(string $cajero): self
+    {
+        $this->cajero = $cajero;
+    }
+	
     public function __toString()
     {
         return ' Pago de $ '.(string) $this->getMonto().' del '.$this->getMes().'/'.$this->getAno().'';

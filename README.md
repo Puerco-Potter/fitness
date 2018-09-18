@@ -1,5 +1,7 @@
 "# fitness" 
+</br>
 php bin/console make:entity
+</br>
 php bin/console doctrine:schema:update --force
 
 <b>Tareas e historias de usuario</b></br>
@@ -75,3 +77,6 @@ Alumnos por profesor</br>
 Alumnos propios</br>
 Informe de ingresos por profesor</br>
 <b>Emitir informe de Actividad</b>
+<b>Gestión de combos</b></br>
+Creación y modificación de combos</br>
+Aplicación de combos</br>
