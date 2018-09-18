@@ -53,6 +53,8 @@ easy_admin:
             - label: 'Gestión de pagos'
               icon: 'money'
               children:
+                - { label: 'Pago de caja', entity: 'Caja', icon: 'bug'}
+                - { label: 'Pago de movimientos', entity: 'Movimiento', icon: 'bug'}
                 - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'book'}
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             - label: "Contacto"
@@ -809,6 +811,11 @@ easy_admin:
                     - {property: 'fecha'}
                     - {property: 'Profesor'}
                     - {property: 'observaciones'}
+        Caja:
+            class: App\Entity\Caja
+        Movimiento:
+            class: App\Entity\Movimiento
+            
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
