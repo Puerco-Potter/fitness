@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Movimiento;
+use App\Entity\Clase;
 
-class MovimientoController extends AdminController
+class ClaseController extends AdminController
 {
     
 }
