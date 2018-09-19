@@ -816,14 +816,12 @@ easy_admin:
                 title: 'Anular movimiento'
                 fields:
                     - {property: 'cierre', label: 'Horarion de cierre'}
-                    - {property: 'EmpleadoCierre', label: 'Empleado al cerrar'}
             new:
                 title: 'Registrar apertura de caja'
                 fields:
                     - {property: 'fecha'}
                     - {property: 'apertura', label: 'Horario de apertura'}
                     - {property: 'saldoInicial'}
-                    - {property: 'EmpleadoApertura', label: 'Empleado al abrir'}
             show:
                 title: 'Cerrar caja'
                 fields:
