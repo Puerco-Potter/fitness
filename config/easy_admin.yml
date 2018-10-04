@@ -870,7 +870,7 @@ easy_admin:
             controller: App\Controller\MovimientoController
         User:
             class: App\Entity\User
-            disabled_actions: ['new']
+            disabled_actions: ['new', 'edit']
             edit:
                 fields:
                     - {property: 'username'}
