@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MovimientoRepository")
@@ -17,7 +18,7 @@ class Movimiento
     private $id;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="datetime")
      */
     private $hora;
 
@@ -55,8 +56,15 @@ class Movimiento
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Caja", inversedBy="Movimientos")
      * @ORM\JoinColumn(nullable=false)
+	 * @Assert\NotBlank(message = "Debe haber una caja")
      */
     private $Caja;
+
+    public function __construct()
+    {
+        $this->anulado = FALSE;
+        $this->hora = new \DateTime();
+    }
 
     public function getId()
     {

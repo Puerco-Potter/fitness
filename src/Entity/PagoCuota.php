@@ -54,9 +54,10 @@ class PagoCuota
      */
     
 	/**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
-	private $cajero;
+	private $Cajero;
     
 	public function __construct()
     {
@@ -124,17 +125,20 @@ class PagoCuota
         return $this;
     }
 
-	public function getCajero()
+    public function getCajero(): ?User
     {
-		return $this->cajero;
+        return $this->Cajero;
+    }
+
+    public function setCajero(?User $User): self
+    {
+        $this->Cajero = $User;
+
+        return $this;
     }
 	
 	#$this->get('security.token_storage')->getToken()->getUser();
 	
-	public function setCajero(string $cajero): self
-    {
-        $this->cajero = $cajero;
-    }
 	
     public function __toString()
     {

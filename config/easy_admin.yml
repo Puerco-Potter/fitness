@@ -768,7 +768,7 @@ easy_admin:
                     - {property: 'monto'}
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
-                    - {property: 'cajero'}
+                    - {property: 'Cajero'}
             show:
                 title: 'Ver pago de cuota'
                 fields:
@@ -813,9 +813,9 @@ easy_admin:
             class: App\Entity\Caja
             disabled_actions: ['delete']
             edit:
-                title: 'Anular movimiento'
+                title: 'Cerrar caja'
                 fields:
-                    - {property: 'cierre', label: 'Horarion de cierre'}
+                    - {property: 'cierre', label: 'Horario de cierre', type: 'time', type_options:{widget: 'single_text'}}
             new:
                 title: 'Registrar apertura de caja'
                 fields:
@@ -834,10 +834,37 @@ easy_admin:
                     - {property: 'EmpleadoCierre', label: 'Empleado al cerrar'}
                     - {property: 'Movimientos'}
             list:
+                dql_filter: 'entity.fecha >= CURRENT_DATE()'
                 actions:
                     - { name: 'edit', label: 'Cerrar caja', title: 'Cerrar caja'}
+            controller: App\Controller\CajaController
         Movimiento:
             class: App\Entity\Movimiento
+            disabled_actions: ['delete']
+            show:
+                title: 'Ver Movimiento'
+                actions:
+                    - { name: 'edit', label: 'Anular movimiento', title: 'Anular movimiento'}
+            new:
+                title: 'Nuevo movimiento'
+                fields:
+                    - { property: 'tipo', type: 'choice', label: 'Tipo de movimiento', type_options: {choices:{'Ingreso':'Ingreso','Egreso':'Egreso'}}}
+                    - {property: 'hora', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}}
+                    - {property: 'concepto'}
+                    - {property: 'monto'}
+                    - {property: 'observaciones'}
+                    - {property: 'Caja'}
+            edit:
+                title: 'Anular movimiento'
+                fields:
+                    - {property: 'anulado', label: 'Anular movimiento'}
+            list:
+                dql_filter: 'entity.hora >= CURRENT_DATE()'
+                title: 'Lista de movimientos'
+                disabled_actions: ['delete']
+                actions:
+                    - { name: 'edit', label: 'Anular movimiento', title: 'Anular movimiento'}
+            controller: App\Controller\MovimientoController
         User:
             class: App\Entity\User
             disabled_actions: ['new']
@@ -847,6 +874,7 @@ easy_admin:
                     - {property: 'nombre'}
                     - {property: 'isActive'}    
             show:
+                title: 'Ver movimiento'
                 fields:
                     - {property: 'username'}
                     - {property: 'nombre'}

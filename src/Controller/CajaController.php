@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Movimiento;
+use App\Entity\Caja;
 
-class MovimientoController extends AdminController
+class CajaController extends AdminController
 {
     public function prePersistEntity($entity)
     {
         parent::prePersistEntity($entity);
-        $entity->setEmpleado($this->get('security.token_storage')->getToken()->getUser());
+        $entity->setEmpleadoApertura($this->get('security.token_storage')->getToken()->getUser());
         #$entityManager = $this->getDoctrine()->getManager();
         #$entityManager->persist($entity);
         #$entityManager->flush();
