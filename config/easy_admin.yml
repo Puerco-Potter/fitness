@@ -484,7 +484,6 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-4'}
                     - { property: 'grupal', type: 'checkbox', label: '¿Es grupal?'}
                     - { property: 'estado', type: 'checkbox', label: '¿Se realiza actualmente?'} 
-
             edit:
                 title: 'Modificar Actividad'
             new:
@@ -502,6 +501,7 @@ easy_admin:
                     - { property: 'Mantenimientos', label: 'Lista de Mantenimientos' }
             list:
                 title: 'Lista de equipamientos del gimnasio'
+                sort: ['ultimoMantenimiento','ASC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar nuevo Equipamiento', title: 'Registrar nuevo Equipamiento'}
                 fields:
@@ -533,6 +533,7 @@ easy_admin:
                     - { property: 'ultimaReposicion', label: 'Fecha de última reposición' }
             list:
                 title: 'Lista de elementos del gimnasio'
+                sort: ['ultimaReposicion','ASC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Añadir nuevo Elemento', title: 'Añadir nuevo Elemento'}
                 fields:
@@ -561,6 +562,7 @@ easy_admin:
                     - { property: 'Equipamiento', label: 'Equipamiento' }
             list:
                 title: 'Mantenimientos realizados'
+                sort: ['fecha','DESC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar mantenimiento', title: 'Registrar mantenimiento'}
                 fields:
@@ -723,7 +725,7 @@ easy_admin:
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: '' }
-                    - {property: 'tipo', type: 'choice', label: 'Tipo', type_options:{choices:{'Entrada': 'Entrada', 'Salida': 'Salida'}}}
+                    - {property: 'tipo', type: 'choice', label: 'Tipo', type_options: {choices:{'Entrada': 'Entrada', 'Salida': 'Salida'}}}
                     - {property: 'Empleado'}
             new:
                 title: 'Registrar entrada/salida'
@@ -743,7 +745,6 @@ easy_admin:
                     - {property: 'fechaYHora', label: 'Fecha y hora'}
         PagoCuota:
             class: App\Entity\PagoCuota
-            
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Inscripción' }
@@ -760,6 +761,7 @@ easy_admin:
                 title: 'Modificar pago de cuota'
             list:
                 title: 'Lista de cuotas pagadas'
+                sort: ['fechaYHora','DESC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registar Pago de cuota', title: 'Registar Pago de cuota'}
                 fields:
@@ -860,6 +862,7 @@ easy_admin:
                     - {property: 'anulado', label: 'Anular movimiento'}
             list:
                 dql_filter: 'entity.hora >= CURRENT_DATE()'
+                sort: ['hora','DESC']
                 title: 'Lista de movimientos'
                 disabled_actions: ['delete']
                 actions:
