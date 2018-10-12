@@ -821,15 +821,16 @@ easy_admin:
             new:
                 title: 'Registrar apertura de caja'
                 fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: '' }
                     - {property: 'fecha'}
-                    - {property: 'apertura', label: 'Horario de apertura'}
+                    - {property: 'apertura', label: 'Hora de apertura'}
                     - {property: 'saldoInicial'}
             show:
                 title: 'Cerrar caja'
                 fields:
                     - {property: 'fecha'}
-                    - {property: 'apertura', label: 'Horario de apertura'}
-                    - {property: 'cierre', label: 'Horarion de cierre'}
+                    - {property: 'apertura', label: 'Hora de apertura'}
+                    - {property: 'cierre', label: 'Hora de cierre'}
                     - {property: 'saldoInicial'}
                     - {property: 'saldoFinal'}
                     - {property: 'EmpleadoApertura', label: 'Empleado al abrir'}
@@ -850,6 +851,7 @@ easy_admin:
             new:
                 title: 'Nuevo movimiento'
                 fields:
+                    - { type: 'group', css_class: 'col-sm-8', label: '' }
                     - { property: 'tipo', type: 'choice', label: 'Tipo de movimiento', type_options: {choices:{'Ingreso':'Ingreso','Egreso':'Egreso'}}}
                     - {property: 'hora', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}}
                     - {property: 'concepto'}
