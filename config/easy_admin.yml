@@ -87,6 +87,7 @@ easy_admin:
                 dql_filter: 'entity.inactivo=0'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registar Alumno', title: 'Registrar Alumno'}
+                    - { name: 'inactivar', label: 'Dar por inactivo', title: 'Dar por inactivo'}
                 fields:
                     - { property: 'dni', label: 'DNI' }
                     - 'apellido'
@@ -117,8 +118,8 @@ easy_admin:
                     - { property: 'observaciones', type: 'textarea', label: 'Observaciones'}
             edit:
                 title:  'Modificar Alumno'
-                fields:
-                    - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
+                #fields:
+                    #- { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
             new:
                 title: 'Registrar nuevo alumno'
             controller: App\Controller\AlumnoController
@@ -132,13 +133,16 @@ easy_admin:
                 title: 'Alumnos inactivos'
                 fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
                 dql_filter: 'entity.inactivo!=0'
+                actions:
+                    - { name: 'activar', label: 'Dar por activo', title: 'Dar por activo'}
             edit:
                 title: 'Modificar alumno'
                 fields:
                     - { property: 'dni', type: 'integer', label: 'DNI'}
                     - { property: 'apellido', type: 'text', label: 'Apellido'}
                     - { property: 'nombre', type: 'text', label: 'Nombres'} 
-                    - { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
+                    #- { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
+            controller: App\Controller\AlumnoController
         FichaMedica:
             class: App\Entity\FichaMedica
             show:

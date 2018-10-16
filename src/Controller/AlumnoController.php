@@ -27,4 +27,31 @@ class AlumnoController extends AdminController
         */
         
     }
+    public function inactivarAction()
+    {
+        $id = $this->request->query->get('id');
+        $entity = $this->em->getRepository(Alumno::class)->find($id);
+        $entity->setInactivo(TRUE);
+        $this->em->flush();
+
+        return $this->redirectToRoute('easyadmin', array(
+            'action' => 'list',
+            'entity' => $this->request->query->get('entity'),
+        ));
+
+    }
+
+    public function activarAction()
+    {
+        $id = $this->request->query->get('id');
+        $entity = $this->em->getRepository(Alumno::class)->find($id);
+        $entity->setInactivo(FALSE);
+        $this->em->flush();
+
+        return $this->redirectToRoute('easyadmin', array(
+            'action' => 'list',
+            'entity' => $this->request->query->get('entity'),
+        ));
+
+    }
 }
