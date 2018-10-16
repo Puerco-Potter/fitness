@@ -20,7 +20,6 @@ class PagoCuota
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Inscripcion")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull()
      */
     private $Inscripcion;
 
@@ -57,7 +56,12 @@ class PagoCuota
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-	private $Cajero;
+    private $Cajero;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Combo", inversedBy="PagoCuotas")
+    */
+    private $Combo;
     
 	public function __construct()
     {
@@ -153,6 +157,18 @@ class PagoCuota
     public function setFechaYHora(\DateTimeInterface $fechaYHora): self
     {
         $this->fechaYHora = $fechaYHora;
+
+        return $this;
+    }
+
+    public function getCombo(): ?Combo
+    {
+        return $this->Combo;
+    }
+
+    public function setCombo(?Combo $Combo): self
+    {
+        $this->Combo = $Combo;
 
         return $this;
     }

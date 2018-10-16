@@ -83,6 +83,11 @@ class Inscripcion
      */
     private $cuota;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Combo", inversedBy="Inscripciones")
+     */
+    private $Combo;
+    
     public function __construct()
     {
         $this->fechaInscripcion = new \DateTime();
@@ -255,5 +260,17 @@ class Inscripcion
     {
         return $this->getClase();
         //return $this->getAlumno().' - '.$this->getClase().' - '.(string) $this->getFechaInscripcion()->format('Y-m-d');
+    }
+
+    public function getCombo(): ?Combo
+    {
+        return $this->Combo;
+    }
+
+    public function setCombo(?Combo $Combo): self
+    {
+        $this->Combo = $Combo;
+
+        return $this;
     }
 }

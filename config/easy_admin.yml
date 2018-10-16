@@ -37,6 +37,7 @@ easy_admin:
                 - {entity: 'Clase', icon: 'clipboard', label: 'Clases'}
                 - {entity: 'Sala', icon: 'building', label: 'Salones'}
                 - {entity: 'Inscripcion', icon: 'edit', label: 'Inscripciones'}
+                - {entity: 'Combo', icon: 'edit', label: 'Inscripción a un combo'}
             - label: 'Gestión de Entrenamientos'
               icon: 'tasks'
               children:
@@ -893,6 +894,8 @@ easy_admin:
                     - {property: 'nombre'}
                     - {property: 'roles'}
                     - {property: 'isActive'}
+        Combo:
+            class: App\Entity\Combo
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }

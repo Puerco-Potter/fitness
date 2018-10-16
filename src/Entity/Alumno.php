@@ -147,6 +147,11 @@ class Alumno
      * @ORM\Column(type="boolean", options={"default" : false})
      */
     private $inactivo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Combo", mappedBy="Alumno")
+     */
+    private $Combos;
 	
     public function __construct()
     {
@@ -156,6 +161,7 @@ class Alumno
         $this->inactivo = 0;
         $this->Telefonos = new ArrayCollection();
         $this->FichasMedicas = new ArrayCollection();
+        $this->Combos = new ArrayCollection();
     }
 
     public function getId()
@@ -404,4 +410,30 @@ class Alumno
 			}
 		return $this;
 	}
+ /**
+  * @return Collection|Combo[]
+  */
+ public function getCombos(): Collection
+ {
+     return $this->Combos;
+ }
+ public function addCombo(Combo $combo): self
+ {
+     if (!$this->Combos->contains($combo)) {
+         $this->Combos[] = $combo;
+         $combo->setAlumno($this);
+     }
+     return $this;
+ }
+ public function removeCombo(Combo $combo): self
+ {
+     if ($this->Combos->contains($combo)) {
+         $this->Combos->removeElement($combo);
+         // set the owning side to null (unless already changed)
+         if ($combo->getAlumno() === $this) {
+             $combo->setAlumno(null);
+         }
+     }
+     return $this;
+ }
 }
