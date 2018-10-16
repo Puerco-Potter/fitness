@@ -5,6 +5,9 @@ parameters:
 
 
 twig:
+    number_format:
+        decimal_point: ','
+        thousands_separator: '.'
     paths: ['%kernel.project_dir%/templates']
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'

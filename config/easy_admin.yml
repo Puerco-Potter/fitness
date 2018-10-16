@@ -868,7 +868,7 @@ easy_admin:
                 title: 'Lista de movimientos'
                 disabled_actions: ['edit','delete',]
                 actions:
-                    - { name: 'new', icon: 'plus-circle',, label: 'Registrar movimiento', title: 'Registrar movimiento'}
+                    - { name: 'new', icon: 'plus-circle', label: 'Registrar movimiento', title: 'Registrar movimiento'}
                     - { name: 'anular', label: 'Anular movimiento', title: 'Anular movimiento'}
                 fields:
                         - 'hora'
