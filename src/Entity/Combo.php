@@ -152,4 +152,9 @@ class Combo
 
         return $this;
     }
+
+	public function __toString()
+    {
+        return 'Combo';
+    }
 }

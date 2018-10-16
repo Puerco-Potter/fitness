@@ -754,6 +754,7 @@ easy_admin:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Inscripción' }
                     - {property: 'Inscripcion'}
+                    - {property: 'Combo'}
                     - {property: 'monto', type: 'money', type_options: { currency: 'ARS' }}
                     - { type: 'group', css_class: 'col-sm-4', label: 'Mes de inscripción' }
                     - {property: 'mes'}
@@ -771,6 +772,7 @@ easy_admin:
                     - { name: 'new', icon: 'plus-circle', label: 'Registar Pago de cuota', title: 'Registar Pago de cuota'}
                 fields:
                     - {property: 'Inscripcion'}
+                    - {property: 'Combo'}
                     - {property: 'fechaYHora', label: 'Momento de pago'}
                     - {property: 'monto'}
                     - {property: 'mes'}
