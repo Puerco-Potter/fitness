@@ -19,7 +19,6 @@ class PagoCuota
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Inscripcion")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $Inscripcion;
 
