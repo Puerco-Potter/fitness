@@ -66,6 +66,7 @@ class Caja
         $this->apertura = new \DateTime();
         $this->Movimientos = new ArrayCollection();
         $this->saldoInicial = 0;
+        $this->saldoFinal = $this->saldoInicial;
     }
 
     public function getId()
