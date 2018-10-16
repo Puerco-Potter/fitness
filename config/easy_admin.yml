@@ -54,7 +54,7 @@ easy_admin:
               icon: 'money'
               children:
                 - { label: 'Gestión de cajas', entity: 'Caja', icon: 'bug'}
-                - { label: 'Pago de movimientos', entity: 'Movimiento', icon: 'bug'}
+                - { label: 'Gestión de movimientos', entity: 'Movimiento', icon: 'bug'}
                 - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'book'}
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             - label: "Contacto"
@@ -843,7 +843,7 @@ easy_admin:
             controller: App\Controller\CajaController
         Movimiento:
             class: App\Entity\Movimiento
-            disabled_actions: ['delete']
+            disabled_actions: ['edit','delete']
             show:
                 title: 'Ver Movimiento'
                 actions:
@@ -858,17 +858,13 @@ easy_admin:
                     - {property: 'monto'}
                     - {property: 'observaciones'}
                     - {property: 'Caja'}
-            edit:
-                title: 'Anular movimiento'
-                fields:
-                    - {property: 'anulado', label: 'Anular movimiento'}
             list:
                 dql_filter: 'entity.hora >= CURRENT_DATE()'
                 sort: ['hora','DESC']
                 title: 'Lista de movimientos'
-                disabled_actions: ['delete']
+                disabled_actions: ['edit','delete',]
                 actions:
-                    - { name: 'edit', label: 'Anular movimiento', title: 'Anular movimiento'}
+                    - { name: 'anular', label: 'Anular movimiento', title: 'Anular movimiento'}
             controller: App\Controller\MovimientoController
         User:
             class: App\Entity\User
