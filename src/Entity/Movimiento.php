@@ -66,6 +66,15 @@ class Movimiento
         $this->hora = new \DateTime();
     }
 
+    public function getValido()
+    {
+        if (($this->anulado)==TRUE)
+        {
+            return FALSE;
+        }
+        return TRUE;
+    }
+
     public function getId()
     {
         return $this->id;

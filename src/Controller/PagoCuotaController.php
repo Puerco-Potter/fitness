@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\PagoCuota;
 use App\Entity\Alumno;
+use App\Entity\Movimiento;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PagoCuotaController extends AdminController
@@ -32,7 +33,27 @@ class PagoCuotaController extends AdminController
             ->where('p.id = '.$entity->getId());
         return $qqb->getQuery()->getResult();
         */
+    }
+    public function persistEntity($entity)
+    {
+        parent::persistEntity($entity);
+        $em = $this->getDoctrine()->getEntityManager();
+        $mov = new Movimiento();
+        $mov->setHora($entity->getFechaYHora());
+        $mov->setConcepto('Cuota');
+        $mov->setMonto($entity->getMonto());
+        $mov->setTipo('Ingreso');
+        $mov->setObservaciones((string)$entity->getInscripcion()->getClase().' - '.(string)$entity->getInscripcion()->getAlumno());
+        $mov->setEmpleado($entity->getCajero());
+        
+        
+        $rep = $em->getRepository('App\Entity\Caja');
+        $results = $rep->findBy(array(),array('id'=>'DESC'),1,1);
 
 
+        $mov->setCaja($results[0]);
+        
+        $em->persist($mov);
+        $em->flush();
     }
 }

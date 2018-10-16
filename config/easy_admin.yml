@@ -858,7 +858,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-8', label: '' }
                     - { property: 'tipo', type: 'choice', label: 'Tipo de movimiento', type_options: {choices:{'Ingreso':'Ingreso','Egreso':'Egreso'}}}
                     - {property: 'hora', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}}
-                    - {property: 'concepto'}
+                    - {property: 'concepto', type: 'choice', type_options: {choices:{'Cuota': 'Cuota','Compra de insumos': 'Compra de insumos','Pago de servicio': 'Pago de servicio', 'Compra': 'Compra'}}}
                     - {property: 'monto'}
                     - {property: 'observaciones'}
                     - {property: 'Caja'}
@@ -868,7 +868,15 @@ easy_admin:
                 title: 'Lista de movimientos'
                 disabled_actions: ['edit','delete',]
                 actions:
+                    - { name: 'new', icon: 'plus-circle',, label: 'Registrar movimiento', title: 'Registrar movimiento'}
                     - { name: 'anular', label: 'Anular movimiento', title: 'Anular movimiento'}
+                fields:
+                        - 'hora'
+                        - 'tipo'
+                        - 'concepto'
+                        - {property: 'monto'}
+                        - {property: 'valido', type: 'boolean', label: 'Válido'}
+                        - 'Empleado'
             controller: App\Controller\MovimientoController
         User:
             class: App\Entity\User
