@@ -26,7 +26,7 @@ class PagoCuotaController extends AdminController
             ->where('a.id = '.(string)$id);
         return $qb->getQuery()->getResult();
 
-        /*
+        
 		$qqb = $this->em->createQueryBuilder();
 		$qqb->update('App\Entity\PagoCuota','p')
             ->set('p.cajero', "'".(string)$cajero."'")
@@ -37,7 +37,6 @@ class PagoCuotaController extends AdminController
     public function persistEntity($entity)
     {
         parent::persistEntity($entity);
-        $em = $this->getDoctrine()->getEntityManager();
         $mov = new Movimiento();
         $mov->setHora($entity->getFechaYHora());
         $mov->setConcepto('Cuota');
@@ -49,6 +48,7 @@ class PagoCuotaController extends AdminController
         
         $rep = $em->getRepository('App\Entity\Caja');
         $results = $rep->findBy(array(),array('id'=>'DESC'),1,1);
+        $em = $this->getDoctrine()->getEntityManager();
 
 
         $mov->setCaja($results[0]);
