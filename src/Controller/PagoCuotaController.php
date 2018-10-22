@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\PagoCuota;
 use App\Entity\Alumno;
 use App\Entity\Movimiento;
+use App\Entity\Caja;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -116,6 +117,19 @@ class PagoCuotaController extends AdminController
         $mov->setCaja($results[0]);
         
         $em->persist($mov);
+
+        $caja = $em->getRepository(Caja::class)->find($mov->getCaja()->getId());
+        if ($mov->getTipo()=='Ingreso')
+        {
+            $caja->setSaldoFinal($caja->getSaldoFinal() + $entity->getMonto());
+        }
+        else
+        {
+            $caja->setSaldoFinal($caja->getSaldoFinal() - $entity->getMonto());
+        }
+      
+        $em->persist($caja);
+
         $entity->setMovimiento($mov);
         $em->flush();
 

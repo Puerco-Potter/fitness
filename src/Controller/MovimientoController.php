@@ -37,7 +37,6 @@ class MovimientoController extends AdminController
         if ($entity->getTipo()=='Ingreso')
         {
             $caja->setSaldoFinal($caja->getSaldoFinal() + $entity->getMonto());
-
         }
         else
         {
@@ -160,6 +159,8 @@ class MovimientoController extends AdminController
         $em->persist($caja);
 
         $this->em->flush();
+
+        $this->addFlash('warning',sprintf('Movimiento anulado'));
 
         return $this->redirectToRoute('easyadmin', array(
             'action' => 'list',
