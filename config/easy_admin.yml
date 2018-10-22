@@ -47,7 +47,7 @@ easy_admin:
                 - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'deviantart' }
                 - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'deaf' }
             - label: 'Gestión de Asistencias'
-              icon: 'exclamation'
+              icon: 'exclamation-circle'
               children:
                 - {label: "Asistencias de alumnos", entity: 'AsistenciaAlumno', icon: 'address-card'}
                 - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'users'}
@@ -850,7 +850,8 @@ easy_admin:
             list:
                 dql_filter: 'entity.fecha >= CURRENT_DATE() and entity.cierre IS NULL'
                 actions:
-                    - { name: 'edit', label: 'Cerrar caja', title: 'Cerrar caja'}
+                    - { name: 'new', icon: 'plus-circle', label: 'Abrir Caja', title: 'Abrir Caja'}
+                    - { name: 'edit', label: 'Cerrar caja', title: 'Cerrar caja'}                
             controller: App\Controller\CajaController
         Movimiento:
             class: App\Entity\Movimiento
