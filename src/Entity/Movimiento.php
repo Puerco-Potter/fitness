@@ -56,7 +56,6 @@ class Movimiento
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Caja", inversedBy="Movimientos")
      * @ORM\JoinColumn(nullable=false)
-	 * @Assert\NotBlank(message = "Debe haber una caja")
      */
     private $Caja;
 

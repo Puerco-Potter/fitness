@@ -99,7 +99,7 @@ class Inscripcion
         $this->sabado = FALSE;
         $this->clasesTotales = 12;
         $this->clasesRestantes = 12;
-        $this->cuota = 300;
+        $this->cuota = 0;
     }
 
     public function getId()

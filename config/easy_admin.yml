@@ -830,8 +830,8 @@ easy_admin:
                 title: 'Registrar apertura de caja'
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: '' }
-                    - {property: 'fecha'}
-                    - {property: 'apertura', label: 'Hora de apertura'}
+                    - {property: 'fecha', type: 'date', type_options: {widget: 'single_text'}}
+                    - {property: 'apertura', type: 'time', type_options: {widget: 'single_text'}, label: 'Hora de apertura'}
                     - {property: 'saldoInicial'}
             show:
                 title: 'Cerrar caja'
@@ -845,7 +845,7 @@ easy_admin:
                     - {property: 'EmpleadoCierre', label: 'Empleado al cerrar'}
                     - {property: 'Movimientos'}
             list:
-                dql_filter: 'entity.fecha >= CURRENT_DATE()'
+                dql_filter: 'entity.fecha >= CURRENT_DATE() and entity.cierre IS NULL'
                 actions:
                     - { name: 'edit', label: 'Cerrar caja', title: 'Cerrar caja'}
             controller: App\Controller\CajaController
@@ -865,7 +865,7 @@ easy_admin:
                     - {property: 'concepto', type: 'choice', type_options: {choices:{'Cuota': 'Cuota','Compra de insumos': 'Compra de insumos','Pago de servicio': 'Pago de servicio', 'Compra': 'Compra'}}}
                     - {property: 'monto'}
                     - {property: 'observaciones'}
-                    - {property: 'Caja'}
+                    #- {property: 'Caja'}
             list:
                 dql_filter: 'entity.hora >= CURRENT_DATE()'
                 sort: ['hora','DESC']
@@ -899,6 +899,21 @@ easy_admin:
                     - {property: 'isActive'}
         Combo:
             class: App\Entity\Combo
+            form:
+                fields:
+                    - {property: 'fecha', type: 'date', type_options: {widget: 'single_text'}}
+                    - {property: 'Alumno'}
+                    - {property: 'monto'}
+                    - {property: 'Inscripciones', label: 'Inscripciones', type: 'collection' ,type_options: { entry_type: 'App\Form\InscripcionType', by_reference: false }}
+            edit:
+                title: 'Editar combo'
+            new:
+                title: 'Inscribir a combo'
+            show:
+                title: 'Ver combo'
+            list:
+                title: 'Lista de combos'
+            controller: App\Controller\ComboController
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
