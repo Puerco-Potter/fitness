@@ -50,7 +50,6 @@ class PagoCuotaController extends AdminController
         $rep = $em->getRepository('App\Entity\Caja');
         $results = $rep->findBy(array(),array('id'=>'DESC'),1,0);
 
-
         $mov->setCaja($results[0]);
         
         $em->persist($mov);

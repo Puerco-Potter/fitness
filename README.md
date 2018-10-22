@@ -3,6 +3,54 @@
 php bin/console make:entity
 </br>
 php bin/console doctrine:schema:update --force
+</br>
+
+public function createEntityFormBuilder($entity, $view)
+{
+//consigo las tematicas de ese usuario
+if (false === $this->isGranted('ROLE_SUPER_ADMIN')) {
+$user = $this->getUser();
+$ong = $user->getOng();
+if ($ong) {
+$tematicas = $ong->getTematicas();
+} else {
+$ongColaborator = $user->getOngColaborator();
+$tematicas = $ongColaborator->getTematicas();
+}
+} else {
+//o todas las tematicas
+$tematicas = $this->getDoctrine()->getRepository(Tematica::Class)->findAll();
+}
+//armo el string para el WHERE IN
+$tematicasIN = "( ";
+foreach ($tematicas as $tematica) {
+$tematicasIN = $tematicasIN . $tematica->getId() . ", ";
+}
+//quito la ultima coma
+if (count($tematicas) != 0) {
+$tematicasIN = substr($tematicasIN, 0, -2);
+} else {
+$tematicasIN = $tematicasIN . "0 ";
+}
+$tematicasIN = $tematicasIN . ")";
+
+$formBuilder = parent::createEntityFormBuilder($entity, $view);
+
+$formBuilder->add('tematicas', EntityType::class, array(
+'class' => Tematica::class,
+'multiple' => true,
+'expanded' => true,
+'query_builder' => function (EntityRepository $er) use ($tematicasIN) {
+return $er->createQueryBuilder('t')
+->where('t.id IN ' . $tematicasIN)
+->orderBy('t.nombre', 'ASC');
+},
+));
+
+return $formBuilder;
+}
+
+
 
 <b>Tareas e historias de usuario</b></br>
 <b>Primer release</b></br>

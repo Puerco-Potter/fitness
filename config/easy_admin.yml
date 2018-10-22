@@ -54,8 +54,8 @@ easy_admin:
             - label: 'Gestión de pagos'
               icon: 'money'
               children:
-                - { label: 'Gestión de cajas', entity: 'Caja', icon: 'bug'}
-                - { label: 'Gestión de movimientos', entity: 'Movimiento', icon: 'bug'}
+                - { label: 'Gestión de cajas', entity: 'Caja', icon: 'credit-card'}
+                - { label: 'Gestión de movimientos', entity: 'Movimiento', icon: 'dollar'}
                 - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'book'}
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             - label: "Contacto"
@@ -748,6 +748,7 @@ easy_admin:
                     - {property: 'Empleado'}
                     - {property: 'tipo'}
                     - {property: 'fechaYHora', label: 'Fecha y hora'}
+            controller: App\Controller\ESEmpleadoController
         PagoCuota:
             class: App\Entity\PagoCuota
             form:
