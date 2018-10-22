@@ -348,6 +348,7 @@ easy_admin:
                     - {property: 'jueves'}
                     - {property: 'viernes'}
                     - {property: 'sabado'}
+                    - {property: 'Combo'}
             list:
                 title: 'Lista de inscripciones'
                 actions:
@@ -768,6 +769,7 @@ easy_admin:
                 title: 'Modificar pago de cuota'
             list:
                 title: 'Lista de cuotas pagadas'
+                disabled_actions: ['delete']
                 sort: ['fechaYHora','DESC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registar Pago de cuota', title: 'Registar Pago de cuota'}
@@ -913,6 +915,12 @@ easy_admin:
                 title: 'Ver combo'
             list:
                 title: 'Lista de combos'
+                sort: ['fecha','DESC']
+                fields:
+                    - {property: 'fecha'}
+                    - {property: 'Alumno'}
+                    - {property: 'Inscripciones', label: 'Inscripciones', type: 'array'}
+                    - {property: 'monto'}
             controller: App\Controller\ComboController
     list:
         actions:

@@ -61,6 +61,12 @@ class PagoCuota
      * @ORM\ManyToOne(targetEntity="App\Entity\Combo", inversedBy="PagoCuotas")
     */
     private $Combo;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Movimiento", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Movimiento;
     
 	public function __construct()
     {
@@ -168,6 +174,18 @@ class PagoCuota
     public function setCombo(?Combo $Combo): self
     {
         $this->Combo = $Combo;
+
+        return $this;
+    }
+
+    public function getMovimiento(): ?Movimiento
+    {
+        return $this->Movimiento;
+    }
+
+    public function setMovimiento(Movimiento $Movimiento): self
+    {
+        $this->Movimiento = $Movimiento;
 
         return $this;
     }

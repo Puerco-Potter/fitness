@@ -297,6 +297,6 @@ class Clase
     }
 	public function __toString()
     {
-        return $this->getProfesor().' - '.$this->getActividad().' - '.$this->getDias().' - '.(string) $this->getHorario()->format('H:i');
+        return 'Prof. '.$this->getProfesor()->getApellido().' - '.$this->getActividad().' - '.$this->getDias().' - '.(string) $this->getHorario()->format('H:i');
     }
 }

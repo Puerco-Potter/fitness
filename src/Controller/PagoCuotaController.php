@@ -92,6 +92,32 @@ class PagoCuotaController extends AdminController
         $entity->setCajero($cajero);
 		
         $em = $this->getDoctrine()->getEntityManager();
+        $mov = new Movimiento();
+        $mov->setHora($entity->getFechaYHora());
+        $mov->setConcepto('Cuota');
+        $mov->setMonto($entity->getMonto());
+        $mov->setTipo('Ingreso');
+        if ($entity->getInscripcion() == NULL)
+        {
+            $mov->setObservaciones((string)$entity->getCombo().' - '.(string)$entity->getCombo()->getAlumno());
+        }
+        else
+        {
+            $mov->setObservaciones((string)$entity->getInscripcion()->getClase().' - '.(string)$entity->getInscripcion()->getAlumno());
+        }
+        
+        
+        $mov->setEmpleado($entity->getCajero());
+        
+        
+        $rep = $em->getRepository('App\Entity\Caja');
+        $results = $rep->findBy(array(),array('id'=>'DESC'),1,0);
+
+        $mov->setCaja($results[0]);
+        
+        $em->persist($mov);
+        $entity->setMovimiento($mov);
+        $em->flush();
 
         $qb = $this->em->createQueryBuilder();
         $qb->update('App\Entity\Alumno','a')
@@ -110,22 +136,6 @@ class PagoCuotaController extends AdminController
     public function persistEntity($entity)
     {
         parent::persistEntity($entity);
-        $em = $this->getDoctrine()->getEntityManager();
-        $mov = new Movimiento();
-        $mov->setHora($entity->getFechaYHora());
-        $mov->setConcepto('Cuota');
-        $mov->setMonto($entity->getMonto());
-        $mov->setTipo('Ingreso');
-        $mov->setObservaciones((string)$entity->getInscripcion()->getClase().' - '.(string)$entity->getInscripcion()->getAlumno());
-        $mov->setEmpleado($entity->getCajero());
         
-        
-        $rep = $em->getRepository('App\Entity\Caja');
-        $results = $rep->findBy(array(),array('id'=>'DESC'),1,0);
-
-        $mov->setCaja($results[0]);
-        
-        $em->persist($mov);
-        $em->flush();
     }
 }

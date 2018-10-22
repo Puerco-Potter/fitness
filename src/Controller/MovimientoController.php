@@ -5,6 +5,8 @@ namespace App\Controller;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use App\Entity\Movimiento;
 use App\Entity\Caja;
+use App\Entity\PagoCuota;
+use App\Entity\Alumno;
 
 class MovimientoController extends AdminController
 {
@@ -125,15 +127,35 @@ class MovimientoController extends AdminController
         $id = $entity->getCaja()->getId();
         $em = $this->getDoctrine()->getEntityManager();
         $caja = $em->getRepository(Caja::class)->find($id);
+
         if ($entity->getTipo()=='Ingreso')
         {
             $caja->setSaldoFinal($caja->getSaldoFinal() - $entity->getMonto());
-
         }
         else
         {
             $caja->setSaldoFinal($caja->getSaldoFinal() + $entity->getMonto());
         }
+
+        $cuotas = $em->getRepository(PagoCuota::class)->findBy(array('Movimiento' => $entity->getID()));
+
+        if ($cuotas!=[])
+        {
+            if ($cuotas[0]->getInscripcion() == NULL)
+            {
+                $alumno = $em->getRepository(Alumno::class)->findBy(array('id' => $cuotas[0]->getCombo()->getAlumno()->getId()));
+            }
+            else
+            {
+                $alumno = $em->getRepository(Alumno::class)->findBy(array('id' => $cuotas[0]->getInscripcion()->getAlumno()->getId()));
+            }
+
+            $alumno[0]->setBalance($alumno[0]->getBalance()-$entity->getMonto());
+            $em->persist($alumno[0]);
+            $em->remove($cuotas[0]);
+        }
+        
+
       
         $em->persist($caja);
 
