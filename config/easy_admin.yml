@@ -11,6 +11,7 @@ easy_admin:
             favicon:
                 path: '/fitness/public/imagenes/favito.png'
         menu:
+            - { label: "Notificaciones" , entity: 'Notificacion', icon: 'exclamation' }
             - label: 'Gestión de alumnos'
               icon: 'address-card'
               children:
@@ -922,6 +923,18 @@ easy_admin:
                     - {property: 'Inscripciones', label: 'Inscripciones', type: 'array'}
                     - {property: 'monto'}
             controller: App\Controller\ComboController
+        Notificacion:
+            class: App\Entity\Notificacion
+            disabled_actions: ['new','delete','edit']
+            show:
+                title: 'Ver Notificación'
+            list:
+                title: 'Lista de notificaciones'
+                disabled_actions: ['edit','delete']
+                sort: ['creacion','DESC']
+                fields:
+                    - {property: 'creacion'}
+                    - {property: 'descripcion', label: 'Descripción'}
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }

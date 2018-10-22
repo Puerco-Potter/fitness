@@ -30,6 +30,7 @@ class Combo
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Inscripcion", mappedBy="Combo", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $Inscripciones;
 
