@@ -25,7 +25,16 @@ class ESEmpleadoController extends AdminController
                 $this->addFlash('warning',sprintf('El empleado no ha entrado/salido correctamente, se generó una notificación'));
                 $noti = new Notificacion();
                 $noti->setCreacion($entity->getFechaYHora());
-                $noti->setDescripcion($entity->getTipo().' sin su Entrada/Salida');
+                if ($entity->getTipo()=='Entrada')
+                {
+                    $coso = 'Salida';
+                }
+                else
+                {
+                    $coso = 'Entrada';
+                }
+
+                $noti->setDescripcion($entity->getTipo().' sin su '.$coso.' de '.(string)$entity->getEmpleado());
 
                 $em->persist($noti);
                 $em->flush();

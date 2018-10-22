@@ -914,8 +914,16 @@ easy_admin:
                 title: 'Inscribir a combo'
             show:
                 title: 'Ver combo'
+                fields:
+                    - {property: 'fecha'}
+                    - {property: 'Alumno'}
+                    - {property: 'monto'}
+                    - {property: 'Inscripciones'}
+                    - {property: 'PagoCuotas', label: 'Pagos de cuotas'}
             list:
                 title: 'Lista de combos'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Inscribir a un combo', title: 'Inscribir a un combo'}
                 sort: ['fecha','DESC']
                 fields:
                     - {property: 'fecha'}
@@ -925,15 +933,15 @@ easy_admin:
             controller: App\Controller\ComboController
         Notificacion:
             class: App\Entity\Notificacion
-            disabled_actions: ['new','delete','edit']
+            disabled_actions: ['new','edit']
             show:
                 title: 'Ver Notificación'
             list:
                 title: 'Lista de notificaciones'
-                disabled_actions: ['edit','delete']
+                disabled_actions: ['edit']
                 sort: ['creacion','DESC']
                 fields:
-                    - {property: 'creacion'}
+                    - {property: 'creacion', label: 'Fecha de creación'}
                     - {property: 'descripcion', label: 'Descripción'}
     list:
         actions:
