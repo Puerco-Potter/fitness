@@ -39,7 +39,7 @@ easy_admin:
                 - {entity: 'Sala', icon: 'building', label: 'Salones'}
                 - {entity: 'Inscripcion', icon: 'edit', label: 'Inscripciones'}
                 - {entity: 'Combo', icon: 'edit', label: 'Inscripción a un combo'}
-            - label: 'Gestión de Entrenamientos'
+            - label: 'Gestión de planes'
               icon: 'tasks'
               children:
                 - { label: "Planes de Entrenamiento" , entity: 'PlanEntrenamiento', icon: 'pinterest-p' }
@@ -201,6 +201,7 @@ easy_admin:
                 title: 'Lista de Fichas médicas'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar Ficha Médica', title: 'Registrar Ficha Médica'}
+                    - { name: 'imprimir', icon: 'print', label: 'Imprimir'}
                 fields: ['alumno', 'fecha']
             form:
                 fields:
@@ -241,7 +242,8 @@ easy_admin:
             new:
                 title: 'Agregar nueva ficha médica'
             edit:
-                title: 'Modificar ficha médica'    
+                title: 'Modificar ficha médica'
+            controller: App\Controller\FichaMedicaController    
         TelefonoAlumno:
             class: App\Entity\TelefonoAlumno
             show:
@@ -836,7 +838,6 @@ easy_admin:
                     - {property: 'EmpleadoCierre', label: 'Empleado al cerrar'}
                     - {property: 'Movimientos'}
             list:
-                dql_filter: 'entity.fecha >= CURRENT_DATE() and entity.cierre IS NULL'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Abrir Caja', title: 'Abrir Caja'}
                     - { name: 'edit', label: 'Cerrar caja', title: 'Cerrar caja'}                
@@ -848,6 +849,8 @@ easy_admin:
                 title: 'Ver Movimiento'
                 actions:
                     - { name: 'edit', label: 'Anular movimiento', title: 'Anular movimiento'}
+                fields:
+                    - {property: 'valido', type: 'boolean', label: 'Válido'}
             new:
                 title: 'Nuevo movimiento'
                 fields:

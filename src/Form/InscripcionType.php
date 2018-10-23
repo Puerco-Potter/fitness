@@ -22,30 +22,39 @@ class InscripcionType extends AbstractType
         $builder
             ->add('Clase', EntityType::class, [
                     'class' => Clase::class,
+                    'attr' => array('class' => 'col-lg-6')
                 ])
             ->add('clasesRestantes', NumberType::class, [
                 'label' => 'Clases Restantes',
+                'attr' => array('class' => 'col-lg-6')
             ])
             ->add('clasesTotales', NumberType::class, [
                 'label' => 'Clases Totales',
+                'attr' => array('class' => 'col-lg-6')
             ])
             ->add('lunes', CheckboxType::class, [
                 'label' => 'Lunes',
+                'attr' => array('class' => 'col-lg-6')
             ])
             ->add('martes', CheckboxType::class, [
                 'label' => 'Martes',
+                'attr' => array('class' => 'col-lg-6')
             ])
             ->add('miercoles', CheckboxType::class, [
                 'label' => 'Miercoles',
+                'attr' => array('class' => 'col-lg-6')
             ])
             ->add('jueves', CheckboxType::class, [
                 'label' => 'Jueves',
+                'attr' => array('class' => 'col-lg-6')
             ])
             ->add('viernes', CheckboxType::class, [
                 'label' => 'Viernes',
+                'attr' => array('class' => 'col-lg-6')
             ])
             ->add('sabado', CheckboxType::class, [
                 'label' => 'Sabado',
+                'attr' => array('class' => 'col-lg-6')
             ])
         ;
     }

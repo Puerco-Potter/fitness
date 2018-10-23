@@ -50,10 +50,12 @@ class ComboController extends AdminController
 
         $newForm->handleRequest($this->request);
 
-        if ($newForm->isSubmitted() && $newForm->isValid()) {
+        if ($newForm->isSubmitted() && $newForm->isValid())
+        {
             $this->dispatch(EasyAdminEvents::PRE_PERSIST, array('entity' => $entity));
             
-            foreach ($entity->getInscripciones() as &$x) {
+            foreach ($entity->getInscripciones() as &$x)
+            {
                 $x->setAlumno($entity->getAlumno());
             }
             #dump($entity);exit;
