@@ -99,7 +99,7 @@ class Inscripcion
         $this->sabado = FALSE;
         $this->clasesTotales = 12;
         $this->clasesRestantes = 12;
-        $this->cuota = 300;
+        $this->cuota = 0;
     }
 
     public function getId()
@@ -252,7 +252,7 @@ class Inscripcion
     }
 	public function __toString()
     {
-        return $this->getAlumno()->getDni().' - '. $this->getAlumno().' - '.$this->getClase();
+        return 'Alumno: '.$this->getAlumno()->getDni().' - '.$this->getClase();
         //return $this->getAlumno().' - '.$this->getClase().' - '.(string) $this->getFechaInscripcion()->format('Y-m-d');
     }
 

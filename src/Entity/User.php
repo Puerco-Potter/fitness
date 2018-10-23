@@ -57,12 +57,12 @@ class User implements UserInterface, \Serializable
     private $nombre;
 
     public function __construct() {
-        $this->roles = array('ROLE_USER');
+        $this->roles = array('ROLE_USER','ROLE_ADMIN');
     }
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->roles;
     }
 
 

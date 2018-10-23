@@ -10,3 +10,18 @@
         </div>
     {% endif %}
 {% endblock global_actions %}
+
+{% block item_actions %}
+    {% set filtered_actions = {} %}
+    {% for action_name, action_config in _list_item_actions %}
+        {% if action_name == 'anular' and item.anulado|default(false) == TRUE %}
+            {# remove the 'delete' action from published items #}
+        {% else %}
+            {% set filtered_actions = filtered_actions|merge([action_config]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% set _list_item_actions = filtered_actions %}
+
+    {{ parent() }}
+{% endblock item_actions %}

@@ -11,6 +11,7 @@ easy_admin:
             favicon:
                 path: '/fitness/public/imagenes/favito.png'
         menu:
+            - { label: "Notificaciones" , entity: 'Notificacion', icon: 'exclamation' }
             - label: 'Gestión de alumnos'
               icon: 'address-card'
               children:
@@ -46,7 +47,7 @@ easy_admin:
                 - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'deviantart' }
                 - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'deaf' }
             - label: 'Gestión de Asistencias'
-              icon: 'exclamation'
+              icon: 'exclamation-circle'
               children:
                 - {label: "Asistencias de alumnos", entity: 'AsistenciaAlumno', icon: 'address-card'}
                 - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'users'}
@@ -54,16 +55,28 @@ easy_admin:
             - label: 'Gestión de pagos'
               icon: 'money'
               children:
-                - { label: 'Gestión de cajas', entity: 'Caja', icon: 'bug'}
-                - { label: 'Gestión de movimientos', entity: 'Movimiento', icon: 'bug'}
+                - { label: 'Gestión de cajas', entity: 'Caja', icon: 'credit-card'}
+                - { label: 'Gestión de movimientos', entity: 'Movimiento', icon: 'dollar'}
                 - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'book'}
             - { label: "Usuarios" , entity: 'User', icon: 'child' }
             - label: "Contacto"
               icon: 'share-square'
               children:
-                - {icon: 'facebook', label: 'Instagram', url: 'https://instagram.com/fussionfitnessgym', target: '_blank'}
-                - {icon: 'instagram', label: 'Facebook', url: 'https://www.facebook.com/Fussion-Gym-1098230646958706/', target: '_blank'}
+                - {icon: 'instagram', label: 'Instagram', url: 'https://instagram.com/fussionfitnessgym', target: '_blank'}
+                - {icon: 'facebook', label: 'Facebook', url: 'https://www.facebook.com/Fussion-Gym-1098230646958706/', target: '_blank'}
     entities:
+        Notificacion:
+            class: App\Entity\Notificacion
+            disabled_actions: ['new','edit']
+            show:
+                title: 'Ver Notificación'
+            list:
+                title: 'Lista de notificaciones'
+                disabled_actions: ['edit']
+                sort: ['creacion','DESC']
+                fields:
+                    - {property: 'creacion', label: 'Fecha de creación'}
+                    - {property: 'descripcion', label: 'Descripción'}
         Alumno:
             class: App\Entity\Alumno
             disabled_actions: ['delete']
@@ -87,7 +100,7 @@ easy_admin:
                 title: 'Lista de alumnos'
                 dql_filter: 'entity.inactivo=0'
                 actions:
-                    - { name: 'new', icon: 'plus-circle', label: 'Registar Alumno', title: 'Registrar Alumno'}
+                    - { name: 'new', icon: 'plus-circle', label: 'Registrar Alumno', title: 'Registrar Alumno'}
                     - { name: 'inactivar', label: 'Dar por inactivo', title: 'Dar por inactivo'}
                 fields:
                     - { property: 'dni', label: 'DNI' }
@@ -317,7 +330,7 @@ easy_admin:
             list:
                 title: 'Salones'
                 actions:
-                    - { name: 'new', icon: 'plus-circle', label: 'Crear nuevo Salóm', title: 'Crear nuevo Salón'}
+                    - { name: 'new', icon: 'plus-circle', label: 'Crear nuevo Salón', title: 'Crear nuevo Salón'}
                 fields:
                     - 'descripcion'
                     - 'capacidad'
@@ -348,6 +361,7 @@ easy_admin:
                     - {property: 'jueves'}
                     - {property: 'viernes'}
                     - {property: 'sabado'}
+                    - {property: 'Combo'}
             list:
                 title: 'Lista de inscripciones'
                 actions:
@@ -748,13 +762,14 @@ easy_admin:
                     - {property: 'Empleado'}
                     - {property: 'tipo'}
                     - {property: 'fechaYHora', label: 'Fecha y hora'}
+            controller: App\Controller\ESEmpleadoController
         PagoCuota:
             class: App\Entity\PagoCuota
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Inscripción' }
                     - {property: 'Inscripcion'}
-                    - {property: 'Combo'}
+                    - {property: 'Combo', help: 'Ingrese un Combo o una Inscripción, a pagar'}
                     - {property: 'monto', type: 'money', type_options: { currency: 'ARS' }}
                     - { type: 'group', css_class: 'col-sm-4', label: 'Mes de inscripción' }
                     - {property: 'mes'}
@@ -767,6 +782,7 @@ easy_admin:
                 title: 'Modificar pago de cuota'
             list:
                 title: 'Lista de cuotas pagadas'
+                disabled_actions: ['delete']
                 sort: ['fechaYHora','DESC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registar Pago de cuota', title: 'Registar Pago de cuota'}
@@ -829,8 +845,8 @@ easy_admin:
                 title: 'Registrar apertura de caja'
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: '' }
-                    - {property: 'fecha'}
-                    - {property: 'apertura', label: 'Hora de apertura'}
+                    - {property: 'fecha', type: 'date', type_options: {widget: 'single_text'}}
+                    - {property: 'apertura', type: 'time', type_options: {widget: 'single_text'}, label: 'Hora de apertura'}
                     - {property: 'saldoInicial'}
             show:
                 title: 'Cerrar caja'
@@ -844,9 +860,10 @@ easy_admin:
                     - {property: 'EmpleadoCierre', label: 'Empleado al cerrar'}
                     - {property: 'Movimientos'}
             list:
-                dql_filter: 'entity.fecha >= CURRENT_DATE()'
+                dql_filter: 'entity.fecha >= CURRENT_DATE() and entity.cierre IS NULL'
                 actions:
-                    - { name: 'edit', label: 'Cerrar caja', title: 'Cerrar caja'}
+                    - { name: 'new', icon: 'plus-circle', label: 'Abrir Caja', title: 'Abrir Caja'}
+                    - { name: 'edit', label: 'Cerrar caja', title: 'Cerrar caja'}                
             controller: App\Controller\CajaController
         Movimiento:
             class: App\Entity\Movimiento
@@ -864,7 +881,7 @@ easy_admin:
                     - {property: 'concepto', type: 'choice', type_options: {choices:{'Cuota': 'Cuota','Compra de insumos': 'Compra de insumos','Pago de servicio': 'Pago de servicio', 'Compra': 'Compra'}}}
                     - {property: 'monto'}
                     - {property: 'observaciones'}
-                    - {property: 'Caja'}
+                    #- {property: 'Caja'}
             list:
                 dql_filter: 'entity.hora >= CURRENT_DATE()'
                 sort: ['hora','DESC']
@@ -898,6 +915,37 @@ easy_admin:
                     - {property: 'isActive'}
         Combo:
             class: App\Entity\Combo
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-5', label: '' }
+                    - {property: 'fecha', type: 'date', type_options: {widget: 'single_text'}}
+                    - {property: 'Alumno'}
+                    - {property: 'monto', type: 'money', label: 'monto', type_options: { currency: 'ARS' }}
+                    - { type: 'group', css_class: 'col-sm-9', label: 'Inscripciones' }
+                    - {property: 'Inscripciones', label: '>>>', help: 'Añada las Inscripciones a las Actividades', type: 'collection' ,type_options: { entry_type: 'App\Form\InscripcionType', by_reference: false }}
+            edit:
+                title: 'Editar combo'
+            new:
+                title: 'Inscribir a combo'
+            show:
+                title: 'Ver combo'
+                fields:
+                    - {property: 'fecha'}
+                    - {property: 'Alumno'}
+                    - {property: 'monto'}
+                    - {property: 'Inscripciones'}
+                    - {property: 'PagoCuotas', label: 'Pagos de cuotas'}
+            list:
+                title: 'Lista de combos'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Inscribir a un combo', title: 'Inscribir a un combo'}
+                sort: ['fecha','DESC']
+                fields:
+                    - {property: 'fecha'}
+                    - {property: 'Alumno'}
+                    - {property: 'Inscripciones', label: 'Inscripciones', type: 'array'}
+                    - {property: 'monto'}
+            controller: App\Controller\ComboController
     list:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }

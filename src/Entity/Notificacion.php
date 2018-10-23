@@ -19,12 +19,12 @@ class Notificacion
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $Creacion;
+    private $creacion;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $Descripcion;
+    private $descripcion;
 
     public function getId(): ?int
     {
@@ -33,25 +33,30 @@ class Notificacion
 
     public function getCreacion(): ?\DateTimeInterface
     {
-        return $this->Creacion;
+        return $this->creacion;
     }
 
-    public function setCreacion(?\DateTimeInterface $Creacion): self
+    public function setCreacion(?\DateTimeInterface $creacion): self
     {
-        $this->Creacion = $Creacion;
+        $this->creacion = $creacion;
 
         return $this;
     }
 
     public function getDescripcion(): ?string
     {
-        return $this->Descripcion;
+        return $this->descripcion;
     }
 
-    public function setDescripcion(?string $Descripcion): self
+    public function setDescripcion(?string $descripcion): self
     {
-        $this->Descripcion = $Descripcion;
+        $this->descripcion = $descripcion;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getDescripcion();
     }
 }

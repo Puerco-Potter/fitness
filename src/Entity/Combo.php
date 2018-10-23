@@ -29,7 +29,8 @@ class Combo
     private $monto;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscripcion", mappedBy="Combo")
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscripcion", mappedBy="Combo", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $Inscripciones;
 
@@ -46,8 +47,10 @@ class Combo
 
     public function __construct()
     {
+        $this->fecha = new \DateTime();
         $this->Inscripciones = new ArrayCollection();
         $this->PagoCuotas = new ArrayCollection();
+        $this->monto = 100;
     }
 
     public function getId()
@@ -155,6 +158,12 @@ class Combo
 
 	public function __toString()
     {
-        return 'Combo';
+        $cadena = $this->getAlumno();
+        foreach ($this->getInscripciones() as $x)
+        {
+            $cadena = $cadena.' - '.(string) $x->getClase()->getActividad();
+        }
+        return $cadena;
+
     }
 }
