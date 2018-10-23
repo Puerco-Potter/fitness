@@ -87,22 +87,27 @@ class AsistenciaController extends AdminController
             
 
             $id = $asistencia->getInscripcion()->getId();
+            $dia = $asistencia->getFecha();
             
             $inscripcion = $this->getDoctrine()
-                     ->getRepository(Inscripcion::class)
-                     ->findOneBy(array('id' => $id));
+                    ->getRepository(Inscripcion::class)
+                    ->findOneBy(array('id' => $id));
+            
+            $asistenciaYaExiste = $this->getDoctrine()
+                    ->getRepository(AsistenciaAlumno::class)
+                    ->findBy(array('Inscripcion' => $id, 'fecha' => $dia));
            
-            $estado = 1;
             if ($inscripcion ->getClasesRestantes() <=0):
                 $estado = 2;
-            endif;
-            if ($inscripcion ->getClasesRestantes() - 1 > 0):
+            elseif ($asistenciaYaExiste !== null):
+                $estado = 3;
+            elseif ($inscripcion ->getClasesRestantes() - 1 > 0):
                 $inscripcion ->setClasesRestantes($inscripcion ->getClasesRestantes() - 1);
+                $estado = 1;
+                $entityManager->persist($inscripcion);
+                $entityManager->flush();
             endif;
             
-            
-            $entityManager->persist($inscripcion);
-            $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
             return $this->redirectToRoute('asistencia3',array('estado' => $estado));

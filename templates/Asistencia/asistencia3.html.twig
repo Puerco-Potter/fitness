@@ -29,6 +29,10 @@
                 <label class="font-weight-bold etiqueta text-warning" ><h4>Su asistencia se ha registrado con exito</h4></label>
                 <label class="font-weight-bold etiqueta text-warning" ><h4>Disfrute la clase</h4></label>
                 <meta http-equiv="refresh" content="4;url={{ path('asistencia') }}" />
+            {% elseif estado == 3 %}
+                <label class="font-weight-bold etiqueta text-warning" ><h4>Ya registro una asistencia a esta clase hoy</h4></label>
+                <label class="font-weight-bold etiqueta text-warning" ><h4>Si es un error comuniquelo a al/la secretario/a</h4></label>
+                {{ mostrame }}
             {% else %}
                 <label class="font-weight-bold etiqueta text-warning" ><h1>USTED NO TIENE CLASES DISPONIBLES.</h1></label>
                     <br>

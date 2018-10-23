@@ -43,8 +43,8 @@ easy_admin:
               icon: 'tasks'
               children:
                 - { label: "Planes de Entrenamiento" , entity: 'PlanEntrenamiento', icon: 'pinterest-p' }
-                - { label: "Rutinas" , entity: 'Rutina', icon: 'registered' }
                 - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'deviantart' }
+                - { label: "Musculos" , entity: 'Musculo', icon: 'deviantart' }
                 - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'deaf' }
             - label: 'Gestión de Asistencias'
               icon: 'exclamation-circle'
@@ -607,8 +607,6 @@ easy_admin:
             form:
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripción'}
-                    - { property: 'duracion', type: 'integer', label: 'Duración (semanas)'}
-                    - { property: 'rutinas', label: 'Rutinas', type: 'collection' , type_options: { entry_type: 'App\Form\RutinaType', by_reference: false }}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
             edit:
@@ -621,50 +619,19 @@ easy_admin:
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nuevo Plan de entrenamiento', title: 'Crear nuevo Plan de entrenamiento'}
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripción'}
-                    - { property: 'duracion', label: 'Duración (semanas)'}
-                    - { property: 'rutinas', label: 'Rutinas', type: 'array'}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
             show:
                 title: 'Ver plan de entrenamiento'
                 fields:
                     - { property: 'descripcion', type: 'text', label: 'Descripción'}
-                    - { property: 'duracion', label: 'Duración (semanas)'}
-                    - { property: 'rutinas', label: 'Rutinas'}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
-        Rutina:
-            class: App\Entity\Rutina
-            form:
-                fields:
-                    - { property: 'descripcion', label: 'Descripción'}
-                    - { property: 'PlanEntrenamiento', label: 'Planes de entrenamiento'}
-                    - { property: 'entrenamientos', label: 'Entrenamientos', type: 'collection' , type_options: { entry_type: 'App\Form\EntrenamientoType', by_reference: false }}
-            edit:
-                title: 'Modificar Rutina'
-            new:
-                title: 'Crear nueva rutina'
-            list:
-                title: 'Lista de rutinas'
-                fields:
-                    - { property: 'descripcion', label: 'Descripción'}
-                    - { property: 'PlanEntrenamiento', label: 'Planes de entrenamiento', type: 'array'}
-                    - { property: 'entrenamientos', label: 'Entrenamientos', type: 'array' }
-            show:
-                title: 'Rutina'
-                fields:
-                    - { property: 'descripcion', label: 'Descripción'}
-                    - { property: 'PlanEntrenamiento', label: 'Planes de entrenamiento'}
-                    - { property: 'entrenamientos', label: 'Entrenamientos'}
         Entrenamiento:
             class: App\Entity\Entrenamiento
             form:
                 fields:
-                    - {property: 'Rutina'}
                     - {property: 'Ejercicio'}
-                    - {property: 'series'}
-                    - {property: 'descansos', label: 'Descansos (segundos)'}
-                    - {property: 'peso', label: 'Peso (kg)'}
                     - {property: 'observaciones'}
             edit:
                 title: 'Modificar entrenamiento'
@@ -673,20 +640,12 @@ easy_admin:
             list:
                 title: 'Lista de entrenamientos'
                 fields:
-                    - {property: 'Rutina'}
                     - {property: 'Ejercicio'}
-                    - {property: 'series'}
-                    - {property: 'descansos', label: 'Descansos (segundos)'}
-                    - {property: 'peso', label: 'Peso (kg)'}
                     - {property: 'observaciones'}
             show:
                 title: 'Ver Entrenamiento'
                 fields:
-                    - {property: 'Rutina'}
                     - {property: 'Ejercicio'}
-                    - {property: 'series'}
-                    - {property: 'descansos', label: 'Descansos (segundos)'}
-                    - {property: 'peso', label: 'Peso (kg)'}
                     - {property: 'observaciones'}
         Ejercicio:
             class: App\Entity\Ejercicio
@@ -714,6 +673,23 @@ easy_admin:
                     - {property: 'zonaMuscular'}
                     - {property: 'Equipamiento'}
                     - {property: 'Elemento'}
+        Musculo:
+            class: App\Entity\Musculo
+            form:
+                fields:
+                    - {property: 'nombre'}
+            edit:
+                title: 'Modificar Musculo'
+            new:
+                title: 'Nuevo entrenamiento'
+            list:
+                title: 'Lista de Musculo'
+                fields:
+                    - {property: 'nombre'}
+            show:
+                title: 'Ver Musculo'
+                fields:
+                    - {property: 'nombre'}
         AsistenciaAlumno:
             class: App\Entity\AsistenciaAlumno
             form:
