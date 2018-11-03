@@ -92,18 +92,6 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
-    "knplabs/knp-snappy": {
-        "version": "v1.0.4"
-    },
-    "knplabs/knp-snappy-bundle": {
-        "version": "1.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.5",
-            "ref": "c81bdcf4a9d4e7b1959071457f9608631865d381"
-        }
-    },
     "monolog/monolog": {
         "version": "1.23.0"
     },
@@ -140,6 +128,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "royopa/fpdf-symfony2": {
+        "version": "3.0"
+    },
     "sensio/framework-extra-bundle": {
         "version": "4.0",
         "recipe": {
@@ -148,6 +139,15 @@
             "version": "4.0",
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
+    },
+    "setasign/fpdf": {
+        "version": "1.8.1"
+    },
+    "setasign/fpdi": {
+        "version": "1.6.2"
+    },
+    "setasign/fpdi-fpdf": {
+        "version": "1.6.2"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.0.2"
