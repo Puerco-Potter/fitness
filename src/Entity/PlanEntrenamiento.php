@@ -25,16 +25,6 @@ class PlanEntrenamiento
     private $descripcion;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $duracion;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Rutina", mappedBy="PlanEntrenamiento", cascade={"persist", "remove"})
-     */
-    private $rutinas;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Alumno")
      */
     private $Alumno;

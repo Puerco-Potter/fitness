@@ -18,31 +18,9 @@ class Entrenamiento
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $series;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $peso;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $descansos;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $observaciones;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Rutina", inversedBy="entrenamientos", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull()
-     */
-    private $Rutina;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ejercicio")

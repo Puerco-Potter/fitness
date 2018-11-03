@@ -1,0 +1,9 @@
+knp_snappy:
+   pdf:
+       enabled:    true
+       binary:     /symfony/wkhtmltox/bin/wkhtmltopdf
+       options:    []
+   image:
+       enabled:    true
+       binary:     /symfony/wkhtmltox/bin/wkhtmltoimage
+       options:    []
