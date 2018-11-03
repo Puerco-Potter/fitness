@@ -1,9 +1,9 @@
 knp_snappy:
    pdf:
        enabled:    true
-       binary:     /symfony/wkhtmltox/bin/wkhtmltopdf
+       binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
        options:    []
    image:
        enabled:    true
-       binary:     /symfony/wkhtmltox/bin/wkhtmltoimage
+       binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
        options:    []

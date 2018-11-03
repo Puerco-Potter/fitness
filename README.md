@@ -128,3 +128,5 @@ Informe de ingresos por profesor</br>
 <b>Gestión de combos</b></br>
 Creación y modificación de combos</br>
 Aplicación de combos</br>
+
+Informes
