@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}FFG: Bienvenido{% endblock %}</title>
+        <link rel="stylesheet" href="/{{ root }}/bootstrap/bootstrap.min.css" />
+        <link rel="icon" href="/{{ root }}{{ imagenes }}/favito.png" type="image/x-icon"/>
+        {% block stylesheets %}
+        {% endblock %}
+        <style>
+            body, html, .container {
+                height: 100%;
+            }
+            body{
+                background-color: black;
+            }
+            .bg {
+                /* The image used */
+                background-image: url("/{{ root }}{{ imagenes }}/fondoclaro2.jpg");
+
+                /* Full height */
+                height: 100%;
+
+                /* Center and scale the image nicely */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bg">
+            <div class="container">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}         
+            </div>
+        <div>
+    </body>
+</html>
