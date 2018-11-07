@@ -1,0 +1,43 @@
+{% extends 'base3.html.twig' %}
+
+    {% block stylesheets %}
+    <style>
+       .bg {
+                /* The image used */
+                background-image: url("/{{ root }}{{ imagenes }}/fondoclaro2.jpg");
+
+                /* Full height */
+                height: 100%;
+
+                /* Center and scale the image nicely */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        .superior{
+            height: 10%;
+        }
+
+        .superior2{
+            height: 56%;
+        }
+        .contenido{
+            height: 100%;
+        }
+
+        .etiqueta{
+            color:white;
+            text-shadow: 0px 0px 8px rgba(255,64,255,1), -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;
+            font-size: large;
+        }
+    </style>
+    {% endblock %}
+    {% block body %}
+        <div class="text-center contenido">
+            <div class="superior"></div>
+            <label class="font-weight-bold etiqueta"><h2>SISTEMA DE INFORMES</h2></label>
+            <br>
+
+        </div>
+        
+    {% endblock %}
