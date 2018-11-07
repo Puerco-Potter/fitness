@@ -12,19 +12,35 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FichaMedicaController extends AdminController
 {
-
     public function imprimirAction()
     {
             // get contract from database
             $id = $this->request->query->get('id');
             $em = $this->getDoctrine()->getEntityManager();
             $fc = $em->getRepository(FichaMedica::Class)->find($id);
+            $alumno = (string)$fc->getAlumno();
+            //dump($fc);exit;
             
             $pdf = new \FPDF();
 
             $pdf->AddPage();
+            $pdf->Image('./imagenes/fitnesConFondo.png',10,10,-300);
+
             $pdf->SetFont('Arial','B',16);
-            $pdf->Cell(40,10,'Hello World!');
+            $pdf->Write(11,utf8_decode('Ficha médica de '.$alumno.' del '.(string)$fc->getFecha()->format('Y/m/d')));
+            $pdf->Ln(10);
+            
+            $pdf->Write(11,((string)$fc->getPeso()));
+            /*
+            $pdf->Cell(35, 8,boolval(utf8_decode($fc->getEnfermedadesCardiacas())));
+            $pdf->Ln();
+            $pdf->Cell(35, 8,utf8_decode((string)$fc->getLesionesCronicas()));
+            $pdf->Ln();
+            $pdf->Cell(35, 8,utf8_decode((string)$fc->getRehabilitacion()));
+            $pdf->Ln();
+            $pdf->Cell(35, 8,utf8_decode((string)$fc->getPerderPeso()));
+            $pdf->Ln();
+            */
 
             return new Response($pdf->Output(), 200, array(
                 'Content-Type' => 'application/pdf'));            
@@ -68,7 +84,7 @@ class FichaMedicaController extends AdminController
             $this->get('knp_snappy.pdf')->generate('http://www.google.fr', 'coso.pdf');
             */
             // Message + redirection
-            $this->addFlash('success', 'Yey');
+            //$this->addFlash('success', 'Yey');
 
         return $this->redirectToRoute('easyadmin', array(
             'action' => 'list',

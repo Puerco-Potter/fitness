@@ -303,6 +303,7 @@ easy_admin:
                 fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Agregar Profesor', title: 'Agregar Profesor'}
+                    - { name: 'informar', icon: 'print', label: 'Informar'}
             form:
                 fields:
                     - { type: 'tab' , label: 'Información Basica', icon: 'user' }
@@ -321,6 +322,7 @@ easy_admin:
                 title: 'Modificar profesor'
             new:
                 title: 'Agregar nuevo profesor'
+            controller: App\Controller\ProfesorController
         Sala:
             class: App\Entity\Sala
             show:
