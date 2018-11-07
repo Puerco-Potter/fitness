@@ -145,12 +145,10 @@ class PagoCuotaController extends AdminController
             ->set('p.cajero', "'".(string)$cajero."'")
             ->where('p.id = '.$entity->getId());
         return $qqb->getQuery()->getResult();
-        */
     }
     public function persistEntity($entity)
     {
         parent::persistEntity($entity);
-<<<<<<< HEAD
         $mov = new Movimiento();
         $mov->setHora($entity->getFechaYHora());
         $mov->setConcepto('Cuota');
@@ -166,8 +164,7 @@ class PagoCuotaController extends AdminController
 
 
         $mov->setCaja($results[0]);
-=======
->>>>>>> master
+
         
     }
 }
