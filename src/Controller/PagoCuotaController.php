@@ -145,7 +145,6 @@ class PagoCuotaController extends AdminController
             ->set('p.cajero', "'".(string)$cajero."'")
             ->where('p.id = '.$entity->getId());
         return $qqb->getQuery()->getResult();
-        
     }
     public function persistEntity($entity)
     {
@@ -166,5 +165,6 @@ class PagoCuotaController extends AdminController
 
         $mov->setCaja($results[0]);
 
+        
     }
 }
