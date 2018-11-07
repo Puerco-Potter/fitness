@@ -55,10 +55,9 @@ class PagoCuota
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-<<<<<<< HEAD
+
 	private $Cajero;
-=======
-    private $Cajero;
+
     
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Combo", inversedBy="PagoCuotas")
@@ -70,7 +69,7 @@ class PagoCuota
      * @ORM\JoinColumn(nullable=false)
      */
     private $Movimiento;
->>>>>>> master
+
     
 	public function __construct()
     {
