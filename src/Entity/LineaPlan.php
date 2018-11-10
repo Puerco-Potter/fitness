@@ -203,6 +203,12 @@ class LineaPlan
      */
     private $c7;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PlanEntrenamiento", inversedBy="lineas")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $planEntrenamiento;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -648,6 +654,18 @@ class LineaPlan
     public function setC7(?string $c7): self
     {
         $this->c7 = $c7;
+
+        return $this;
+    }
+
+    public function getPlanEntrenamiento(): ?PlanEntrenamiento
+    {
+        return $this->planEntrenamiento;
+    }
+
+    public function setPlanEntrenamiento(?PlanEntrenamiento $planEntrenamiento): self
+    {
+        $this->planEntrenamiento = $planEntrenamiento;
 
         return $this;
     }
