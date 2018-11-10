@@ -2,6 +2,7 @@ security:
     encoders:
         App\Entity\User:
             algorithm: bcrypt
+        Symfony\Component\Security\Core\User\User: plaintext
 
     # ...
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
@@ -12,8 +13,8 @@ security:
         in_memory:
             memory:
                 users:
-                    adminarphos:
-                        password: admin879023
+                    admin:
+                        password: admin
                         roles: 'ROLE_USER'
         our_db_provider:
             entity:
@@ -33,7 +34,7 @@ security:
                 check_path: login
                 default_target_path: /admin
             pattern:    ^/
-            provider: our_db_provider
+            provider: chain_provider
             logout:       true
 
             # activate different ways to authenticate
