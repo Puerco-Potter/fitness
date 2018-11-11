@@ -36,9 +36,15 @@ class PlanEntrenamiento
      */
     private $Profesor;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LineaPlan", mappedBy="planEntrenamiento", orphanRemoval=true)
+     */
+    private $lineas;
+
     public function __construct()
     {
         $this->rutinas = new ArrayCollection();
+        $this->lineas = new ArrayCollection();
     }
 
     public function getId()
@@ -123,6 +129,37 @@ class PlanEntrenamiento
     public function setProfesor(?Profesor $Profesor): self
     {
         $this->Profesor = $Profesor;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LineaPlan[]
+     */
+    public function getLineas(): Collection
+    {
+        return $this->lineas;
+    }
+
+    public function addLinea(LineaPlan $linea): self
+    {
+        if (!$this->lineas->contains($linea)) {
+            $this->lineas[] = $linea;
+            $linea->setPlanEntrenamiento($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLinea(LineaPlan $linea): self
+    {
+        if ($this->lineas->contains($linea)) {
+            $this->lineas->removeElement($linea);
+            // set the owning side to null (unless already changed)
+            if ($linea->getPlanEntrenamiento() === $this) {
+                $linea->setPlanEntrenamiento(null);
+            }
+        }
 
         return $this;
     }

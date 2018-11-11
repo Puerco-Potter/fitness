@@ -177,6 +177,6 @@ class Movimiento
     
     public function __toString()
     {
-        return $this->getTipo().' de '.(string)$this->getMonto().' - '.$this->getConcepto(). (string) $this->getHora()->format('H:i:s');
+        return $this->getTipo().' de $'.(string)$this->getMonto().' - '.$this->getConcepto().' a las '.(string) $this->getHora()->format('H:i:s');
     }
 }
