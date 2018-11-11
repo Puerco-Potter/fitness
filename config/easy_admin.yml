@@ -491,6 +491,7 @@ easy_admin:
             list:
                 title: 'Lista de actividades'
                 actions:
+                    - { name: 'informar', icon: 'print', label: 'Informar'}
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Actividad', title: 'Crear nueva Actividad'}
                 fields:
                     - 'nombre'
@@ -511,6 +512,7 @@ easy_admin:
                 title: 'Modificar Actividad'
             new:
                 title: 'Crear nueva Actividad'
+            controller: App\Controller\ActividadController
         Equipamiento:
             class: App\Entity\Equipamiento
             show:

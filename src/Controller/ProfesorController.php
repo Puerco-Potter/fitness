@@ -9,6 +9,8 @@ use App\Entity\Combo;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use DateInterval;
+
 
 class ProfesorController extends AdminController
 {
@@ -31,6 +33,8 @@ GROUP BY clase.id
         $p = $em->getRepository(Profesor::Class)->find($id);
 
         $qb = $em->createQueryBuilder();
+        $now = new \DateTime();
+        $treinta = (new \DateTime())->sub(new DateInterval('P30D'));
         $resultados = $qb
         ->addSelect('COUNT(a.id) as count')
         ->addSelect('c.id')
@@ -39,39 +43,55 @@ GROUP BY clase.id
         ->innerjoin('App\Entity\Inscripcion','i','WITH','c.id = i.Clase')
         ->innerjoin('App\Entity\Alumno','a','WITH','a.id = i.Alumno')
         ->groupBy('c.id')
-        ->where('p.id = :id')
+        ->add('where', $qb->expr()->between(
+            'i.fechaInscripcion',
+            ':from',
+            ':to'
+            )
+        )
+        ->setParameters(array('from' => $treinta, 'to' => $now))
+        ->andWhere('p.id = :id')
         ->setParameter('id',$id)
         ->getQuery()
         ->getResult();
-        //dump($resultados[0]);exit;
-        if ($resultados)
+        //dump($resultados);exit;
+        $labels = '';
+        $valores = '';
+        //dump($resultados);exit;
+        if ($resultados != [])
         {
-            $labels = '';
-            $valores = '';
             foreach ($resultados as &$coso)
             {
-                $labels = $labels.(string)$coso['id'];//.',';
-                //$labels = substr_replace($labels ,"", -1);
-                $valores = $valores.(string)$coso['count'];//.'|';
-                //$valores = substr_replace($labels ,"", -1);
+                $labels = $labels.(string)$coso['id'].'|';
+                $valores = $valores.(string)$coso['count'].',';
             }
-        }
-        $url = 'https://chart.googleapis.com/chart?cht=bvg&chs=300x300&';
+            $labels = substr_replace($labels ,'', -1);
+            $valores = substr_replace($valores ,'', -1);
+        $url = 'https://chart.googleapis.com/chart?cht=bvg&chs=200x200&';
         $url = $url.'chd=t:'.$valores.'&';
         $url = $url.'chl='.$labels;
         //dump($url);exit;
 
-
-
-
-
         $pdf = new \FPDF();
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',16);
-        $pdf->Write(11,utf8_decode($url));
+        $pdf->Write(11,utf8_decode('Cantidad de alumnos en los últimos días de: '));
         $pdf->Ln(10);
-        $pdf->Image($url,60,30,90,0,'PNG');
+        $pdf->Write(11,utf8_decode((string)$p));
+        $pdf->Ln(10);
+        //$pdf->Write(11,utf8_decode($url));
+        //$pdf->Ln(10);
+        $pdf->Image($url,60,30,0,0,'PNG');
         return new Response($pdf->Output(), 200, array(
-            'Content-Type' => 'application/pdf'));    
+            'Content-Type' => 'application/pdf'));
+        }
+        else
+        {
+            $this->addFlash('error',sprintf('No hay suficientes datos'));
+            return $this->redirectToRoute('easyadmin', array(
+                'action' => 'list',
+                'entity' => 'Profesor'
+            ));
+        }    
     }
 }
