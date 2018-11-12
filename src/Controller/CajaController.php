@@ -3,32 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Caja;
+use App\Entity\Movimiento;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 
 class CajaController extends AdminController
 {
-
-    public function updateEntity($entity)
-    {
-        $abuelo = get_parent_class(get_parent_class($this));
-        $abuelo::updateEntity($entity);
-        $this->addFlash('success',sprintf('Se ha cerrado la caja de hoy: '.$entity->__toString()));
-    }
-    public function prePersistEntity($entity)
-    {
-        parent::prePersistEntity($entity);
-        $entity->setEmpleadoApertura($this->get('security.token_storage')->getToken()->getUser());
-    
-        #$entityManager = $this->getDoctrine()->getManager();
-        #$entityManager->persist($entity);
-        #$entityManager->flush();
-    }
-    /**
-     * The method that is executed when the user performs a 'edit' action on an entity.
-     *
-     * @return Response|RedirectResponse
-     */
-    protected function editAction()
+    public function cerrarAction()
     {
         $this->dispatch(EasyAdminEvents::PRE_EDIT);
 
@@ -87,6 +68,82 @@ class CajaController extends AdminController
         );
 
         return $this->executeDynamicMethod('render<EntityName>Template', array('edit', $this->entity['templates']['edit'], $parameters));
+    
+        $id = $this->request->query->get('id');
+        $entity = $this->em->getRepository(Caja::class)->find($id);
+        $entity->setCierre(new \DateTime());
+        $entity->setEmpleadoCierre($this->get('security.token_storage')->getToken()->getUser());
+      
+        $em->persist($caja);
+
+        $this->em->flush();
+
+        $this->addFlash('warning',sprintf('Caja cerrada'));
+
+        return $this->redirectToRoute('easyadmin', array(
+            'action' => 'list',
+            'entity' => 'Caja',
+        ));
+
+    }
+    public function balanceAction()
+    {
+        $id = $this->request->query->get('id');
+        $em = $this->getDoctrine()->getEntityManager();
+        $caja = $em->getRepository(Caja::class)->find($id);
+        $movimientos = $em->getRepository(Movimiento::class)->findBy(array('Caja' => $caja->getId()));
+        
+        if ($movimientos==[])
+        {
+            $this->addFlash('warning',sprintf('No hay movimientos'));
+            return $this->redirectToRoute('easyadmin', array(
+                'action' => 'list',
+                'entity' => 'Caja'
+            ));
+        }
+        $lista = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'Horario', 'type' => 'string'],
+            ['label' => 'Tipo', 'type' => 'string'],
+            ['label' => 'Concepto', 'type' => 'string'],
+            ['label' => 'Observaciones', 'type' => 'string'],
+            ['label' => 'Monto', 'type' => 'number'],
+            ['label' => 'Válido', 'type' => 'boolean']
+        ];
+        array_push($lista, $elemento);
+        foreach ($movimientos as $movimiento)
+        {
+            $elemento = array();
+            array_push($elemento, (string) $movimiento->getHora()->format('H:i:s'));
+            array_push($elemento, $movimiento->getTipo());
+            array_push($elemento, $movimiento->getConcepto());
+            array_push($elemento, $movimiento->getObservaciones());
+            array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
+            array_push($elemento, $movimiento->getValido());
+            array_push($lista,$elemento);
+        }        
+        $chart = new TableChart();
+        $chart->getData()->setArrayToDataTable($lista);
+        $chart->getOptions()->setHeight('50%');
+        $chart->getOptions()->setWidth('50%');
+        return $this->render('bar.html.twig', array('chart' => $chart));
+    }
+
+    public function updateEntity($entity)
+    {
+        $abuelo = get_parent_class(get_parent_class($this));
+        $abuelo::updateEntity($entity);
+        $this->addFlash('success',sprintf('Se ha cerrado la caja de hoy: '.$entity->__toString()));
+    }
+    public function prePersistEntity($entity)
+    {
+        parent::prePersistEntity($entity);
+        $entity->setEmpleadoApertura($this->get('security.token_storage')->getToken()->getUser());
+    
+        #$entityManager = $this->getDoctrine()->getManager();
+        #$entityManager->persist($entity);
+        #$entityManager->flush();
     }
 
     /**

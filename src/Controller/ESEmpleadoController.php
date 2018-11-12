@@ -17,7 +17,7 @@ class ESEmpleadoController extends AdminController
 
         parent::persistEntity($entity);
 
-        #dump($results);exit;
+        //dump($results);exit;
         if ($results != [])
         {            
             if ($results[0]->getTipo() == $tipo)
@@ -34,7 +34,7 @@ class ESEmpleadoController extends AdminController
                     $coso = 'Entrada';
                 }
 
-                $noti->setDescripcion($entity->getTipo().' sin su '.$coso.' de '.(string)$entity->getEmpleado());
+                $noti->setDescripcion($entity->getTipo().' sin su '.$coso.' de '.(string)$entity->getEmpleado().' a las '.(string) $entity->getFechaYHora()->format('Y-m-d'));
 
                 $em->persist($noti);
                 $em->flush();

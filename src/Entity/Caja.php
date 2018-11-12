@@ -74,6 +74,11 @@ class Caja
         return $this->id;
     }
 
+    public function getCerrada()
+    {
+        return ($this->cierre!=NULL);
+    }
+
     public function getFecha(): ?\DateTimeInterface
     {
         return $this->fecha;

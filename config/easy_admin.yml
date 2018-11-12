@@ -79,6 +79,8 @@ easy_admin:
                     - {property: 'descripcion', label: 'Descripción'}
         Alumno:
             class: App\Entity\Alumno
+            actions:
+                - { name: 'informemorosos', icon: 'print', title: 'Informe de morosos', label: 'Informe alumnos morosos'}
             disabled_actions: ['delete']
             show:
                 title: 'Datos del alumno'
@@ -201,7 +203,7 @@ easy_admin:
                 title: 'Lista de Fichas médicas'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar Ficha Médica', title: 'Registrar Ficha Médica'}
-                    - { name: 'imprimir', icon: 'print', label: 'Imprimir'}
+                    #- { name: 'imprimir', icon: 'print', label: 'Imprimir'}
                 fields: ['alumno', 'fecha']
             form:
                 fields:
@@ -295,6 +297,8 @@ easy_admin:
                 title: 'Agregar nuevo empleado'
         Profesor:
             class: App\Entity\Profesor
+            actions:
+                - { name: 'informeprofesores', icon: 'print', title: 'Informe de profesores', label: 'Informe de todos los profesores'}
             show:
                 title: 'Datos del profesor'
                 fields: [ { property: 'cuit', label: 'CUIT' }, { property: 'dni', label: 'DNI'}, 'apellido', 'nombre', { property: 'relacion', label: 'Relación Laboral'}, { property: 'direccion', label: 'Dirección'}, { property: 'fechaNacimiento', label: 'Fecha de Nacimiento'}, 'Telefonos', 'Clases']
@@ -303,7 +307,9 @@ easy_admin:
                 fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Agregar Profesor', title: 'Agregar Profesor'}
-                    - { name: 'informar', icon: 'print', label: 'Informar'}
+                    - { name: 'informar', icon: 'print', label: 'Informe de clases'}
+                    - { name: 'asistencias', icon: 'exclamation', label: 'Informe de asistencias'}
+
             form:
                 fields:
                     - { type: 'tab' , label: 'Información Basica', icon: 'user' }
@@ -353,7 +359,8 @@ easy_admin:
             show:
                 title: 'Ver inscripción'
                 fields:
-                    - {property: 'fechaInscripcion', label: 'Fecha'}
+                    - {property: 'fechaInscripcion', label: 'Fecha de inscripción'}
+                    - {property: 'fechaFin', label: 'Fecha de fin de inscripción'}
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
                     - {property: 'cuota'}
@@ -371,7 +378,8 @@ easy_admin:
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar Inscripción', title: 'Registrar Inscripción'}
                 fields:
-                    - {property: 'fechaInscripcion', label: 'Fecha'}
+                    - {property: 'fechaInscripcion', label: 'Fecha de inscripción'}
+                    - {property: 'fechaFin', label: 'Fecha de fin de inscripción'}
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
                     - {property: 'cuota', label: 'Precio'}
@@ -386,7 +394,8 @@ easy_admin:
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-7', label: 'Información Basica' }
-                    - {property: 'fechaInscripcion', label: 'Fecha'}
+                    - {property: 'fechaInscripcion', label: 'Fecha de inscripción'}
+                    - {property: 'fechaFin', label: 'Fecha de fin de inscripción'}
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
                     - {property: 'cuota', type: 'money', type_options: { currency: 'ARS' }}
@@ -404,8 +413,9 @@ easy_admin:
                 title: 'Modificar Inscripción'
             controller: App\Controller\InscripcionController     
         Clase:
-        #DONE reemplazar atributos a posteriori
             class: App\Entity\Clase
+            actions:
+                - { name: 'informeclases', icon: 'copy', title: 'Informe de clases', label: 'Informe de clases'}
             show:
                 title: 'Clase'
                 fields:
@@ -425,7 +435,6 @@ easy_admin:
             list:
                 title: 'Clases'
                 actions:
-                    #- { name: 'export', icon: 'copy', title: 'Informe de alumnos', label: 'Informe de alumnos'}
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Clase', title: 'Crear nueva Clase'}
                 fields: 
                     - {property: 'Profesor'}
@@ -456,12 +465,11 @@ easy_admin:
                     - {property: 'jueves'}
                     - {property: 'viernes'}
                     - {property: 'sabado'}
-
             new:
                 title: 'Crear nueva clase'
             edit:
                 title: 'Modificar clase'
-            #controller: App\Controller\ClaseController
+            controller: App\Controller\ClaseController
         TelefonoEmpleado:
             class: App\Entity\TelefonoEmpleado
             show:
@@ -485,13 +493,16 @@ easy_admin:
                 title: 'Agregar nuevo teléfono' 
         Actividad:
             class: App\Entity\Actividad
+            actions:
+                - { name: 'informeactividades', icon: 'print', title: 'Informe de actividades', label: 'Informe de todas las actividades'}
             show:
                 title: 'Actividad'
                 fields: ['nombre', 'grupal', 'descripcion', { property: 'estado', label: '¿Se realiza actualmente?' }, { property: 'fechaInicio', label: 'Fecha de inicio de actividad' }]
             list:
                 title: 'Lista de actividades'
                 actions:
-                    - { name: 'informar', icon: 'print', label: 'Informar'}
+                #    - { name: 'informeactividades', icon: 'print', title: 'Informe de actividades', label: 'Informe de todas las actividades'}
+                    - { name: 'informar', icon: 'print', label: 'Informe de clases'}
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Actividad', title: 'Crear nueva Actividad'}
                 fields:
                     - 'nombre'
@@ -818,7 +829,7 @@ easy_admin:
                     - {property: 'observaciones'}
         Caja:
             class: App\Entity\Caja
-            disabled_actions: ['delete']
+            disabled_actions: ['delete','edit']
             edit:
                 title: 'Cerrar caja'
                 fields:
@@ -843,8 +854,9 @@ easy_admin:
                     - {property: 'Movimientos'}
             list:
                 actions:
+                    - { name: 'balance', icon: 'money', label: 'Balance diario'}     
                     - { name: 'new', icon: 'plus-circle', label: 'Abrir Caja', title: 'Abrir Caja'}
-                    - { name: 'edit', label: 'Cerrar caja', title: 'Cerrar caja'}                
+                    - { name: 'cerrar', label: 'Cerrar caja', title: 'Cerrar caja'}           
             controller: App\Controller\CajaController
         Movimiento:
             class: App\Entity\Movimiento
@@ -861,7 +873,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-8', label: '' }
                     - { property: 'tipo', type: 'choice', label: 'Tipo de movimiento', type_options: {choices:{'Ingreso':'Ingreso','Egreso':'Egreso'}}}
                     - {property: 'hora', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}}
-                    - {property: 'concepto', type: 'choice', type_options: {choices:{'Cuota': 'Cuota','Compra de insumos': 'Compra de insumos','Pago de servicio': 'Pago de servicio', 'Compra': 'Compra'}}}
+                    - {property: 'concepto', type: 'choice', type_options: {choices:{'Cuota': 'Cuota','Compra de insumos': 'Compra de insumos','Pago de servicio': 'Pago de servicio', 'Compra': 'Compra', 'Donación': 'Donación','Otros': 'Otros'}}}
                     - {property: 'monto'}
                     - {property: 'observaciones'}
                     #- {property: 'Caja'}

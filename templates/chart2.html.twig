@@ -1,0 +1,13 @@
+<!-- index.html.twig -->
+<html>
+<head></head>
+<body>
+    <div id="div_chart1"></div>
+    <div id="div_chart2"></div>
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw([chart1, chart2], ['div_chart1', 'div_chart2']) }}
+    </script>
+</body>
+</html>
