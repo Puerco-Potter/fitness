@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}FUSSION FITNESS{% endblock %}</title>
+        <LINK href="{{asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+        <script src="//code.jquery.com/jquery.min.js"></script>
+        <LINK href="{{asset('fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        {% block footable %}
+        {% endblock %}
+    </head>
+    <body >
+
+        
+        {% block body %}
+        {% endblock %}
+
+        {% block footer %}
+       	<div class="d-flex justify-content-center text-light fondo-negro">
+       		<div>
+	       		
+	       	</div>
+       	</div>
+        {% endblock %}
+        {% block javascripts %}
+        <script type="text/javascript">
+            jQuery(function($){
+                $('.table').footable();
+            });
+        </script>
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,396 @@
+
+{% extends "PlanEntrenamiento/base.html.twig" %}
+{% import _self as formMacros %}
+{% macro imprimirLinea(linea) %}
+    <li>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                {{ form_row(linea.musculo, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_row(linea.ejercicio, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="form-group col-sm-8">
+                    {{ form_row(linea.observacion, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+        </div>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                <th scope="col">Semana 1</th>
+                <th scope="col">Semana 2</th>
+                <th scope="col">Semana 3</th>
+                <th scope="col">Semana 4</th>
+                <th scope="col">Semana 5</th>
+                <th scope="col">Semana 6</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        
+                            <div class="form-group">
+                                <label>Dias:</label>
+                                {{ form_widget(linea.dias1, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        
+                    </td>
+                    <td>
+                        
+                            <div class="form-group">
+                                <label>Dias:</label>
+                                {{ form_widget(linea.dias2, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        
+                    </td>
+                    <td>
+                        
+                            <div class="form-group mb-2">
+                                <label>Dias:</label>
+                                {{ form_widget(linea.dias3, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                         
+                    </td>
+                    <td>
+                        
+                            <div class="form-group mb-2">
+                                <label>Dias:</label>
+                                {{ form_widget(linea.dias4, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                         
+                    </td>
+                    <td>
+                        
+                            <div class="form-group mb-2">
+                                <label>Dias:</label>
+                                {{ form_widget(linea.dias5, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                         
+                    </td>
+                    <td>
+                        
+                            <div class="form-group mb-2">
+                                <label>Dias:</label>
+                                {{ form_widget(linea.dias6, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                         
+                    </td>
+                </tr>
+                <tr>
+                        <td>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>F:</label>
+                                        {{ form_widget(linea.f1, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>F:</label>
+                                        {{ form_widget(linea.f2, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>F:</label>
+                                        {{ form_widget(linea.f3, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>F:</label>
+                                        {{ form_widget(linea.f4, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>F:</label>
+                                        {{ form_widget(linea.f5, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>F:</label>
+                                        {{ form_widget(linea.f6, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                    
+                </tr>
+                <tr>
+                        <td>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>S:</label>
+                                        {{ form_widget(linea.s1, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>S:</label>
+                                        {{ form_widget(linea.s2, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>S:</label>
+                                        {{ form_widget(linea.s3, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>S:</label>
+                                        {{ form_widget(linea.s4, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>S:</label>
+                                        {{ form_widget(linea.s5, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>S:</label>
+                                        {{ form_widget(linea.s6, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                        
+                </tr>
+                <tr>
+                        <td>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>R:</label>
+                                        {{ form_widget(linea.r1, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>R:</label>
+                                        {{ form_widget(linea.r2, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>R:</label>
+                                        {{ form_widget(linea.r3, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>R:</label>
+                                        {{ form_widget(linea.r4, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>R:</label>
+                                        {{ form_widget(linea.r5, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>R:</label>
+                                        {{ form_widget(linea.r6, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                        
+                </tr>
+                <tr>
+                        <td>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>C:</label>
+                                        {{ form_widget(linea.c1, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>C:</label>
+                                        {{ form_widget(linea.c2, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>C:</label>
+                                        {{ form_widget(linea.c3, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>C:</label>
+                                        {{ form_widget(linea.c4, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>C:</label>
+                                        {{ form_widget(linea.c5, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="form-group mb-2">
+                                        <label>C:</label>
+                                        {{ form_widget(linea.c6, { 'attr': {'class': 'form-control w-50'} }) }}
+                                    </div>
+                                </div> 
+                            </td>
+                        
+                </tr>
+            </tbody>
+        </table>
+    </li>
+{% endmacro %}
+
+{% block body %}
+<div class="container bg-light">
+    <hr>
+    <div class="d-flex justify-content-center">
+        <h2>
+            Planes de Entrenamiento:
+        </h2>
+    </div>
+    <hr>
+    {{ form_start(form) }}
+    <label class="font-weight-bold etiqueta" for="username">INGRESE SU DNI:</label>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            {{ form_row(form.descripcion, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group col-sm-4">
+            {{ form_row(form.Alumno, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_row(form.Profesor, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group col-sm-4">
+            {{ form_row(form.save, { 'attr': {'class': 'btn btn-dark w-100'} } ) }}
+        </div>
+    </div>
+    
+    {{ form_row(form.save) }}
+    {{ form_errors(form.Alumno) }}
+    <h3>Lineas</h3>
+        <ul class="lineas" data-prototype="{{ formMacros.imprimirLinea(form.lineas.vars.prototype)|e('html_attr') }}">
+            
+            {% for linea in form.lineas %}
+                {{ formMacros.imprimirLinea(linea) }}
+            {% endfor %}
+        </ul>
+
+
+    {{ form_end(form) }}
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var $collectionHolder;
+
+    // setup an "add a tag" link
+    var $addLineaPlanButton = $('<button type="button" class="add_lineaplan_link btn btn-dark">Agregar Linea</button>');
+    var $newLinkLi = $('<li></li>').append($addLineaPlanButton);
+
+    jQuery(document).ready(function() {
+        // Get the ul that holds the collection of tags
+        $collectionHolder = $('ul.lineas');
+
+        // add the "add a tag" anchor and li to the tags ul
+        $collectionHolder.append($newLinkLi);
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addLineaPlanButton.on('click', function(e) {
+            e.preventDefault();
+            // add a new tag form (see next code block)
+            addLineaPlanForm($collectionHolder, $newLinkLi);
+        });
+    });
+</script>
+
+<script>
+    function addLineaPlanForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+        
+            // get the new index
+            var index = $collectionHolder.data('index');
+        
+            var newForm = prototype;
+            // You need this only if you didn't set 'label' => false in your tags field in TaskType
+            // Replace '__name__label__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            // newForm = newForm.replace(/__name__label__/g, index);
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            newForm = newForm.replace(/__name__/g, index);
+        
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+        
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+
+            // also add a remove button, just for this example
+            $newFormLi.append('<a href="#" class="remove-linea btn btn-danger">X</a><hr>');
+        
+            $newLinkLi.before($newFormLi);
+
+            // handle the removal, just for this example
+            $('.remove-linea').click(function(e) {
+                e.preventDefault();
+                
+                $(this).parent().remove();
+                
+                return false;
+            });
+        }
+</script>
+{% endblock %}
+
+

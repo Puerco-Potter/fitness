@@ -1,0 +1,54 @@
+{% extends "PlanEntrenamiento/base.html.twig" %}
+
+{% block footable %}
+<script src="{{asset('footable/js/footable.min.js') }}"></script>
+<LINK href="{{asset('footable/css/footable.standalone.min.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+<div class="container container-normal bg-light">
+    <hr>
+    <div class="d-flex justify-content-center fondo-negro">
+        <h2>
+            Planes de Entrenamiento:
+        </h2>
+    </div>
+    <hr>
+    <div class="form-group">
+        <a class="btn btn-dark float-right" role="button" href="{{ path('nuevoPlan') }}">Crear Nuevo Plan</a>
+    </div>
+                <!-- Table Markup -->
+    <table class="table footable" data-filtering="true" data-sorting="true" data-empty="Sin Obras" data-paging-count-format="{CP} de {TP}"
+    data-paging="true" data-paging-size="20" data-filter-placeholder="Buscar">
+        <thead>
+            <tr>
+                <th>Descripcion</th>
+                <th>Alumno</th>
+                <th>DNI Alumno</th>
+                <th>Profesor</th>
+                <th>Observaciones</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for plan in planes %}
+                <tr>
+                    <td>{{ plan.descripcion }}</td>
+                    <td>{{ plan.Alumno }}</td>
+                    <td>{{ plan.Alumno.dni }}</td>
+                    <td>{{ plan.Profesor }}</td>
+                    <td>
+                        {% for linea in plan.lineas %}
+                            {{ linea.observacion }}
+                            <br>
+                        {% endfor %}
+                    </td>
+                    <td><a class="btn btn-dark" href="{{ path('plan', {'id': plan.id}) }}">Ver Plan</a>
+                        <a class="btn btn-dark" href="{{ path('plan', {'id': plan.id}) }}">Editar Plan</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
