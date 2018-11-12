@@ -37,7 +37,7 @@ class PlanEntrenamiento
     private $Profesor;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\LineaPlan", mappedBy="planEntrenamiento", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\LineaPlan", mappedBy="planEntrenamiento", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $lineas;
 
