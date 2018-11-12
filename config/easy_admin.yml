@@ -79,6 +79,8 @@ easy_admin:
                     - {property: 'descripcion', label: 'Descripción'}
         Alumno:
             class: App\Entity\Alumno
+            actions:
+                - { name: 'informemorosos', icon: 'print', title: 'Informe de morosos', label: 'Informe alumnos morosos'}
             disabled_actions: ['delete']
             show:
                 title: 'Datos del alumno'

@@ -33,6 +33,14 @@
             </a>
         </div>
     {% endif %}
+    {% if _entity_config.name in ['Alumno'] %}
+        <div class="button-action">
+            <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informemorosos' })) }}">
+                <i class="fa fa-download"></i>
+                Informe de morosos
+            </a>
+        </div>
+    {% endif %}
 
 {% endblock global_actions %}
 

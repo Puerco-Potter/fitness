@@ -93,6 +93,14 @@ class CajaController extends AdminController
         $caja = $em->getRepository(Caja::class)->find($id);
         $movimientos = $em->getRepository(Movimiento::class)->findBy(array('Caja' => $caja->getId()));
         
+        if ($movimientos==[])
+        {
+            $this->addFlash('warning',sprintf('No hay movimientos'));
+            return $this->redirectToRoute('easyadmin', array(
+                'action' => 'list',
+                'entity' => 'Caja'
+            ));
+        }
         $lista = array();
         $elemento = array();
         $elemento = [
