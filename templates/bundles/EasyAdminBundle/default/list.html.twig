@@ -9,12 +9,37 @@
             </a>
         </div>
     {% endif %}
+    {% if _entity_config.name in ['Actividad'] %}
+        <div class="button-action">
+            <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeactividades' })) }}">
+                <i class="fa fa-download"></i>
+                Informe global
+            </a>
+        </div>
+    {% endif %}
+    {% if _entity_config.name in ['Profesor'] %}
+        <div class="button-action">
+            <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeprofesores' })) }}">
+                <i class="fa fa-download"></i>
+                Informe global
+            </a>
+        </div>
+    {% endif %}
+    {% if _entity_config.name in ['Clase'] %}
+        <div class="button-action">
+            <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeclases' })) }}">
+                <i class="fa fa-download"></i>
+                Informe global
+            </a>
+        </div>
+    {% endif %}
+
 {% endblock global_actions %}
 
 {% block item_actions %}
     {% set filtered_actions = {} %}
     {% for action_name, action_config in _list_item_actions %}
-        {% if action_name == 'anular' and item.anulado|default(false) == TRUE %}
+        {% if (action_name == 'anular' and item.anulado|default(false) == TRUE) or (action_name == 'cerrar' and item.cerrada|default(false) == TRUE) %}
             {# remove the 'delete' action from published items #}
         {% else %}
             {% set filtered_actions = filtered_actions|merge([action_config]) %}

@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use DateInterval;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InscripcionRepository")
@@ -23,6 +24,11 @@ class Inscripcion
      * @ORM\Column(type="date")
      */
     private $fechaInscripcion;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $fechaFin;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Clase")
@@ -91,6 +97,7 @@ class Inscripcion
     public function __construct()
     {
         $this->fechaInscripcion = new \DateTime();
+        $this->fechaFin = (new \DateTime())->add(new DateInterval('P30D'));
         $this->lunes = FALSE;
         $this->martes = FALSE;
         $this->miercoles = FALSE;
@@ -105,6 +112,18 @@ class Inscripcion
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getFechaFin(): ?\DateTimeInterface
+    {
+        return $this->fechaFin;
+    }
+
+    public function setFechaFin(\DateTimeInterface $fechaFin): self
+    {
+        $this->fechaFin = $fechaFin;
+
+        return $this;
     }
 
     public function getFechaInscripcion(): ?\DateTimeInterface
