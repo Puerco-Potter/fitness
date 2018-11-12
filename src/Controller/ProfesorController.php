@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use DateInterval;
-use CMEN\GoogleChartsBundle\GoogleCharts\Charts\ScatterChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
 
 
@@ -53,18 +53,31 @@ GROUP BY clase.id
         $ar_dinero = array();
         $c_alumnos = array();
         $c_dinero = array();
+
         array_push($c_alumnos, 'Profesores');
         array_push($c_alumnos, 'Alumnos');
         array_push($c_dinero, 'Profesores');
         array_push($c_dinero, 'Dinero');
         array_push($ar_alumnos, $c_alumnos);    
-        array_push($ar_dinero, $c_dinero);        
+        array_push($ar_dinero, $c_dinero);   
+        
+        $lista_tabla = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'Profesor', 'type' => 'string'],
+            ['label' => 'Cantidad de alumnos', 'type' => 'number'],
+            ['label' => 'Ingresos', 'type' => 'number']
+        ];
+        array_push($lista_tabla, $elemento);
+
         foreach ($profesores as $profesor)
         {
             $c_alumnos = array();
             $c_dinero = array();
+            $elemento = array();
             array_push($c_alumnos, (string)$profesor);
             array_push($c_dinero, (string)$profesor);
+            array_push($elemento, (string)$profesor);
             $contador = 0;
             $dinero = 0;
             foreach ($inscripciones as $inscripcion)
@@ -82,9 +95,17 @@ GROUP BY clase.id
             array_push($c_alumnos, $contador);
             array_push($c_dinero, $dinero);
             array_push($ar_alumnos, $c_alumnos);    
-            array_push($ar_dinero, $c_dinero);    
+            array_push($ar_dinero, $c_dinero);  
+
+            array_push($elemento, ['v' => $contador, 'f' => (string)$contador]);
+            array_push($elemento, ['v' => $dinero, 'f' => '$'.(string)$dinero]);
+            array_push($lista_tabla, $elemento);  
         }
         //dump($resultado);exit;
+        
+       
+        $table = new TableChart();
+        $table->getData()->setArrayToDataTable($lista_tabla);    
 
 
         $chart1 = new BarChart();
@@ -92,20 +113,32 @@ GROUP BY clase.id
         $chart1->getOptions()->setTitle('Informe global de cantidad de alumnos de profesores');
         $chart1->getOptions()->getHAxis()->setTitle('Cantidad de alumnos');
         $chart1->getOptions()->getHAxis()->setMinValue(0);
+        $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Profesores');
-        $chart1->getOptions()->setWidth(900);
-        $chart1->getOptions()->setHeight(500);
+        #$chart1->getOptions()->setWidth(900);
+        $chart1->getOptions()->setHeight(400);
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
-        $chart2->getOptions()->setTitle('Informe global de dinero recaudado de profesores');
-        $chart2->getOptions()->getHAxis()->setTitle('Dinero recaudado');
+        $chart2->getOptions()->setTitle('Informe global de ingresos de profesores');
+        $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
         $chart2->getOptions()->getHAxis()->setMinValue(0);
+        $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart2->getOptions()->getVAxis()->setTitle('Profesores');
-        $chart2->getOptions()->setWidth(900);
-        $chart2->getOptions()->setHeight(500);
+        #$chart2->getOptions()->setWidth(900);
+        $chart2->getOptions()->setHeight(400);
+        $now =  new \DateTime();
 
-        return $this->render('chart2.html.twig', array('chart1' => $chart1, 'chart2' => $chart2));
+        return $this->render('/informes/informes2.html.twig',
+        array('table'=> $table,
+            'chart1' => $chart1,
+        'chart2' => $chart2,
+        'titulo' => 'Informe de profesores',
+        'sub1' => 'Cantidad de alumnos e ingresos por profesor',
+        'sub2' => 'Gráficos de cantidad de alumnos',
+        'sub3' => 'Cantidad de ingresos',
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+    ));
     }
     public function asistenciasAction()
     {
@@ -131,6 +164,7 @@ GROUP BY clase.id
                 }
             }
         }
+
         if ($eses==[])
         {
             $this->addFlash('warning',sprintf('No hay registros de Entradas/Salidas'));
@@ -139,39 +173,42 @@ GROUP BY clase.id
                 'entity' => 'Profesor'
             ));
         }
-
         $lista = array();
         $elemento = array();
-        array_push($elemento, 'Días');
-        array_push($elemento, 'Entrada');
+        array_push($elemento, 'Día');
+        array_push($elemento, 'Horario');
+        array_push($elemento, 'Tipo');
         //array_push($elemento, 'Tipo');
         array_push($lista, $elemento);  
+        
+        
+        /*
+        $dia = (int) $max[3].$max[4];
+        foreach( range(1, $dia) as $numero)
+        {
+            $elemento = array();
+
+            
+        }
+        */
 
         foreach ($eses as $ese)
         {
             $elemento = array();
             $dia =  idate('d',$ese->getFechaYHora()->getTimestamp());
             array_push($elemento, $dia);
-            $hora = (int) idate('H',$ese->getFechaYHora()->getTimestamp());
-            $minuto = (int) idate('i',$ese->getFechaYHora()->getTimestamp());
-            $tiempo = ($hora + $minuto/60);
-            array_push($elemento, $tiempo);
-            //array_push($elemento, $ese->getTipo());
+            $hora =(string)$ese->getFechaYHora()->format('H:i:s');
+            array_push($elemento, $hora);
+            array_push($elemento, $ese->getTipo());
             array_push($lista, $elemento);
         }
         //dump($lista);exit;
-        $chart = new ScatterChart();
+        $chart = new TableChart();
         $chart->getData()->setArrayToDataTable($lista);
-        $chart->getOptions()->setTitle('Lista de Entradas y salidas del profesor en el mes');
-        $chart->getOptions()->getHAxis()->setTitle('Día');
-        $chart->getOptions()->getHAxis()->setMinValue(1);
-        $chart->getOptions()->getVAxis()->setTitle('Horario');
-        $chart->getOptions()->getVAxis()->setMinValue(0);
-        $chart->getOptions()->getLegend()->setPosition('none');
-        $chart->getOptions()->setHeight(500);
-        $chart->getOptions()->setWidth(900);
 
-        return $this->render('bar.html.twig', array('chart' => $chart));
+        return $this->render('informes/informes.html.twig', array('chart' => $chart,
+        'titulo'=> 'Lista de entradas y salidas de '.(string)$profesor.' durante el mes',
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),));
 
 
 
@@ -250,6 +287,7 @@ GROUP BY clase.id
         $chart1->getOptions()->setTitle('Informe por clases activas de '.(string)$profesor);
         $chart1->getOptions()->getHAxis()->setTitle('Cantidad de alumnos');
         $chart1->getOptions()->getHAxis()->setMinValue(0);
+        $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Clases');
         $chart1->getOptions()->setWidth(900);
         $chart1->getOptions()->setHeight(500);
@@ -257,7 +295,7 @@ GROUP BY clase.id
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
         $chart2->getOptions()->setTitle('Informe por clases activas de '.(string)$profesor);
-        $chart2->getOptions()->getHAxis()->setTitle('Dinero recaudado');
+        $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
         $chart2->getOptions()->getHAxis()->setMinValue(0);
         $chart2->getOptions()->getVAxis()->setTitle('Clases');
         $chart2->getOptions()->setWidth(900);

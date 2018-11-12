@@ -42,16 +42,20 @@
             </br>
             
             <label class="font-weight-bold etiqueta">Fecha de Impresión: {{fechaimpresion}}</label>
-
             </br>
+            <label class="font-weight-bold etiqueta"><h3>{{sub1}}</h3></label>
+            <div id="div_table"></div>
+            </br>
+            <label class="font-weight-bold etiqueta"><h3>{{sub2}}</h3></label>
             <div id="div_chart1"></div>
             </br>
+            <label class="font-weight-bold etiqueta"><h3>{{sub3}}</h3></label>
             <div id="div_chart2"></div>
             </br>
             
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <script type="text/javascript">
-                {{ gc_draw([chart1, chart2], ['div_chart1', 'div_chart2']) }}
+                {{ gc_draw([table, chart1, chart2], ['div_table','div_chart1', 'div_chart2']) }}
             </script>
 
     {% endblock %}

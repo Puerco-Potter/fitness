@@ -442,6 +442,7 @@ easy_admin:
                 title: 'Clases'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Clase', title: 'Crear nueva Clase'}
+                    - { name: 'alumnosdeclase', icon: 'copy', title: 'Lista de alumnos', label: 'Lista de alumnos'}
                 fields: 
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
@@ -862,7 +863,7 @@ easy_admin:
                     - {property: 'Movimientos'}
             list:
                 actions:
-                    - { name: 'balance', icon: 'money', label: 'Balance diario'}     
+                    - { name: 'balance', icon: 'money', label: 'Balance'}     
                     - { name: 'new', icon: 'plus-circle', label: 'Abrir Caja', title: 'Abrir Caja'}
                     - { name: 'cerrar', label: 'Cerrar caja', title: 'Cerrar caja'}           
             controller: App\Controller\CajaController
