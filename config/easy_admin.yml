@@ -829,6 +829,8 @@ easy_admin:
                     - {property: 'observaciones'}
         Caja:
             class: App\Entity\Caja
+            actions:
+                - { name: 'liquidacion', icon: 'print', title: 'Liquidación del mes', label: 'Liquidación del mes'}
             disabled_actions: ['delete','edit']
             edit:
                 title: 'Cerrar caja'
