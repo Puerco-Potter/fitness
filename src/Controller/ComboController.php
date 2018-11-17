@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Combo;
 use App\Entity\Alumno;
 use App\Entity\Inscripcion;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller as coso;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 
 class ComboController extends AdminController
@@ -19,10 +18,12 @@ class ComboController extends AdminController
         $em = $this->getDoctrine()->getEntityManager();
 
         $alumno = $em->getRepository(Alumno::class)->find($id);
-
         $alumno->setBalance($alumno->getBalance() - $entity->getMonto());
-      
         $em->persist($alumno);
+        $em->flush();
+
+        $entity->setSaldo(-$monto);
+        $em->persist($entity);
         $em->flush();
     }
 

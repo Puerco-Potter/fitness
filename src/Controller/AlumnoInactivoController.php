@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Alumno;
 use App\Entity\AlumnoInactivo;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller as coso;
 
 class AlumnoInactivoController extends AdminController
 {

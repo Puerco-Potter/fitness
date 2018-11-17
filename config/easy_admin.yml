@@ -373,6 +373,7 @@ easy_admin:
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
                     - {property: 'cuota'}
+                    - {property: 'saldo'}
                     - {property: 'clasesTotales'}
                     - {property: 'clasesRestantes'}
                     - {property: 'lunes'}
@@ -388,7 +389,7 @@ easy_admin:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar Inscripción', title: 'Registrar Inscripción'}
                 fields:
                     - {property: 'fechaInscripcion', label: 'Fecha de inscripción'}
-                    - {property: 'fechaFin', label: 'Fecha de fin de inscripción'}
+                    - {property: 'fechaFin', label: 'Fin de inscripción'}
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
                     - {property: 'cuota', label: 'Precio'}
@@ -948,6 +949,7 @@ easy_admin:
                     - {property: 'fecha'}
                     - {property: 'Alumno'}
                     - {property: 'monto'}
+                    - {property: 'saldo'}
                     - {property: 'Inscripciones'}
                     - {property: 'PagoCuotas', label: 'Pagos de cuotas'}
             list:
