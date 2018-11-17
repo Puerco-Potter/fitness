@@ -637,6 +637,7 @@ easy_admin:
             class: App\Entity\PlanEntrenamiento
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-7', label: '' }
                     - { property: 'descripcion', type: 'text', label: 'Descripción'}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
@@ -649,19 +650,20 @@ easy_admin:
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nuevo Plan de entrenamiento', title: 'Crear nuevo Plan de entrenamiento'}
                 fields:
-                    - { property: 'descripcion', type: 'text', label: 'Descripción'}
+                    - {property: 'descripcion', type: 'text', label: 'Descripción'}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
             show:
                 title: 'Ver plan de entrenamiento'
                 fields:
-                    - { property: 'descripcion', type: 'text', label: 'Descripción'}
+                    - {property: 'descripcion', type: 'text', label: 'Descripción'}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
         Entrenamiento:
             class: App\Entity\Entrenamiento
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-7', label: '' }
                     - {property: 'Ejercicio'}
                     - {property: 'observaciones'}
             edit:
@@ -682,6 +684,7 @@ easy_admin:
             class: App\Entity\Ejercicio
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-7', label: '' }
                     - {property: 'descripcion', label: 'Descripción'}
                     - {property: 'zonaMuscular'}
                     - {property: 'Equipamiento'}
@@ -708,11 +711,12 @@ easy_admin:
             class: App\Entity\Musculo
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: '' }
                     - {property: 'nombre'}
             edit:
                 title: 'Modificar Musculo'
             new:
-                title: 'Nuevo entrenamiento'
+                title: 'Nuevo Musculo'
             list:
                 title: 'Lista de Musculo'
                 fields:
