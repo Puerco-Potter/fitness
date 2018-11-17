@@ -217,23 +217,15 @@ easy_admin:
             form:
                 fields:
                     - { type: 'tab' , label: 'Informacion Basica', icon: 'user' }
+                    - { type: 'group', css_class: 'col-sm-8'  }  
                     - { property: 'alumno', type: 'easyadmin_autocomplete',type_options: {class: 'App\Entity\Alumno'}, label: 'Alumno'}
                     - { property: 'fecha', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha'}
                     - { property: 'grupoSanguineo', type: 'choice', label: 'Grupo Sanguíneo', type_options:{choices:{'A-':'A-','A+':'A+','B-':'B-','B+':'B+','AB-':'AB-','AB+':'AB+','0-':'0-','0+':'0+','Otro':'Otro'}}}
-                    - { property: 'peso', type: 'integer', label: 'Peso', help: 'Ingrese el peso en kilogramos'}                  
-                    - { property: 'altura', type: 'integer', label: 'Altura', help: 'Ingrese la altura en centímetros'}
-                    - { property: 'talla', type: 'text', label: 'Talla'}  
+                    - { property: 'peso', type: 'integer', label: 'Peso (Kg)'}                  
+                    - { property: 'altura', type: 'integer', label: 'Altura (cm)'}
+                    - { property: 'talla', type: 'text', label: 'Talla', help: 'Ingrese su talla si la conoce'}  
                     - { property: 'telefonoEmergencia', type: 'text', label: 'Teléfono de emergencia'}  
                     - { type: 'tab' , label: 'Informacion Medica', icon: 'user' }
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Enfermedades' }      
-                    - { property: 'enfermedadesCardiacas',type: 'checkbox', label: '¿Posee enfermedades cardíacas?'}
-                    - { property: 'hipertenso',type: 'checkbox', label: '¿Es hipertenso?'}
-                    - { property: 'diabetes',type: 'checkbox', label: '¿Es diabético/a?'}
-                    - { property: 'bajoTratamiento',type: 'checkbox', label: '¿Se encuentra bajo algún tipo de tratamiento?'}
-                    - { property: 'sobrepeso',type: 'checkbox', label: '¿Tiene sobrepeso?'}
-                    - { property: 'listaEnfermedades', type: 'textarea', label: 'Lista de enfermedades'}
-                    - { property: 'medicamentos',type: 'checkbox', label: '¿Toma algún tipo de medicamento?'}
-                    - { property: 'listaMedicamentos', type: 'textarea', label: 'Lista de medicamentos'} 
                     - { type: 'group', css_class: 'col-sm-6', label: 'Particularidades Fisicas' }
                     - { property: 'dieta',type: 'checkbox', label: '¿Se encuentra a dieta?'}
                     - { property: 'perderPeso',type: 'checkbox', label: '¿Se encuentra en un plan de perder peso?'}
@@ -246,10 +238,23 @@ easy_admin:
                     - { property: 'rehabilitacion',type: 'checkbox', label: '¿Se encuentra en rehabilitación?'}
                     - { property: 'hidratado',type: 'checkbox', label: '¿Se encuentra bien hidratado?'}
                     - { property: 'conoceImc',type: 'checkbox', label: '¿Conoce su IMC?'}
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Enfermedades' }      
+                    - { property: 'enfermedadesCardiacas',type: 'checkbox', label: '¿Posee enfermedades cardíacas?'}
+                    - { property: 'hipertenso',type: 'checkbox', label: '¿Es hipertenso?'}
+                    - { property: 'diabetes',type: 'checkbox', label: '¿Es diabético/a?'}
+                    - { property: 'bajoTratamiento',type: 'checkbox', label: '¿Se encuentra bajo algún tipo de tratamiento?'}
+                    - { property: 'sobrepeso',type: 'checkbox', label: '¿Tiene sobrepeso?'}
+                    - { property: 'listaEnfermedades', type: 'textarea', label: '>'}
+                    - { type: 'group', css_class: 'col-sm-6', label: 'En caso de Embarazo', collapsible: true  }  
                     - { property: 'embarazada',type: 'checkbox', label: '¿Se encuentra embarazada?'}       
-                    - { property: 'tiempoEmbarazo', type: 'text', label: 'Tiempo de embarazo'}               
+                    - { property: 'tiempoEmbarazo', type: 'text', label: 'Tiempo de embarazo'}     
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Medicaciones', collapsible: true  }  
+                    - { property: 'medicamentos',type: 'checkbox', label: '¿Toma algún tipo de medicamento?'}
+                    - { property: 'listaMedicamentos', type: 'textarea', label: '>'}   
                     - { type: 'tab' , label: 'Observaciones', icon: 'user' }
-                    - { property: 'observaciones', type: 'textarea', label: 'Observaciones particulares'} 
+                    - { type: 'group', css_class: 'col-sm-8', label: 'Describa lo que crea necesario' }  
+                    - { property: 'observaciones', type: 'textarea', label: '>'} 
+
             new:
                 title: 'Agregar nueva ficha médica'
             edit:
@@ -853,6 +858,7 @@ easy_admin:
             edit:
                 title: 'Cerrar caja'
                 fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: '' }
                     - {property: 'cierre', label: 'Horario de cierre', type: 'time', type_options:{widget: 'single_text'}}
             new:
                 title: 'Registrar apertura de caja'
