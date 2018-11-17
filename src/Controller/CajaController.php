@@ -341,6 +341,9 @@ class CajaController extends AdminController
         }
         #dump($entity);exit;
         if ($newForm->isSubmitted() && $newForm->isValid()) {
+
+            $entity->setSaldoFinal($entity->getSaldoInicial());
+
             $this->dispatch(EasyAdminEvents::PRE_PERSIST, array('entity' => $entity));
 
             $this->executeDynamicMethod('prePersist<EntityName>Entity', array($entity));
