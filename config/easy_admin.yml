@@ -784,15 +784,16 @@ easy_admin:
             class: App\Entity\PagoCuota
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-8', label: 'Inscripción' }
+                    - { type: 'group', css_class: 'col-sm-7', label: '¿Es una Inscripción?', collapsible: true}
                     - {property: 'Inscripcion'}
-                    - {property: 'Combo', help: 'Ingrese un Combo o una Inscripción, a pagar'}
+                    - { type: 'group', css_class: 'col-sm-7', label: '¿Es un Combo?', collapsible: true }                    
+                    - {property: 'Combo'}
+                    - { type: 'group', css_class: 'col-sm-7', }                   
                     - {property: 'monto', type: 'money', type_options: { currency: 'ARS' }}
-                    - { type: 'group', css_class: 'col-sm-4', label: 'Mes de inscripción' }
                     - {property: 'mes'}
                     - {property: 'ano', label: 'Año'}
-                    - { type: 'group', css_class: 'col-sm-8', label: 'Momento de pago' }
-                    - {property: 'fechaYHora', label: '', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}}
+                    - {property: 'fechaYHora', label: 'Fecha-Hora', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}}
+                    #- { type: 'divider' }
             new:
                 title: 'Registrar pago de cuota'
             edit:
