@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -24,6 +25,11 @@ class InscripcionType extends AbstractType
                     'class' => Clase::class,
                     'attr' => array('class' => 'col-lg-6')
                 ])
+            ->add('fechaFin', DateType::class, [
+                'widget' => 'single_text',
+                'label' => 'Fecha de fin',
+                'attr' => array('class' => 'col-lg-6')
+            ])
             ->add('clasesRestantes', NumberType::class, [
                 'label' => 'Clases Restantes',
                 'attr' => array('class' => 'col-lg-6')

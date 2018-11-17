@@ -51,7 +51,7 @@ easy_admin:
               icon: 'exclamation-circle'
               children:
                 - {label: "Asistencias de alumnos", entity: 'AsistenciaAlumno', icon: 'address-card'}
-                - { icon: 'plus-circle', label: 'Registrar asistencia', url: 'http://localhost:8080/fitness/public/asistencia'}
+                - { icon: 'plus-circle', label: 'Registrar asistencia', url: '../asistencia'}
                 - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'users'}
                 - {label: "Registro de suplencias", entity: 'RegistroSuplencia', icon: 'male'}
             - label: 'Gestión de pagos'
@@ -393,11 +393,12 @@ easy_admin:
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar Inscripción', title: 'Registrar Inscripción'}
                 fields:
-                    - {property: 'fechaInscripcion', label: 'Fecha de inscripción'}
-                    - {property: 'fechaFin', label: 'Fin de inscripción'}
+                    - {property: 'fechaInscripcion', label: 'Inicio'}
+                    - {property: 'fechaFin', label: 'Fin'}
                     - {property: 'Alumno'}
                     - {property: 'Clase'}
-                    - {property: 'cuota', label: 'Precio'}
+                    - {property: 'cuota', label: 'Cuota'}
+                    - {property: 'saldo', label: 'Deuda'}
                     - {property: 'clasesTotales'}
                     - {property: 'clasesRestantes'}
                     #- {property: 'lunes'}
@@ -971,7 +972,8 @@ easy_admin:
                     - {property: 'fecha'}
                     - {property: 'Alumno'}
                     - {property: 'Inscripciones', label: 'Inscripciones', type: 'array'}
-                    - {property: 'monto'}
+                    - {property: 'monto', label: 'Cuota'}
+                    - {property: 'saldo', label: 'Deuda'}
             controller: App\Controller\ComboController
     list:
         actions:
