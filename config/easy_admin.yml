@@ -43,7 +43,7 @@ easy_admin:
               icon: 'tasks'
               children:
                 - { label: "Planes de Entrenamiento" , entity: 'PlanEntrenamiento', icon: 'pinterest-p' }
-                - { icon: 'plus-circle', label: 'Crear plan', url: 'http://localhost:8080/fitness/public/nuevoplan'}
+                - { icon: 'plus-circle', label: 'Crear plan', url: '../planes'}
             #    - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'deviantart' }
                 - { label: "Musculos" , entity: 'Musculo', icon: 'deviantart' }
                 - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'deaf' }
