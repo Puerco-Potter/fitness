@@ -1,98 +1,177 @@
 {% extends "PlanEntrenamiento/base.html.twig" %}
         
 {% block body %}
-<div class="bg-light">
+<div class="container bg-light">
     <hr>
-    <div class="d-flex justify-content-center fondo-negro">
+    <div class="d-flex justify-content-center fondo-negro bg-morado text-light">
         <h2>
             Plan "{{ plan.descripcion }}":
         </h2>
     </div>
     <hr>
+    <a class="btn btn-dark" href="{{ path('planes') }}"><i class="fa fa-arrow-left"></i> Volver</a>
     <h3>Alumno: {{ plan.Alumno }}</h3>
     <h3>Profesor: {{ plan.Profesor }}</h3>
+    <hr>
+    <h3>Semana 1 ( {{ plan.dias1 }})</h3>
+    <hr>
+    {% for linea in plan.lineas %}
+    <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                <th class="bg-morado" scope="col">Musculo:</th>
+                <td scope="col">{{ linea.Musculo }}</td>
+                <th class="bg-morado" scope="col">Ejercicio:</th>
+                <td scope="col">{{ linea.Ejercicio }}</td>
+                <th class="bg-morado" scope="col">Observacion:</th>
+                <td colspan="3" scope="col">{{ linea.Observacion }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                    <th class="bg-morado">F:</th>
+                    <td scope="col">{{ linea.f1 }}</td>
+                    <th class="bg-morado">S:</th>
+                    <td scope="col">{{ linea.s1 }}</td>
+                    <th class="bg-morado">R:</th>
+                    <td scope="col">{{ linea.r1 }}</td>
+                    <th class="bg-morado">C:</th>
+                    <td scope="col">{{ linea.c1 }}</td>
+            </tbody>
+        </table>
+    {% endfor %}
+
+    <h3>Semana 2 ( {{ plan.dias2 }})</h3>
+    <hr>
+    {% for linea in plan.lineas %}
+    <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                <th class="bg-morado" scope="col">Musculo:</th>
+                <td scope="col">{{ linea.Musculo }}</td>
+                <th class="bg-morado" scope="col">Ejercicio:</th>
+                <td scope="col">{{ linea.Ejercicio }}</td>
+                <th class="bg-morado" scope="col">Observacion:</th>
+                <td colspan="3" scope="col">{{ linea.Observacion }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                    <th class="bg-morado">F:</th>
+                    <td scope="col">{{ linea.f2 }}</td>
+                    <th class="bg-morado">S:</th>
+                    <td scope="col">{{ linea.s2 }}</td>
+                    <th class="bg-morado">R:</th>
+                    <td scope="col">{{ linea.r2 }}</td>
+                    <th class="bg-morado">C:</th>
+                    <td scope="col">{{ linea.c2 }}</td>
+            </tbody>
+        </table>
+    {% endfor %}
+
+    <h3>Semana 3 ( {{ plan.dias3 }})</h3>
+    <hr>
+    {% for linea in plan.lineas %}
+    <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                <th class="bg-morado" scope="col">Musculo:</th>
+                <td scope="col">{{ linea.Musculo }}</td>
+                <th class="bg-morado" scope="col">Ejercicio:</th>
+                <td scope="col">{{ linea.Ejercicio }}</td>
+                <th class="bg-morado" scope="col">Observacion:</th>
+                <td colspan="3" scope="col">{{ linea.Observacion }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                    <th class="bg-morado">F:</th>
+                    <td scope="col">{{ linea.f3 }}</td>
+                    <th class="bg-morado">S:</th>
+                    <td scope="col">{{ linea.s3 }}</td>
+                    <th class="bg-morado">R:</th>
+                    <td scope="col">{{ linea.r3 }}</td>
+                    <th class="bg-morado">C:</th>
+                    <td scope="col">{{ linea.c3 }}</td>
+            </tbody>
+        </table>
+    {% endfor %}
+    <h3>Semana 4 ( {{ plan.dias4 }})</h3>
+    <hr>
+    {% for linea in plan.lineas %}
+    <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                <th class="bg-morado" scope="col">Musculo:</th>
+                <td scope="col">{{ linea.Musculo }}</td>
+                <th class="bg-morado" scope="col">Ejercicio:</th>
+                <td scope="col">{{ linea.Ejercicio }}</td>
+                <th class="bg-morado" scope="col">Observacion:</th>
+                <td colspan="3" scope="col">{{ linea.Observacion }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                    <th class="bg-morado">F:</th>
+                    <td scope="col">{{ linea.f4 }}</td>
+                    <th class="bg-morado">S:</th>
+                    <td scope="col">{{ linea.s4 }}</td>
+                    <th class="bg-morado">R:</th>
+                    <td scope="col">{{ linea.r4 }}</td>
+                    <th class="bg-morado">C:</th>
+                    <td scope="col">{{ linea.c4 }}</td>
+            </tbody>
+        </table>
+    {% endfor %}
+    <h3>Semana 5 ( {{ plan.dias5 }})</h3>
+    <hr>
+    {% for linea in plan.lineas %}
+    <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                <th class="bg-morado" scope="col">Musculo:</th>
+                <td scope="col">{{ linea.Musculo }}</td>
+                <th class="bg-morado"  scope="col">Ejercicio:</th>
+                <td scope="col">{{ linea.Ejercicio }}</td>
+                <th class="bg-morado" scope="col">Observacion:</th>
+                <td colspan="3" scope="col">{{ linea.Observacion }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                    <th class="bg-morado">F:</th>
+                    <td scope="col">{{ linea.f5 }}</td>
+                    <th class="bg-morado">S:</th>
+                    <td scope="col">{{ linea.s5 }}</td>
+                    <th class="bg-morado">R:</th>
+                    <td scope="col">{{ linea.r5 }}</td>
+                    <th class="bg-morado">C:</th>
+                    <td scope="col">{{ linea.c5 }}</td>
+            </tbody>
+        </table>
+    {% endfor %}
+    <h3>Semana 6 ( {{ plan.dias6 }})</h3>
+    <hr>
+    {% for linea in plan.lineas %}
+    <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                <th class="bg-morado" scope="col">Musculo:</th>
+                <td scope="col">{{ linea.Musculo }}</td>
+                <th class="bg-morado" scope="col">Ejercicio:</th>
+                <td scope="col">{{ linea.Ejercicio }}</td>
+                <th class="bg-morado" scope="col">Observacion:</th>
+                <td colspan="3" scope="col">{{ linea.Observacion }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                    <th class="bg-morado">F:</th>
+                    <td scope="col">{{ linea.f6 }}</td>
+                    <th class="bg-morado">S:</th>
+                    <td scope="col">{{ linea.s6 }}</td>
+                    <th class="bg-morado">R:</th>
+                    <td scope="col">{{ linea.r6 }}</td>
+                    <th class="bg-morado">C:</th>
+                    <td scope="col">{{ linea.c6 }}</td>
+            </tbody>
+        </table>
+    {% endfor %}
     
-            {% for linea in plan.lineas %}
-            <h4>Musculo: {{ linea.Musculo }} Ejercicio:{{ linea.Ejercicio }} Observacion:{{ linea.observacion }}</h4>
-                
-                <table class="table table-dark table-bordered">
-                    <thead>
-                        <tr>
-                        <th colspan="4" scope="col">Semana 1</th>
-                        <th colspan="4" scope="col">Semana 2</th>
-                        <th colspan="4" scope="col">Semana 3</th>
-                        <th colspan="4" scope="col">Semana 4</th>
-                        <th colspan="4" scope="col">Semana 5</th>
-                        <th colspan="4" scope="col">Semana 6</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="4">{{ linea.dias1 }}</td>
-                            <td colspan="4">{{ linea.dias2 }}</td>
-                            <td colspan="4">{{ linea.dias3 }}</td>
-                            <td colspan="4">{{ linea.dias4 }}</td>
-                            <td colspan="4">{{ linea.dias5 }}</td>
-                            <td colspan="4">{{ linea.dias6 }}</td>
-                        </tr>
-                        <tr>
-                            <th>F</th>
-                            <th>S</th>
-                            <th>R</th>
-                            <th>C</th>
-                            <th>F</th>
-                            <th>S</th>
-                            <th>R</th>
-                            <th>C</th>
-                            <th>F</th>
-                            <th>S</th>
-                            <th>R</th>
-                            <th>C</th>
-                            <th>F</th>
-                            <th>S</th>
-                            <th>R</th>
-                            <th>C</th>
-                            <th>F</th>
-                            <th>S</th>
-                            <th>R</th>
-                            <th>C</th>
-                            <th>F</th>
-                            <th>S</th>
-                            <th>R</th>
-                            <th>C</th>
-                        </tr>
-                        <tr>
-                            <td>{{ linea.f1 }}</td>
-                            <td>{{ linea.s1 }}</td>
-                            <td>{{ linea.r1 }}</td>
-                            <td>{{ linea.c1 }}</td>
-                            <td>{{ linea.f2 }}</td>
-                            <td>{{ linea.s2 }}</td>
-                            <td>{{ linea.r2 }}</td>
-                            <td>{{ linea.c2 }}</td>
-                            <td>{{ linea.f3 }}</td>
-                            <td>{{ linea.s3 }}</td>
-                            <td>{{ linea.r3 }}</td>
-                            <td>{{ linea.c3 }}</td>
-                            <td>{{ linea.f4 }}</td>
-                            <td>{{ linea.s4 }}</td>
-                            <td>{{ linea.r4 }}</td>
-                            <td>{{ linea.c4 }}</td>
-                            <td>{{ linea.f5 }}</td>
-                            <td>{{ linea.s5 }}</td>
-                            <td>{{ linea.r5 }}</td>
-                            <td>{{ linea.c5 }}</td>
-                            <td>{{ linea.f6 }}</td>
-                            <td>{{ linea.s6 }}</td>
-                            <td>{{ linea.r6 }}</td>
-                            <td>{{ linea.c6 }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            {% endfor %}
-        
                     
-                    <td><a class="btn btn-dark" href="{{ path('planes') }}">Volver Al Listado</a>
-                    </td>
 </div>
 {% endblock %}

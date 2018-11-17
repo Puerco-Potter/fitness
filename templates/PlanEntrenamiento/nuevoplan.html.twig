@@ -15,6 +15,7 @@
         <table class="table table-dark">
             <thead>
                 <tr>
+                <th scope="col"></th>
                 <th scope="col">Semana 1</th>
                 <th scope="col">Semana 2</th>
                 <th scope="col">Semana 3</th>
@@ -24,61 +25,13 @@
                 </tr>
             </thead>
             <tbody>
+                
                 <tr>
-                    <td>
-                        
-                            <div class="form-group">
-                                <label>Dias:</label>
-                                {{ form_widget(linea.dias1, { 'attr': {'class': 'form-control'} }) }}
-                            </div>
-                        
-                    </td>
-                    <td>
-                        
-                            <div class="form-group">
-                                <label>Dias:</label>
-                                {{ form_widget(linea.dias2, { 'attr': {'class': 'form-control'} }) }}
-                            </div>
-                        
-                    </td>
-                    <td>
-                        
-                            <div class="form-group mb-2">
-                                <label>Dias:</label>
-                                {{ form_widget(linea.dias3, { 'attr': {'class': 'form-control'} }) }}
-                            </div>
-                         
-                    </td>
-                    <td>
-                        
-                            <div class="form-group mb-2">
-                                <label>Dias:</label>
-                                {{ form_widget(linea.dias4, { 'attr': {'class': 'form-control'} }) }}
-                            </div>
-                         
-                    </td>
-                    <td>
-                        
-                            <div class="form-group mb-2">
-                                <label>Dias:</label>
-                                {{ form_widget(linea.dias5, { 'attr': {'class': 'form-control'} }) }}
-                            </div>
-                         
-                    </td>
-                    <td>
-                        
-                            <div class="form-group mb-2">
-                                <label>Dias:</label>
-                                {{ form_widget(linea.dias6, { 'attr': {'class': 'form-control'} }) }}
-                            </div>
-                         
-                    </td>
-                </tr>
-                <tr>
+                        <th scope="col">Frecuencia:</th>
                         <td>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <label>F:</label>
+                                         
                                         {{ form_widget(linea.f1, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -86,7 +39,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <label>F:</label>
+                                         
                                         {{ form_widget(linea.f2, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -94,7 +47,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>F:</label>
+                                         
                                         {{ form_widget(linea.f3, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -102,7 +55,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>F:</label>
+                                         
                                         {{ form_widget(linea.f4, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -110,7 +63,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>F:</label>
+                                         
                                         {{ form_widget(linea.f5, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -118,7 +71,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>F:</label>
+                                         
                                         {{ form_widget(linea.f6, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -126,10 +79,11 @@
                     
                 </tr>
                 <tr>
+                        <th scope="col">Series:</th>
                         <td>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <label>S:</label>
+                                         
                                         {{ form_widget(linea.s1, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -137,7 +91,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <label>S:</label>
+                                         
                                         {{ form_widget(linea.s2, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -145,7 +99,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>S:</label>
+                                         
                                         {{ form_widget(linea.s3, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -153,7 +107,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>S:</label>
+                                         
                                         {{ form_widget(linea.s4, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -161,7 +115,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>S:</label>
+                                         
                                         {{ form_widget(linea.s5, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -169,7 +123,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>S:</label>
+                                         
                                         {{ form_widget(linea.s6, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -177,10 +131,11 @@
                         
                 </tr>
                 <tr>
+                        <th scope="col">Repeticiones:</th>
                         <td>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <label>R:</label>
+                                         
                                         {{ form_widget(linea.r1, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -188,7 +143,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <label>R:</label>
+                                         
                                         {{ form_widget(linea.r2, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -196,7 +151,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>R:</label>
+                                         
                                         {{ form_widget(linea.r3, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -204,7 +159,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>R:</label>
+                                         
                                         {{ form_widget(linea.r4, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -212,7 +167,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>R:</label>
+                                         
                                         {{ form_widget(linea.r5, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -220,7 +175,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>R:</label>
+                                         
                                         {{ form_widget(linea.r6, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -228,10 +183,11 @@
                         
                 </tr>
                 <tr>
+                        <th scope="col">Series:</th>
                         <td>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <label>C:</label>
+                                         
                                         {{ form_widget(linea.c1, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -239,7 +195,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <label>C:</label>
+                                         
                                         {{ form_widget(linea.c2, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -247,7 +203,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>C:</label>
+                                         
                                         {{ form_widget(linea.c3, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -255,7 +211,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>C:</label>
+                                         
                                         {{ form_widget(linea.c4, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -263,7 +219,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>C:</label>
+                                         
                                         {{ form_widget(linea.c5, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -271,7 +227,7 @@
                             <td>
                                 <div class="form-inline">
                                     <div class="form-group mb-2">
-                                        <label>C:</label>
+                                         
                                         {{ form_widget(linea.c6, { 'attr': {'class': 'form-control w-50'} }) }}
                                     </div>
                                 </div> 
@@ -286,14 +242,14 @@
 {% block body %}
 <div class="container bg-light">
     <hr>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center bg-morado text-light">
         <h2>
-            Planes de Entrenamiento:
+            Nuevo Plan de Entrenamiento:
         </h2>
     </div>
     <hr>
+    <a class="btn btn-dark" href="{{ path('planes') }}"><i class="fa fa-arrow-left"></i> Volver</a>
     {{ form_start(form) }}
-    <label class="font-weight-bold etiqueta" for="username">INGRESE SU DNI:</label>
     <div class="row">
         <div class="form-group col-sm-4">
             {{ form_row(form.descripcion, { 'attr': {'class': 'form-control'} }) }}
@@ -304,6 +260,46 @@
         </div>
         <div class="form-group col-sm-4">
             {{ form_row(form.save, { 'attr': {'class': 'btn btn-dark w-100'} } ) }}
+            <br>
+        </div>
+        
+        <div class="form-group col-sm-12">
+            <label class="font-weight-bold etiqueta" for="username">Dias:</label>
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                    <th scope="col">Semana 1</th>
+                    <th scope="col">Semana 2</th>
+                    <th scope="col">Semana 3</th>
+                    <th scope="col">Semana 4</th>
+                    <th scope="col">Semana 5</th>
+                    <th scope="col">Semana 6</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{ form_widget(form.dias1, { 'attr': {'class': 'form-control'} }) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form.dias2, { 'attr': {'class': 'form-control'} }) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form.dias3, { 'attr': {'class': 'form-control'} }) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form.dias4, { 'attr': {'class': 'form-control'} }) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form.dias5, { 'attr': {'class': 'form-control'} }) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form.dias6, { 'attr': {'class': 'form-control'} }) }}
+                        </td>
+                                                
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     
@@ -329,7 +325,7 @@
     var $collectionHolder;
 
     // setup an "add a tag" link
-    var $addLineaPlanButton = $('<button type="button" class="add_lineaplan_link btn btn-dark">Agregar Linea</button>');
+    var $addLineaPlanButton = $('<button type="button" class="add_lineaplan_link btn btn-dark"><i class="fa fa-plus-circle"> Linea</button><hr>');
     var $newLinkLi = $('<li></li>').append($addLineaPlanButton);
 
     jQuery(document).ready(function() {
