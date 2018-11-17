@@ -12,38 +12,27 @@
     <hr>
     <div class="d-flex justify-content-center fondo-negro bg-morado text-light">
         <h2>
-            Planes de Entrenamiento:
+                {{ clase.Profesor }} {{ clase.Actividad }} {{ hoy }}
         </h2>
     </div>
     <hr>
     <a class="btn btn-dark" href="{{ path('panel') }}"><i class="fa fa-arrow-left"></i> Volver</a>
-    <div class="form-group">
-        <a class="btn btn-dark float-right" role="button" href="{{ path('nuevoPlan') }}"><i class="fa fa-plus-circle"></i> Nuevo</a>
-    </div>
                 <!-- Table Markup -->
     <table class="table footable" data-filtering="true" data-sorting="true" data-empty="Sin Resultados" data-paging-count-format="{CP} de {TP}"
     data-paging="true" data-paging-size="20" data-filter-placeholder="Buscar">
         <thead>
             <tr>
-                <th>Descripcion</th>
-                <th>Alumno</th>
-                <th>DNI Alumno</th>
-                <th>Profesor</th>
-                <th></th>
+                <th>Actividades:</th>
             </tr>
         </thead>
         <tbody>
-            {% for plan in planes %}
+            
                 <tr>
-                    <td>{{ plan.descripcion }}</td>
-                    <td>{{ plan.Alumno }}</td>
-                    <td>{{ plan.Alumno.dni }}</td>
-                    <td>{{ plan.Profesor }}</td>
-                    <td><a class="btn btn-dark" href="{{ path('plan', {'id': plan.id}) }}"><i class="fa fa-eye"></i> Ver</a>
-                        <a class="btn btn-dark" href="{{ path('plan', {'id': plan.id}) }}"><i class="fa fa-pencil"></i> Editar</a>
+                    <td>
+                        <a class="btn btn-dark btn-lg btn-block" href=""><i class="fa fa-bolt"></i></a>
                     </td>
                 </tr>
-            {% endfor %}
+            
         </tbody>
     </table>
 </div>

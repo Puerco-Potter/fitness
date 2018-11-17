@@ -1,0 +1,31 @@
+{% extends "PlanEntrenamiento/base.html.twig" %}
+
+{% block footable %}
+<script src="{{asset('footable/js/footable.min.js') }}"></script>
+<LINK href="{{asset('footable/css/footable.standalone.min.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+<div class="container container-normal bg-light">
+    <hr>
+    <img style="height:200px;" width="100%" src="{{asset('imagenes/fondoclaro.jpg') }}">
+    <hr>
+    <div class="d-flex justify-content-center fondo-negro bg-morado text-light">
+        <h2>
+            Panel de Profesores:
+        </h2>
+    </div>
+    <hr>
+    <div class="d-flex flex-column fondo-negro">
+        <h4 class=""><i class="fa fa-user"></i> Humberto Velez</h4>
+        <p class="">Profesor de: <br>Zumba<br>Musculación</p>
+    </div>
+    <hr>
+    <div class="form-group">
+        <a class="btn btn-dark btn-lg btn-block" role="button" href="{{ path('asistenciapanel') }}"><i class="fa fa-users"></i> Asistencia de Alumnos</a>
+        <a class="btn btn-dark btn-lg btn-block" role="button" href="{{ path('planes') }}"><i class="fa fa-heartbeat"></i> Planes de Entrenamiento</a>
+    </div>
+    <hr>
+    
+</div>
+{% endblock %}

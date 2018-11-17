@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\LineaPlan;
+use App\Entity\Actividad;
+use App\Entity\Clase;
 use App\Entity\PlanEntrenamiento;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -120,4 +122,47 @@ class PlanController extends AbstractController
             'plan' => $plan,
         ));
     }
+
+     /**
+     * @Route("/panel", name="panel")
+     */
+    public function panel()
+    {
+
+        return $this->render('PlanEntrenamiento/panel.html.twig', array(
+        ));
+    }
+
+     /**
+     * @Route("/asistenciapanel", name="asistenciapanel")
+     */
+    public function asistencia()
+    {
+        $clases = $this->getDoctrine()
+                     ->getRepository(Clase::class)
+                     ->findAll();
+
+        return $this->render('PlanEntrenamiento/asistencia.html.twig', [
+            'clases' => $clases,
+        ]
+        );
+    }
+
+     /**
+     * @Route("/asistenciaClase/{id}", name="asistenciaClase")
+     */
+    public function asistenciaClase($id)
+    {
+        $clase = $this->getDoctrine()
+                     ->getRepository(Clase::class)
+                     ->find($id);
+        $hoy = date("d/m/Y");
+
+        return $this->render('PlanEntrenamiento/asistenciaClase.html.twig', [
+            'clase' => $clase,
+            'hoy' => $hoy
+        ]
+        );
+    }
+    
 }
