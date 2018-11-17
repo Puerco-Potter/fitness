@@ -158,9 +158,11 @@ class AlumnoController extends AdminController
     public function inactivarAction()
     {
         $id = $this->request->query->get('id');
+        $em = $this->getDoctrine()->getEntityManager();
         $entity = $this->em->getRepository(Alumno::class)->find($id);
         $entity->setInactivo(TRUE);
-        $this->em->flush();
+        $em->persist($entity);
+        $em->flush();
 
         return $this->redirectToRoute('easyadmin', array(
             'action' => 'list',
@@ -172,9 +174,11 @@ class AlumnoController extends AdminController
     public function activarAction()
     {
         $id = $this->request->query->get('id');
+        $em = $this->getDoctrine()->getEntityManager();
         $entity = $this->em->getRepository(Alumno::class)->find($id);
         $entity->setInactivo(FALSE);
-        $this->em->flush();
+        $em->persist($entity);
+        $em->flush();
 
         return $this->redirectToRoute('easyadmin', array(
             'action' => 'list',

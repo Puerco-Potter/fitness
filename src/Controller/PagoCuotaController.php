@@ -133,13 +133,12 @@ class PagoCuotaController extends AdminController
         $em->persist($caja);
 
         $entity->setMovimiento($mov);
-        $em->flush();
+        $em->persist($entity);
 
         if($entity->getInscripcion()!=NULL)
         {
             $iid = $entity->getInscripcion();
             $a = ($em->getRepository(Alumno::class)->findBy(array('id' => $entity->getInscripcion()->getAlumno()->getId())))[0];
-
         }
         else
         {
@@ -149,7 +148,6 @@ class PagoCuotaController extends AdminController
         
         $a->setBalance($a->getBalance()+$entity->getMonto());
         $em->persist($a);
-        $em->flush();
 
         if($entity->getInscripcion()!=NULL)
         {

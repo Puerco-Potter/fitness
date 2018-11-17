@@ -20,7 +20,6 @@ class ComboController extends AdminController
         $alumno = $em->getRepository(Alumno::class)->find($id);
         $alumno->setBalance($alumno->getBalance() - $entity->getMonto());
         $em->persist($alumno);
-        $em->flush();
 
         $entity->setSaldo(-$monto);
         $em->persist($entity);

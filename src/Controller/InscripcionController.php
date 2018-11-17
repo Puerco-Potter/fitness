@@ -68,7 +68,6 @@ class InscripcionController extends AdminController
 
         $entity->setSaldo(-$monto);
         $em->persist($entity);
-        $em->flush();
 
         $a = ($em->getRepository(Alumno::class)->findBy(array('id' => $entity->getAlumno()->getId())))[0];
         $a->setBalance($a->getBalance()-$monto);
