@@ -45,6 +45,11 @@ class Combo
      */
     private $PagoCuotas;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $saldo;
+
     public function __construct()
     {
         $this->fecha = new \DateTime();
@@ -157,13 +162,25 @@ class Combo
     }
 
 	public function __toString()
-    {
-        $cadena = $this->getAlumno();
-        foreach ($this->getInscripciones() as $x)
-        {
-            $cadena = $cadena.' - '.(string) $x->getClase()->getActividad();
-        }
-        return $cadena;
+             {
+                 $cadena = $this->getAlumno();
+                 foreach ($this->getInscripciones() as $x)
+                 {
+                     $cadena = $cadena.' - '.(string) $x->getClase()->getActividad();
+                 }
+                 return $cadena;
+         
+             }
 
+    public function getSaldo(): ?float
+    {
+        return $this->saldo;
+    }
+
+    public function setSaldo(?float $saldo): self
+    {
+        $this->saldo = $saldo;
+
+        return $this;
     }
 }
