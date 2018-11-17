@@ -3,11 +3,84 @@
 namespace App\Controller;
 
 use App\Entity\Alumno;
+use App\Entity\Inscripcion;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as coso;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 
 class AlumnoController extends AdminController
 {
+    public function informeactivosAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $alumnos = $em->getRepository(Alumno::class)->findAll();
+        $inscripciones = $em->getRepository(Inscripcion::class)->findAll();
+
+        foreach ($inscripciones as $key => $inscripcion)
+        {
+            if ($inscripcion->getFechaFin()<=(new \DateTime()))
+            {
+                unset($inscripciones[$key]);
+            }
+        }
+
+        foreach ($alumnos as $key => $alumno)
+        {   
+            $resultado = FALSE;
+            foreach ($inscripciones as $key => $inscripcion)
+            {
+                if ($inscripcion->getAlumno()==$alumno->getId())
+                {
+                    $resultado = TRUE;
+                }
+            }
+            if (!($resultado))
+            {
+                unset($alumnos[$key]);
+            }
+        }
+        
+        $lista = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'DNI', 'type' => 'string'],
+            ['label' => 'Nombre y apellido', 'type' => 'string'],
+            ['label' => 'Localidad', 'type' => 'string'],
+            ['label' => 'Dirección', 'type' => 'string'],
+            ['label' => 'Correo', 'type' => 'string'],
+            ['label' => 'Teléfono', 'type' => 'string']
+        ];
+        array_push($lista, $elemento);
+        if ($alumnos==[])
+        {
+            $this->addFlash('warning',sprintf('No hay alumnos activos'));
+            return $this->redirectToRoute('easyadmin', array(
+                'action' => 'list',
+                'entity' => 'Alumno'
+            ));
+        }
+        foreach ($alumnos as $alumno)
+        {
+            $elemento = array();
+            array_push($elemento, (string) $alumno->getDNI());
+            array_push($elemento, (string) $alumno);
+            array_push($elemento, (string) $alumno->getLocalidad());
+            array_push($elemento, (string) $alumno->getDireccion());
+            array_push($elemento, (string) $alumno->getCorreo());
+            #dump($alumno->listaTelefonos());exit;
+            array_push($elemento, (string) $alumno->listaTelefonos());
+            array_push($elemento, ['v' => $alumno->getBalance(), 'f' => '$'.(string)$alumno->getBalance()]);
+            array_push($lista,$elemento);
+        }        
+        $chart = new TableChart();
+        $chart->getData()->setArrayToDataTable($lista);
+        #$chart->getOptions()->setHeight('100%');
+        #$chart->getOptions()->setWidth('25%');
+        $now =  new \DateTime();
+        return $this->render('/informes/informes.html.twig',
+        array('chart' => $chart,
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),
+        'titulo' => 'Informe de alumnos activos'));
+    }
     public function informemorososAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
