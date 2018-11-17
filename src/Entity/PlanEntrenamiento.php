@@ -106,34 +106,6 @@ class PlanEntrenamiento
         return $this;
     }
 
-    /**
-     * @return Collection|Rutina[]
-     */
-    public function getRutinas(): Collection
-    {
-        return $this->rutinas;
-    }
-
-    public function addRutina(Rutina $rutina): self
-    {
-        if (!$this->rutinas->contains($rutina)) {
-            $this->rutinas[] = $rutina;
-            $rutina->addPlanEntrenamiento($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRutina(Rutina $rutina): self
-    {
-        if ($this->rutinas->contains($rutina)) {
-            $this->rutinas->removeElement($rutina);
-            $rutina->removePlanEntrenamiento($this);
-        }
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->getDescripcion();

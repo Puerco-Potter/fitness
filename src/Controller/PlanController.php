@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\LineaPlan;
 use App\Entity\Actividad;
 use App\Entity\Clase;
+use App\Entity\Inscripcion;
+use App\Entity\AsistenciaAlumno;
 use App\Entity\PlanEntrenamiento;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -156,11 +158,29 @@ class PlanController extends AbstractController
         $clase = $this->getDoctrine()
                      ->getRepository(Clase::class)
                      ->find($id);
+        $inscripciones = $this->getDoctrine()
+                     ->getRepository(Inscripcion::class)
+                     ->findBy(['Clase' => $id]);
+
+        foreach ($inscripciones as $key => $inscripcion)
+        {
+            if ($inscripcion->getFechaFin()<=(new \DateTime()))
+            {
+                unset($inscripciones[$key]);
+            }
+        }
+
+        $asistencias = $this->getDoctrine()
+                     ->getRepository(AsistenciaAlumno::class)
+                     ->findByFecha(new \DateTime("now"));
+
         $hoy = date("d/m/Y");
 
         return $this->render('PlanEntrenamiento/asistenciaClase.html.twig', [
             'clase' => $clase,
-            'hoy' => $hoy
+            'hoy' => $hoy,
+            'inscripciones' => $inscripciones,
+            'asistencias' => $asistencias
         ]
         );
     }
