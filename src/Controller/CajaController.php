@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Caja;
 use App\Entity\Movimiento;
+use App\Entity\Notificacion;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 
@@ -14,9 +15,19 @@ class CajaController extends AdminController
         $this->dispatch(EasyAdminEvents::PRE_EDIT);
 
         $id = $this->request->query->get('id');
+        $em = $this->getDoctrine()->getEntityManager();
         $entity = $this->em->getRepository(Caja::class)->find($id);
         $entity->setCierre(new \DateTime());
         $entity->setEmpleadoCierre($this->get('security.token_storage')->getToken()->getUser());
+
+        if ($entity->getEmpleadoCierre()!=$entity->getEmpleadoApertura())
+        {
+            $noti = new Notificacion();
+            $noti->setCreacion(new \DateTime());
+            $noti->setDescripcion('La caja abierta por '.$entity->getEmpleadoApertura().' fue cerrada por '.$entity->getEmpleadoCierre());
+            $em->persist($noti);
+            $this->addFlash('warning',sprintf('Está a punto de cerrar una caja que no fue abierta por usted'));
+        }
         
         $easyadmin = $this->request->attributes->get('easyadmin');
         $entity = $easyadmin['item'];
