@@ -112,6 +112,8 @@ class Inscripcion
         $this->clasesTotales = 12;
         $this->clasesRestantes = 12;
         $this->cuota = 0;
+        $this->saldo = 0;
+
     }
 
     public function getId()

@@ -940,7 +940,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-5', label: '' }
                     - {property: 'fecha', type: 'date', type_options: {widget: 'single_text'}}
                     - {property: 'Alumno'}
-                    - {property: 'monto', type: 'money', label: 'monto', type_options: { currency: 'ARS' }}
+                    - {property: 'monto', type: 'money', label: 'Monto', type_options: { currency: 'ARS' }}
                     - { type: 'group', css_class: 'col-sm-9', label: 'Inscripciones' }
                     - {property: 'Inscripciones', label: '>>>', help: 'Añada las Inscripciones a las Actividades', type: 'collection' ,type_options: { entry_type: 'App\Form\InscripcionType', by_reference: false }}
             edit:

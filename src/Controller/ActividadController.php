@@ -74,7 +74,7 @@ class ActividadController extends AdminController
                     $dinero = $dinero + $inscripcion->getCuota() + $inscripcion->getSaldo();
                     if ($inscripcion->getCombo()!=NULL)
                     {
-                        $dinero = $dinero + $inscripcion->getCombo()->getMonto() + $inscripcion->getCombo()->getSaldo();
+                        $dinero = $dinero + $inscripcion->getCombo()->getMontoReal() + $inscripcion->getCombo()->getSaldoReal();
                     }
                 }
             }
@@ -182,7 +182,7 @@ class ActividadController extends AdminController
                     $dinero = $dinero + $inscripcion->getCuota() + $inscripcion->getSaldo();
                     if ($inscripcion->getCombo()!=NULL)
                     {
-                        $dinero = $dinero + $inscripcion->getCombo()->getMonto() + $inscripcion->getCombo()->getSaldo();
+                        $dinero = $dinero + $inscripcion->getCombo()->getMontoReal() + $inscripcion->getCombo()->getSaldoReal();
                     }
                 }
             }

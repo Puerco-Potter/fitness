@@ -55,7 +55,8 @@ class Combo
         $this->fecha = new \DateTime();
         $this->Inscripciones = new ArrayCollection();
         $this->PagoCuotas = new ArrayCollection();
-        $this->monto = 100;
+        $this->monto = 0;
+        $this->saldo = 0;
     }
 
     public function getId()
@@ -118,6 +119,16 @@ class Combo
         return $this;
     }
 
+    public function getMontoReal()
+    {
+        return ($this->monto)/(count($this->Inscripciones));
+    }
+
+    public function getSaldoReal()
+    {
+        return ($this->saldo)/(count($this->Inscripciones));
+    }
+
     public function getAlumno(): ?Alumno
     {
         return $this->Alumno;
@@ -163,13 +174,14 @@ class Combo
 
 	public function __toString()
              {
-                 $cadena = $this->getAlumno();
+                 $cadena = $this->getAlumno().' - ';
                  foreach ($this->getInscripciones() as $x)
                  {
-                     $cadena = $cadena.' - '.(string) $x->getClase()->getActividad();
+                     $cadena = $cadena.(string) $x->getClase()->getActividad().' + ';
                  }
+                 substr_replace($cadena,"", -1);
+                 substr_replace($cadena,"", -1);
                  return $cadena;
-         
              }
 
     public function getSaldo(): ?float
