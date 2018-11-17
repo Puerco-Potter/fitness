@@ -28,7 +28,7 @@ class AlumnoController extends AdminController
             $resultado = FALSE;
             foreach ($inscripciones as $key2 => $inscripcion)
             {
-                if ($inscripcion->getAlumno()==$alumno->getId())
+                if ($inscripcion->getAlumno()->getId()==$alumno->getId())
                 {
                     $resultado = TRUE;
                 }
@@ -71,6 +71,7 @@ class AlumnoController extends AdminController
             array_push($elemento, ['v' => $alumno->getBalance(), 'f' => '$'.(string)$alumno->getBalance()]);
             array_push($lista,$elemento);
         }        
+        //dump($lista);exit;
         $chart = new TableChart();
         $chart->getData()->setArrayToDataTable($lista);
         #$chart->getOptions()->setHeight('100%');
