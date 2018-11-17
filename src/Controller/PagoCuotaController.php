@@ -133,14 +133,14 @@ class PagoCuotaController extends AdminController
         $entity->setMovimiento($mov);
         $em->flush();
 
-        $qb = $this->em->createQueryBuilder();
+        $qb = $em->createQueryBuilder();
         $qb->update('App\Entity\Alumno','a')
             ->set('a.balance','a.balance + '.(string)$monto)
             ->where('a.id = '.(string)$id);
         return $qb->getQuery()->getResult();
 
         
-		$qqb = $this->em->createQueryBuilder();
+		$qqb = $em->createQueryBuilder();
 		$qqb->update('App\Entity\PagoCuota','p')
             ->set('p.cajero', "'".(string)$cajero."'")
             ->where('p.id = '.$entity->getId());
