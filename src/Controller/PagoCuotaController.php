@@ -6,6 +6,8 @@ use App\Entity\PagoCuota;
 use App\Entity\Alumno;
 use App\Entity\Movimiento;
 use App\Entity\Caja;
+use App\Entity\Inscripcion;
+use App\Entity\Combo;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -133,18 +135,49 @@ class PagoCuotaController extends AdminController
         $entity->setMovimiento($mov);
         $em->flush();
 
+        if($entity->getInscripcion()!=NULL)
+        {
+            $iid = $entity->getInscripcion();
+            $a = ($em->getRepository(Alumno::class)->findBy(array('id' => $entity->getInscripcion()->getAlumno()->getId())))[0];
+
+        }
+        else
+        {
+            $iid = $entity->getCombo();
+            $a = ($em->getRepository(Alumno::class)->findBy(array('id' => $entity->getCombo()->getAlumno()->getId())))[0];
+        }
+        
+        $a->setBalance($a->getBalance()+$entity->getMonto());
+        $em->persist($a);
+        $em->flush();
+
+        if($entity->getInscripcion()!=NULL)
+        {
+            $i = ($em->getRepository(Inscripcion::class)->findBy(array('id' => $iid->getId())))[0];
+        }
+        else
+        {
+            $i = ($em->getRepository(Combo::class)->findBy(array('id' => $iid->getId())))[0];
+        }
+
+        $i->setSaldo($i->getSaldo()+$entity->getMonto());
+        $em->persist($i);
+        $em->flush();
+        
+        /*
         $qb = $em->createQueryBuilder();
         $qb->update('App\Entity\Alumno','a')
             ->set('a.balance','a.balance + '.(string)$monto)
             ->where('a.id = '.(string)$id);
         return $qb->getQuery()->getResult();
-
-        
+        */
+        /*
 		$qqb = $em->createQueryBuilder();
 		$qqb->update('App\Entity\PagoCuota','p')
             ->set('p.cajero', "'".(string)$cajero."'")
             ->where('p.id = '.$entity->getId());
         return $qqb->getQuery()->getResult();
+        */
     }
     /*public function persistEntity($entity)
     {

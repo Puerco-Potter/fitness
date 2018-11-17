@@ -62,15 +62,17 @@ class InscripcionController extends AdminController
     public function persistEntity($entity)
     {
         parent::persistEntity($entity);
+        $em = $this->getDoctrine()->getEntityManager();
         $id = $entity->getAlumno()->getId();
         $monto = $entity->getCuota();
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $entity->setSaldo(-$monto);
+        $em->persist($entity);
+        $em->flush();
 
-        $qb = $this->em->createQueryBuilder();
-        $qb->update('App\Entity\Alumno','a')
-            ->set('a.balance','a.balance - '.(string)$monto)
-            ->where('a.id = '.(string)$id);
-        return $qb->getQuery()->getResult();
+        $a = ($em->getRepository(Alumno::class)->findBy(array('id' => $entity->getAlumno()->getId())))[0];
+        $a->setBalance($a->getBalance()-$monto);
+        $em->persist($a);
+        $em->flush();
     }
 }

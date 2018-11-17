@@ -27,6 +27,18 @@
             text-shadow: 0px 0px 8px rgba(255,64,255,1), -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;
             font-size: large;
         }
+        .btn-print{
+            margin-top: 2%;
+            background-color: #e2048d;
+            color:white;
+            float: right;
+        }
+        
+        .zona-informe{
+            padding-top: 8%;            
+        }
+
+    
     </style>
     {% endblock %}
     {% block body %}
@@ -43,8 +55,13 @@
                                     }
         }
     </script>
-    <button onclick="printDiv('Informe')">IMPRIMIR</button> 
-        <div id='Informe' class="text-center contenido">
+    
+    <button class="btn btn-print" onclick="printDiv('Informe')">
+        <i class="fa fa-print" aria-hidden="true"></i>
+        IMPRIMIR
+    </button> 
+    <div id='Informe' class="zona-informe">
+        <div class="text-center contenido">
             <div class="superior"></div>
             <label class="font-weight-bold etiqueta"><h2>SISTEMA DE INFORMES</h2></label>
             <br>       
@@ -59,5 +76,6 @@
             <script type="text/javascript">
                 {{ gc_draw(chart, 'div_chart') }}
             </script>
-
+        </div>
+    </div>
     {% endblock %}

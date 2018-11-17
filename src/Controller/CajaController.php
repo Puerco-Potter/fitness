@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Caja;
 use App\Entity\Movimiento;
+use App\Entity\Notificacion;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 
@@ -14,9 +15,19 @@ class CajaController extends AdminController
         $this->dispatch(EasyAdminEvents::PRE_EDIT);
 
         $id = $this->request->query->get('id');
+        $em = $this->getDoctrine()->getEntityManager();
         $entity = $this->em->getRepository(Caja::class)->find($id);
         $entity->setCierre(new \DateTime());
         $entity->setEmpleadoCierre($this->get('security.token_storage')->getToken()->getUser());
+
+        if ($entity->getEmpleadoCierre()!=$entity->getEmpleadoApertura())
+        {
+            $noti = new Notificacion();
+            $noti->setCreacion(new \DateTime());
+            $noti->setDescripcion('La caja abierta por '.$entity->getEmpleadoApertura().' fue cerrada por '.$entity->getEmpleadoCierre());
+            $em->persist($noti);
+            $this->addFlash('warning',sprintf('Está a punto de cerrar una caja que no fue abierta por usted'));
+        }
         
         $easyadmin = $this->request->attributes->get('easyadmin');
         $entity = $easyadmin['item'];
@@ -95,7 +106,6 @@ class CajaController extends AdminController
         
         $min = date('m-01-Y'); // hard-coded '01' for first day
         $max  = date('m-t-Y');
-
         
         foreach ($cajas as $key => $caja)
         {
@@ -202,6 +212,35 @@ class CajaController extends AdminController
         $caja = $em->getRepository(Caja::class)->find($id);
         $movimientos = $em->getRepository(Movimiento::class)->findBy(array('Caja' => $caja->getId()));
         
+        $balance = array();
+        $egresos = array();
+        $ingresos = array();
+        
+        $elemento = [
+            ['label' => 'Concepto', 'type' => 'string'],
+            ['label' => 'Total', 'type' => 'number']
+        ];
+        array_push($balance, $elemento);
+        
+        $elemento = array();
+        array_push($elemento, 'Saldo inicial');
+        array_push($elemento, ['v' => $caja->getSaldoInicial(), 'f' => '$'.(string)$caja->getSaldoInicial()]);
+        array_push($balance, $elemento);
+        $elemento = array();
+        array_push($elemento, 'Saldo final');
+        array_push($elemento, ['v' => $caja->getSaldoFinal(), 'f' => '$'.(string)$caja->getSaldoFinal()]);
+        array_push($balance, $elemento);
+        
+        $elemento = [
+            ['label' => 'Momento', 'type' => 'string'],
+            ['label' => 'Concepto', 'type' => 'string'],
+            ['label' => 'Observaciones', 'type' => 'string'],
+            ['label' => 'Monto', 'type' => 'number'],
+            ['label' => 'Válido', 'type' => 'boolean']
+        ];
+        array_push($ingresos, $elemento);
+        array_push($egresos, $elemento);
+        
         if ($movimientos==[])
         {
             $this->addFlash('warning',sprintf('No hay movimientos'));
@@ -210,37 +249,44 @@ class CajaController extends AdminController
                 'entity' => 'Caja'
             ));
         }
-        $lista = array();
-        $elemento = array();
-        $elemento = [
-            ['label' => 'Horario', 'type' => 'string'],
-            ['label' => 'Tipo', 'type' => 'string'],
-            ['label' => 'Concepto', 'type' => 'string'],
-            ['label' => 'Observaciones', 'type' => 'string'],
-            ['label' => 'Monto', 'type' => 'number'],
-            ['label' => 'Válido', 'type' => 'boolean']
-        ];
-        array_push($lista, $elemento);
         foreach ($movimientos as $movimiento)
         {
             $elemento = array();
             array_push($elemento, (string) $movimiento->getHora()->format('H:i:s'));
-            array_push($elemento, $movimiento->getTipo());
             array_push($elemento, $movimiento->getConcepto());
             array_push($elemento, $movimiento->getObservaciones());
             array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
             array_push($elemento, $movimiento->getValido());
-            array_push($lista,$elemento);
+            
+            if ($movimiento->getTipo()=='Ingreso')
+            {
+                array_push($ingresos,$elemento);
+            }
+            else
+            {
+                array_push($egresos,$elemento);
+            }
         }        
-        $chart = new TableChart();
-        $chart->getData()->setArrayToDataTable($lista);
-        $chart->getOptions()->setHeight('50%');
-        $chart->getOptions()->setWidth('50%');
+        $tablas = [new TableChart(),new TableChart(),new TableChart()];
+        $tablas[0]->getData()->setArrayToDataTable($balance);
+        $tablas[1]->getData()->setArrayToDataTable($ingresos);
+        $tablas[2]->getData()->setArrayToDataTable($egresos);
+        foreach ($tablas as $tabla)
+        {
+            $tabla->getOptions()->setWidth('50%');
+            $tabla->getOptions()->setHeight('50%');
+        }
         $now =  new \DateTime();
-        return $this->render('/informes/informes.html.twig',
-        array('chart' => $chart,
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),
-        'titulo' => 'Balance de caja'));
+        return $this->render('/informes/informes2.html.twig',
+        array('table'=> $tablas[0],
+            'chart1' => $tablas[1],
+        'chart2' => $tablas[2],
+        'titulo' => 'Balance de caja',
+        'sub1' => 'Apertura y cierre de caja',
+        'sub2' => 'Ingresos',
+        'sub3' => 'Egresos',
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+    ));
     }
 
     public function updateEntity($entity)

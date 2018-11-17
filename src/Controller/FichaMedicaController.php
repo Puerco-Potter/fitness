@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Alumno;
 use App\Entity\AlumnoInactivo;
 use App\Entity\FichaMedica;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller as coso;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;

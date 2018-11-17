@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Alumno;
 use App\Entity\Inscripcion;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller as coso;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 
 class AlumnoController extends AdminController
