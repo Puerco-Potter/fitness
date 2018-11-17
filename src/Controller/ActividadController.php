@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 
 class ActividadController extends AdminController
 {
@@ -39,6 +40,16 @@ class ActividadController extends AdminController
         $ar_dinero = array();
         $c_alumnos = array();
         $c_dinero = array();
+
+        $lista_tabla = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'Profesor', 'type' => 'string'],
+            ['label' => 'Cantidad de alumnos', 'type' => 'number'],
+            ['label' => 'Ingresos', 'type' => 'number']
+        ];
+        array_push($lista_tabla, $elemento);
+
         array_push($c_alumnos, 'Actividades');
         array_push($c_alumnos, 'Alumnos');
         array_push($c_dinero, 'Actividades');
@@ -49,8 +60,10 @@ class ActividadController extends AdminController
         {
             $c_alumnos = array();
             $c_dinero = array();
+            $elemento = array();
             array_push($c_alumnos, (string)$actividad);
             array_push($c_dinero, (string)$actividad);
+            array_push($elemento, (string)$actividad);
             $contador = 0;
             $dinero = 0;
             foreach ($inscripciones as $inscripcion)
@@ -69,29 +82,47 @@ class ActividadController extends AdminController
             array_push($c_dinero, $dinero);
             array_push($ar_alumnos, $c_alumnos);    
             array_push($ar_dinero, $c_dinero);    
+
+            array_push($elemento, ['v' => $contador, 'f' => (string)$contador]);
+            array_push($elemento, ['v' => $dinero, 'f' => '$'.(string)$dinero]);
+            array_push($lista_tabla, $elemento);  
         }
         //dump($resultado);exit;
 
+        $table = new TableChart();
+        $table->getData()->setArrayToDataTable($lista_tabla); 
 
         $chart1 = new BarChart();
         $chart1->getData()->setArrayToDataTable($ar_alumnos);
         $chart1->getOptions()->setTitle('Informe global de cantidad de alumnos por actividad');
         $chart1->getOptions()->getHAxis()->setTitle('Cantidad de alumnos');
         $chart1->getOptions()->getHAxis()->setMinValue(0);
+        $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Actividades');
-        $chart1->getOptions()->setWidth(900);
-        $chart1->getOptions()->setHeight(1000);
+        #$chart1->getOptions()->setWidth(900);
+        #$chart1->getOptions()->setHeight(1000);
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
-        $chart2->getOptions()->setTitle('Informe global de dinero recaudado por actividad');
-        $chart2->getOptions()->getHAxis()->setTitle('Dinero recaudado');
+        $chart2->getOptions()->setTitle('Informe global de ingresos por actividad');
+        $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
         $chart2->getOptions()->getHAxis()->setMinValue(0);
+        $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart2->getOptions()->getVAxis()->setTitle('Actividades');
-        $chart2->getOptions()->setWidth(900);
-        $chart2->getOptions()->setHeight(1000);
+        #$chart2->getOptions()->setWidth(900);
+        #$chart2->getOptions()->setHeight(1000);
 
-        return $this->render('chart2.html.twig', array('chart1' => $chart1, 'chart2' => $chart2));
+        $now =  new \DateTime();
+        return $this->render('/informes/informes2.html.twig',
+        array('table'=> $table,
+            'chart1' => $chart1,
+        'chart2' => $chart2,
+        'titulo' => 'Informe de profesores',
+        'sub1' => 'Cantidad de alumnos e ingresos por actividad',
+        'sub2' => 'Gráficos de cantidad de alumnos',
+        'sub3' => 'Cantidad de ingresos',
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+    ));
     }
     
     public function informarAction()
@@ -133,7 +164,8 @@ class ActividadController extends AdminController
         array_push($c_dinero, 'Clases');
         array_push($c_dinero, 'Dinero');
         array_push($ar_alumnos, $c_alumnos);    
-        array_push($ar_dinero, $c_dinero);        
+        array_push($ar_dinero, $c_dinero);      
+          
         foreach ($clases as $clase)
         {
             $c_alumnos = array();
@@ -167,6 +199,7 @@ class ActividadController extends AdminController
         $chart1->getOptions()->setTitle('Informe por clases de '.$actividad->getNombre());
         $chart1->getOptions()->getHAxis()->setTitle('Cantidad de alumnos');
         $chart1->getOptions()->getHAxis()->setMinValue(0);
+        $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Clases');
         $chart1->getOptions()->setWidth(900);
         $chart1->getOptions()->setHeight(500);
@@ -174,7 +207,7 @@ class ActividadController extends AdminController
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
         $chart2->getOptions()->setTitle('Informe por clases de '.$actividad->getNombre());
-        $chart2->getOptions()->getHAxis()->setTitle('Dinero recaudado');
+        $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
         $chart2->getOptions()->getHAxis()->setMinValue(0);
         $chart2->getOptions()->getVAxis()->setTitle('Clases');
         $chart2->getOptions()->setWidth(900);

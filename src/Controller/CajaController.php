@@ -14,6 +14,10 @@ class CajaController extends AdminController
         $this->dispatch(EasyAdminEvents::PRE_EDIT);
 
         $id = $this->request->query->get('id');
+        $entity = $this->em->getRepository(Caja::class)->find($id);
+        $entity->setCierre(new \DateTime());
+        $entity->setEmpleadoCierre($this->get('security.token_storage')->getToken()->getUser());
+        
         $easyadmin = $this->request->attributes->get('easyadmin');
         $entity = $easyadmin['item'];
 
@@ -69,10 +73,6 @@ class CajaController extends AdminController
 
         return $this->executeDynamicMethod('render<EntityName>Template', array('edit', $this->entity['templates']['edit'], $parameters));
     
-        $id = $this->request->query->get('id');
-        $entity = $this->em->getRepository(Caja::class)->find($id);
-        $entity->setCierre(new \DateTime());
-        $entity->setEmpleadoCierre($this->get('security.token_storage')->getToken()->getUser());
       
         $em->persist($caja);
 
@@ -85,6 +85,115 @@ class CajaController extends AdminController
             'entity' => 'Caja',
         ));
 
+    }
+    
+    public function liquidacionAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $cajas = $em->getRepository(Caja::class)->findAll();
+        $movimientos = $em->getRepository(Movimiento::class)->findAll();
+        
+        $min = date('m-01-Y'); // hard-coded '01' for first day
+        $max  = date('m-t-Y');
+
+        
+        foreach ($cajas as $key => $caja)
+        {
+            if (($caja->getFecha()<=($max))and($caja->getFecha()>=($min)))
+            {
+                unset($cajas[$key]);
+            }
+        }
+        foreach ($movimientos as $key => $movimiento)
+        {
+            if (($movimiento->getHora()<=($max))and($movimiento->getHora()>=($min)))
+            {
+                unset($movimientos[$key]);
+            }
+        } 
+
+        if ($movimientos==[] or $cajas ==[])
+        {
+            $this->addFlash('warning',sprintf('No hay movimientos/cajas'));
+            return $this->redirectToRoute('easyadmin', array(
+                'action' => 'list',
+                'entity' => 'Caja'
+            ));
+        }
+        $listacajas = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'Mes', 'type' => 'string'],
+            ['label' => 'Concepto', 'type' => 'string'],
+            ['label' => 'Total', 'type' => 'number']
+        ];
+        array_push($listacajas, $elemento);
+
+        $listamovimientos = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'Momento', 'type' => 'string'],
+            ['label' => 'Tipo', 'type' => 'string'],
+            ['label' => 'Concepto', 'type' => 'string'],
+            ['label' => 'Observaciones', 'type' => 'string'],
+            ['label' => 'Monto', 'type' => 'number'],
+            ['label' => 'Válido', 'type' => 'boolean']
+        ];
+        array_push($listamovimientos, $elemento);
+        $ingresos = 0;
+        $egresos = 0;
+        foreach ($movimientos as $movimiento)
+        {
+            if ($movimiento->getValido()==TRUE)
+            {
+                if ($movimiento->getTipo()=='Ingreso')
+                {
+                    $ingresos = $ingresos + $movimiento->getMonto();
+                }
+                else
+                {
+                    $egresos = $egresos + $movimiento->getMonto();
+                }
+            }
+            $elemento = array();
+            array_push($elemento, (string) $movimiento->getHora()->format('Y/m/d H:i:s'));
+            array_push($elemento, $movimiento->getTipo());
+            array_push($elemento, $movimiento->getConcepto());
+            array_push($elemento, $movimiento->getObservaciones());
+            array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
+            array_push($elemento, $movimiento->getValido());
+            array_push($listamovimientos,$elemento);
+        }    
+        $now = new \DateTime();
+        $elemento = array();
+        array_push($elemento, ($now)->format('F, Y'));
+        array_push($elemento, 'Total de ingresos');
+        array_push($elemento, ['v' => $ingresos, 'f' => '$'.(string)$ingresos]);            
+        array_push($listacajas, $elemento);
+        $elemento = array();
+        array_push($elemento, ($now)->format('F, Y'));
+        array_push($elemento, 'Total de egresos');
+        array_push($elemento, ['v' => $egresos, 'f' => '$'.(string)$egresos]);            
+        array_push($listacajas, $elemento);
+        //dump($listacajas);exit;
+
+        $chart1 = new TableChart();
+        $chart1->getData()->setArrayToDataTable($listacajas);
+        $chart1->getOptions()->setHeight('40%');
+        $chart1->getOptions()->setWidth('40%');
+
+        $chart2 = new TableChart();
+        $chart2->getData()->setArrayToDataTable($listamovimientos);
+        $chart2->getOptions()->setHeight('50%');
+        $chart2->getOptions()->setWidth('50%');
+        $now =  new \DateTime();
+
+        return $this->render('chart2.html.twig', array(
+            'chart1' => $chart1,
+            'chart2' => $chart2,
+            'titulo' => 'Balance mensual',
+            'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        ));
     }
     public function balanceAction()
     {
@@ -127,7 +236,11 @@ class CajaController extends AdminController
         $chart->getData()->setArrayToDataTable($lista);
         $chart->getOptions()->setHeight('50%');
         $chart->getOptions()->setWidth('50%');
-        return $this->render('bar.html.twig', array('chart' => $chart));
+        $now =  new \DateTime();
+        return $this->render('/informes/informes.html.twig',
+        array('chart' => $chart,
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),
+        'titulo' => 'Balance de caja'));
     }
 
     public function updateEntity($entity)

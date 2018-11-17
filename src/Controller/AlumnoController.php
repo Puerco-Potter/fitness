@@ -18,6 +18,10 @@ class AlumnoController extends AdminController
         $elemento = [
             ['label' => 'DNI', 'type' => 'string'],
             ['label' => 'Nombre y apellido', 'type' => 'string'],
+            ['label' => 'Localidad', 'type' => 'string'],
+            ['label' => 'Dirección', 'type' => 'string'],
+            ['label' => 'Correo', 'type' => 'string'],
+            ['label' => 'Teléfono', 'type' => 'string'],
             ['label' => 'Deuda', 'type' => 'number']
         ];
         array_push($lista, $elemento);
@@ -42,14 +46,23 @@ class AlumnoController extends AdminController
             $elemento = array();
             array_push($elemento, (string) $alumno->getDNI());
             array_push($elemento, (string) $alumno);
+            array_push($elemento, (string) $alumno->getLocalidad());
+            array_push($elemento, (string) $alumno->getDireccion());
+            array_push($elemento, (string) $alumno->getCorreo());
+            #dump($alumno->listaTelefonos());exit;
+            array_push($elemento, (string) $alumno->listaTelefonos());
             array_push($elemento, ['v' => $alumno->getBalance(), 'f' => '$'.(string)$alumno->getBalance()]);
             array_push($lista,$elemento);
         }        
         $chart = new TableChart();
         $chart->getData()->setArrayToDataTable($lista);
-        $chart->getOptions()->setHeight('25%');
-        $chart->getOptions()->setWidth('25%');
-        return $this->render('bar.html.twig', array('chart' => $chart));
+        #$chart->getOptions()->setHeight('100%');
+        #$chart->getOptions()->setWidth('25%');
+        $now =  new \DateTime();
+        return $this->render('/informes/informes.html.twig',
+        array('chart' => $chart,
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),
+        'titulo' => 'Informe de alumnos morosos'));
     }
     protected function persistEntity($entity)
     {

@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use App\Form\Lineatype;
+use App\Form\LineaType;
 
 class PlanController extends AbstractController
 {

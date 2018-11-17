@@ -41,6 +41,14 @@
             </a>
         </div>
     {% endif %}
+    {% if _entity_config.name in ['Caja'] %}
+        <div class="button-action">
+            <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'liquidacion' })) }}">
+                <i class="fa fa-download"></i>
+                Balance mensual
+            </a>
+        </div>
+    {% endif %}
 
 {% endblock global_actions %}
 

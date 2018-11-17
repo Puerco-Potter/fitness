@@ -354,6 +354,23 @@ class Alumno
     {
         return $this->getApellido().', '.$this->getNombre();
     }
+
+	public function listaTelefonos()
+    {
+        if ($this->getTelefonos()==[])
+        {
+            return 'No hay teléfono';
+        }
+        else
+        {
+        $cadena = '';
+        foreach ($this->Telefonos as $telefono)
+        {
+            $cadena = $cadena.(string)$telefono.' ';
+        }
+        return $cadena;
+        }
+    }
 	
 	/**
 	* @return Collection|FichaMedica[]
@@ -410,30 +427,30 @@ class Alumno
 			}
 		return $this;
 	}
- /**
-  * @return Collection|Combo[]
-  */
- public function getCombos(): Collection
- {
-     return $this->Combos;
- }
- public function addCombo(Combo $combo): self
- {
-     if (!$this->Combos->contains($combo)) {
-         $this->Combos[] = $combo;
-         $combo->setAlumno($this);
-     }
-     return $this;
- }
- public function removeCombo(Combo $combo): self
- {
-     if ($this->Combos->contains($combo)) {
-         $this->Combos->removeElement($combo);
-         // set the owning side to null (unless already changed)
-         if ($combo->getAlumno() === $this) {
-             $combo->setAlumno(null);
-         }
-     }
-     return $this;
- }
+    /**
+     * @return Collection|Combo[]
+    */
+    public function getCombos(): Collection
+    {
+        return $this->Combos;
+    }
+    public function addCombo(Combo $combo): self
+    {
+        if (!$this->Combos->contains($combo)) {
+            $this->Combos[] = $combo;
+            $combo->setAlumno($this);
+        }
+        return $this;
+    }
+    public function removeCombo(Combo $combo): self
+    {
+        if ($this->Combos->contains($combo)) {
+            $this->Combos->removeElement($combo);
+            // set the owning side to null (unless already changed)
+            if ($combo->getAlumno() === $this) {
+                $combo->setAlumno(null);
+            }
+        }
+        return $this;
+    }
 }
