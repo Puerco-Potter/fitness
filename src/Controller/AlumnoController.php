@@ -68,7 +68,6 @@ class AlumnoController extends AdminController
             array_push($elemento, (string) $alumno->getCorreo());
             #dump($alumno->listaTelefonos());exit;
             array_push($elemento, (string) $alumno->listaTelefonos());
-            array_push($elemento, ['v' => $alumno->getBalance(), 'f' => '$'.(string)$alumno->getBalance()]);
             array_push($lista,$elemento);
         }        
         //dump($lista);exit;
