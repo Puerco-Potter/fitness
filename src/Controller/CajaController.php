@@ -186,8 +186,14 @@ class CajaController extends AdminController
         $chart2->getData()->setArrayToDataTable($listamovimientos);
         $chart2->getOptions()->setHeight('50%');
         $chart2->getOptions()->setWidth('50%');
+        $now =  new \DateTime();
 
-        return $this->render('chart2.html.twig', array('chart1' => $chart1, 'chart2' => $chart2));
+        return $this->render('chart2.html.twig', array(
+            'chart1' => $chart1,
+            'chart2' => $chart2,
+            'titulo' => 'Balance mensual',
+            'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        ));
     }
     public function balanceAction()
     {
@@ -230,7 +236,11 @@ class CajaController extends AdminController
         $chart->getData()->setArrayToDataTable($lista);
         $chart->getOptions()->setHeight('50%');
         $chart->getOptions()->setWidth('50%');
-        return $this->render('bar.html.twig', array('chart' => $chart));
+        $now =  new \DateTime();
+        return $this->render('/informes/informes.html.twig',
+        array('chart' => $chart,
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),
+        'titulo' => 'Balance de caja'));
     }
 
     public function updateEntity($entity)
