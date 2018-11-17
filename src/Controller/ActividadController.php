@@ -213,7 +213,14 @@ class ActividadController extends AdminController
         $chart2->getOptions()->setWidth(900);
         $chart2->getOptions()->setHeight(500);
 
-        return $this->render('chart2.html.twig', array('chart1' => $chart1, 'chart2' => $chart2));
+        $now =  new \DateTime();
+
+        return $this->render('chart2.html.twig', array(
+            'titulo'=>'Informe de las clases de '.(string)$actividad,
+        'chart1' => $chart1,
+        'chart2' => $chart2,
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        ));
     }
 
 }

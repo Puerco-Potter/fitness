@@ -41,6 +41,7 @@ GROUP BY clase.id
                 unset($inscripciones[$key]);
             }
         }
+
         if ($inscripciones==[])
         {
             $this->addFlash('warning',sprintf('No hay inscripciones'));
@@ -49,6 +50,27 @@ GROUP BY clase.id
                 'entity' => 'Clase'
             ));
         }
+        foreach ($profesores as $key1 => $profesor)
+        {   
+            $resultado = FALSE;
+            foreach ($inscripciones as $key2 => $inscripcion)
+            {
+                if ($inscripcion->getClase()->getProfesor()->getId()==$profesor->getId())
+                {
+                    $resultado = TRUE;
+                }
+            }
+            if (!($resultado))
+            {
+                unset($profesores[$key1]);
+            }
+        }
+        //dump($profesores);exit;
+        if ($profesores==[])
+        {
+            $this->addFlash('warning',sprintf('No hay profesores con alumnos inscriptos'));
+        }
+
         $ar_alumnos = array();
         $ar_dinero = array();
         $c_alumnos = array();
@@ -116,7 +138,7 @@ GROUP BY clase.id
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Profesores');
         #$chart1->getOptions()->setWidth(900);
-        $chart1->getOptions()->setHeight(400);
+        $chart1->getOptions()->setHeight(600);
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
@@ -126,7 +148,7 @@ GROUP BY clase.id
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart2->getOptions()->getVAxis()->setTitle('Profesores');
         #$chart2->getOptions()->setWidth(900);
-        $chart2->getOptions()->setHeight(400);
+        $chart2->getOptions()->setHeight(600);
         $now =  new \DateTime();
 
         return $this->render('/informes/informes2.html.twig',
@@ -206,9 +228,11 @@ GROUP BY clase.id
         $chart = new TableChart();
         $chart->getData()->setArrayToDataTable($lista);
 
-        return $this->render('informes/informes.html.twig', array('chart' => $chart,
+        return $this->render('informes/informes.html.twig',
+        array('chart' => $chart,
         'titulo'=> 'Lista de entradas y salidas de '.(string)$profesor.' durante el mes',
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),));
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+    ));
 
 
 
@@ -300,8 +324,14 @@ GROUP BY clase.id
         $chart2->getOptions()->getVAxis()->setTitle('Clases');
         $chart2->getOptions()->setWidth(900);
         $chart2->getOptions()->setHeight(500);
+        $now =  new \DateTime();
 
-        return $this->render('chart2.html.twig', array('chart1' => $chart1, 'chart2' => $chart2));
+        return $this->render('chart2.html.twig', array(
+            'titulo'=>'Informe de las clases de '.(string)$profesor,
+        'chart1' => $chart1,
+        'chart2' => $chart2,
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+    ));
         /*
         $id = $this->request->query->get('id');
         $em = $this->getDoctrine()->getEntityManager();

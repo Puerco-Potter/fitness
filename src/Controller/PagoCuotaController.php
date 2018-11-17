@@ -149,6 +149,7 @@ class PagoCuotaController extends AdminController
     /*public function persistEntity($entity)
     {
         parent::persistEntity($entity);
+        $em = $this->getDoctrine()->getEntityManager();
         $mov = new Movimiento();
         $mov->setHora($entity->getFechaYHora());
         $mov->setConcepto('Cuota');
@@ -159,7 +160,7 @@ class PagoCuotaController extends AdminController
         
         
         $rep = $em->getRepository('App\Entity\Caja');
-        $results = $rep->findBy(array(),array('id'=>'DESC'),1,1);
+        $results = $rep->findBy(array(),array('id'=>'DESC'),1,0);
         $em = $this->getDoctrine()->getEntityManager();
 
 

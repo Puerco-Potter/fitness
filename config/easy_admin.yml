@@ -878,6 +878,11 @@ easy_admin:
                 actions:
                     - { name: 'edit', label: 'Anular movimiento', title: 'Anular movimiento'}
                 fields:
+                    - { property: 'tipo'}
+                    - {property: 'hora', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}}
+                    - {property: 'concepto'}
+                    - {property: 'monto'}
+                    - {property: 'observaciones'}
                     - {property: 'valido', type: 'boolean', label: 'Válido'}
             new:
                 title: 'Nuevo movimiento'

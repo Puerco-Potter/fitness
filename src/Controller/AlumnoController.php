@@ -23,10 +23,10 @@ class AlumnoController extends AdminController
             }
         }
 
-        foreach ($alumnos as $key => $alumno)
+        foreach ($alumnos as $key1 => $alumno)
         {   
             $resultado = FALSE;
-            foreach ($inscripciones as $key => $inscripcion)
+            foreach ($inscripciones as $key2 => $inscripcion)
             {
                 if ($inscripcion->getAlumno()==$alumno->getId())
                 {
@@ -35,7 +35,7 @@ class AlumnoController extends AdminController
             }
             if (!($resultado))
             {
-                unset($alumnos[$key]);
+                unset($alumnos[$key1]);
             }
         }
         
