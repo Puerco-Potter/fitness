@@ -146,7 +146,7 @@ class PagoCuotaController extends AdminController
             ->where('p.id = '.$entity->getId());
         return $qqb->getQuery()->getResult();
     }
-    public function persistEntity($entity)
+    /*public function persistEntity($entity)
     {
         parent::persistEntity($entity);
         $mov = new Movimiento();
@@ -166,5 +166,5 @@ class PagoCuotaController extends AdminController
         $mov->setCaja($results[0]);
 
         
-    }
+    }*/ //Revisar esto porque no permite registrar Pagos de Cuotas.
 }
