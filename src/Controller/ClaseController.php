@@ -116,10 +116,10 @@ class ClaseController extends AdminController
                 if ($inscripcion->getClase()->getId()==$clase->getId())
                 {
                     $contador = $contador+1;
-                    $dinero = $dinero + $inscripcion->getCuota();
+                    $dinero = $dinero + $inscripcion->getCuota() + $inscripcion->getSaldo();
                     if ($inscripcion->getCombo()!=NULL)
                     {
-                        $dinero = $dinero + $inscripcion->getCombo()->getMonto();
+                        $dinero = $dinero + $inscripcion->getCombo()->getMonto() + $inscripcion->getCombo()->getSaldo();
                     }
                 }
             }
