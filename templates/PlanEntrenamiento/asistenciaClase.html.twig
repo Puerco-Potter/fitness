@@ -32,15 +32,19 @@
                     <td>
                             {{ inscripcion.alumno }}
                     </td>
-                    <td>
-                        {% set presente = 'ausente' %}
+                        {% set presente = 'Ausente' %}
                         {% for asistencia in asistencias %}
                             {% if asistencia.inscripcion == inscripcion %}
-                                            {% set presente = 'presente' %}
+                                            {% set presente = 'Presente' %}
                             {% endif %}
                         {% endfor %}
-                        {{ presente }}
-                    </td>
+                    {% if presente == "Presente" %}
+                        <td class="bg-success">
+                    {% else %}
+                        <td class="bg-danger">
+                    {% endif %}
+                            {{ presente }}
+                        </td>
                     
                 </tr>
                     
