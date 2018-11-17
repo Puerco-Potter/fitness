@@ -31,6 +31,12 @@ class PlanController extends AbstractController
             ->add('descripcion')
             ->add('Alumno')
             ->add('Profesor')
+            ->add('dias1')
+            ->add('dias2')
+            ->add('dias3')
+            ->add('dias4')
+            ->add('dias5')
+            ->add('dias6')
             ->add('lineas', CollectionType::class, array(
                 'entry_type' => LineaType::class,
                 'entry_options' => array('label' => false),
