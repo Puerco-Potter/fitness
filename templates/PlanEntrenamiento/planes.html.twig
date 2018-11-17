@@ -8,14 +8,16 @@
 {% block body %}
 <div class="container container-normal bg-light">
     <hr>
-    <div class="d-flex justify-content-center fondo-negro">
+    <img style="height:200px;" width="100%" src="{{asset('imagenes/fondoclaro.jpg') }}">
+    <hr>
+    <div class="d-flex justify-content-center fondo-negro bg-morado text-light">
         <h2>
             Planes de Entrenamiento:
         </h2>
     </div>
     <hr>
     <div class="form-group">
-        <a class="btn btn-dark float-right" role="button" href="{{ path('nuevoPlan') }}">Crear Nuevo Plan</a>
+        <a class="btn btn-dark float-right" role="button" href="{{ path('nuevoPlan') }}"><i class="fa fa-plus-circle"></i> Nuevo</a>
     </div>
                 <!-- Table Markup -->
     <table class="table footable" data-filtering="true" data-sorting="true" data-empty="Sin Obras" data-paging-count-format="{CP} de {TP}"
@@ -26,7 +28,6 @@
                 <th>Alumno</th>
                 <th>DNI Alumno</th>
                 <th>Profesor</th>
-                <th>Observaciones</th>
                 <th></th>
             </tr>
         </thead>
@@ -37,14 +38,8 @@
                     <td>{{ plan.Alumno }}</td>
                     <td>{{ plan.Alumno.dni }}</td>
                     <td>{{ plan.Profesor }}</td>
-                    <td>
-                        {% for linea in plan.lineas %}
-                            {{ linea.observacion }}
-                            <br>
-                        {% endfor %}
-                    </td>
-                    <td><a class="btn btn-dark" href="{{ path('plan', {'id': plan.id}) }}">Ver Plan</a>
-                        <a class="btn btn-dark" href="{{ path('plan', {'id': plan.id}) }}">Editar Plan</a>
+                    <td><a class="btn btn-dark" href="{{ path('plan', {'id': plan.id}) }}"><i class="fa fa-eye"></i> Ver</a>
+                        <a class="btn btn-dark" href="{{ path('plan', {'id': plan.id}) }}"><i class="fa fa-pencil"></i> Editar</a>
                     </td>
                 </tr>
             {% endfor %}

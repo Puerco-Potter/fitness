@@ -36,36 +36,6 @@ class LineaPlan
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $dias1;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $dias2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $dias3;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $dias4;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $dias5;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $dias6;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $f1;
 
     /**
