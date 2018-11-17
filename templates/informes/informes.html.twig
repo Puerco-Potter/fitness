@@ -33,7 +33,21 @@
     </style>
     {% endblock %}
     {% block body %}
-        <div class="text-center contenido">
+    <script type="text/javascript">
+        {function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+       
+            document.body.innerHTML = printContents;
+       
+            window.print();
+       
+            document.body.innerHTML = originalContents;
+                                    }
+        }
+    </script>
+    <button onclick="printDiv('Informe')">IMPRIMIR</button> 
+        <div id='Informe' class="text-center contenido">
             <div class="superior"></div>
             <label class="font-weight-bold etiqueta"><h2>SISTEMA DE INFORMES</h2></label>
             <br>       
