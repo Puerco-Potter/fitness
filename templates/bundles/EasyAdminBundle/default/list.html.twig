@@ -27,6 +27,7 @@
     {% endif %}
     {% if _entity_config.name in ['Clase'] %}
         <div class="button-action">
+            {# <br/> #}
             <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeclases' })) }}">
                 <i class="fa fa-download"></i>
                 Informe global
@@ -35,9 +36,18 @@
     {% endif %}
     {% if _entity_config.name in ['Alumno'] %}
         <div class="button-action">
+            {# <br/> #}
             <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informemorosos' })) }}">
-                <i class="fa fa-download"></i>
-                Informe de morosos
+                <i class="fa fa-file"></i>
+                Morosos
+            </a>
+        </div>
+    {% endif %}
+    {% if _entity_config.name in ['Alumno'] %}
+        <div class="button-action">
+            <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeactivos' })) }}">
+                <i class="fa fa-file"></i>
+                Activos
             </a>
         </div>
     {% endif %}

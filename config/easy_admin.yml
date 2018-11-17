@@ -86,7 +86,8 @@ easy_admin:
         Alumno:
             class: App\Entity\Alumno
             actions:
-                - { name: 'informemorosos', icon: 'print', title: 'Informe de morosos', label: 'Informe alumnos morosos'}
+                - { name: 'informemorosos', icon: 'print', title: 'Lista de alumnos morosos', label: 'Lista de alumnos morosos'}
+                - { name: 'informactivos', icon: 'print', title: 'Lista de alumnos activos', label: 'Lista de alumnos activos'}
             disabled_actions: ['delete']
             show:
                 title: 'Datos del alumno'
@@ -108,7 +109,7 @@ easy_admin:
                 title: 'Lista de alumnos'
                 dql_filter: 'entity.inactivo=0'
                 actions:
-                    - { name: 'new', icon: 'plus-circle', label: 'Registrar Alumno', title: 'Registrar Alumno'}
+                    - { name: 'new', icon: 'plus-circle', label: 'Registrar', title: 'Registrar Alumno'}
                     - { name: 'inactivar', label: 'Dar por inactivo', title: 'Dar por inactivo'}
                 fields:
                     - { property: 'dni', label: 'DNI' }
@@ -144,6 +145,8 @@ easy_admin:
                     #- { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
             new:
                 title: 'Registrar nuevo alumno'
+            #search:
+                #fields: ['apellido', 'nombre', 'dni']
             controller: App\Controller\AlumnoController
         AlumnoInactivo:
             class: App\Entity\Alumno
