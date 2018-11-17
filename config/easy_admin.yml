@@ -43,7 +43,7 @@ easy_admin:
               icon: 'tasks'
               children:
                 - { label: "Planes de Entrenamiento" , entity: 'PlanEntrenamiento', icon: 'pinterest-p' }
-                - { icon: 'plus-circle', label: 'Crear plan', url: 'http://localhost:8080/fitness/public/nuevoplan'}
+                - { icon: 'plus-circle', label: 'Crear plan', url: '../planes'}
             #    - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'deviantart' }
                 - { label: "Musculos" , entity: 'Musculo', icon: 'deviantart' }
                 - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'deaf' }
@@ -144,7 +144,7 @@ easy_admin:
                 #fields:
                     #- { property: 'inactivo', type: 'checkbox', label: 'Dar por inactivo al alumno'}
             new:
-                title: 'Registrar nuevo alumno'
+                title: 'Registrar alumno'
             #search:
                 #fields: ['apellido', 'nombre', 'dni']
             controller: App\Controller\AlumnoController
@@ -536,6 +536,8 @@ easy_admin:
             controller: App\Controller\ActividadController
         Equipamiento:
             class: App\Entity\Equipamiento
+            actions:
+                - { name: 'informeequipamientos', icon: 'print', title: 'Informe de equipamientos', label: 'Informe de equipamientos'}
             show:
                 title: 'Equipamiento'
                 fields:
@@ -549,7 +551,7 @@ easy_admin:
                 title: 'Lista de equipamientos del gimnasio'
                 sort: ['ultimoMantenimiento','ASC']
                 actions:
-                    - { name: 'new', icon: 'plus-circle', label: 'Registrar nuevo Equipamiento', title: 'Registrar nuevo Equipamiento'}
+                    - { name: 'new', icon: 'plus-circle', label: 'Registrar Equipamiento', title: 'Registrar nuevo Equipamiento'}
                 fields:
                     - 'descripcion'
                     - 'estado'
@@ -569,6 +571,7 @@ easy_admin:
                 title: 'Modificar equipamiento'
             new:
                 title: 'Añadir nuevo equipamiento'
+            controller: App\Controller\EquipamientoController
         Elemento:
             class: App\Entity\Elemento
             show:

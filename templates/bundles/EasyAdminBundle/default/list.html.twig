@@ -59,6 +59,14 @@
             </a>
         </div>
     {% endif %}
+    {% if _entity_config.name in ['Equipamiento'] %}
+        <div class="button-action">
+            <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeequipamientos' })) }}">
+                <i class="fa fa-file"></i>
+                Mantenimientos
+            </a>
+        </div>
+    {% endif %}
 
 {% endblock global_actions %}
 

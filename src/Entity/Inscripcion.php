@@ -93,6 +93,11 @@ class Inscripcion
      * @ORM\ManyToOne(targetEntity="App\Entity\Combo", inversedBy="Inscripciones")
      */
     private $Combo;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $saldo;
     
     public function __construct()
     {
@@ -270,10 +275,10 @@ class Inscripcion
         return $this;
     }
 	public function __toString()
-    {
-        return 'Alumno: '.$this->getAlumno()->getDni().' - '.$this->getClase();
-        //return $this->getAlumno().' - '.$this->getClase().' - '.(string) $this->getFechaInscripcion()->format('Y-m-d');
-    }
+             {
+                 return 'Alumno: '.$this->getAlumno()->getDni().' - '.$this->getClase();
+                 //return $this->getAlumno().' - '.$this->getClase().' - '.(string) $this->getFechaInscripcion()->format('Y-m-d');
+             }
 
     public function conseguir_asistencia()
     {
@@ -289,6 +294,18 @@ class Inscripcion
     public function setCombo(?Combo $Combo): self
     {
         $this->Combo = $Combo;
+
+        return $this;
+    }
+
+    public function getSaldo(): ?float
+    {
+        return $this->saldo;
+    }
+
+    public function setSaldo(?float $saldo): self
+    {
+        $this->saldo = $saldo;
 
         return $this;
     }

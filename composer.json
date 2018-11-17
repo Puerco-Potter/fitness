@@ -6,6 +6,8 @@
         "ext-iconv": "*",
         "cmen/google-charts-bundle": "^3.0",
         "easycorp/easyadmin-bundle": "^1.17",
+        "mukadi/chartjs-bundle": "^1.0",
+        "phpoffice/phpspreadsheet": "^1.5",
         "royopa/fpdf-symfony2": "^3.0",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/apache-pack": "^1.0",

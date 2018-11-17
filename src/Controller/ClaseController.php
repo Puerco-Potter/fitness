@@ -60,11 +60,6 @@ class ClaseController extends AdminController
         return $this->render('/informes/informes.html.twig', array('chart' => $chart,
         'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),
         'titulo' => ((string)$clase)));
-
-
-
-
-
     }
     public function informeclasesAction()
     {

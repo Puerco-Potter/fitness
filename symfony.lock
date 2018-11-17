@@ -95,8 +95,17 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "markbaker/complex": {
+        "version": "1.4.7"
+    },
     "monolog/monolog": {
         "version": "1.23.0"
+    },
+    "mukadi/chartjs-builder": {
+        "version": "1.0.1"
+    },
+    "mukadi/chartjs-bundle": {
+        "version": "1.0.2"
     },
     "nikic/php-parser": {
         "version": "v4.0.1"
@@ -115,6 +124,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
+    },
+    "phpoffice/phpspreadsheet": {
+        "version": "1.5.0"
     },
     "psr/cache": {
         "version": "1.0.1"
