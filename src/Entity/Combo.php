@@ -177,10 +177,10 @@ class Combo
                  $cadena = $this->getAlumno().' - ';
                  foreach ($this->getInscripciones() as $x)
                  {
-                     $cadena = $cadena.(string) $x->getClase()->getActividad().' + ';
+                    $cadena = $cadena.(string) $x->getClase()->getActividad().' + ';
                  }
-                 substr_replace($cadena,"", -1);
-                 substr_replace($cadena,"", -1);
+                 $cadena = mb_substr($cadena, 0, -1);
+                 $cadena = mb_substr($cadena, 0, -1);
                  return $cadena;
              }
 
