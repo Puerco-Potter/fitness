@@ -4,7 +4,7 @@
     {% if easyadmin_action_is_enabled_for_list_view('export', _entity_config.name) %}
         <div class="button-action">
             <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'export' })) }}">
-                <i class="fa fa-download"></i>
+                <i class="fa fa-file"></i>
                 Alumnos por clase
             </a>
         </div>
@@ -12,7 +12,7 @@
     {% if _entity_config.name in ['Actividad'] %}
         <div class="button-action">
             <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeactividades' })) }}">
-                <i class="fa fa-download"></i>
+                <i class="fa fa-file"></i>
                 Informe global
             </a>
         </div>
@@ -20,7 +20,7 @@
     {% if _entity_config.name in ['Profesor'] %}
         <div class="button-action">
             <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeprofesores' })) }}">
-                <i class="fa fa-download"></i>
+                <i class="fa fa-file"></i>
                 Informe global
             </a>
         </div>
@@ -29,8 +29,16 @@
         <div class="button-action">
             {# <br/> #}
             <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeclases' })) }}">
-                <i class="fa fa-download"></i>
+                <i class="fa fa-file"></i>
                 Informe global
+            </a>
+        </div>
+    {% endif %}
+    {% if _entity_config.name in ['Alumno'] %}
+        <div class="button-action">
+            <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeactivos' })) }}">
+                <i class="fa fa-file"></i>
+                Activos
             </a>
         </div>
     {% endif %}
@@ -43,18 +51,10 @@
             </a>
         </div>
     {% endif %}
-    {% if _entity_config.name in ['Alumno'] %}
-        <div class="button-action">
-            <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeactivos' })) }}">
-                <i class="fa fa-file"></i>
-                Activos
-            </a>
-        </div>
-    {% endif %}
     {% if _entity_config.name in ['Caja'] %}
         <div class="button-action">
             <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'liquidacion' })) }}">
-                <i class="fa fa-download"></i>
+                <i class="fa fa-file"></i>
                 Balance mensual
             </a>
         </div>
@@ -62,8 +62,8 @@
     {% if _entity_config.name in ['Equipamiento'] %}
         <div class="button-action">
             <a class="btn btn-primary" href="{{ path('easyadmin', _request_parameters|merge({ action: 'informeequipamientos' })) }}">
-                <i class="fa fa-file"></i>
-                Mantenimientos
+                <i class="fa fa-exclamation"></i>
+                Por mantener
             </a>
         </div>
     {% endif %}

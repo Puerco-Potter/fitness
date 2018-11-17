@@ -452,7 +452,7 @@ easy_admin:
                 title: 'Clases'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Clase', title: 'Crear nueva Clase'}
-                    - { name: 'alumnosdeclase', icon: 'copy', title: 'Lista de alumnos', label: 'Lista de alumnos'}
+                    - { name: 'alumnosdeclase', icon: 'copy', title: 'Lista de alumnos', label: 'Alumnos'}
                 fields: 
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
