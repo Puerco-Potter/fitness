@@ -8,23 +8,15 @@
         {% block stylesheets %}
         {% endblock %}
         <style>
-            body, html, .container {
-                height: 100%;
+            .bg-morado{
+                background-color: #e2048d;
             }
+
             body{
-                background-color: black;
-            }
-            .bg {
-                /* The image used */
-                background-image: url("/{{ root }}{{ imagenes }}/fondoclaro2.jpg");
-
-                /* Full height */
-                height: 100%;
-
-                /* Center and scale the image nicely */
-                background-position: center;
+                background-image: url("{{asset('imagenes/fondoclaro3.jpg') }}");
                 background-repeat: no-repeat;
-                background-size: cover;
+                background-attachment: fixed;
+                background-size: 100%;
             }
         </style>
     </head>
