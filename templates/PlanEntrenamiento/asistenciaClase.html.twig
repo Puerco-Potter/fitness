@@ -1,8 +1,6 @@
 {% extends "PlanEntrenamiento/base.html.twig" %}
 
 {% block footable %}
-<script src="{{asset('footable/js/footable.min.js') }}"></script>
-<LINK href="{{asset('footable/css/footable.standalone.min.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block body %}
@@ -18,7 +16,7 @@
     <hr>
     <a class="btn btn-dark" href="{{ path('panel') }}"><i class="fa fa-arrow-left"></i> Volver</a>
                 <!-- Table Markup -->
-    <table class="table footable" data-filtering="true" data-sorting="true" data-empty="Sin Resultados" data-paging-count-format="{CP} de {TP}"
+    <table class="table" data-filtering="true" data-sorting="true" data-empty="Sin Resultados" data-paging-count-format="{CP} de {TP}"
     data-paging="true" data-paging-size="20" data-filter-placeholder="Buscar">
         <thead>
             <tr>

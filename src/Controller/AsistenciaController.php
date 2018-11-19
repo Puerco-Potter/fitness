@@ -81,30 +81,40 @@ class AsistenciaController extends AdminController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // 4) save the User!
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($asistencia);
-            $entityManager->flush();
+            // 
+            // $entityManager->persist($asistencia);
+            // $entityManager->flush();
             
 
-            $id = $asistencia->getInscripcion()->getId();
+            $id_asistencia = $asistencia->getInscripcion()->getId();
             $dia = $asistencia->getFecha();
             
             $inscripcion = $this->getDoctrine()
                     ->getRepository(Inscripcion::class)
                     ->findOneBy(array('id' => $id));
             
-            $asistenciaYaExiste = $this->getDoctrine()
+            $asistenciaYaExiste =  $this->getDoctrine()
                     ->getRepository(AsistenciaAlumno::class)
-                    ->findBy(array('Inscripcion' => $id, 'fecha' => $dia));
+                    ->findAll();
+                $existe= false;
+                foreach ($asistenciaYaExiste as $asistenciaitem)
+                {
+                    if ($asistenciaitem->getInscripcion()->getId() == $asistencia->getInscripcion()->getId() 
+                    and $asistenciaitem->getFecha() == $asistencia->getFecha())
+                    {
+                        $existe= true;
+                    }
+                }
            
             if ($inscripcion ->getClasesRestantes() <=0):
                 $estado = 2;
-            elseif ($asistenciaYaExiste !== null):
+            elseif ($existe):
                 $estado = 3;
             elseif ($inscripcion ->getClasesRestantes() - 1 > 0):
                 $inscripcion ->setClasesRestantes($inscripcion ->getClasesRestantes() - 1);
                 $estado = 1;
-                $entityManager->persist($inscripcion);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($asistencia);
                 $entityManager->flush();
             endif;
             
