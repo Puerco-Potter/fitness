@@ -928,12 +928,19 @@ easy_admin:
             controller: App\Controller\MovimientoController
         User:
             class: App\Entity\User
-            disabled_actions: ['new', 'edit']
+            disabled_actions: ['edit']
             edit:
                 fields:
                     - {property: 'username'}
                     - {property: 'nombre'}
-                    - {property: 'isActive'}    
+                    - {property: 'isActive'}
+            new:
+                fields:
+                    - {property: 'username'}
+                    - {property: 'nombre'}
+                    - {property: 'plainPassword'}
+                    - {property: 'isActive'}  
+                    - {property: 'roles'}  
             show:
                 title: 'Ver movimiento'
                 fields:
