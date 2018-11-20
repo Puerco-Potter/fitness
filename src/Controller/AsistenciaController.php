@@ -91,7 +91,7 @@ class AsistenciaController extends AdminController
             
             $inscripcion = $this->getDoctrine()
                     ->getRepository(Inscripcion::class)
-                    ->findOneBy(array('id' => $id));
+                    ->findOneBy(array('id' => $id_asistencia));
             
             $asistenciaYaExiste =  $this->getDoctrine()
                     ->getRepository(AsistenciaAlumno::class)
