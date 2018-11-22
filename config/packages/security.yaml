@@ -1,6 +1,4 @@
 security:
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_PROFESOR
     encoders:
         App\Entity\User:
             algorithm: bcrypt
@@ -17,7 +15,7 @@ security:
                 users:
                     admin:
                         password: admin
-                        roles: 'ROLE_ADMIN'
+                        roles: 'ROLE_USER'
         our_db_provider:
             entity:
                 class: App\Entity\User
@@ -53,5 +51,3 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
          - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/planes, roles: ROLE_PROFESOR }
-         - { path: ^/panel, roles: ROLE_PROFESOR }

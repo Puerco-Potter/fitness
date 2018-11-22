@@ -23,7 +23,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     *
+     * @Assert\NotBlank()
      */
     private $username;
 
@@ -31,7 +31,7 @@ class User implements UserInterface, \Serializable
      * The below length depends on the "algorithm" you use for encoding
      * the password, but this works well with bcrypt.
      *
-     * @ORM\Column(type="string", length=64, nullable=true)
+     * @ORM\Column(type="string", length=64)
      */
     private $password;
 
@@ -41,25 +41,30 @@ class User implements UserInterface, \Serializable
     private $isActive;
 
     /**
-     * 
+     * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
     private $nombre;
 
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $roles = [];
-
-
     public function __construct() {
-        $this->roles = array('ROLE_PROFESOR','ROLE_ADMIN');
+        $this->roles = array('ROLE_USER','ROLE_ADMIN');
     }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
 
     public function eraseCredentials()
     {
@@ -164,18 +169,4 @@ class User implements UserInterface, \Serializable
     {
         return $this->getUsername().' - '.$this->getNombre();
     }
-
-    public function getRoles(): ?array
-    {
-        return $this->roles;
-    }
-
-    public function setRoles(?array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    
 }
