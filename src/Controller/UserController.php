@@ -16,7 +16,7 @@ class UserController extends AdminController
     public function persistEntity($entity)
     {
         parent::persistEntity($entity);
-        UserPasswordEncoderInterface $passwordEncoder;
+        UserPasswordEncoderInterface::$passwordEncoder;
         // 3) Encode the password (you could also do this via Doctrine listener)
         $password = $passwordEncoder->encodePassword($entity, $entity->getPlainPassword());
         $entity->setPassword($password);
