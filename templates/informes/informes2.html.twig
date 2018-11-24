@@ -28,16 +28,6 @@
             font-size: large;
         }
         
-        .btn-print{
-            margin-top: 2%;
-            background-color: #e2048d;
-            color:white;
-            float: right;
-        }
-        
-        .zona-informe{
-            padding-top: 8%;            
-        }
     </style>
     {% endblock %}
     {% block body %}
@@ -55,10 +45,10 @@
         }
     </script>
     
-    <button class="btn btn-print" onclick="printDiv('Informe')">
-        <i class="fa fa-print" aria-hidden="true"></i>
-        IMPRIMIR
-    </button> 
+    <a class="btn btn-print" href="#" onclick="printDiv('Informe')">
+            <i class="fa fa-print" aria-hidden="true" ></i>
+            IMPRIMIR
+    </a>  
     <div id='Informe' class="zona-informe">
         <div class="text-center contenido">
             <div class="superior"></div>
