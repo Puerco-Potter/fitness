@@ -56,9 +56,14 @@ class User implements UserInterface, \Serializable
      */
     private $roles = [];
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Profesor")
+     */
+    private $profesor;
+
 
     public function __construct() {
-        $this->roles = array('ROLE_PROFESOR','ROLE_ADMIN');
+        $this->roles = array('ROLE_PROFESOR','ROLE_USER');
     }
 
     public function eraseCredentials()
@@ -173,6 +178,18 @@ class User implements UserInterface, \Serializable
     public function setRoles(?array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getProfesor(): ?Profesor
+    {
+        return $this->profesor;
+    }
+
+    public function setProfesor(?Profesor $profesor): self
+    {
+        $this->profesor = $profesor;
 
         return $this;
     }

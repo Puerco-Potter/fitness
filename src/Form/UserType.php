@@ -18,6 +18,8 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class)
             ->add('nombre', TextType::class)
+            ->add('roles')
+            ->add('profesor')
             ->add('isActive', ChoiceType::class,array('choices' => array('Activo' => true, 'Inactivo' => false),))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,

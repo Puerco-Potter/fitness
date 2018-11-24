@@ -7,9 +7,41 @@ use App\Entity\Alumno;
 use App\Entity\PagoCuota;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\FormEvents;
 
 class InscripcionController extends AdminController
 {
+    /**
+     * Creates the form builder of the form used to create or edit the given entity.
+     *
+     * @param object $entity
+     * @param string $view   The name of the view where this form is used ('new' or 'edit')
+     *
+     * @return FormBuilder
+     */
+     public function createEntityFormBuilder($entity, $view)
+    {
+        $builder = parent::createEntityFormBuilder($entity, $view);
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            
+            $product = $event->getData();
+            $form = $event->getForm();
+        });
+        dump($event);exit;
+        if ($entity->getClase())
+        {
+            $clase = $entity->getClase();
+            $precio = $clase->getCuotaBase();
+            $builder->add
+            ('cuota', NumberType::class,
+                [
+                    'data' => 100
+                ]
+            );
+        }
+        return $builder;
+    }
     /**
      * The method that is executed when the user performs a 'new' action on an entity.
      *
