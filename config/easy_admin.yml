@@ -938,7 +938,7 @@ easy_admin:
             controller: App\Controller\MovimientoController
         User:
             class: App\Entity\User
-            disabled_actions: ['edit']
+            disabled_actions: ["new", 'edit']
             edit:
                 fields:
                     - {property: 'username'}
@@ -958,7 +958,6 @@ easy_admin:
                     - {property: 'nombre'}
                     - {property: 'roles'}
                     - {property: 'isActive'}
-            controller: App\Controller\UserController
         Combo:
             class: App\Entity\Combo
             form:

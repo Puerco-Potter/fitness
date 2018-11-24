@@ -130,8 +130,9 @@ class PlanController extends AbstractController
      */
     public function panel()
     {
-
+        $user = $this->getUser();
         return $this->render('PlanEntrenamiento/panel.html.twig', array(
+            "user" => $user
         ));
     }
 
