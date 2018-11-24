@@ -958,6 +958,7 @@ easy_admin:
                     - {property: 'nombre'}
                     - {property: 'roles'}
                     - {property: 'isActive'}
+            controller: App\Controller\UserController
         Combo:
             class: App\Entity\Combo
             form:
