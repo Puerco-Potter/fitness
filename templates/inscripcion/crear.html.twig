@@ -1,33 +1,41 @@
 {# templates/meetup/create.html.twig #}
+
+{% extends '@EasyAdmin/default/new.html.twig' %}
+
+{% block main %}
 {{ form_start(form) }}
-    {{ form_row(form.clase) }}    {# <select id="meetup_sport" ... #}
-    {{ form_row(form.cuota) }} {# <select id="meetup_position" ... #}
-    {# ... #}
+{{ form_row(form.clase) }}    {# <select id="meetup_sport" ... #}
+{{ form_row(form.cuota) }} {# <select id="meetup_position" ... #}
+{# ... #}
 {{ form_end(form) }}
 
 <script>
+  console.log("aiuda");
 var $clase = $('#inscripcion_clase');
 // When sport gets selected ...
 $clase.change(function() {
-  // ... retrieve the corresponding form.
-  var $form = $(this).closest('form');
-  // Simulate form data, but only include the selected sport value.
-  var data = {};
-  console.log(555555555555555555);
-  data[$clase.attr('cuota')] = $clase.val();
-  // Submit data via AJAX to the form's action path.
-  $.ajax({
-    url : $form.attr('action'),
-    type: $form.attr('method'),
-    data : data,
-    success: function(html) {
-      // Replace current position field ...
-      $('#cuota').replaceWith(
-        // ... with the returned one from the AJAX response.
-        $(html).find('#cuota')
-      );
-      // Position field now displays the appropriate positions.
-    }
-  });
+  console.log("aiuda2");
+// ... retrieve the corresponding form.
+var $form = $(this).closest('form');
+// Simulate form data, but only include the selected sport value.
+var data = {};
+data[$clase.attr('cuota')] = $clase.val();
+// Submit data via AJAX to the form's action path.
+$.ajax({
+  console.log("aiuda4");
+url : $form.attr('action'),
+type: $form.attr('method'),
+data : data,
+success: function(html) {
+  console.log("aiuda3");
+  // Replace current position field ...
+  $('#cuota').replaceWith(
+    // ... with the returned one from the AJAX response.
+    $(html).find('#cuota')
+  );
+  // Position field now displays the appropriate positions.
+}
+});
 });
 </script>
+{% endblock %}

@@ -129,8 +129,12 @@ class InscripcionController extends AdminController
             'entity_fields' => $fields,
             'entity' => $entity,
         );
-        return $this->executeDynamicMethod('render<EntityName>Template', array('new', $this->entity['templates']['new'], $parameters));
-
+        //return $this->executeDynamicMethod('render<EntityName>Template', array('new', $this->entity['templates']['new'], $parameters));
+        
+        return $this->render(
+            'inscripcion/crear.html.twig',
+            array('form' => $newForm->createView())
+        );
         
     }
     public function persistEntity($entity)
