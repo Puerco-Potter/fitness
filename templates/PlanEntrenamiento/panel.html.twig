@@ -17,8 +17,13 @@
     </div>
     <hr>
     <div class="d-flex flex-column fondo-negro">
-        <h4 class=""><i class="fa fa-user"></i> Humberto Velez</h4>
-        <p class="">Profesor de: <br>Zumba<br>Musculación</p>
+        <h4 class=""><i class="fa fa-user"></i> {{ user.nombre }} <a class="btn btn-danger" href="{{ path('cerrarSesion') }}"><i class="fa fa-times" aria-hidden="true"></i> Salir</a></h4>
+        {% if user.profesor %}
+            <p class="">Profesor de: <br>
+                {% for clase in user.profesor.clases %}
+                    {{ clase.actividad }}<br>
+                {% endfor %}
+        {% endif %}
     </div>
     <hr>
     <div class="form-group">
