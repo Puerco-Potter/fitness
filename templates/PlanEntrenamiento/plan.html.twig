@@ -1,7 +1,31 @@
 {% extends "PlanEntrenamiento/base.html.twig" %}
         
 {% block body %}
+
 <div class="container bg-light">
+
+        <script type="text/javascript"> 
+            {function printDiv(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+           
+                document.body.innerHTML = printContents;
+           
+                window.print();
+           
+                document.body.innerHTML = originalContents;
+                                        }
+            }
+        </script>
+        
+        <button class="btn btn-print" onclick="printDiv('Informe')">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            IMPRIMIR
+        </button> 
+        
+        <a class="btn btn-back" href="{{ path('panel') }}"><i class="fa fa-arrow-left"></i> Volver</a>
+
+<div id='Informe' class="zona-informe">   
     <hr>
     <div class="d-flex justify-content-center fondo-negro bg-morado text-light">
         <h2>
@@ -9,7 +33,7 @@
         </h2>
     </div>
     <hr>
-    <a class="btn btn-dark" href="{{ path('planes') }}"><i class="fa fa-arrow-left"></i> Volver</a>
+    
     <h3>Alumno: {{ plan.Alumno }}</h3>
     <h3>Profesor: {{ plan.Profesor }}</h3>
     <hr>
@@ -194,5 +218,6 @@
     </table>
     <hr>
                     
+</div>
 </div>
 {% endblock %}
