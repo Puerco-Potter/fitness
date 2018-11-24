@@ -32,7 +32,7 @@ class AlumnoController extends AdminController
                     $resultado = TRUE;
                 }
             }
-            if (!($resultado))
+            if (!($resultado) or $alumno->getInactivo())
             {
                 unset($alumnos[$key1]);
             }
