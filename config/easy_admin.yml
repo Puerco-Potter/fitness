@@ -2,7 +2,7 @@ easy_admin:
     formats:
         date:   'd/m/Y'
         datetime:   'd/m/Y H:i:s'
-    site_name: '<img src="/fitness/public/imagenes/fitnesConFondo.png">Administración Fussion Fitnnes Gym'
+    site_name: '<img src="/fitness/public/imagenes/letraslogo2.png">'
     design:
         form_theme: 
             - vertical 
