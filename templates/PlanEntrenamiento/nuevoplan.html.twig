@@ -248,7 +248,7 @@
         </h2>
     </div>
     <hr>
-    <a class="btn btn-dark" href="{{ path('planes') }}"><i class="fa fa-arrow-left"></i> Volver</a>
+    <a class="btn btn-gral" href="{{ path('planes') }}"><i class="fa fa-arrow-left"></i> Volver</a>
     {{ form_start(form) }}
     <div class="row">
         <div class="form-group col-sm-4">
@@ -259,7 +259,7 @@
             {{ form_row(form.Profesor, { 'attr': {'class': 'form-control'} }) }}
         </div>
         <div class="form-group col-sm-4">
-            {{ form_row(form.save, { 'attr': {'class': 'btn btn-dark w-100'} } ) }}
+            {{ form_row(form.save, { 'attr': {'class': 'btn btn-gral w-100'} } ) }}
             <br>
         </div>
         
@@ -325,7 +325,7 @@
     var $collectionHolder;
 
     // setup an "add a tag" link
-    var $addLineaPlanButton = $('<button type="button" class="add_lineaplan_link btn btn-dark"><i class="fa fa-plus-circle"> Linea</button><hr>');
+    var $addLineaPlanButton = $('<button type="button" class="add_lineaplan_link btn btn-gral"><i class="fa fa-plus-circle"> Linea</button><hr>');
     var $newLinkLi = $('<li></li>').append($addLineaPlanButton);
 
     jQuery(document).ready(function() {

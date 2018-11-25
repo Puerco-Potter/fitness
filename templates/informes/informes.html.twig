@@ -27,17 +27,16 @@
             text-shadow: 0px 0px 8px rgba(255,64,255,1), -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;
             font-size: large;
         }
+        .etiqueta2{
+            color:black;
+            text-shadow:  white 0.1em 0.1em 0.2em;
+            font-size: large;
+        }
         .btn-print{
-            margin-top: 2%;
-            background-color: #e2048d;
-            color:white;
-            float: right;
-        }
-        
-        .zona-informe{
-            padding-top: 8%;            
-        }
-
+                margin-top: 1%;
+                background-color: #e2048d;
+                color:white;
+            }
     
     </style>
     {% endblock %}
@@ -56,21 +55,20 @@
         }
     </script>
     
-    <button class="btn btn-print" onclick="printDiv('Informe')">
-        <i class="fa fa-print" aria-hidden="true"></i>
-        IMPRIMIR
-    </button> 
+    <a class="btn btn-print" href="#" onclick="printDiv('Informe')" style="float:right">
+            <i class="fa fa-print" aria-hidden="true" ></i>
+            IMPRIMIR
+    </a>  
     <div id='Informe' class="zona-informe">
-        <div class="text-center contenido">
-            <div class="superior"></div>
-            <label class="font-weight-bold etiqueta"><h2>SISTEMA DE INFORMES</h2></label>
-            <br>       
-            
-            <label class="font-weight-bold etiqueta"><h2>{{titulo}}</h2></label>
-            </br>
-            
-            <label class="font-weight-bold etiqueta">Fecha de Impresión: {{fechaimpresion}}</label>
-            <div id="div_chart"></div>
+        <div class="contenido">
+            <div align="left"><img src="{{asset('imagenes/letraslogo.png') }}"></div>
+            <div align="right">
+               <label class="font-weight-bold etiqueta2"><h6>Fecha: {{fechaimpresion}}</h6></label>
+            </div>
+            <div align="center">
+               <label class="font-weight-bold etiqueta2"><h4>{{titulo}}</h4></label>
+             <br> </br>   </div>
+            <div id="div_chart" align="center"></div>
             
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <script type="text/javascript">
