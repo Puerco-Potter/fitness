@@ -96,6 +96,82 @@ class PlanController extends AbstractController
         ));
     }
 
+    /**
+     * @Route("/editarplan/{id}", name="editarPlan")
+     */
+    public function editarPlan(Request $request, $id)
+    {
+        // creates a task and gives it some dummy data for this example
+        $plan = $this->getDoctrine()
+                     ->getRepository(PlanEntrenamiento::class)
+                     ->find($id);
+
+        //$linea ->setPlanEntrenamiento($plan);
+
+        $form = $this->createFormBuilder($plan)
+            ->add('descripcion')
+            ->add('Alumno')
+            ->add('Profesor')
+            ->add('dias1')
+            ->add('dias2')
+            ->add('dias3')
+            ->add('dias4')
+            ->add('dias5')
+            ->add('dias6')
+            ->add('lineas', CollectionType::class, array(
+                'entry_type' => LineaType::class,
+                'entry_options' => array('label' => false),
+                'allow_add' => true,
+            ))
+            ->add('save', SubmitType::class, array('label' => 'Guardar Cambios'))
+            ->getForm();
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted()) {
+            $plan = $form->getData();
+            
+            foreach ($plan->getLineas() as $linea) {
+                $linea ->setPlanEntrenamiento($plan);
+            }
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $plan = $form->getData();
+    
+            // ... perform some action, such as saving the task to the database
+            // for example, if Task is a Doctrine entity, save it!
+             $entityManager = $this->getDoctrine()->getManager();
+             $entityManager->persist($plan);
+             $entityManager->flush();
+    
+            return $this->redirectToRoute('planes');
+        }
+
+        //que mal la validacion no anda, prometo arreglarlo algun dia
+        if ($form->isSubmitted() && !($form->isValid()) ) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $plan = $form->getData();
+    
+            // ... perform some action, such as saving the task to the database
+            // for example, if Task is a Doctrine entity, save it!
+             $entityManager = $this->getDoctrine()->getManager();
+             $entityManager->persist($plan);
+             $entityManager->flush();
+    
+            return $this->redirectToRoute('planes');
+        }
+
+        //Be aware that the createView() method should be called after handleRequest() is called.
+         //Otherwise, changes done in the *_SUBMIT events aren't applied to the view (like validation errors).
+
+        return $this->render('PlanEntrenamiento/nuevoplan.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 
      /**
      * @Route("/planes", name="planes")
@@ -121,6 +197,20 @@ class PlanController extends AbstractController
                      ->find($id);
 
         return $this->render('PlanEntrenamiento/plan.html.twig', array(
+            'plan' => $plan,
+        ));
+    }
+
+     /**
+     * @Route("/plan_planilla/{id}", name="plan_planilla")
+     */
+    public function plan_planilla($id)
+    {
+        $plan = $this->getDoctrine()
+                     ->getRepository(PlanEntrenamiento::class)
+                     ->find($id);
+
+        return $this->render('PlanEntrenamiento/plan_planilla.html.twig', array(
             'plan' => $plan,
         ));
     }

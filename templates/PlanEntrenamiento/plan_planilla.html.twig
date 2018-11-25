@@ -1,0 +1,148 @@
+{% extends "PlanEntrenamiento/base.html.twig" %}
+        
+{% block body %}
+
+<div class="bg-light">
+
+        <script type="text/javascript"> 
+            {function printDiv(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+           
+                document.body.innerHTML = printContents;
+           
+                window.print();
+           
+                document.body.innerHTML = originalContents;
+                                        }
+            }
+        </script>
+        
+        <a class="btn btn-print" href="#" onclick="printDiv('Informe')">
+
+            <i class="fa fa-print" aria-hidden="true" ></i>
+            IMPRIMIR
+        </a> 
+        
+        <a class="btn btn-back" href="{{ path('panel') }}"><i class="fa fa-arrow-left"></i> Volver</a>
+
+<div id='Informe' class="zona-informe">   
+    <hr>
+    <div class="d-flex justify-content-center fondo-negro bg-morado text-light">
+        <h2>
+            Plan "{{ plan.descripcion }}":
+        </h2>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                    <h3>Alumno: {{ plan.Alumno }}</h3>
+                    <h3>Profesor: {{ plan.Profesor }}</h3>
+                    <br>
+                    <h5><i>Referencia:</i></h5>
+                    <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th colspan=>Musculo</th>
+                                    <th colspan=>Ejercicio</th>
+                                    <td colspan="2">Observacion</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="4" class="bg-morado">Semana:</th>
+                                </tr>
+                                <tr>
+                                    <td scope="col">Frecuencia</td>
+                                    <td scope="col">Series</td>
+                                    <td scope="col">Repeticiones</td>
+                                    <td scope="col">Carga</td>
+                                </tr>
+                            </tbody>
+                        </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Sem. 1:</th>
+                            <td>{{ plan.dias1 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sem. 2:</th>
+                            <td>{{ plan.dias2 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sem. 3:</th>
+                            <td>{{ plan.dias3 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sem. 4:</th>
+                            <td>{{ plan.dias4 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sem. 5:</th>
+                            <td>{{ plan.dias5 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sem. 6:</th>
+                            <td>{{ plan.dias6 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <hr>
+    <table class="table table-bordered">
+            <tbody>
+                {% for linea in plan.lineas %}
+                <tr>
+                    <th colspan="4" scope="col">{{ linea.Musculo }}</th>
+                    <th colspan="4" scope="col">{{ linea.Ejercicio }}</th>
+                    <td colspan="16" scope="col">{{ linea.Observacion }}</td>
+                </tr>
+                <tr>
+                    <th colspan="4" class="bg-morado">Sem. 1:</th>
+                    <th colspan="4" class="bg-morado">Sem. 2:</th>
+                    <th colspan="4" class="bg-morado">Sem. 3:</th>
+                    <th colspan="4" class="bg-morado">Sem. 4:</th>
+                    <th colspan="4" class="bg-morado">Sem. 5:</th>
+                    <th colspan="4" class="bg-morado">Sem. 6:</th>
+                </tr>
+                <tr>
+                    <td scope="col">{{ linea.f1 }}</td>
+                    <td scope="col">{{ linea.s1 }}</td>
+                    <td scope="col">{{ linea.r1 }}</td>
+                    <td scope="col">{{ linea.c1 }}</td>
+                    <td scope="col">{{ linea.f2 }}</td>
+                    <td scope="col">{{ linea.s2 }}</td>
+                    <td scope="col">{{ linea.r2 }}</td>
+                    <td scope="col">{{ linea.c2 }}</td>
+                    <td scope="col">{{ linea.f3 }}</td>
+                    <td scope="col">{{ linea.s3 }}</td>
+                    <td scope="col">{{ linea.r3 }}</td>
+                    <td scope="col">{{ linea.c3 }}</td>
+                    <td scope="col">{{ linea.f4 }}</td>
+                    <td scope="col">{{ linea.s4 }}</td>
+                    <td scope="col">{{ linea.r4 }}</td>
+                    <td scope="col">{{ linea.c4 }}</td>
+                    <td scope="col">{{ linea.f5 }}</td>
+                    <td scope="col">{{ linea.s5 }}</td>
+                    <td scope="col">{{ linea.r5 }}</td>
+                    <td scope="col">{{ linea.c5 }}</td>
+                    <td scope="col">{{ linea.f6 }}</td>
+                    <td scope="col">{{ linea.s6 }}</td>
+                    <td scope="col">{{ linea.r6 }}</td>
+                    <td scope="col">{{ linea.c6 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <hr>
+                    
+</div>
+</div>
+{% endblock %}

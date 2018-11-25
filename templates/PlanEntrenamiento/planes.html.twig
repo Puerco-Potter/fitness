@@ -41,7 +41,8 @@
                     <td>{{ plan.Alumno.dni }}</td>
                     <td>{{ plan.Profesor }}</td>
                     <td><a class="btn btn-gral" href="{{ path('plan', {'id': plan.id}) }}"><i class="fa fa-eye"></i> Ver</a>
-                        <a class="btn btn-gral" href="{{ path('plan', {'id': plan.id}) }}"><i class="fa fa-pencil"></i> Editar</a>
+                        <a class="btn btn-gral" href="{{ path('plan_planilla', {'id': plan.id}) }}"><i class="fa fa-vcard"></i> Planilla</a>
+                        <a class="btn btn-gral" href="{{ path('editarPlan', {'id': plan.id}) }}"><i class="fa fa-pencil"></i> Editar</a>
                     </td>
                 </tr>
             {% endfor %}
