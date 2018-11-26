@@ -117,7 +117,7 @@ class ActividadController extends AdminController
         array('table'=> $table,
             'chart1' => $chart1,
         'chart2' => $chart2,
-        'titulo' => 'Informe de profesores',
+        'titulo' => 'Informe de actividades',
         'sub1' => 'Cantidad de alumnos e ingresos por actividad',
         'sub2' => 'Gráficos de cantidad de alumnos',
         'sub3' => 'Cantidad de ingresos',
