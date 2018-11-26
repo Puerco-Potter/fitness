@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class InscripcionController extends AdminController
 {
+    /*
     public function create(Request $request)
     {
         $meetup = new Inscripcion();
@@ -33,6 +34,7 @@ class InscripcionController extends AdminController
             array('form' => $form->createView())
         );
     }
+    */
     /**
      * Creates the form builder of the form used to create or edit the given entity.
      *
@@ -41,6 +43,7 @@ class InscripcionController extends AdminController
      *
      * @return FormBuilder
      */
+    /*
      public function createEntityFormBuilder($entity, $view)
     {
         $builder = parent::createEntityFormBuilder($entity, $view);
@@ -84,11 +87,13 @@ class InscripcionController extends AdminController
         );
         return $builder;
     }
+    */
     /**
      * The method that is executed when the user performs a 'new' action on an entity.
      *
      * @return Response|RedirectResponse
      */
+    /*
     protected function newAction()
     {
         $this->dispatch(EasyAdminEvents::PRE_NEW);
@@ -137,6 +142,7 @@ class InscripcionController extends AdminController
         );
         
     }
+    */
     public function persistEntity($entity)
     {
         parent::persistEntity($entity);

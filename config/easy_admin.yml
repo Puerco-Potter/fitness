@@ -138,7 +138,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-5', label: 'Informacion de Contacto' , icon: 'phone', collapsible: true}
                     - { property: 'cp', type: 'text', label: 'Código Postal', css_class: 'col-sm-4 '}
                     - { property: 'correo', type: 'text', label: 'Correo electrónico', css_class: 'col-sm-8 '}
-                    - { property: 'Telefonos' , label: "Telefono/Celular" ,type: 'collection' ,type_options: { entry_type: 'App\Form\TelefonoAlumnoType', by_reference: true }, css_class: 'pre-scrollable'}
+                    - { property: 'Telefonos' , label: "Teléfono/Celular", type: 'collection', type_options: { entry_type: 'App\Form\TelefonoAlumnoType', by_reference: false }, css_class: 'pre-scrollable'}
                     - { type: 'group', css_class: 'col-sm-5', label: 'Observaciones', collapsible: true ,icon: 'sticky-note'}
                     - { property: 'observaciones', type: 'textarea', label: 'Describa lo que crea necesario:', css_class: 'col-sm-11'}
                     #- { type: 'tab' , label: 'Informacion de Contacto', icon: 'phone' }
@@ -424,6 +424,9 @@ easy_admin:
                     - {property: 'Clase', css_class: 'col-sm-11'}
                     - {property: 'Alumno', css_class: 'col-sm-8'}
                     - {property: 'cuota', type: 'money', type_options: { currency: 'ARS' }, css_class: 'col-sm-6'}
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Clases' }
+                    - {property: 'clasesTotales', css_class: 'col-sm-6'}
+                    - {property: 'clasesRestantes', css_class: 'col-sm-6'}
                  
                     - { type: 'group', css_class: 'col-sm-2', label: 'Días', icon: 'check-square'  }
                     - {property: 'lunes'}
@@ -578,7 +581,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-6'}
                     - { property: 'descripcion', type: 'text', label: 'Descripcion', css_class: 'col-sm-7'}
                     - { property: 'fechaAdquisicion', type: 'date', label: 'Fecha de adquisición',type_options: {widget: 'single_text'}, css_class: 'col-sm-6 new-row'}
-                    - { property: 'estado', type: 'choice', label: 'Estado del equipamiento',type_options:{choices:{'En mantenimiento':'En mantenimiento','Necesita mantenimiento':'Necesita mantenimiento','Listo para usar':'Listo para usar'}}, css_class: 'col-sm-6'}
+                    - { property: 'estado', type: 'choice', label: 'Estado del equipamiento',type_options:{choices:{'En reparación':'En reparación','Dañado':'Dañado','Listo para usar':'Listo para usar'}}, css_class: 'col-sm-6'}
                     - { type : 'section' , label : 'Mantenimiento', icon: 'wrench' }                    
                     - { property: 'ultimoMantenimiento', type: 'date', label: 'Fecha del último mantenimiento',type_options: {widget: 'single_text'}, css_class: 'col-sm-6 new-row'}
                     - { property: 'MantenimientoDias', type: 'integer', label: 'Días entre mantenimientos', css_class: 'col-sm-6'} 

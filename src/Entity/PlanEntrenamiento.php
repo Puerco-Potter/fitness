@@ -26,6 +26,7 @@ class PlanEntrenamiento
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Alumno")
+     * @Assert\NotNull()
      */
     private $Alumno;
 

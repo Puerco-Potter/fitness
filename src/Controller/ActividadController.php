@@ -19,7 +19,7 @@ class ActividadController extends AdminController
     public function informeactividadesAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $actividades = $em->getRepository(Actividad::class)->findAll();
+        $actividades = $em->getRepository(Actividad::class)->findBy(['estado'=>TRUE]);//All();
         $inscripciones = $em->getRepository(Inscripcion::class)->findAll();
         foreach ($inscripciones as $key => $inscripcion)
         {
@@ -87,7 +87,7 @@ class ActividadController extends AdminController
             array_push($elemento, ['v' => $dinero, 'f' => '$'.(string)$dinero]);
             array_push($lista_tabla, $elemento);  
         }
-        //dump($resultado);exit;
+        //dump($lista_tabla);exit;
 
         $table = new TableChart();
         $table->getData()->setArrayToDataTable($lista_tabla); 
@@ -166,6 +166,14 @@ class ActividadController extends AdminController
         array_push($ar_alumnos, $c_alumnos);    
         array_push($ar_dinero, $c_dinero);      
           
+        $lista_tabla = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'Clase', 'type' => 'string'],
+            ['label' => 'Cantidad de alumnos', 'type' => 'number'],
+            ['label' => 'Ingresos', 'type' => 'number']
+        ];
+        array_push($lista_tabla, $elemento);  
         foreach ($clases as $clase)
         {
             $c_alumnos = array();
@@ -190,8 +198,15 @@ class ActividadController extends AdminController
             array_push($c_dinero, $dinero);
             array_push($ar_alumnos, $c_alumnos);    
             array_push($ar_dinero, $c_dinero);    
+            $elemento = array();            
+            array_push($elemento, (string)$clase);
+            array_push($elemento, ['v' => $contador, 'f' => (string)$contador]);
+            array_push($elemento, ['v' => $dinero, 'f' => '$'.(string)$dinero]);
+            array_push($lista_tabla, $elemento);  
         }
         //dump($resultado);exit;
+        $table = new TableChart();
+        $table->getData()->setArrayToDataTable($lista_tabla);  
 
 
         $chart1 = new BarChart();
@@ -215,12 +230,16 @@ class ActividadController extends AdminController
 
         $now =  new \DateTime();
 
-        return $this->render('chart2.html.twig', array(
-            'titulo'=>'Informe de las clases de '.(string)$actividad,
-        'chart1' => $chart1,
+        return $this->render('/informes/informes2.html.twig',
+        array('table'=> $table,
+            'chart1' => $chart1,
         'chart2' => $chart2,
+        'titulo' => 'Informe de las clases de '.(string)$actividad,
+        'sub1' => 'Cantidad de alumnos e ingresos',
+        'sub2' => 'Gráfico de cantidad de alumnos',
+        'sub3' => 'Gráfico de ingresos',
         'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
-        ));
+    ));
     }
 
 }

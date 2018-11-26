@@ -58,7 +58,7 @@ class PagoCuotaController extends AdminController
 
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
-                'entity' => 'Movimiento'
+                'entity' => 'PagoCuota'
             ));
         }
 

@@ -138,7 +138,7 @@ GROUP BY clase.id
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Profesores');
         #$chart1->getOptions()->setWidth(900);
-        $chart1->getOptions()->setHeight(600);
+        $chart1->getOptions()->setHeight(400);
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
@@ -148,7 +148,7 @@ GROUP BY clase.id
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart2->getOptions()->getVAxis()->setTitle('Profesores');
         #$chart2->getOptions()->setWidth(900);
-        $chart2->getOptions()->setHeight(600);
+        $chart2->getOptions()->setHeight(400);
         $now =  new \DateTime();
 
         return $this->render('/informes/informes2.html.twig',
@@ -277,7 +277,17 @@ GROUP BY clase.id
         array_push($c_dinero, 'Clases');
         array_push($c_dinero, 'Dinero');
         array_push($ar_alumnos, $c_alumnos);    
-        array_push($ar_dinero, $c_dinero);        
+        array_push($ar_dinero, $c_dinero);
+
+        $lista_tabla = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'Clase', 'type' => 'string'],
+            ['label' => 'Cantidad de alumnos', 'type' => 'number'],
+            ['label' => 'Ingresos', 'type' => 'number']
+        ];
+
+        array_push($lista_tabla, $elemento);    
         foreach ($clases as $clase)
         {
             $c_alumnos = array();
@@ -301,10 +311,18 @@ GROUP BY clase.id
             array_push($c_alumnos, $contador);
             array_push($c_dinero, $dinero);
             array_push($ar_alumnos, $c_alumnos);    
-            array_push($ar_dinero, $c_dinero);    
+            array_push($ar_dinero, $c_dinero);
+            $elemento = array();            
+            array_push($elemento, (string)$clase);
+            array_push($elemento, ['v' => $contador, 'f' => (string)$contador]);
+            array_push($elemento, ['v' => $dinero, 'f' => '$'.(string)$dinero]);
+            array_push($lista_tabla, $elemento);  
         }
         //dump($resultado);exit;
 
+
+        $table = new TableChart();
+        $table->getData()->setArrayToDataTable($lista_tabla);  
 
         $chart1 = new BarChart();
         $chart1->getData()->setArrayToDataTable($ar_alumnos);
@@ -326,10 +344,14 @@ GROUP BY clase.id
         $chart2->getOptions()->setHeight(500);
         $now =  new \DateTime();
 
-        return $this->render('chart2.html.twig', array(
-            'titulo'=>'Informe de las clases de '.(string)$profesor,
-        'chart1' => $chart1,
+        return $this->render('/informes/informes2.html.twig',
+        array('table'=> $table,
+            'chart1' => $chart1,
         'chart2' => $chart2,
+        'titulo' => 'Informe de las clases de '.(string)$profesor,
+        'sub1' => 'Cantidad de alumnos e ingresos',
+        'sub2' => 'Gráfico de cantidad de alumnos',
+        'sub3' => 'Gráfico de ingresos',
         'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
     ));
         /*

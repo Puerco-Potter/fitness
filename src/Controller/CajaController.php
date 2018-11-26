@@ -215,6 +215,8 @@ class CajaController extends AdminController
         $balance = array();
         $egresos = array();
         $ingresos = array();
+        $totalingresos = 0;
+        $totalegresos = 0;
         
         $elemento = [
             ['label' => 'Concepto', 'type' => 'string'],
@@ -261,12 +263,28 @@ class CajaController extends AdminController
             if ($movimiento->getTipo()=='Ingreso')
             {
                 array_push($ingresos,$elemento);
+                if($movimiento->getValido())
+                {
+                    $totalingresos = $totalingresos+$movimiento->getMonto();
+                }
             }
             else
             {
                 array_push($egresos,$elemento);
+                if($movimiento->getValido())
+                {
+                    $totalegresos = $totalegresos+$movimiento->getMonto();
+                }
             }
         }        
+        $elemento = array();
+        array_push($elemento, 'Total de ingresos');
+        array_push($elemento, ['v' => $totalingresos, 'f' => '$'.(string)$totalingresos]);
+        array_push($balance, $elemento);
+        $elemento = array();
+        array_push($elemento, 'Total de egresos');
+        array_push($elemento, ['v' => $totalegresos, 'f' => '$'.(string)$totalegresos]);
+        array_push($balance, $elemento);
         $tablas = [new TableChart(),new TableChart(),new TableChart()];
         $tablas[0]->getData()->setArrayToDataTable($balance);
         $tablas[1]->getData()->setArrayToDataTable($ingresos);
@@ -281,7 +299,7 @@ class CajaController extends AdminController
         array('table'=> $tablas[0],
             'chart1' => $tablas[1],
         'chart2' => $tablas[2],
-        'titulo' => 'Balance de caja',
+        'titulo' => 'Balance de caja del día '. (string) $caja->getFecha()->format('d/m/Y'),
         'sub1' => 'Apertura y cierre de caja',
         'sub2' => 'Ingresos',
         'sub3' => 'Egresos',
