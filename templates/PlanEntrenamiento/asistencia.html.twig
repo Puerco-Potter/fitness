@@ -12,7 +12,7 @@
     <hr>
     <div class="d-flex justify-content-center fondo-negro bg-morado text-light">
         <h2>
-                Asitencias:
+                Asistencias:
         </h2>
     </div>
     <hr>
@@ -29,7 +29,7 @@
             {% for clase in clases %}
                 <tr>
                     <td>
-                        <a class="btn btn-dark btn-lg btn-block" href="{{ path('asistenciaClase', {'id': clase.id}) }}"><i class="fa fa-bolt"></i> {{ clase }}</a>
+                        <a class="btn btn-lg btn-block text-dark" href="{{ path('asistenciaClase', {'id': clase.id}) }}"><i class="fa fa-bolt"></i> {{ clase }}</a>
                     </td>
                 </tr>
             {% endfor %}

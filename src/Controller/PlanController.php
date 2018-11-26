@@ -67,6 +67,11 @@ class PlanController extends AbstractController
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
              $entityManager = $this->getDoctrine()->getManager();
+             if ($plan->getAlumno()==NULL)
+            {
+                $this->addFlash('warning',sprintf('Está a punto de cerrar una caja que no fue abierta por usted'));
+                return $this->redirectToRoute($request->getUri());
+            }
              $entityManager->persist($plan);
              $entityManager->flush();
     
@@ -87,6 +92,7 @@ class PlanController extends AbstractController
     
             return $this->redirectToRoute('planes');
         }
+        
 
         //Be aware that the createView() method should be called after handleRequest() is called.
          //Otherwise, changes done in the *_SUBMIT events aren't applied to the view (like validation errors).

@@ -100,7 +100,7 @@ class ActividadController extends AdminController
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Actividades');
         #$chart1->getOptions()->setWidth(900);
-        #$chart1->getOptions()->setHeight(1000);
+        $chart1->getOptions()->setHeight(400);
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
@@ -110,14 +110,14 @@ class ActividadController extends AdminController
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart2->getOptions()->getVAxis()->setTitle('Actividades');
         #$chart2->getOptions()->setWidth(900);
-        #$chart2->getOptions()->setHeight(1000);
+        $chart2->getOptions()->setHeight(400);
 
         $now =  new \DateTime();
         return $this->render('/informes/informes2.html.twig',
         array('table'=> $table,
             'chart1' => $chart1,
         'chart2' => $chart2,
-        'titulo' => 'Informe de profesores',
+        'titulo' => 'Informe de actividades',
         'sub1' => 'Cantidad de alumnos e ingresos por actividad',
         'sub2' => 'Gráficos de cantidad de alumnos',
         'sub3' => 'Cantidad de ingresos',
@@ -217,7 +217,7 @@ class ActividadController extends AdminController
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Clases');
         $chart1->getOptions()->setWidth(900);
-        $chart1->getOptions()->setHeight(500);
+        $chart1->getOptions()->setHeight(400);
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
@@ -226,7 +226,7 @@ class ActividadController extends AdminController
         $chart2->getOptions()->getHAxis()->setMinValue(0);
         $chart2->getOptions()->getVAxis()->setTitle('Clases');
         $chart2->getOptions()->setWidth(900);
-        $chart2->getOptions()->setHeight(500);
+        $chart2->getOptions()->setHeight(400);
 
         $now =  new \DateTime();
 
