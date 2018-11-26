@@ -424,10 +424,6 @@ easy_admin:
                     - {property: 'Clase', css_class: 'col-sm-11'}
                     - {property: 'Alumno', css_class: 'col-sm-8'}
                     - {property: 'cuota', type: 'money', type_options: { currency: 'ARS' }, css_class: 'col-sm-6'}
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Clases' }
-                    - {property: 'clasesTotales', css_class: 'col-sm-6'}
-                    - {property: 'clasesRestantes', css_class: 'col-sm-6'}
-                 
                     - { type: 'group', css_class: 'col-sm-2', label: 'Días', icon: 'check-square'  }
                     - {property: 'lunes'}
                     - {property: 'martes'}
@@ -435,6 +431,10 @@ easy_admin:
                     - {property: 'jueves'}
                     - {property: 'viernes'}
                     - {property: 'sabado'}
+                    - { type: 'group', css_class: 'col-sm-3 inline', label: 'Clases' }
+                    - {property: 'clasesTotales', css_class: 'col-sm-12'}
+                    - {property: 'clasesRestantes', css_class: 'col-sm-12'}
+
             new:
                 title: 'Registrar Inscripción' 
             edit:
