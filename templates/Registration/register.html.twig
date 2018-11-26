@@ -1,19 +1,8 @@
-{% extends 'base3.html.twig' %}
+{% extends 'base4.html.twig' %}
 
     {% block stylesheets %}
     <style>
-       .bg {
-                /* The image used */
-                background-image: url("/{{ root }}{{ imagenes }}/fondoclaro.jpg");
 
-                /* Full height */
-                height: 100%;
-
-                /* Center and scale the image nicely */
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
         .superior{
             height: 10%;
         }
@@ -31,31 +20,42 @@
             text-shadow: 0px 0px 8px rgba(255,64,255,1), -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;
             font-size: large;
         }
+        .etiqueta2{
+            color:light-black;
+            text-shadow: -1px 0 white, 0 1px black, 1px 0 white, 0 -1px white;;
+            font-size: large;
+        }
+        .btn-rosa{
+                background-color: #e2048d;
+                color:white;
+            }
+
     </style>
       {% endblock %}
     {% block body %}
-        <div class="text-center contenido">
+        <div class="contenido col-sm-6">
             <div class="superior"></div>
-            <label class="font-weight-bold etiqueta"><h2>Nuevo Usuario</h2></label>
-            <div class="superior2"></div>
-            {{ form_start(form) }}
-             <div class="form-group col-sm-8 offset-sm-2">
-                 {{ form_row(form.username) }}
-             </div>
-             <div class="form-group col-sm-8 offset-sm-2">
-                 {{ form_row(form.plainPassword.first) }}
-             </div>
-             <div class="form-group col-sm-8 offset-sm-2">
-                 {{ form_row(form.plainPassword.second) }}
-             </div>
-             <div class="form-group col-sm-8 offset-sm-2">
-                 {{ form_row(form.nombre) }}
-             </div>
+            <br> </br>     
+              <label class="font-weight-bold etiqueta"><h2>Nuevo Usuario </h2></label>
+            </div></br> 
+              <label class="font-weight-bold etiqueta"><h3>Profesor: </h3></label>
 
-             <div class="form-group col-sm-8 offset-sm-2">
-                  <button type="submit">Registrar</button>
+            {{ form_start(form) }}
+                 <h6>{{ form_row(form.username) }}</h6>
+             </div>
+                  <h6>{{ form_row(form.plainPassword.first) }}</h6>
+             </div>
+                 <h6>{{ form_row(form.plainPassword.second) }}</h6>
+             </div>
+                 <h6>{{ form_row(form.nombre) }}</h6>
+             </div>     </br>
+                <h5> <button type="submit" class="btn-rosa " href="#"" >Registrar</button></h5>
+             </div>
+             <div class="form-group col-sm-4" style='display:none;">
+                 {{ form_row(form.roles) }}
+                 {{ form_row(form.profesor) }}
+                 {{ form_row(form.isActive) }}
              </div>
             {{ form_end(form) }}
         </div>
-        
     {% endblock %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Fussion Fitness Gym{% endblock %}</title>
+        <link rel="stylesheet" href="/{{ root }}/bootstrap/bootstrap.min.css" />
+        <link rel="icon" href="/{{ root }}{{ imagenes }}/favito.png" type="image/x-icon"/>
+        <LINK href="{{asset('fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        {% block stylesheets %}
+        {% endblock %}
+        <style>
+            .bg-morado{
+                background-color: #e2048d;
+            }
+
+            body{
+                background-image: url("{{asset('imagenes/fondoclaro2.jpg') }}");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100%;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="bg">
+            <div class="container">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}         
+            </div>
+        <div>
+    </body>
+</html>
