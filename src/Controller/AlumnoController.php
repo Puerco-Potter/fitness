@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Alumno;
+use App\Entity\FichaMedica;
 use App\Entity\Inscripcion;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 
@@ -186,4 +187,60 @@ class AlumnoController extends AdminController
         ));
 
     }
+    public function irFichaAction()
+    {
+        $id = $this->request->query->get('id');
+        $em = $this->getDoctrine()->getEntityManager();
+        $entity = $this->em->getRepository(Alumno::class)->find($id);
+        $em->persist($entity);
+
+
+        $ficha = new FichaMedica();
+     
+        $ficha->setAlumno($entity); 
+        $ficha->setAltura(0);
+        $ficha->setPeso(0);
+        $ficha->setEnfermedadesCardiacas(0);
+        $ficha->setLesionesCronicas(0);
+        $ficha->setRehabilitacion(0);
+        $ficha->setPerderPeso(0);
+        $ficha->setDiabetes(0);
+        $ficha->setBajoTratamiento(0);
+        $ficha->setDieta(0);
+        $ficha->setConoceImc(0);
+        $ficha->setProblemasArticulares(0);
+        $ficha->setProblemasEspalda(0);
+        $ficha->setDolores(0);
+        $ficha->setSobrepeso(0);
+        $ficha->setHipertenso(0);
+        $ficha->setMedicamentos(0);
+        $ficha->setEmbarazada(0);
+        $ficha->setHernias(0);
+        $ficha->setHidratado(0);
+        $ficha->setTiempoEmbarazo("-");
+        $ficha->setTalla(" ");
+        $ficha->setObservaciones("  ");
+        $ficha->setTelefonoEmergencia(" ");
+        $ficha->setGrupoSanguineo(" ");
+        $ficha->setListaMedicamentos("  ");
+        $ficha->setListaEnfermedades(" ");
+        $ficha->setCirugia(0);
+
+        $em->persist($ficha);
+        $em->flush();  
+
+        $highest_id = $ficha->getId();       
+        $em->flush();   
+
+        return $this->redirectToRoute('easyadmin', array(
+            'action' => 'edit',
+            'entity' => 'FichaMedica',
+            'id' => $highest_id,
+
+        ));
+
+    }
+
+
+
 }

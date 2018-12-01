@@ -113,6 +113,7 @@ easy_admin:
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar', title: 'Registrar Alumno'}
                     - { name: 'inactivar', label: 'Dar por inactivo', title: 'Dar por inactivo'}
+                    - { name: 'irFicha', label: 'Ficha', title: 'Agregar un Ficha Médica',icon: 'plus-square'}
                 fields:
                     - { property: 'dni', label: 'DNI' }
                     - 'apellido'
