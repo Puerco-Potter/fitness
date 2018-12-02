@@ -14,25 +14,26 @@ easy_admin:
                 path: '/fitness/public/imagenes/favito.png'
         menu:
             - { label: "Notificaciones" , entity: 'Notificacion', icon: 'exclamation' }
-            - label: 'Gestión de alumnos'
+            - label: 'Gestión de Alumnos'
               icon: 'address-card'
               children:
-                - { entity: 'Alumno', icon: 'address-card' }
+                - { entity: 'Alumno', icon: 'address-card', label: 'Alumnos' }
                 - { entity: 'AlumnoInactivo', icon: 'id-badge', label: 'Alumnos inactivos'}
                 - { entity: 'FichaMedica', icon: 'clipboard', label: 'Fichas médicas'}
                 - { entity: 'TelefonoAlumno', icon: 'phone', label: 'Teléfonos de alumnos' }
-            - label: 'Gestión de Inventario'
-              icon: 'cubes'
-              children:
-                - { entity: 'Equipamiento', icon: 'cog' }
-                - { entity: 'Elemento', icon: 'cogs', label: 'Elemento de gimnasio' }
-                - { entity: 'RegistroMantenimiento', icon: 'clipboard', label: 'Registro de Mantenimiento' }
             - label: 'Gestión del Personal'
               icon: 'users'
               children:
                 - { entity: 'Empleado', label: 'Empleados', icon: 'user' }
                 - { entity: 'Profesor', label: 'Profesores', icon: 'male' }
                 - { entity: 'TelefonoEmpleado', icon: 'phone', label: 'Teléfonos de empleados'}
+            - label: 'Gestión de Asistencias'
+              icon: 'exclamation-circle'
+              children:
+                - {label: "Asistencias de Alumnos", entity: 'AsistenciaAlumno', icon: 'address-card'}
+                - { icon: 'plus-circle', label: 'Registrar Asistencia', url: '../asistencia', target: '_blank' }
+                - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'users'}
+                - {label: "Registro de Suplencias", entity: 'RegistroSuplencia', icon: 'male'}
             - label: 'Gestión de Actividades'
               icon: 'bolt'
               children:
@@ -40,32 +41,31 @@ easy_admin:
                 - {entity: 'Clase', icon: 'clipboard', label: 'Clases'}
                 - {entity: 'Sala', icon: 'building', label: 'Salones'}
                 - {entity: 'Inscripcion', icon: 'edit', label: 'Inscripciones'}
-                - {entity: 'Combo', icon: 'edit', label: 'Inscripción a un combo'}
-            - label: 'Gestión de planes'
+                - {entity: 'Combo', icon: 'edit', label: 'Inscripción a un Combo'}       
+            - label: 'Gestión de Inventario'
+              icon: 'cubes'
+              children:
+                - { entity: 'Equipamiento', icon: 'cog' }
+                - { entity: 'Elemento', icon: 'cogs', label: 'Elemento de gimnasio' }
+                - { entity: 'RegistroMantenimiento', icon: 'clipboard', label: 'Registro de Mantenimiento' }
+            - label: 'Gestión de Planes'
               icon: 'tasks'
               children:
                 - { label: "Planes de Entrenamiento" , entity: 'PlanEntrenamiento', icon: 'pinterest-p' }
-                - { icon: 'plus-circle', label: 'Crear plan', url: '../planes'}
+                - { icon: 'plus-circle', label: 'Crear plan', url: '../planes', target: '_blank'}
             #    - { label: "Entrenamientos" , entity: 'Entrenamiento', icon: 'deviantart' }
-                - { label: "Musculos" , entity: 'Musculo', icon: 'deviantart' }
+                - { label: "Músculos" , entity: 'Musculo', icon: 'deviantart' }
                 - { label: "Ejercicios" , entity: 'Ejercicio', icon: 'deaf' }
-            - label: 'Gestión de Asistencias'
-              icon: 'exclamation-circle'
-              children:
-                - {label: "Asistencias de alumnos", entity: 'AsistenciaAlumno', icon: 'address-card'}
-                - { icon: 'plus-circle', label: 'Registrar asistencia', url: '../asistencia'}
-                - {label: "Entrada/Salida de Empleados", entity: 'ESEmpleado', icon: 'users'}
-                - {label: "Registro de suplencias", entity: 'RegistroSuplencia', icon: 'male'}
-            - label: 'Gestión de pagos'
+            - label: 'Gestión de Pagos'
               icon: 'money'
               children:
-                - { label: 'Gestión de cajas', entity: 'Caja', icon: 'credit-card'}
-                - { label: 'Gestión de movimientos', entity: 'Movimiento', icon: 'dollar'}
-                - { label: 'Pago de cuotas', entity: 'PagoCuota', icon: 'book'}
+                - { label: 'Gestión de Cajas', entity: 'Caja', icon: 'credit-card'}
+                - { label: 'Gestión de Movimientos', entity: 'Movimiento', icon: 'dollar'}
+                - { label: 'Pago de Cuotas', entity: 'PagoCuota', icon: 'book'}
             #- label: 'Gestión de usuarios'
             #  icon: 'child'
             #  children:
-            - { label: "Ver usuarios" , entity: 'User', icon: 'child'}
+            - { label: "Ver Usuarios" , entity: 'User', icon: 'child'}
             #    - { icon: 'plus-circle', label: 'Registrar usuario', url: 'http://localhost:8080/fitness/public/register'}
             - label: "Contacto"
               icon: 'share-square'
@@ -112,7 +112,7 @@ easy_admin:
                 dql_filter: 'entity.inactivo=0'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar', title: 'Registrar Alumno'}
-                    - { name: 'irFicha', label: 'Ficha', title: 'Agregar un Ficha Médica',icon: 'plus-square', css_class: 'text-black'}
+                    - { name: 'irFicha', label: 'Ficha', title: 'Agregar un Ficha Médica',icon: 'plus-square', css_class: 'text-black' , target: '_blank'}
                     - { name: 'inactivar', label: 'x   ', title: 'Dar por inactivo', css_class: 'text-red', icon: 'user'}
 
                 fields:
@@ -331,8 +331,8 @@ easy_admin:
                 fields: [ { property: 'cuit', label: 'CUIT' }, 'apellido', 'nombre']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Agregar Profesor', title: 'Agregar Profesor'}
-                    - { name: 'informar', icon: 'print', label: 'Informe de clases'}
-                    - { name: 'asistencias', icon: 'exclamation', label: 'Informe de asistencias'}
+                    - { name: 'informar', icon: 'print', label: 'Informe de clases', title: 'Informe de sus clases', target: '_blank'}
+                    - { name: 'asistencias', icon: 'check-circle', label: 'Asistencias', title: 'Informe de sus Entradas/Salidas', target: '_blank'}
 
             form:
                 fields:
@@ -466,7 +466,7 @@ easy_admin:
                 title: 'Clases'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Clase', title: 'Crear nueva Clase'}
-                    - { name: 'alumnosdeclase', icon: 'copy', title: 'Lista de alumnos', label: 'Alumnos'}
+                    - { name: 'alumnosdeclase', icon: 'copy', title: 'Lista de alumnos', label: 'Alumnos', target: '_blank'}
                 fields: 
                     - {property: 'Profesor'}
                     - {property: 'Actividad'}
@@ -532,7 +532,7 @@ easy_admin:
                 title: 'Lista de actividades'
                 actions:
                 #    - { name: 'informeactividades', icon: 'print', title: 'Informe de actividades', label: 'Informe de todas las actividades'}
-                    - { name: 'informar', icon: 'print', label: 'Informe de clases'}
+                    - { name: 'informar', icon: 'print', label: 'Informe de clases', target: '_blank'}
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Actividad', title: 'Crear nueva Actividad'}
                 fields:
                     - 'nombre'
@@ -568,6 +568,7 @@ easy_admin:
                     - { property: 'Mantenimientos', label: 'Lista de Mantenimientos' }
             list:
                 title: 'Lista de equipamientos del gimnasio'
+                help: '*Se refiere a los equipos o máquinas del gimnasio, que puedan necesitar mantenimiento cada cierto tiempo'
                 sort: ['ultimoMantenimiento','ASC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar Equipamiento', title: 'Registrar nuevo Equipamiento'}
@@ -603,7 +604,7 @@ easy_admin:
                     - { property: 'ultimaReposicion', label: 'Fecha de última reposición' }
             list:
                 title: 'Lista de elementos del gimnasio'
-                help: '*Se refiere a todos los elementos discernidos por cantidad; tales como: discos, barras, colchonetas, etc.'
+                help: '*Se refiere a todos los elementos tales como: discos, barras, colchonetas, etc; los mismos estan discernidos por cantidad'
                 sort: ['ultimaReposicion','ASC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Añadir nuevo Elemento', title: 'Añadir nuevo Elemento'}
@@ -708,7 +709,7 @@ easy_admin:
                     - {property: 'descripcion', label: 'Descripción', css_class: 'col-sm-10'}
                     - {property: 'zonaMuscular', type: 'choice', label: 'Zona muscular',type_options:{choices:{ 'Dorsal':'Dorsal' ,'Pecho':'Pecho' ,'Hombros':'Hombros' ,'Brazos':'Brazos' ,'Piernas':'Piernas' }}, css_class: 'wrap-collabsible col-sm-6'}
                     
-                    - { type: 'group', label: 'Materiales a utilizar:', css_class: 'col-sm-5 new-row', collapsible: true}
+                    - { type: 'group', label: 'Equipo/Elemento requerido:', css_class: 'col-sm-5 new-row', collapsible: true}
                     - {property: 'Equipamiento', css_class: 'col-sm-6 new-row'}
                     - {property: 'Elemento', css_class: 'col-sm-6'}
             edit:
@@ -898,9 +899,9 @@ easy_admin:
                     - {property: 'Movimientos'}
             list:
                 actions:
-                    - { name: 'balance', icon: 'money', label: 'Balance'}     
+                    - { name: 'balance', icon: 'balance-scale', label: 'Balance', target: '_blank'}     
                     - { name: 'new', icon: 'plus-circle', label: 'Abrir Caja', title: 'Abrir Caja'}
-                    - { name: 'cerrar', label: 'Cerrar caja', title: 'Cerrar caja'}           
+                    - { name: 'cerrar', label: 'Cerrar caja', title: 'Cerrar caja', icon: 'times-circle', css_class: 'text-red'}           
             controller: App\Controller\CajaController
         Movimiento:
             class: App\Entity\Movimiento
@@ -933,7 +934,7 @@ easy_admin:
                 disabled_actions: ['edit','delete',]
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar movimiento', title: 'Registrar movimiento'}
-                    - { name: 'anular', label: 'Anular movimiento', title: 'Anular movimiento'}
+                    - { name: 'anular', label: 'Anular', title: 'Anular movimiento', icon: 'times-circle', css_class: 'text-red'}
                 fields:
                         - 'hora'
                         - 'tipo'
