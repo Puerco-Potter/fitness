@@ -65,7 +65,7 @@ easy_admin:
             #- label: 'Gestión de usuarios'
             #  icon: 'child'
             #  children:
-            - { label: "Ver usuarios" , entity: 'User', icon: 'child' }
+            - { label: "Ver usuarios" , entity: 'User', icon: 'child'}
             #    - { icon: 'plus-circle', label: 'Registrar usuario', url: 'http://localhost:8080/fitness/public/register'}
             - label: "Contacto"
               icon: 'share-square'
@@ -112,8 +112,9 @@ easy_admin:
                 dql_filter: 'entity.inactivo=0'
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar', title: 'Registrar Alumno'}
-                    - { name: 'inactivar', label: 'Dar por inactivo', title: 'Dar por inactivo'}
-                    - { name: 'irFicha', label: 'Ficha', title: 'Agregar un Ficha Médica',icon: 'plus-square'}
+                    - { name: 'irFicha', label: 'Ficha', title: 'Agregar un Ficha Médica',icon: 'plus-square', css_class: 'text-black'}
+                    - { name: 'inactivar', label: 'x   ', title: 'Dar por inactivo', css_class: 'text-red', icon: 'user'}
+
                 fields:
                     - { property: 'dni', label: 'DNI' }
                     - 'apellido'
@@ -165,7 +166,7 @@ easy_admin:
                 fields: [{ property: 'dni', label: 'DNI' }, 'apellido', 'nombre']
                 dql_filter: 'entity.inactivo!=0'
                 actions:
-                    - { name: 'activar', label: 'Dar por activo', title: 'Dar por activo'}
+                    - { name: 'activar', label: '↑ ', title: 'Dar por activo', icon: 'user',css_class: 'text-green'}
             edit:
                 title: 'Modificar alumno'
                 fields:
@@ -570,12 +571,13 @@ easy_admin:
                 sort: ['ultimoMantenimiento','ASC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar Equipamiento', title: 'Registrar nuevo Equipamiento'}
+                    - { name: 'addMant', label: '+', title: 'Registrar un Mantenimiento',icon: 'wrench', css_class: 'text-black'}
                 fields:
                     - 'descripcion'
                     - 'estado'
                     - { property: 'alarma', label: '¿Mantenimiento al día?', type: 'boolean'}
                     #- { property: 'fechaAdquisicion', label: 'Fecha de adquisición' }
-                    - { property: 'ultimoMantenimiento', label: 'Fecha de último mantenimiento' }
+                    - { property: 'ultimoMantenimiento', label: 'Último mantenimiento' }
                     - { property: 'MantenimientoDias', label: 'Días entre mantenimientos' }
             form:
                 fields:
@@ -1001,5 +1003,5 @@ easy_admin:
         actions:
             - { name: 'new', icon: 'plus-circle', title: 'Agregar' }
             - { name: 'show', icon: 'eye', label: '', title: 'Ver' }
-            - { name: 'edit', icon: 'pencil', label: '', title: 'Modificar' }
+            - { name: 'edit', icon: 'pencil', label: '', title: 'Modificar datos' }
             - { name: 'delete', icon: 'trash', label: '', title: 'Eliminar' }

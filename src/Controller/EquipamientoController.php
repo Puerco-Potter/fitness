@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Equipamiento;
+use App\Entity\Empleado;
+use App\Entity\RegistroMantenimiento;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 
 class EquipamientoController extends AdminController
@@ -58,4 +60,44 @@ class EquipamientoController extends AdminController
         'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
     ));
     }
+
+
+    public function addMantAction()
+    {
+        $id = $this->request->query->get('id');
+        $em = $this->getDoctrine()->getEntityManager();
+        $entity = $this->em->getRepository(Equipamiento::class)->find($id);
+        $em->persist($entity);
+
+
+        $regM = new RegistroMantenimiento();
+        $idEmpl = $em->createQueryBuilder()
+               ->select('MAX(e.id)')
+               ->from('App\Entity\Empleado', 'e')
+               ->getQuery()
+               ->getSingleScalarResult();
+        $empl = $this->em->getRepository(Empleado::class)->find($idEmpl);
+        $em->persist($entity);
+
+        $regM->setEquipamiento($entity);
+        $regM->setEmpleado($empl);
+        $regM->setObservaciones('-');
+       
+        $em->persist($regM);
+        $em->flush();  
+
+        $highest_id = $regM->getId();       
+        $em->flush();   
+
+        return $this->redirectToRoute('easyadmin', array(
+            'action' => 'edit',
+            'entity' => 'RegistroMantenimiento',
+            'id' => $highest_id,
+
+        ));
+
+    }
+
+
+
 }
