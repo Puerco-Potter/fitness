@@ -834,6 +834,7 @@ easy_admin:
             show:
                 title: 'Ver pago de cuota'
                 fields:
+                    - {property: 'id', label: 'Código de pago'}
                     - {property: 'Inscripcion'}
                     - {property: 'fechaYHora', label: 'Momento de pago'}
                     - {property: 'monto'}
