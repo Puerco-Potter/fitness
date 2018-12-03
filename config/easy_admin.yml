@@ -821,6 +821,7 @@ easy_admin:
                 disabled_actions: ['delete']
                 sort: ['fechaYHora','DESC']
                 actions:
+                    - { name: 'imprCompr', label: '', title: 'Imprimir comprobante de pago',icon: 'print', css_class: 'text-black' , target: '_blank'}
                     - { name: 'new', icon: 'plus-circle', label: 'Registar Pago de cuota', title: 'Registar Pago de cuota'}
                 fields:
                     - {property: 'Inscripcion'}

@@ -8,6 +8,8 @@ use App\Entity\Movimiento;
 use App\Entity\Caja;
 use App\Entity\Inscripcion;
 use App\Entity\Combo;
+use DateTime;
+use DateTimeInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -177,6 +179,63 @@ class PagoCuotaController extends AdminController
         return $qqb->getQuery()->getResult();
         */
     }
+
+    public function imprComprAction()
+    {
+        $id = $this->request->query->get('id');
+        $em = $this->getDoctrine()->getEntityManager();
+        $pagoCuota = $em->getRepository(PagoCuota::class)->find($id);
+        $inscrPago = $pagoCuota->getInscripcion();
+        $now =  new \DateTime();
+
+        if ($inscrPago == NULL)
+        {
+            $comboPago = $pagoCuota->getCombo();
+             if ($comboPago == NULL)
+            {     
+            $this->addFlash('warning',sprintf('No se cargó la inscrición o el combo, verifíquelo y vuelva a intentarlo'));
+            return $this->redirectToRoute('easyadmin', array(
+                'action' => 'list',
+                'entity' => 'PagoCuota'
+            )); }
+            return $this->render('informes/Compr.html.twig',
+        array(
+        'titulo'=> 'Comprobante de pago ',
+        'codigo' => (string)$pagoCuota->getId(),
+        'alumno' => (string)$pagoCuota->getCombo()->getAlumno(),
+        'dniAlu' => (string)$pagoCuota->getCombo()->getAlumno()->getDni(),
+        'inscrPago' => '-',
+        'comboPago' => (string)$pagoCuota->getCombo(),
+        'diaPago' => $pagoCuota->getFechaYHora()->format('Y/m/d'),
+        'horaPago'=> $pagoCuota->getFechaYHora()->format('H:i:s'),
+        'monto' => (string)$pagoCuota->getMonto(),
+        'mes' => (string)$pagoCuota->getMes(),
+        'anio' => (string)$pagoCuota->getAno(),
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+         ));
+
+        }
+
+
+        return $this->render('informes/Compr.html.twig',
+        array(
+        'titulo'=> 'Comprobante de pago ',
+        'codigo' => (string)$pagoCuota->getId(),
+        'alumno' => (string)$pagoCuota->getInscripcion()->getAlumno(),
+        'dniAlu' => (string)$pagoCuota->getInscripcion()->getAlumno()->getDni(),
+        'inscrPago' => (string)$pagoCuota->getInscripcion(),
+        'comboPago' => '-',
+        'diaPago' => $pagoCuota->getFechaYHora()->format('Y/m/d'),
+        'horaPago'=> $pagoCuota->getFechaYHora()->format('H:i:s'),
+        'monto' => (string)$pagoCuota->getMonto(),
+        'mes' => (string)$pagoCuota->getMes(),
+        'anio' => (string)$pagoCuota->getAno(),
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        ));
+    }
+
+
+
     /*public function persistEntity($entity)
     {
         parent::persistEntity($entity);

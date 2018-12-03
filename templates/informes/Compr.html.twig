@@ -1,0 +1,93 @@
+{% extends 'base3.html.twig' %}
+
+    {% block stylesheets %}
+    <style>
+       .bg {
+                /* Full height */
+                height: 100%;
+
+                /* Center and scale the image nicely */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        .superior{
+            height: 10%;
+        }
+
+        .superior2{
+            height: 56%;
+        }
+        .contenido{
+            height: 100%;
+        }
+
+        .etiqueta{
+            color:white;
+            text-shadow: 0px 0px 8px rgba(255,64,255,1), -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;
+            font-size: large;
+        }
+        .etiqueta2{
+            color:black;
+            text-shadow:  white 0.1em 0.1em 0.2em;
+            font-size: large;
+        }
+        .btn-print{
+                margin-top: 1%;
+                background-color: #e2048d;
+                color:white;
+            }
+    
+    </style>
+    {% endblock %}
+    {% block body %}
+    <script type="text/javascript">
+        {function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+       
+            document.body.innerHTML = printContents;
+       
+            window.print();
+       
+            document.body.innerHTML = originalContents;
+                                    }
+        }
+    </script>
+    
+    <a class="btn btn-print" href="#" onclick="printDiv('Informe',)" style="float:right">
+            <i class="fa fa-print" aria-hidden="true" ></i>
+            IMPRIMIR
+    </a>  
+
+
+    <div id='Informe' class="zona-informe">
+        <div class="contenido">
+            <div align="left"><img src="{{asset('imagenes/letraslogo.png') }}"></div>
+            <div align="right">
+               <label class="font-weight-bold etiqueta2"><h6>Fecha: {{fechaimpresion}}</h6></label>
+            </div>
+            <div align="left" class="col-offset-4">
+               <label class="font-weight-bold etiqueta2"><h4>{{titulo}}</h4></label>    </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h5>Codigo de pago: {{codigo}}</h5></label>    </div> <div align="left">   
+               <label class="font-weight-bold etiqueta2"><h5>Alumno: {{alumno}}</h5></label>    </div> <div align="left">    
+               <label class="font-weight-bold etiqueta2"><h5>DNI: {{dniAlu}}</h5></label>    </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h5>Inscripción: {{inscrPago}}</h5></label>    </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h5>Combo: {{comboPago}}</h5></label>    </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h5>Pagado el: {{diaPago}}
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                         a las: {{horaPago}}hs</h5></label>    </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h5>Monto: ARS ${{monto}}</h5></label>    </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h5>Mes: {{mes}} 
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                              Año:{{anio}}</h5></label> </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h5>Firma encargado/a:
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                              Aclaración encargado/a:  </h5></label>   </div> 
+
+             </div>
+        </div>
+    </div>
+
+    {% endblock %}
