@@ -37,7 +37,10 @@
                 background-color: #e2048d;
                 color:white;
             }
-    
+        .trans{
+                opacity: 0.3;
+            }
+
     </style>
     {% endblock %}
     {% block body %}
@@ -65,27 +68,29 @@
         <div class="contenido">
             <div align="left"><img src="{{asset('imagenes/letraslogo.png') }}"></div>
             <div align="right">
-               <label class="font-weight-bold etiqueta2"><h6>Fecha: {{fechaimpresion}}</h6></label>
+               <label class="font-weight-bold etiqueta2"><h6><b>Fecha: </b>{{fechaimpresion}} hs</h6></label>
             </div>
             <div align="left" class="col-offset-4">
-               <label class="font-weight-bold etiqueta2"><h4>{{titulo}}</h4></label>    </div> <div align="left">
-               <label class="font-weight-bold etiqueta2"><h5>Codigo de pago: {{codigo}}</h5></label>    </div> <div align="left">   
-               <label class="font-weight-bold etiqueta2"><h5>Alumno: {{alumno}}</h5></label>    </div> <div align="left">    
-               <label class="font-weight-bold etiqueta2"><h5>DNI: {{dniAlu}}</h5></label>    </div> <div align="left">
-               <label class="font-weight-bold etiqueta2"><h5>Inscripción: {{inscrPago}}</h5></label>    </div> <div align="left">
-               <label class="font-weight-bold etiqueta2"><h5>Combo: {{comboPago}}</h5></label>    </div> <div align="left">
-               <label class="font-weight-bold etiqueta2"><h5>Pagado el: {{diaPago}}
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                         a las: {{horaPago}}hs</h5></label>    </div> <div align="left">
-               <label class="font-weight-bold etiqueta2"><h5>Monto: ARS ${{monto}}</h5></label>    </div> <div align="left">
-               <label class="font-weight-bold etiqueta2"><h5>Mes: {{mes}} 
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                              Año:{{anio}}</h5></label> </div> <div align="left">
-               <label class="font-weight-bold etiqueta2"><h5>Firma encargado/a:
+               <label class="font-weight-bold etiqueta2"><h5><b>{{titulo}}</b></h5></label>    </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h6><b>Codigo de pago:</b> {{codigo}}</h6></label>    </div> <div align="left">   
+               <label class="font-weight-bold etiqueta2"><h6><b>Alumno:</b> {{alumno}}</h6></label>    </div> <div align="left">    
+               <label class="font-weight-bold etiqueta2"><h6><b>DNI:</b> {{dniAlu}}</h6></label>    </div> <div align="left">
+               {% if comboPago =='-' %}
+               <label class="font-weight-bold etiqueta2"><h6><b>Inscripción:</b> {{inscrPago}}</h6></label>    </div> <div align="left">
+               {% endif %}
+               {% if inscrPago =='-' %}
+               <label class="font-weight-bold etiqueta2"><h6><b>Combo:</b>{{comboPago}}</h6></label>    </div> <div align="left">
+               {% endif %}
+               <label class="font-weight-bold etiqueta2"><b><h6>Pagado el:</b> {{diaPago}} <b>a las:</b> {{horaPago}} hs</h6></label>    </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h6><b>Monto:</b> ARS$ {{monto}}</h6></label>    </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h6><b>Corresponde al mes:</b> {{mes}}<b> del año:</b> {{anio}}</h6></label> </div> <div align="left">
+               <label class="font-weight-bold etiqueta2"><h6><b>Firma encargado/a:</b>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                              Aclaración encargado/a:  </h5></label>   </div> 
-
+                                                                              <b>Aclaración encargado/a:</b>  </h6></label>   </div> 
+               <br>
+               <div class="trans"> <hr /> </div>
              </div>
         </div>
     </div>

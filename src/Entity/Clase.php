@@ -105,7 +105,7 @@ class Clase
         $this->sabado = FALSE;
     }
 
-    private function getDias(): ?string
+    public function getDias(): ?string
     {
         $answer = '';
         if ($this->lunes)
@@ -135,6 +135,35 @@ class Clase
         return $answer;
     }
 
+    public function getDiasCorto(): ?string
+    {
+        $answer = '';
+        if ($this->lunes)
+        {
+            $answer = $answer.'Lun ';
+        }
+        if ($this->martes)
+        {
+            $answer = $answer.'Mar ';
+        }
+        if ($this->miercoles)
+        {
+            $answer = $answer.'Mié ';
+        }
+        if ($this->jueves)
+        {
+            $answer = $answer.'Jue ';
+        }
+        if ($this->viernes)
+        {
+            $answer = $answer.'Vie ';
+        }
+        if ($this->sabado)
+        {
+            $answer = $answer.'Sáb ';
+        }
+        return $answer;
+    }
     public function getId()
     {
         return $this->id;

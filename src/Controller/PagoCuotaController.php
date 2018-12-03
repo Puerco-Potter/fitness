@@ -187,7 +187,7 @@ class PagoCuotaController extends AdminController
         $pagoCuota = $em->getRepository(PagoCuota::class)->find($id);
         $inscrPago = $pagoCuota->getInscripcion();
         $now =  new \DateTime();
-
+        $cadena = ' ';
         if ($inscrPago == NULL)
         {
             $comboPago = $pagoCuota->getCombo();
@@ -198,6 +198,12 @@ class PagoCuotaController extends AdminController
                 'action' => 'list',
                 'entity' => 'PagoCuota'
             )); }
+                  foreach ($comboPago->getInscripciones() as $x)
+                 {
+                    $cadena = $cadena.((string)$x->getClase()->getActividad()).' + ';
+                 }
+                 $cadena = mb_substr($cadena, 0, -1);
+                 $cadena = mb_substr($cadena, 0, -1);
             return $this->render('informes/Compr.html.twig',
         array(
         'titulo'=> 'Comprobante de pago ',
@@ -205,13 +211,13 @@ class PagoCuotaController extends AdminController
         'alumno' => (string)$pagoCuota->getCombo()->getAlumno(),
         'dniAlu' => (string)$pagoCuota->getCombo()->getAlumno()->getDni(),
         'inscrPago' => '-',
-        'comboPago' => (string)$pagoCuota->getCombo(),
+        'comboPago' => (string)$cadena,
         'diaPago' => $pagoCuota->getFechaYHora()->format('Y/m/d'),
-        'horaPago'=> $pagoCuota->getFechaYHora()->format('H:i:s'),
+        'horaPago'=> $pagoCuota->getFechaYHora()->format('H:i'),
         'monto' => (string)$pagoCuota->getMonto(),
         'mes' => (string)$pagoCuota->getMes(),
         'anio' => (string)$pagoCuota->getAno(),
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d - H:i'))
          ));
 
         }
@@ -223,14 +229,18 @@ class PagoCuotaController extends AdminController
         'codigo' => (string)$pagoCuota->getId(),
         'alumno' => (string)$pagoCuota->getInscripcion()->getAlumno(),
         'dniAlu' => (string)$pagoCuota->getInscripcion()->getAlumno()->getDni(),
-        'inscrPago' => (string)$pagoCuota->getInscripcion(),
+        'inscrPago' => (' '.(string)$pagoCuota->getInscripcion()->getClase()->getActividad().
+        ' - Prof. '.(string)$pagoCuota->getInscripcion()->getClase()->getProfesor().
+        ' - '.(string)$pagoCuota->getInscripcion()->getClase()->getDiasCorto().
+        ' - '.(string)$pagoCuota->getInscripcion()->getClase()->getHorario()->format('H:i').'hs'),
+
         'comboPago' => '-',
         'diaPago' => $pagoCuota->getFechaYHora()->format('Y/m/d'),
-        'horaPago'=> $pagoCuota->getFechaYHora()->format('H:i:s'),
+        'horaPago'=> $pagoCuota->getFechaYHora()->format('H:i'),
         'monto' => (string)$pagoCuota->getMonto(),
         'mes' => (string)$pagoCuota->getMes(),
         'anio' => (string)$pagoCuota->getAno(),
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d - H:i'))
         ));
     }
 
