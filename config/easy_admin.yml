@@ -572,7 +572,7 @@ easy_admin:
                 sort: ['ultimoMantenimiento','ASC']
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar Equipamiento', title: 'Registrar nuevo Equipamiento'}
-                    - { name: 'addMant', label: '+', title: 'Registrar un Mantenimiento',icon: 'wrench', css_class: 'text-black'}
+                    - { name: 'addMant', label: '+', title: 'Registrar un Mantenimiento',icon: 'wrench', css_class: 'text-black' , target: '_blank'}
                 fields:
                     - 'descripcion'
                     - 'estado'
@@ -737,15 +737,18 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-4', label: '' }
                     - {property: 'nombre'}
             edit:
-                title: 'Modificar Musculo'
+                title: 'Modificar Músculo'
             new:
-                title: 'Nuevo Musculo'
+                title: 'Nuevo Músculo'
             list:
-                title: 'Lista de Musculo'
+                actions:
+                    - { name: 'new', icon: 'plus-circle', label: 'Registrar Músculo', title: 'Registrar Músculo'}
+                
+                title: 'Lista de Músculos'
                 fields:
                     - {property: 'nombre'}
             show:
-                title: 'Ver Musculo'
+                title: 'Ver Músculo'
                 fields:
                     - {property: 'nombre'}
         AsistenciaAlumno:
@@ -932,7 +935,7 @@ easy_admin:
             list:
                 dql_filter: 'entity.hora >= CURRENT_DATE()'
                 sort: ['hora','DESC']
-                title: 'Lista de movimientos'
+                title: 'Lista de movimientos de caja'
                 disabled_actions: ['edit','delete',]
                 actions:
                     - { name: 'new', icon: 'plus-circle', label: 'Registrar movimiento', title: 'Registrar movimiento'}

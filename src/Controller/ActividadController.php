@@ -30,7 +30,7 @@ class ActividadController extends AdminController
         }
         if ($inscripciones==[])
         {
-            $this->addFlash('warning',sprintf('No hay inscripciones'));
+            $this->addFlash('warning',sprintf('No hay inscripciones activas en ninguna clase, de ninguna actividad'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'Actividad'
@@ -44,8 +44,8 @@ class ActividadController extends AdminController
         $lista_tabla = array();
         $elemento = array();
         $elemento = [
-            ['label' => 'Profesor', 'type' => 'string'],
-            ['label' => 'Cantidad de alumnos', 'type' => 'number'],
+            ['label' => 'Actividad', 'type' => 'string'],
+            ['label' => 'Cantidad de Alumnos', 'type' => 'number'],
             ['label' => 'Ingresos', 'type' => 'number']
         ];
         array_push($lista_tabla, $elemento);
@@ -94,8 +94,8 @@ class ActividadController extends AdminController
 
         $chart1 = new BarChart();
         $chart1->getData()->setArrayToDataTable($ar_alumnos);
-        $chart1->getOptions()->setTitle('Informe global de cantidad de alumnos por actividad');
-        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de alumnos');
+        $chart1->getOptions()->setTitle('Informe global de cantidad de Alumnos por Actividad');
+        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de Alumnos');
         $chart1->getOptions()->getHAxis()->setMinValue(0);
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Actividades');
@@ -104,7 +104,7 @@ class ActividadController extends AdminController
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
-        $chart2->getOptions()->setTitle('Informe global de ingresos por actividad');
+        $chart2->getOptions()->setTitle('Informe global de ingresos por Actividad');
         $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
         $chart2->getOptions()->getHAxis()->setMinValue(0);
         $chart1->getOptions()->getHAxis()->setFormat('0');
@@ -117,11 +117,11 @@ class ActividadController extends AdminController
         array('table'=> $table,
             'chart1' => $chart1,
         'chart2' => $chart2,
-        'titulo' => 'Informe de actividades',
-        'sub1' => 'Cantidad de alumnos e ingresos por actividad',
-        'sub2' => 'Gráficos de cantidad de alumnos',
+        'titulo' => 'Informe de Actividades',
+        'sub1' => 'Cantidad de Alumnos e ingresos por Actividad',
+        'sub2' => 'Gráficos de cantidad de Alumnos',
         'sub3' => 'Cantidad de ingresos',
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d - H:i'))
     ));
     }
     
@@ -148,7 +148,7 @@ class ActividadController extends AdminController
 
         if ($inscripciones==[])
         {
-            $this->addFlash('warning',sprintf('No hay inscripciones'));
+            $this->addFlash('warning',sprintf('No hay inscripciones en ninguna clase de esta actividad'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'Actividad'
@@ -170,7 +170,7 @@ class ActividadController extends AdminController
         $elemento = array();
         $elemento = [
             ['label' => 'Clase', 'type' => 'string'],
-            ['label' => 'Cantidad de alumnos', 'type' => 'number'],
+            ['label' => 'Cantidad de Alumnos', 'type' => 'number'],
             ['label' => 'Ingresos', 'type' => 'number']
         ];
         array_push($lista_tabla, $elemento);  
@@ -211,8 +211,8 @@ class ActividadController extends AdminController
 
         $chart1 = new BarChart();
         $chart1->getData()->setArrayToDataTable($ar_alumnos);
-        $chart1->getOptions()->setTitle('Informe por clases de '.$actividad->getNombre());
-        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de alumnos');
+        $chart1->getOptions()->setTitle('Informe por Clases de '.$actividad->getNombre());
+        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de Alumnos');
         $chart1->getOptions()->getHAxis()->setMinValue(0);
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Clases');
@@ -221,7 +221,7 @@ class ActividadController extends AdminController
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
-        $chart2->getOptions()->setTitle('Informe por clases de '.$actividad->getNombre());
+        $chart2->getOptions()->setTitle('Informe por Clases de '.$actividad->getNombre());
         $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
         $chart2->getOptions()->getHAxis()->setMinValue(0);
         $chart2->getOptions()->getVAxis()->setTitle('Clases');
@@ -234,11 +234,11 @@ class ActividadController extends AdminController
         array('table'=> $table,
             'chart1' => $chart1,
         'chart2' => $chart2,
-        'titulo' => 'Informe de las clases de '.(string)$actividad,
-        'sub1' => 'Cantidad de alumnos e ingresos',
-        'sub2' => 'Gráfico de cantidad de alumnos',
+        'titulo' => 'Informe de las Clases de '.(string)$actividad,
+        'sub1' => 'Cantidad de Alumnos e ingresos',
+        'sub2' => 'Gráfico de cantidad de Alumnos',
         'sub3' => 'Gráfico de ingresos',
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d - H:i'))
     ));
     }
 

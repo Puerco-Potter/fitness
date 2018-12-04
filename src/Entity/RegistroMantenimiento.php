@@ -101,6 +101,6 @@ class RegistroMantenimiento
 
 	public function __toString()
     {
-        return (string) $this->getFecha()->format('Y-m-d').' - '.$this->getObservaciones();
+        return (string) $this->getFecha()->format('Y-m-d').' - '.$this->getEquipamiento().' - '.$this->getObservaciones();
     }
 }

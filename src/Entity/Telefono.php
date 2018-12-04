@@ -75,7 +75,7 @@ abstract class Telefono
     }
 	public function __toString()
     {
-        return $this->getCaracteristica().' - '.$this->getNumero();
+        return $this->getTipo().' - '.$this->getCaracteristica().'-'.$this->getNumero();
     }
 
 }

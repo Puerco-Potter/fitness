@@ -196,6 +196,6 @@ class Caja
     
     public function __toString()
     {
-        return 'Caja - '.(string) $this->getFecha()->format('Y/m/d');
+        return 'Caja del día - '.(string) $this->getFecha()->format('Y/m/d');
     }
 }
