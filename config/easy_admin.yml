@@ -933,7 +933,7 @@ easy_admin:
                     - {property: 'observaciones', label: '✏ Observaciones',css_class: 'col-sm-11'}
                     #- {property: 'Caja'}
             list:
-                dql_filter: 'entity.hora >= CURRENT_DATE()'
+                #dql_filter: 'entity.hora >= CURRENT_DATE()'
                 sort: ['hora','DESC']
                 title: 'Lista de movimientos de caja'
                 disabled_actions: ['edit','delete',]

@@ -56,7 +56,7 @@ class AsistenciaController extends AdminController
                 $id= $alumno -> getId();
             return $this->redirectToRoute('asistencia2',array('id' => $id));
             }
-            $aviso = "El documento no se encuentra registrado";
+            $aviso = "Error: el documento no se encuentra registrado";
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
         }

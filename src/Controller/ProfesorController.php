@@ -44,7 +44,7 @@ GROUP BY clase.id
 
         if ($inscripciones==[])
         {
-            $this->addFlash('warning',sprintf('No hay inscripciones'));
+            $this->addFlash('warning',sprintf('No hay inscripciones, no se puede realizar el Informe'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'Clase'
@@ -68,7 +68,7 @@ GROUP BY clase.id
         //dump($profesores);exit;
         if ($profesores==[])
         {
-            $this->addFlash('warning',sprintf('No hay profesores con alumnos inscriptos'));
+            $this->addFlash('warning',sprintf('No hay profesores con alumnos inscriptos, no se puede realizar el Informe'));
         }
 
         $ar_alumnos = array();
@@ -87,7 +87,7 @@ GROUP BY clase.id
         $elemento = array();
         $elemento = [
             ['label' => 'Profesor', 'type' => 'string'],
-            ['label' => 'Cantidad de alumnos', 'type' => 'number'],
+            ['label' => 'Cantidad de Alumnos', 'type' => 'number'],
             ['label' => 'Ingresos', 'type' => 'number']
         ];
         array_push($lista_tabla, $elemento);
@@ -132,8 +132,8 @@ GROUP BY clase.id
 
         $chart1 = new BarChart();
         $chart1->getData()->setArrayToDataTable($ar_alumnos);
-        $chart1->getOptions()->setTitle('Informe global de cantidad de alumnos de profesores');
-        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de alumnos');
+        $chart1->getOptions()->setTitle('Informe global de cantidad de Alumnos por Profesor');
+        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de Alumnos');
         $chart1->getOptions()->getHAxis()->setMinValue(0);
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Profesores');
@@ -142,7 +142,7 @@ GROUP BY clase.id
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
-        $chart2->getOptions()->setTitle('Informe global de ingresos de profesores');
+        $chart2->getOptions()->setTitle('Informe global de ingresos por Profesor');
         $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
         $chart2->getOptions()->getHAxis()->setMinValue(0);
         $chart1->getOptions()->getHAxis()->setFormat('0');
@@ -155,11 +155,11 @@ GROUP BY clase.id
         array('table'=> $table,
             'chart1' => $chart1,
         'chart2' => $chart2,
-        'titulo' => 'Informe de profesores',
-        'sub1' => 'Cantidad de alumnos e ingresos por profesor',
-        'sub2' => 'Gráficos de cantidad de alumnos',
+        'titulo' => 'Informe de Profesores',
+        'sub1' => 'Cantidad de Alumnos e ingresos por Profesor',
+        'sub2' => 'Gráficos de cantidad de Alumnos',
         'sub3' => 'Cantidad de ingresos',
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
     ));
     }
     public function asistenciasAction()
@@ -189,7 +189,7 @@ GROUP BY clase.id
 
         if ($eses==[])
         {
-            $this->addFlash('warning',sprintf('No hay registros de Entradas/Salidas'));
+            $this->addFlash('warning',sprintf('No hay registros de Entradas/Salidas de este profesor'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'Profesor'
@@ -230,8 +230,9 @@ GROUP BY clase.id
 
         return $this->render('informes/informes.html.twig',
         array('chart' => $chart,
+        'titulo2'=> '',
         'titulo'=> 'Lista de entradas y salidas de '.(string)$profesor.' durante el mes',
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
     ));
 
 
@@ -261,7 +262,7 @@ GROUP BY clase.id
 
         if ($inscripciones==[])
         {
-            $this->addFlash('warning',sprintf('No hay inscripciones'));
+            $this->addFlash('warning',sprintf('No hay alumnos inscriptos a su/s clase/s, no se puede realizar el Informe'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'Profesor'
@@ -283,7 +284,7 @@ GROUP BY clase.id
         $elemento = array();
         $elemento = [
             ['label' => 'Clase', 'type' => 'string'],
-            ['label' => 'Cantidad de alumnos', 'type' => 'number'],
+            ['label' => 'Cantidad de Alumnos', 'type' => 'number'],
             ['label' => 'Ingresos', 'type' => 'number']
         ];
 
@@ -327,7 +328,7 @@ GROUP BY clase.id
         $chart1 = new BarChart();
         $chart1->getData()->setArrayToDataTable($ar_alumnos);
         $chart1->getOptions()->setTitle('Informe por clases activas de '.(string)$profesor);
-        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de alumnos');
+        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de Alumnos');
         $chart1->getOptions()->getHAxis()->setMinValue(0);
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Clases');
@@ -336,7 +337,7 @@ GROUP BY clase.id
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
-        $chart2->getOptions()->setTitle('Informe por clases activas de '.(string)$profesor);
+        $chart2->getOptions()->setTitle('Informe por Clases activas de '.(string)$profesor);
         $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
         $chart2->getOptions()->getHAxis()->setMinValue(0);
         $chart2->getOptions()->getVAxis()->setTitle('Clases');
@@ -348,11 +349,11 @@ GROUP BY clase.id
         array('table'=> $table,
             'chart1' => $chart1,
         'chart2' => $chart2,
-        'titulo' => 'Informe de las clases de '.(string)$profesor,
-        'sub1' => 'Cantidad de alumnos e ingresos',
-        'sub2' => 'Gráfico de cantidad de alumnos',
+        'titulo' => 'Informe de las Clases de '.(string)$profesor,
+        'sub1' => 'Cantidad de Alumnos e ingresos',
+        'sub2' => 'Gráfico de cantidad de Alumnos',
         'sub3' => 'Gráfico de ingresos',
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
     ));
         /*
         $id = $this->request->query->get('id');

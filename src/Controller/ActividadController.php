@@ -148,7 +148,7 @@ class ActividadController extends AdminController
 
         if ($inscripciones==[])
         {
-            $this->addFlash('warning',sprintf('No hay inscripciones en ninguna clase de esta actividad'));
+            $this->addFlash('warning',sprintf('No hay inscripciones en ninguna de las clases de esta actividad'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'Actividad'

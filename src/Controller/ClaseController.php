@@ -34,7 +34,7 @@ class ClaseController extends AdminController
         }
         if ($inscripciones==[])
         {
-            $this->addFlash('warning',sprintf('No hay inscripciones'));
+            $this->addFlash('warning',sprintf('No hay alumnos inscriptos a la clase seleccionada'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'Clase'
@@ -58,9 +58,14 @@ class ClaseController extends AdminController
         #$chart->getOptions()->setWidth('25%');
         $now =  new \DateTime();
         return $this->render('/informes/informes.html.twig', array('chart' => $chart,
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),
-        'titulo' => ((string)$clase)));
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i')),
+        'titulo2' => 'Alumnos inscriptos: ',
+        'titulo' => ('Clase de '.(string)$clase->getActividad().
+        ' - Prof. '.(string)$clase->getProfesor().
+        ' - '.(string)$clase->getDiasCorto().
+        ' - '.(string)$clase->getHorario()->format('H:i').'hs')));
     }
+
     public function informeclasesAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
@@ -75,7 +80,7 @@ class ClaseController extends AdminController
         }
         if ($inscripciones==[])
         {
-            $this->addFlash('warning',sprintf('No hay inscripciones'));
+            $this->addFlash('warning',sprintf('No hay inscripciones en ninguna de las clases'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'Clase'
@@ -96,7 +101,7 @@ class ClaseController extends AdminController
         $elemento = array();
         $elemento = [
             ['label' => 'Clase', 'type' => 'string'],
-            ['label' => 'Cantidad de alumnos', 'type' => 'number'],
+            ['label' => 'Cantidad de Alumnos', 'type' => 'number'],
             ['label' => 'Ingresos', 'type' => 'number']
         ];
         array_push($lista_tabla, $elemento);
@@ -142,8 +147,8 @@ class ClaseController extends AdminController
 
         $chart1 = new BarChart();
         $chart1->getData()->setArrayToDataTable($ar_alumnos);
-        $chart1->getOptions()->setTitle('Informe global de cantidad de alumnos de clases');
-        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de alumnos');
+        $chart1->getOptions()->setTitle('Informe global de cantidad de Alumnos por Clase');
+        $chart1->getOptions()->getHAxis()->setTitle('Cantidad de Alumnos');
         $chart1->getOptions()->getHAxis()->setMinValue(0);
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Clases');
@@ -152,7 +157,7 @@ class ClaseController extends AdminController
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
-        $chart2->getOptions()->setTitle('Informe global de ingresos de clases');
+        $chart2->getOptions()->setTitle('Informe global de ingresos por Clase');
         $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
         $chart2->getOptions()->getHAxis()->setMinValue(0);
         $chart2->getOptions()->getVAxis()->setTitle('Clases');
@@ -165,11 +170,11 @@ class ClaseController extends AdminController
         array('table'=> $table,
             'chart1' => $chart1,
         'chart2' => $chart2,
-        'titulo' => 'Informe de clases',
-        'sub1' => 'Cantidad de alumnos e ingresos por clase',
-        'sub2' => 'Gráficos de cantidad de alumnos',
+        'titulo' => 'Informe de Clases',
+        'sub1' => 'Cantidad de Alumnos e ingresos por Clase',
+        'sub2' => 'Gráficos de cantidad de Alumnos',
         'sub3' => 'Cantidad de ingresos',
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
     ));
     }
     /*

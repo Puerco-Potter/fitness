@@ -78,8 +78,9 @@ class AlumnoController extends AdminController
         $now =  new \DateTime();
         return $this->render('/informes/informes.html.twig',
         array('chart' => $chart,
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),
-        'titulo' => 'Informe de alumnos activos'));
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i')),
+        'titulo2' => '',
+        'titulo' => 'Informe de Alumnos activos'));
     }
     public function informemorososAction()
     {
@@ -134,8 +135,9 @@ class AlumnoController extends AdminController
         $now =  new \DateTime();
         return $this->render('/informes/informes.html.twig',
         array('chart' => $chart,
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s')),
-        'titulo' => 'Informe de alumnos morosos'));
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i')),
+        'titulo2' => '',
+        'titulo' => 'Informe de Alumnos morosos'));
     }
     protected function persistEntity($entity)
     {

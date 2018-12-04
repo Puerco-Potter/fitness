@@ -43,7 +43,7 @@ class PagoCuotaController extends AdminController
 
         if ($cajas ==[])
         {
-            $this->addFlash('error',sprintf('No hay ninguna caja abierta'));
+            $this->addFlash('error',sprintf('No hay ninguna Caja abierta, debe abrir una Caja para poder registrar Pagos'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'Caja'

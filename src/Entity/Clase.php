@@ -148,7 +148,7 @@ class Clase
         }
         if ($this->miercoles)
         {
-            $answer = $answer.'Mié ';
+            $answer = $answer.'Mie ';
         }
         if ($this->jueves)
         {

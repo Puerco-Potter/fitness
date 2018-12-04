@@ -68,12 +68,18 @@
             <div align="center">
                <label class="font-weight-bold etiqueta2"><h4>{{titulo}}</h4></label>
              <br> </br>   </div>
+             {% if titulo2 == 'Alumnos inscriptos: ' %}
+                 <div align="center">
+                  <label class="font-weight-bold etiqueta2"><h5>{{titulo2}}</h5></label>
+                  </div>
+              {% endif %}
             <div id="div_chart" align="center"></div>
             
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <script type="text/javascript">
                 {{ gc_draw(chart, 'div_chart') }}
             </script>
+            <br>
         </div>
     </div>
     {% endblock %}

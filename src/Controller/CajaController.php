@@ -202,7 +202,7 @@ class CajaController extends AdminController
             'chart1' => $chart1,
             'chart2' => $chart2,
             'titulo' => 'Balance mensual',
-            'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+            'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
         ));
     }
     public function balanceAction()
@@ -303,7 +303,7 @@ class CajaController extends AdminController
         'sub1' => 'Apertura y cierre de caja',
         'sub2' => 'Ingresos',
         'sub3' => 'Egresos',
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
     ));
     }
 

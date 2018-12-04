@@ -56,8 +56,9 @@ class EquipamientoController extends AdminController
 
         return $this->render('/informes/informes.html.twig',
         array('chart' => $table,
+        'titulo2' => '',   
         'titulo' => 'Informe de equipamientos que necesitan mantenimiento',
-        'fechaimpresion' => ((string)$now->format('Y/m/d H:i:s'))
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
     ));
     }
 
