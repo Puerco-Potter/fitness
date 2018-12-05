@@ -908,9 +908,11 @@ easy_admin:
                     - {property: 'Movimientos'}
             list:
                 actions:
+                    - { name: 'addMov', label: '+ ', title: 'Agregar Movimiento', icon: 'money', css_class: 'text-green', target: '_blank'}  
                     - { name: 'balance', icon: 'balance-scale', label: 'Balance', target: '_blank'}     
                     - { name: 'new', icon: 'plus-circle', label: 'Abrir Caja', title: 'Abrir Caja'}
-                    - { name: 'cerrar', label: 'Cerrar caja', title: 'Cerrar caja', icon: 'times-circle', css_class: 'text-red'}           
+                    - { name: 'cerrar', label: 'Cerrar caja', title: 'Cerrar caja', icon: 'times-circle', css_class: 'text-red'} 
+
             controller: App\Controller\CajaController
         Movimiento:
             class: App\Entity\Movimiento

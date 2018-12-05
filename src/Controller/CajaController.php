@@ -418,5 +418,18 @@ class CajaController extends AdminController
         return $this->executeDynamicMethod('render<EntityName>Template', array('new', $this->entity['templates']['new'], $parameters));
     }
     
+    public function addMovAction()
+    {
+
+        return $this->redirectToRoute('easyadmin', array(
+            'action' => 'new',
+            'entity' => 'Movimiento',
+
+
+        ));
+
+    }
+
+
 }
 ?>
