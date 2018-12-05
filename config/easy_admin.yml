@@ -65,8 +65,11 @@ easy_admin:
             #- label: 'Gestión de usuarios'
             #  icon: 'child'
             #  children:
-            - { label: "Ver Usuarios" , entity: 'User', icon: 'child'}
-            #    - { icon: 'plus-circle', label: 'Registrar usuario', url: 'http://localhost:8080/fitness/public/register'}
+            - label: "Usuarios"
+              icon: 'user'
+              children:
+                - { icon: 'child', label: 'Ver usuarios', entity: 'User'}
+                - { icon: 'plus-circle', label: 'Registrar usuario', url: '../register', target: '_blank' }
             - label: "Contacto"
               icon: 'share-square'
               children:
