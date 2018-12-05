@@ -304,7 +304,7 @@ easy_admin:
                 fields:
                     #- { type: 'tab' , label: 'Información Basica', icon: 'user' }
                     - { type: 'group', css_class: 'col-sm-5', label: 'Información Basica', icon: 'user' }
-                    - { property: 'dni', type: 'integer', label: 'DNI (sin puntos)', css_class: 'col-sm-8'}
+                    - { property: 'dni', type: 'integer', label: 'DNI (sin puntos)', css_class: 'col-sm-6'}
                     - { property: 'apellido', type: 'text', label: 'Apellido', css_class: 'col-sm-10 new-row'}
                     - { property: 'nombre', type: 'text', label: 'Nombres', css_class: 'col-sm-10'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento',css_class: 'col-sm-6'}               
@@ -338,7 +338,7 @@ easy_admin:
                 fields:
                     #- { type: 'tab' , label: 'Información Basica', icon: 'user' }
                     - { type: 'group', css_class: 'col-sm-5', label: 'Información Basica', icon: 'user' }
-                    - { property: 'dni', type: 'integer', label: 'DNI (sin puntos)', css_class: 'col-sm-8'}
+                    - { property: 'dni', type: 'integer', label: 'DNI (sin puntos)', css_class: 'col-sm-6'}
                     - { property: 'apellido', type: 'text', label: 'Apellido', css_class: 'col-sm-10 new-row'}
                     - { property: 'nombre', type: 'text', label: 'Nombres', css_class: 'col-sm-10'}
                     - { property: 'fechaNacimiento', type: 'date',type_options: {widget: 'single_text'}, label: 'Fecha de nacimiento',css_class: 'col-sm-6'}               
@@ -486,7 +486,7 @@ easy_admin:
                     - {property: 'cuotaBase', type: 'money', type_options: { currency: 'ARS' }, css_class: 'col-sm-6' }
                     - {property: 'Sala', label: 'Salón', css_class: 'col-sm-6 new-row' }
                     - {property: 'cupo', css_class: 'col-sm-6' }
-                    - {property: 'horario', css_class: 'col-sm-6 new-row' } 
+                    - {property: 'horario', label: 'Horario (hs)', css_class: 'col-sm-6 new-row' } 
                     - {property: 'duracion', label: 'Duración (minutos)', css_class: 'col-sm-6' } 
                     - { type: 'group', css_class: 'col-sm-2' , label: 'Días', icon: 'check-square'}
                     - {property: 'lunes'}
@@ -542,11 +542,11 @@ easy_admin:
                     - { property: 'fechaInicio', label: 'Fecha de iniciación' }
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-7'}
-                    - { property: 'nombre', type: 'text', label: 'Nombre', css_class: 'col-sm-6'}
-                    - { property: 'grupal', type: 'checkbox', label: '¿Es grupal?', css_class: 'col-sm-offset-1 inline col-sm-5'}
+                    - { type: 'group', css_class: 'col-sm-6'}
+                    - { property: 'nombre', type: 'text', label: 'Nombre', css_class: 'col-sm-5'}
+                    - { property: 'grupal', type: 'checkbox', label: '¿Es grupal?', css_class: 'col-sm-offset-2 inline col-sm-5 btn-default'}
                     - { property: 'fechaInicio', type: 'date', label: 'Fecha de iniciación',type_options: {widget: 'single_text'}, css_class: 'col-sm-5 new-row'}                
-                    - { property: 'estado', type: 'checkbox', label: '¿Se realiza actualmente?', css_class: 'col-sm-offset-2 inline col-sm-5'} 
+                    - { property: 'estado', type: 'checkbox', label: '¿Se realiza actualmente?', css_class: 'col-sm-offset-2 inline col-sm-5 btn-default'} 
                     - { property: 'descripcion', type: 'textarea', label: 'Descripción', css_class: 'col-sm-12'}
             edit:
                 title: 'Modificar Actividad'
@@ -583,7 +583,7 @@ easy_admin:
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6'}
-                    - { property: 'descripcion', type: 'text', label: 'Descripcion', css_class: 'col-sm-7'}
+                    - { property: 'descripcion', type: 'text', label: 'Descripcion', css_class: 'col-sm-6'}
                     - { property: 'fechaAdquisicion', type: 'date', label: 'Fecha de adquisición',type_options: {widget: 'single_text'}, css_class: 'col-sm-6 new-row'}
                     - { property: 'estado', type: 'choice', label: 'Estado del equipamiento',type_options:{choices:{'En reparación':'En reparación','Dañado':'Dañado','Listo para usar':'Listo para usar'}}, css_class: 'col-sm-6'}
                     - { type : 'section' , label : 'Mantenimiento', icon: 'wrench' }                    
@@ -617,7 +617,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-4'}
                     - { property: 'descripcion', type: 'text', label: 'Descripcion', css_class: 'col-sm-12'}
                  #   - { property: 'ultimaReposicion', type: 'date', label: 'Fecha de última reposición',type_options: {widget: 'single_text'}}                  
-                    - { property: 'cantidad', type: 'integer', label: 'Cantidad disponible', css_class: 'col-sm-6'}
+                    - { property: 'cantidad', type: 'integer', label: 'Cantidad disponible', css_class: 'col-sm-7'}
             edit:
                 title: 'Modificar elemento'
             new:
@@ -658,7 +658,7 @@ easy_admin:
             class: App\Entity\PlanEntrenamiento
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-5', label: '' }
+                    - { type: 'group', css_class: 'col-sm-4', label: '' }
                     - { property: 'descripcion', type: 'text', label: 'Descripción'}
                     - {property: 'Alumno'}
                     - {property: 'Profesor'}
@@ -707,7 +707,7 @@ easy_admin:
                 fields:
                     - { type: 'group', css_class: 'col-sm-5', label: '' }
                     - {property: 'descripcion', label: 'Descripción', css_class: 'col-sm-10'}
-                    - {property: 'zonaMuscular', type: 'choice', label: 'Zona muscular',type_options:{choices:{ 'Dorsal':'Dorsal' ,'Pecho':'Pecho' ,'Hombros':'Hombros' ,'Brazos':'Brazos' ,'Piernas':'Piernas' }}, css_class: 'wrap-collabsible col-sm-6'}
+                    - {property: 'zonaMuscular', type: 'choice', label: 'Zona muscular',type_options:{choices:{ 'Pecho':'Pecho','Espalda':'Espalda'  ,'Hombros':'Hombros' ,'Brazos':'Brazos' ,'Piernas':'Piernas' }}, css_class: 'wrap-collabsible col-sm-6'}
                     
                     - { type: 'group', label: 'Equipo/Elemento requerido:', css_class: 'col-sm-5 new-row', collapsible: true}
                     - {property: 'Equipamiento', css_class: 'col-sm-6 new-row'}
@@ -812,6 +812,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-6 new-row' }                   
                     - {property: 'monto', type: 'money', type_options: { currency: 'ARS' }, css_class: 'col-sm-4'}
                     - {property: 'fechaYHora', label: 'Fecha-Hora', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}, css_class: 'col-sm-8'}
+                    - { type : 'section' , label : 'Corresponde al:', icon: 'calendar-alt' }    
                     - {property: 'mes', css_class: 'col-sm-4'}
                     - {property: 'ano', label: 'Año', css_class: 'col-sm-4'}
                     #- { type: 'divider' }
@@ -890,7 +891,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-5', label: '' }
                     - {property: 'fecha', type: 'date', type_options: {widget: 'single_text'}, css_class: 'col-sm-7'}
                     - {property: 'apertura', type: 'time', type_options: {widget: 'single_text'}, label: 'Hora de apertura', css_class: 'col-sm-5'}
-                    - {property: 'saldoInicial', css_class: 'col-sm-7 new_row'}
+                    - {property: 'saldoInicial', type: 'money', label: 'Saldo inicial', type_options: { currency: 'ARS' }, css_class: 'col-sm-7 new_row'}
             show:
                 title: 'Cerrar caja'
                 fields:
@@ -927,7 +928,7 @@ easy_admin:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: '' }
                     - { property: 'tipo', type: 'choice', label: 'Tipo de movimiento', type_options: {choices:{'Ingreso':'Ingreso','Egreso':'Egreso'}}, css_class: 'col-sm-4'}
-                    - {property: 'hora', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}, css_class: 'col-sm-8'}
+                    - {property: 'hora', label: 'Fecha-Hora', type: 'datetime', type_options: {date_widget: 'single_text', time_widget: 'single_text'}, css_class: 'col-sm-8'}
                     - {property: 'concepto', type: 'choice', type_options: {choices:{'Cuota': 'Cuota','Compra de insumos': 'Compra de insumos','Pago de servicio': 'Pago de servicio', 'Compra': 'Compra', 'Donación': 'Donación','Otros': 'Otros'}}, css_class: 'col-sm-4'}
                     - {property: 'monto',type: 'money', type_options: { currency: 'ARS' }, css_class: 'col-sm-7' }
                     - {property: 'observaciones', label: '✏ Observaciones',css_class: 'col-sm-11'}
@@ -979,7 +980,7 @@ easy_admin:
                     - {property: 'monto', type: 'money', label: 'Monto', type_options: { currency: 'ARS' }, css_class: 'col-sm-8'}
                     - {property: 'Alumno', css_class: 'col-sm-12'}
                     - { type: 'group', css_class: 'col-sm-6', label: 'Inscripciones'}
-                    - {property: 'Inscripciones', label: 'Añada las Inscripciones a las Actividades ⤵️', type: 'collection' ,type_options: { entry_type: 'App\Form\InscripcionType', by_reference: false }, css_class: 'pre-scrollable btn-default '}
+                    - {property: 'Inscripciones', label: 'Añada las Inscripciones a las Actividades ⤵️', type: 'collection' ,type_options: { entry_type: 'App\Form\InscripcionType', by_reference: false }, css_class: 'pre-scrollable well '}
             edit:
                 title: 'Editar combo'
             new:
