@@ -143,7 +143,8 @@ class CajaController extends AdminController
         $elemento = array();
         $elemento = [
             ['label' => 'Momento', 'type' => 'string'],
-            ['label' => 'Tipo', 'type' => 'string'],
+            ['label' => 'Entrada', 'type' => 'string'],
+            ['label' => 'Salida', 'type' => 'string'],
             ['label' => 'Concepto', 'type' => 'string'],
             ['label' => 'Observaciones', 'type' => 'string'],
             ['label' => 'Monto', 'type' => 'number'],
@@ -166,8 +167,17 @@ class CajaController extends AdminController
                 }
             }
             $elemento = array();
-            array_push($elemento, (string) $movimiento->getHora()->format('Y/m/d H:i:s'));
-            array_push($elemento, $movimiento->getTipo());
+            array_push($elemento, (string) $movimiento->getHora()->format('d/m/Y H:i:s'));
+            if ($movimiento->getTipo()=='Ingreso')
+            {
+                array_push($elemento, 'Ingreso');
+                array_push($elemento, '');
+            }
+            else
+            {
+                array_push($elemento, '');
+                array_push($elemento, 'Egreso');
+            }
             array_push($elemento, $movimiento->getConcepto());
             array_push($elemento, $movimiento->getObservaciones());
             array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
@@ -176,12 +186,14 @@ class CajaController extends AdminController
         }    
         $now = new \DateTime();
         $elemento = array();
-        array_push($elemento, ($now)->format('F, Y'));
+        setlocale(LC_ALL,"es_ES");
+        $mesyano =  strftime("%B de %Y",$now->getTimestamp());
+        array_push($elemento, $mesyano);
         array_push($elemento, 'Total de ingresos');
         array_push($elemento, ['v' => $ingresos, 'f' => '$'.(string)$ingresos]);            
         array_push($listacajas, $elemento);
         $elemento = array();
-        array_push($elemento, ($now)->format('F, Y'));
+        array_push($elemento, $mesyano);
         array_push($elemento, 'Total de egresos');
         array_push($elemento, ['v' => $egresos, 'f' => '$'.(string)$egresos]);            
         array_push($listacajas, $elemento);
@@ -198,10 +210,11 @@ class CajaController extends AdminController
         $chart2->getOptions()->setWidth('50%');
         $now =  new \DateTime();
 
+        $nombremes =  strftime("%B",$now->getTimestamp());
         return $this->render('chart2.html.twig', array(
             'chart1' => $chart1,
             'chart2' => $chart2,
-            'titulo' => 'Balance mensual',
+            'titulo' => 'Balance mensual de '.$nombremes,
             'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
         ));
     }
@@ -213,8 +226,7 @@ class CajaController extends AdminController
         $movimientos = $em->getRepository(Movimiento::class)->findBy(array('Caja' => $caja->getId()));
         
         $balance = array();
-        $egresos = array();
-        $ingresos = array();
+        $tablamovimientos = array();
         $totalingresos = 0;
         $totalegresos = 0;
         
@@ -235,13 +247,14 @@ class CajaController extends AdminController
         
         $elemento = [
             ['label' => 'Momento', 'type' => 'string'],
+            ['label' => 'Entrada', 'type' => 'string'],
+            ['label' => 'Salida', 'type' => 'string'],
             ['label' => 'Concepto', 'type' => 'string'],
             ['label' => 'Observaciones', 'type' => 'string'],
             ['label' => 'Monto', 'type' => 'number'],
             ['label' => 'Válido', 'type' => 'boolean']
         ];
-        array_push($ingresos, $elemento);
-        array_push($egresos, $elemento);
+        array_push($tablamovimientos, $elemento);
         
         if ($movimientos==[])
         {
@@ -255,6 +268,16 @@ class CajaController extends AdminController
         {
             $elemento = array();
             array_push($elemento, (string) $movimiento->getHora()->format('H:i:s'));
+            if ($movimiento->getTipo()=='Ingreso')
+            {
+                array_push($elemento, 'Ingreso');
+                array_push($elemento, '');
+            }
+            else
+            {
+                array_push($elemento, '');
+                array_push($elemento, 'Egreso');
+            }
             array_push($elemento, $movimiento->getConcepto());
             array_push($elemento, $movimiento->getObservaciones());
             array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
@@ -262,7 +285,6 @@ class CajaController extends AdminController
             
             if ($movimiento->getTipo()=='Ingreso')
             {
-                array_push($ingresos,$elemento);
                 if($movimiento->getValido())
                 {
                     $totalingresos = $totalingresos+$movimiento->getMonto();
@@ -270,25 +292,31 @@ class CajaController extends AdminController
             }
             else
             {
-                array_push($egresos,$elemento);
                 if($movimiento->getValido())
                 {
                     $totalegresos = $totalegresos+$movimiento->getMonto();
                 }
             }
+            array_push($tablamovimientos,$elemento);
         }        
+        $final = array();
+        $elemento = [
+            ['label' => 'Concepto', 'type' => 'string'],
+            ['label' => 'Total', 'type' => 'number']
+        ];
+        array_push($final, $elemento);
         $elemento = array();
         array_push($elemento, 'Total de ingresos');
         array_push($elemento, ['v' => $totalingresos, 'f' => '$'.(string)$totalingresos]);
-        array_push($balance, $elemento);
+        array_push($final, $elemento);
         $elemento = array();
         array_push($elemento, 'Total de egresos');
         array_push($elemento, ['v' => $totalegresos, 'f' => '$'.(string)$totalegresos]);
-        array_push($balance, $elemento);
+        array_push($final, $elemento);
         $tablas = [new TableChart(),new TableChart(),new TableChart()];
         $tablas[0]->getData()->setArrayToDataTable($balance);
-        $tablas[1]->getData()->setArrayToDataTable($ingresos);
-        $tablas[2]->getData()->setArrayToDataTable($egresos);
+        $tablas[1]->getData()->setArrayToDataTable($tablamovimientos);
+        $tablas[2]->getData()->setArrayToDataTable($final);
         foreach ($tablas as $tabla)
         {
             $tabla->getOptions()->setWidth('50%');
@@ -301,8 +329,8 @@ class CajaController extends AdminController
         'chart2' => $tablas[2],
         'titulo' => 'Balance de caja del día '. (string) $caja->getFecha()->format('d/m/Y'),
         'sub1' => 'Apertura y cierre de caja',
-        'sub2' => 'Ingresos',
-        'sub3' => 'Egresos',
+        'sub2' => 'Movimientos',
+        'sub3' => 'Totales',
         'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
     ));
     }
@@ -390,5 +418,18 @@ class CajaController extends AdminController
         return $this->executeDynamicMethod('render<EntityName>Template', array('new', $this->entity['templates']['new'], $parameters));
     }
     
+    public function addMovAction()
+    {
+
+        return $this->redirectToRoute('easyadmin', array(
+            'action' => 'new',
+            'entity' => 'Movimiento',
+
+
+        ));
+
+    }
+
+
 }
 ?>
