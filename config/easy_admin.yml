@@ -381,6 +381,9 @@ easy_admin:
         Inscripcion:
         #DONE reemplazar atributos a posteriori
             class: App\Entity\Inscripcion
+            templates:
+                # Twig namespace template syntax
+                new: 'inscripcion\javaS.html.twig'
             show:
                 title: 'Ver inscripción'
                 fields:
@@ -423,9 +426,9 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Información Básica' }
                     - {property: 'fechaInscripcion',label: 'Fecha de inscripción', css_class: 'col-sm-6'}
                     - {property: 'fechaFin', label: 'Fecha de fin de inscripción', css_class: 'col-sm-6'}
-                    - {property: 'Clase', css_class: 'col-sm-11'}
+                    - {property: 'Clase', css_class: 'col-sm-11 clase'}
                     - {property: 'Alumno', css_class: 'col-sm-8'}
-                    - {property: 'cuota', type: 'money', type_options: { currency: 'ARS' }, css_class: 'col-sm-6'}
+                    - {property: 'cuota', type: 'money', type_options: { currency: 'ARS' }, css_class: 'col-sm-6 cuota'}
                     - { type: 'group', css_class: 'col-sm-2', label: 'Días', icon: 'check-square'  }
                     - {property: 'lunes'}
                     - {property: 'martes'}
