@@ -53,7 +53,7 @@
                     <td>
                             {{ inscripcion.alumno }}
                     </td>
-                        {% set presente = 'Ausente' %}
+                        {% set presente = '-' %}
                         {% for asistencia in asistencias %}
                             {% if asistencia.inscripcion == inscripcion %}
                                             {% set presente = 'Presente' %}
