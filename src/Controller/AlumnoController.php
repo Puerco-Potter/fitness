@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Alumno;
 use App\Entity\FichaMedica;
 use App\Entity\Inscripcion;
+use App\Entity\Combo;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
 
 class AlumnoController extends AdminController
@@ -85,6 +86,83 @@ class AlumnoController extends AdminController
     public function informemorososAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
+        $inscripciones = $em->getRepository(Inscripcion::class)->findAll();
+        $combos = $em->getRepository(Combo::class)->findAll();
+        
+        $lista = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'DNI', 'type' => 'string'],
+            ['label' => 'Nombre y apellido', 'type' => 'string'],
+            ['label' => 'Dirección', 'type' => 'string'],
+            ['label' => 'Correo', 'type' => 'string'],
+            ['label' => 'Teléfono', 'type' => 'string'],
+            ['label' => 'Inscripción/Combo', 'type' => 'string'],
+            ['label' => 'Deuda', 'type' => 'number']
+        ];
+        array_push($lista, $elemento);
+        foreach ($inscripciones as $key => $inscripcion)
+        {
+            if ($inscripcion->getSaldo()>=0)
+            {
+                unset($inscripciones[$key]);
+            }
+        }
+        foreach ($combos as $key => $combo)
+        {
+            if ($combo->getSaldo()>=0)
+            {
+                unset($combos[$key]);
+            }
+        }
+        if (($combos==[]) AND ($inscripciones=[]))
+        {
+            $this->addFlash('warning',sprintf('No hay alumnos morosos'));
+            return $this->redirectToRoute('easyadmin', array(
+                'action' => 'list',
+                'entity' => 'Alumno'
+            ));
+        }
+        foreach ($inscripciones as $inscripcion)
+        {
+            $elemento = array();
+            $alumno = $em->getRepository(Alumno::class)->find($inscripcion->getAlumno()->getId());
+            array_push($elemento, (string) $alumno->getDNI());
+            array_push($elemento, (string) $alumno);
+            array_push($elemento, (string) $alumno->getLocalidad().' - '.$alumno->getDireccion());
+            array_push($elemento, (string) $alumno->getCorreo());
+            #dump($alumno->listaTelefonos());exit;
+            array_push($elemento, (string) $alumno->listaTelefonos());
+            array_push($elemento, (string) $inscripcion->getClase());
+            array_push($elemento, ['v' => $inscripcion->getSaldo(), 'f' => '$'.(string)$inscripcion->getSaldo()]);
+            array_push($lista,$elemento);
+        }        
+        foreach ($combos as $combo)
+        {
+            $elemento = array();
+            $alumno = $em->getRepository(Alumno::class)->find($combo->getAlumno()->getId());
+            array_push($elemento, (string) $alumno->getDNI());
+            array_push($elemento, (string) $alumno);
+            array_push($elemento, (string) $alumno->getLocalidad().' - '.$alumno->getDireccion());
+            array_push($elemento, (string) $alumno->getCorreo());
+            #dump($alumno->listaTelefonos());exit;
+            array_push($elemento, (string) $alumno->listaTelefonos());
+            array_push($elemento, (string) $combo);
+            array_push($elemento, ['v' => $combo->getSaldo(), 'f' => '$'.(string)$combo->getSaldo()]);
+            array_push($lista,$elemento);
+        }        
+        $chart = new TableChart();
+        $chart->getData()->setArrayToDataTable($lista);
+        #$chart->getOptions()->setHeight('100%');
+        #$chart->getOptions()->setWidth('25%');
+        $now =  new \DateTime();
+        return $this->render('/informes/informes.html.twig',
+        array('chart' => $chart,
+        'fechaimpresion' => ((string)$now->format('Y/m/d H:i')),
+        'titulo2' => '',
+        'titulo' => 'Informe de Alumnos morosos'));
+        /*
+        $em = $this->getDoctrine()->getEntityManager();
         $alumnos = $em->getRepository(Alumno::class)->findAll();
         
         $lista = array();
@@ -138,6 +216,7 @@ class AlumnoController extends AdminController
         'fechaimpresion' => ((string)$now->format('Y/m/d H:i')),
         'titulo2' => '',
         'titulo' => 'Informe de Alumnos morosos'));
+        */
     }
     protected function persistEntity($entity)
     {
