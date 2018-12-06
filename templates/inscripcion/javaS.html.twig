@@ -1,0 +1,36 @@
+{% extends '@!EasyAdmin/default/new.html.twig' %}
+
+{% block body_javascript %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(function() {
+            $('.new-form').areYouSure({ 'message': '{{ 'form.are_you_sure'|trans({}, 'EasyAdminBundle')|e('js') }}' });
+
+            $('.form-actions').easyAdminSticky();
+        });
+    </script>
+
+    {{ include('@EasyAdmin/default/includes/_select2_widget.html.twig') }}
+    <script>
+        $( document ).ready(function() {
+            console.log("todos putos");
+            $('#select2-inscripcion_Clase-container').on('DOMSubtreeModified',function(){
+                $('#inscripcion_cuota').val(500);
+                var nombre=$('#select2-inscripcion_Clase-container').html();
+                nombre = nombre.substring(nombre.indexOf("codigo:") + 7)
+                console.log(nombre);
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    console.log("entro");
+                    if (this.readyState == 4 && this.status == 200) {
+                        $('#inscripcion_cuota').val(this.responseText);
+                    console.log("entro2");
+                    }
+                };
+                xhttp.open("GET", "../ajax/cuota.php?id=" + nombre, true);
+                xhttp.send();
+            });
+        });
+    </script>
+{% endblock %}
