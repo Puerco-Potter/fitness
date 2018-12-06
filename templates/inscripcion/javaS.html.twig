@@ -13,19 +13,127 @@
 
     {{ include('@EasyAdmin/default/includes/_select2_widget.html.twig') }}
     <script>
+        function calcularDias() {
+            var semana= 0;
+            if ($('#inscripcion_lunes').is(':checked')) {
+                semana = semana +1;
+            }
+            if ($('#inscripcion_martes').is(':checked')) {
+                semana = semana +1;
+            }
+            if ($('#inscripcion_miercoles').is(':checked')) {
+                semana = semana +1;
+            }
+            if ($('#inscripcion_jueves').is(':checked')) {
+                semana = semana +1;
+            }
+            if ($('#inscripcion_viernes').is(':checked')) {
+                semana = semana +1;
+            }
+            if ($('#inscripcion_sabado').is(':checked')) {
+                semana = semana +1;
+            }
+            var dias = 0;
+            switch(semana) {
+                case 0:
+                  dias= 0;
+                  break;
+                case 1:
+                  dias= 5;
+                  break;
+                case 2:
+                  dias= 10;
+                  break;
+                case 3:
+                  dias= 15;
+                  break;
+                case 4:
+                  dias= 19;
+                  break;
+                case 5:
+                  dias= 23;
+                  break;
+                case 6:
+                  dias= 27;
+                  break;
+              } 
+            $('#inscripcion_clasesTotales').val(dias);
+        }
         $( document ).ready(function() {
+            $('#inscripcion_lunes').change(function() {
+                calcularDias();
+            });
+            $('#inscripcion_martes').change(function() {
+                calcularDias();
+            });
+            $('#inscripcion_miercoles').change(function() {
+                calcularDias();
+            });
+            $('#inscripcion_jueves').change(function() {
+                calcularDias();
+            });
+            $('#inscripcion_viernes').change(function() {
+                calcularDias();
+            });
+            $('#inscripcion_sabado').change(function() {
+                calcularDias();
+            });
+
             console.log("todos putos");
             $('#select2-inscripcion_Clase-container').on('DOMSubtreeModified',function(){
                 $('#inscripcion_cuota').val(500);
                 var nombre=$('#select2-inscripcion_Clase-container').html();
                 nombre = nombre.substring(nombre.indexOf("codigo:") + 7)
-                console.log(nombre);
+                
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
-                    console.log("entro");
+                    
                     if (this.readyState == 4 && this.status == 200) {
-                        $('#inscripcion_cuota').val(this.responseText);
-                    console.log("entro2");
+                        arreglo = JSON.parse(this.responseText)
+                        $('#inscripcion_cuota').val(arreglo["cuota"]);
+                        if(arreglo["lunes"] == 0 ){
+                            $('#inscripcion_lunes').prop( "checked", false );
+                            $('#inscripcion_lunes').prop('disabled', true);
+                        } else {
+                            $('#inscripcion_lunes').prop( "checked", true );
+                            $('#inscripcion_lunes').prop('disabled', false);
+                        }
+                        if(arreglo["martes"] == 0 ){
+                            $('#inscripcion_martes').prop( "checked", false );
+                            $('#inscripcion_martes').prop('disabled', true);
+                        } else {
+                            $('#inscripcion_martes').prop( "checked", true );
+                            $('#inscripcion_martes').prop('disabled', false);
+                        }
+                        if(arreglo["miercoles"] == 0 ){
+                            $('#inscripcion_miercoles').prop( "checked", false );
+                            $('#inscripcion_miercoles').prop('disabled', true);
+                        } else {
+                            $('#inscripcion_miercoles').prop( "checked", true );
+                            $('#inscripcion_miercoles').prop('disabled', false);
+                        }
+                        if(arreglo["jueves"] == 0 ){
+                            $('#inscripcion_jueves').prop( "checked", false );
+                            $('#inscripcion_jueves').prop('disabled', true);
+                        } else {
+                            $('#inscripcion_jueves').prop( "checked", true );
+                            $('#inscripcion_jueves').prop('disabled', false);
+                        }
+                        if(arreglo["viernes"] == 0 ){
+                            $('#inscripcion_viernes').prop( "checked", false );
+                            $('#inscripcion_viernes').prop('disabled', true);
+                        } else {
+                            $('#inscripcion_viernes').prop( "checked", true );
+                            $('#inscripcion_viernes').prop('disabled', false);
+                        }
+                        if(arreglo["sabado"] == 0 ){
+                            $('#inscripcion_sabado').prop( "checked", false );
+                            $('#inscripcion_sabado').prop('disabled', true);
+                        } else {
+                            $('#inscripcion_sabado').prop( "checked", true );
+                            $('#inscripcion_sabado').prop('disabled', false);
+                        }
+                        calcularDias();
                     }
                 };
                 xhttp.open("GET", "../ajax/cuota.php?id=" + nombre, true);

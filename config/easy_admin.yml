@@ -440,8 +440,7 @@ easy_admin:
                     - {property: 'viernes'}
                     - {property: 'sabado'}
                     - { type: 'group', css_class: 'col-sm-3 inline', label: 'Clases' }
-                    - {property: 'clasesTotales', css_class: 'col-sm-12'}
-                    - {property: 'clasesRestantes', css_class: 'col-sm-12'}
+                    - {property: 'clasesTotales', css_class: 'col-sm-12', type_options: { disabled: true }}
 
             new:
                 title: 'Registrar Inscripción' 
