@@ -206,8 +206,10 @@ class PagoCuotaController extends AdminController
                  $cadena = mb_substr($cadena, 0, -1);
             return $this->render('informes/Compr.html.twig',
         array(
+
         'titulo'=> 'Comprobante de pago ',
         'codigo' => (string)$pagoCuota->getId(),
+        'nroCuenta' => (string)$pagoCuota->getCombo()->getAlumno()->getCuenta(),
         'alumno' => (string)$pagoCuota->getCombo()->getAlumno(),
         'dniAlu' => (string)$pagoCuota->getCombo()->getAlumno()->getDni(),
         'inscrPago' => '-',
@@ -228,6 +230,7 @@ class PagoCuotaController extends AdminController
         'titulo'=> 'Comprobante de pago ',
         'codigo' => (string)$pagoCuota->getId(),
         'alumno' => (string)$pagoCuota->getInscripcion()->getAlumno(),
+        'nroCuenta' => (string)$pagoCuota->getInscripcion()->getAlumno()->getCuenta(),
         'dniAlu' => (string)$pagoCuota->getInscripcion()->getAlumno()->getDni(),
         'inscrPago' => (' '.(string)$pagoCuota->getInscripcion()->getClase()->getActividad().
         ' - Prof. '.(string)$pagoCuota->getInscripcion()->getClase()->getProfesor().

@@ -75,6 +75,9 @@
                <label class="font-weight-bold etiqueta2"><h6><b>Codigo de pago:</b> {{codigo}}</h6></label>    </div> <div align="left">   
                <label class="font-weight-bold etiqueta2"><h6><b>Alumno:</b> {{alumno}}</h6></label>    </div> <div align="left">    
                <label class="font-weight-bold etiqueta2"><h6><b>DNI:</b> {{dniAlu}}</h6></label>    </div> <div align="left">
+               {% if nroCuenta !='' %}
+               <label class="font-weight-bold etiqueta2"><h6><b>Cuenta Nº:</b> {{nroCuenta}}</h6></label>    </div> <div align="left">
+               {% endif %}
                {% if comboPago =='-' %}
                <label class="font-weight-bold etiqueta2"><h6><b>Inscripción:</b> {{inscrPago}}</h6></label>    </div> <div align="left">
                {% endif %}
