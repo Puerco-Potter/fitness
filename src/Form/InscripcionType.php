@@ -30,14 +30,7 @@ class InscripcionType extends AbstractType
                 'label' => 'Fecha de fin',
                 'attr' => array('class' => 'col-lg-6')
             ])
-            ->add('clasesRestantes', NumberType::class, [
-                'label' => 'Clases Restantes',
-                'attr' => array('class' => 'col-lg-6')
-            ])
-            ->add('clasesTotales', NumberType::class, [
-                'label' => 'Clases Totales',
-                'attr' => array('class' => 'col-lg-6')
-            ])
+
             ->add('lunes', CheckboxType::class, [
                 'label' => 'Lunes',
                 'attr' => array('class' => 'col-lg-6')

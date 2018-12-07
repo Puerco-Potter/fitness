@@ -143,11 +143,10 @@ class CajaController extends AdminController
         $elemento = array();
         $elemento = [
             ['label' => 'Momento', 'type' => 'string'],
-            ['label' => 'Entrada', 'type' => 'string'],
-            ['label' => 'Salida', 'type' => 'string'],
+            ['label' => 'Ingreso', 'type' => 'string'],
+            ['label' => 'Egreso', 'type' => 'string'],
             ['label' => 'Concepto', 'type' => 'string'],
             ['label' => 'Observaciones', 'type' => 'string'],
-            ['label' => 'Monto', 'type' => 'number'],
             ['label' => 'Válido', 'type' => 'boolean']
         ];
         array_push($listamovimientos, $elemento);
@@ -170,17 +169,17 @@ class CajaController extends AdminController
             array_push($elemento, (string) $movimiento->getHora()->format('d/m/Y H:i:s'));
             if ($movimiento->getTipo()=='Ingreso')
             {
-                array_push($elemento, 'Ingreso');
-                array_push($elemento, '');
+                array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
+                array_push($elemento, '-');
             }
             else
             {
-                array_push($elemento, '');
-                array_push($elemento, 'Egreso');
+                array_push($elemento, '-');
+                array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
             }
             array_push($elemento, $movimiento->getConcepto());
             array_push($elemento, $movimiento->getObservaciones());
-            array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
+
             array_push($elemento, $movimiento->getValido());
             array_push($listamovimientos,$elemento);
         }    
@@ -247,11 +246,10 @@ class CajaController extends AdminController
         
         $elemento = [
             ['label' => 'Momento', 'type' => 'string'],
-            ['label' => 'Entrada', 'type' => 'string'],
-            ['label' => 'Salida', 'type' => 'string'],
+            ['label' => 'Ingreso', 'type' => 'string'],
+            ['label' => 'Egreso', 'type' => 'string'],
             ['label' => 'Concepto', 'type' => 'string'],
             ['label' => 'Observaciones', 'type' => 'string'],
-            ['label' => 'Monto', 'type' => 'number'],
             ['label' => 'Válido', 'type' => 'boolean']
         ];
         array_push($tablamovimientos, $elemento);
@@ -270,17 +268,16 @@ class CajaController extends AdminController
             array_push($elemento, (string) $movimiento->getHora()->format('H:i:s'));
             if ($movimiento->getTipo()=='Ingreso')
             {
-                array_push($elemento, 'Ingreso');
-                array_push($elemento, '');
+                array_push($elemento, ['v' => $caja->getSaldoInicial(), 'f' => '$'.(string)$caja->getSaldoInicial()]);
+                array_push($elemento, '-');
             }
             else
             {
-                array_push($elemento, '');
-                array_push($elemento, 'Egreso');
+                array_push($elemento, '-');
+                array_push($elemento, ['v' => $caja->getSaldoInicial(), 'f' => '$'.(string)$caja->getSaldoInicial()]);
             }
             array_push($elemento, $movimiento->getConcepto());
             array_push($elemento, $movimiento->getObservaciones());
-            array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
             array_push($elemento, $movimiento->getValido());
             
             if ($movimiento->getTipo()=='Ingreso')
