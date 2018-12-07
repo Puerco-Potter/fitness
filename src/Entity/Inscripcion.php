@@ -102,7 +102,7 @@ class Inscripcion
     public function __construct()
     {
         $this->fechaInscripcion = new \DateTime();
-        $this->fechaFin = (new \DateTime())->add(new DateInterval('P30D'));
+        $this->fechaFin = (new \DateTime())->add(new DateInterval('P01M'));
         $this->lunes = FALSE;
         $this->martes = FALSE;
         $this->miercoles = FALSE;

@@ -7,15 +7,132 @@ use App\Entity\Clase;
 use App\Entity\Inscripcion;
 use App\Entity\Alumno;
 use App\Entity\Combo;
+use App\Entity\PagoCuota;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use \DateTime;
+use \Date;
+use DateInterval;
 
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\TableChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\LineChart;
 
 class ActividadController extends AdminController
 {
+    public function historicoActividadesAction()
+    {
+        $id = $this->request->query->get('id');
+        $em = $this->getDoctrine()->getEntityManager();
+        $actividad = $em->getRepository(Actividad::class)->find($id);
+
+        $min = date('m-01-Y', strtotime("-6 months")); // hard-coded '01' for first day
+        $max  = date("m-t-Y");#date('m-t-Y');
+
+        $pagocuotas = $em->getRepository(PagoCuota::class)->findAll();
+        foreach ($pagocuotas as $key => $pagocuota)
+        {
+            if ($pagocuota->getInscripcion()!=NULL)
+            {
+                if ($pagocuota->getInscripcion()->getClase()->getActividad()->getId()!=$id)
+                {
+                    unset($pagocuotas[$key]);
+                }
+            }
+            else
+            {
+                $bandera = FALSE;
+                foreach ($pagocuota->getCombo()->getInscripciones() as $key => $inscripcion)
+                {
+                    if ($inscripcion->getClase()->getActividad()->getId()==$id)
+                    {
+                        $bandera = TRUE;
+                    }
+                }
+                if (!$bandera)
+                {
+                    unset($pagocuotas[$key]);
+                }
+            }
+        }
+        if ($pagocuotas==[])
+        {
+            $this->addFlash('warning',sprintf('No hay datos históricos'));
+            return $this->redirectToRoute('easyadmin', array(
+                'action' => 'list',
+                'entity' => 'Actividad'
+            ));
+        }
+        $min = DateTime::createFromFormat('m-d-Y', $min);
+        $max = DateTime::createFromFormat('m-d-Y', $max);
+        $temporal = $min;
+        $mesinicial = idate('m',$min->getTimeStamp());
+        $meses = array();
+        array_push($meses,idate('m',$min->getTimeStamp()));
+
+        
+        for ($i = 1; $i <= $mesinicial;$i++)
+        {
+            $temporal->add(new DateInterval('P01M'));
+            $coso = idate('m',$temporal->getTimeStamp());
+            array_push($meses,$coso);
+
+        }
+        //dump($meses);exit;
+
+        $dineros = array();
+        foreach ($meses as $mes)
+        {
+            $acumulador = 0;
+            foreach ($pagocuotas as $key => $pagocuota)
+            {
+                if (($pagocuota->getInscripcion()!=NULL) and ($mes==idate('m',$pagocuota->getFechaYHora()->getTimeStamp())))
+                {
+                    $acumulador = $acumulador + $pagocuota->getMonto();
+                }
+                if (($pagocuota->getCombo()!=NULL) and ($mes==idate('m',$pagocuota->getFechaYHora()->getTimeStamp())))
+                {
+                    $acumulador = $acumulador + (($pagocuota->getMonto())/count($pagocuota->getCombo()->getInscripciones()));
+                }
+            }      
+            array_push($dineros,$acumulador);
+        }
+        $final = array();
+        $elto = array();
+        array_push($elto,'Mes');
+        array_push($elto,'Ingresos por cuotas');
+        array_push($final,$elto);
+        for($i = 0; $i<count($meses);$i++)
+        {
+            $elto = array();
+            array_push($elto,(String)$meses[$i]);
+            array_push($elto,$dineros[$i]);
+            array_push($final,$elto);
+        }
+        //dump($final);exit;
+        
+        $chart1 = new LineChart();
+        $chart1->getData()->setArrayToDataTable($final);
+        $chart1->getOptions()->setTitle('Ingresos de los últimos meses');
+        $chart1->getOptions()->setSeries([['axis' => 'Temps'], ['axis' => 'Daylight']]);
+        
+        #$chart1->getOptions()->setWidth(900);
+        $chart1->getOptions()->setHeight(400);
+
+        $now =  new \DateTime();
+        return $this->render('/informes/informes2.html.twig',
+        array('table'=> $chart1,
+            'chart1' => $chart1,
+        'chart2' => $chart1,
+        'titulo' => 'Informe de Actividades',
+        'sub1' => 'Cantidad de Alumnos e ingresos por Actividad',
+        'sub2' => 'Gráficos de cantidad de Alumnos',
+        'sub3' => 'Cantidad de ingresos',
+        'fechaimpresion' => ((string)$now->format('Y/m/d - H:i'))
+    ));
+    }
+
     public function informeactividadesAction()
     {
         $em = $this->getDoctrine()->getEntityManager();

@@ -416,7 +416,7 @@ easy_admin:
                     - {property: 'Clase'}
                     - {property: 'cuota', label: 'Cuota'}
                     - {property: 'saldo', label: 'Deuda'}
-                    - {property: 'clasesTotales'}
+                    #- {property: 'clasesTotales'}
                     - {property: 'clasesRestantes'}
                     #- {property: 'lunes'}
                     #- {property: 'martes'}
@@ -538,6 +538,7 @@ easy_admin:
                 actions:
                 #    - { name: 'informeactividades', icon: 'print', title: 'Informe de actividades', label: 'Informe de todas las actividades'}
                     - { name: 'informar', icon: 'print', label: 'Informe de clases', target: '_blank'}
+                    - { name: 'historicoActividades', icon: 'clock', label: 'Histórico', target: '_blank'}
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Actividad', title: 'Crear nueva Actividad'}
                 fields:
                     - 'nombre'
@@ -845,6 +846,7 @@ easy_admin:
                 fields:
                     - {property: 'id', label: 'Código de pago'}
                     - {property: 'Inscripcion'}
+                    - {property: 'Combo'}
                     - {property: 'fechaYHora', label: 'Momento de pago'}
                     - {property: 'monto'}
                     - {property: 'mes'}

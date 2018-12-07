@@ -171,8 +171,9 @@ GROUP BY clase.id
         
         $now = new \DateTime();
 
-        $first_day_this_month = date('m-01-Y'); // hard-coded '01' for first day
-        $last_day_this_month  = date('m-t-Y');
+        $first_day_this_month = date('m-01-Y', strtotime("-1 months")); // hard-coded '01' for first day
+        $last_day_this_month  = date("m-t-Y");#date('m-t-Y');
+        #dump($last_day_this_month);exit;
 
         $min = $first_day_this_month;
         $max = $last_day_this_month;
@@ -186,6 +187,7 @@ GROUP BY clase.id
                 }
             }
         }
+        #dump($eses);exit;
 
         if ($eses==[])
         {
@@ -217,8 +219,11 @@ GROUP BY clase.id
         foreach ($eses as $ese)
         {
             $elemento = array();
-            $dia =  idate('d',$ese->getFechaYHora()->getTimestamp());
-            array_push($elemento, $dia);
+            setlocale(LC_ALL,"es_ES");
+            $dia =  (string)idate('d',$ese->getFechaYHora()->getTimestamp());
+            $mes =  strftime("%B",$ese->getFechaYHora()->getTimestamp());
+            $diames = (string)$dia.' de '.$mes;
+            array_push($elemento, $diames);
             $hora =(string)$ese->getFechaYHora()->format('H:i:s');
             array_push($elemento, $hora);
             array_push($elemento, $ese->getTipo());
@@ -231,7 +236,7 @@ GROUP BY clase.id
         return $this->render('informes/informes.html.twig',
         array('chart' => $chart,
         'titulo2'=> '',
-        'titulo'=> 'Lista de entradas y salidas de '.(string)$profesor.' durante el mes',
+        'titulo'=> 'Entradas y salidas de "'.(string)$profesor.'" durante los 2 últimos meses',
         'fechaimpresion' => ((string)$now->format('Y/m/d H:i'))
     ));
 
