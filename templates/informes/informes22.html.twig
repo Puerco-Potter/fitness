@@ -1,0 +1,85 @@
+{% extends 'base3.html.twig' %}
+
+    {% block stylesheets %}
+    <style>
+       .bg {
+                /* Full height */
+                height: 100%;
+
+                /* Center and scale the image nicely */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        .superior{
+            height: 10%;
+        }
+
+        .superior2{
+            height: 56%;
+        }
+        .contenido{
+            height: 100%;
+        }
+
+        .etiqueta{
+            color:white;
+            text-shadow: 0px 0px 8px rgba(255,64,255,1), -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;
+            font-size: large;
+        }
+        .etiqueta2{
+            color:black;
+            text-shadow:  white 0.1em 0.1em 0.2em;
+            font-size: large;
+        }
+        .btn-print{
+                margin-top: 1%;
+                background-color: #e2048d;
+                color:white;
+        }
+    
+    </style>
+    {% endblock %}
+    {% block body %}
+    <script type="text/javascript">
+        {function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+       
+            document.body.innerHTML = printContents;
+       
+            window.print();
+       
+            document.body.innerHTML = originalContents;
+                                    }
+        }
+    </script>
+    
+    <a class="btn btn-print" href="#" onclick="printDiv('Informe')" style="float:right">
+            <i class="fa fa-print" aria-hidden="true" ></i>
+            IMPRIMIR
+    </a>  
+    <div id='Informe' class="zona-informe">
+        <div class="contenido">
+            <div align="left"><img src="{{asset('imagenes/letraslogo.png') }}"></div>
+            <div align="right">
+               <label class="font-weight-bold etiqueta2"><h6><b>Fecha:</b> {{fechaimpresion}}hs</h6></label>
+            </div>
+            <div align="center">
+               <label class="font-weight-bold etiqueta2"><h3>{{titulo}}</h3></label>
+             <br> </br>   </div>
+            <div align="left">
+               <label class="font-weight-bold etiqueta2">{{sub1}}</label>
+              <div id="div_table"></div>
+              <br> </br>
+            <div align="left">
+               <label class="font-weight-bold etiqueta2">{{sub2}}</label>
+              <div id="div_chart1"></div></div>
+            <br> </br>
+            
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                {{ gc_draw([table, chart1], ['div_table','div_chart1']) }}
+            </script>
+        </div></div>
+    {% endblock %}

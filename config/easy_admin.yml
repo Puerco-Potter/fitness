@@ -538,7 +538,7 @@ easy_admin:
                 actions:
                 #    - { name: 'informeactividades', icon: 'print', title: 'Informe de actividades', label: 'Informe de todas las actividades'}
                     - { name: 'informar', icon: 'print', label: 'Informe de clases', target: '_blank'}
-                    - { name: 'historicoActividades', icon: 'clock', label: 'Histórico', target: '_blank'}
+                    - { name: 'historicoActividades', icon: 'signal', label: 'Histórico', target: '_blank'}
                     - { name: 'new', icon: 'plus-circle', label: 'Crear nueva Actividad', title: 'Crear nueva Actividad'}
                 fields:
                     - 'nombre'

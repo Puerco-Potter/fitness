@@ -27,10 +27,20 @@ class ActividadController extends AdminController
         $em = $this->getDoctrine()->getEntityManager();
         $actividad = $em->getRepository(Actividad::class)->find($id);
 
-        $min = date('m-01-Y', strtotime("-6 months")); // hard-coded '01' for first day
+        $min = date('m-01-Y', strtotime("-5 months")); // hard-coded '01' for first day
         $max  = date("m-t-Y");#date('m-t-Y');
 
+        $now = new \DateTime();
         $pagocuotas = $em->getRepository(PagoCuota::class)->findAll();
+
+        $tabla = array();
+        $elemento = array();
+        $elemento = [
+            ['label' => 'Mes', 'type' => 'string'],
+            ['label' => 'Ingresos', 'type' => 'number']
+        ];
+        array_push($tabla, $elemento);
+
         foreach ($pagocuotas as $key => $pagocuota)
         {
             if ($pagocuota->getInscripcion()!=NULL)
@@ -68,11 +78,12 @@ class ActividadController extends AdminController
         $max = DateTime::createFromFormat('m-d-Y', $max);
         $temporal = $min;
         $mesinicial = idate('m',$min->getTimeStamp());
+        $mesactual = idate('m',$now->getTimeStamp());
         $meses = array();
         array_push($meses,idate('m',$min->getTimeStamp()));
 
         
-        for ($i = 1; $i <= $mesinicial;$i++)
+        for ($i = $mesinicial; $i < $mesactual;$i++)
         {
             $temporal->add(new DateInterval('P01M'));
             $coso = idate('m',$temporal->getTimeStamp());
@@ -84,6 +95,8 @@ class ActividadController extends AdminController
         $dineros = array();
         foreach ($meses as $mes)
         {
+            $elemento = array();
+            array_push($elemento,(string)$mes);
             $acumulador = 0;
             foreach ($pagocuotas as $key => $pagocuota)
             {
@@ -97,6 +110,8 @@ class ActividadController extends AdminController
                 }
             }      
             array_push($dineros,$acumulador);
+            array_push($elemento, ['v' => $acumulador, 'f' => '$ '.(string)$acumulador]);
+            array_push($tabla,$elemento);
         }
         $final = array();
         $elto = array();
@@ -112,6 +127,19 @@ class ActividadController extends AdminController
         }
         //dump($final);exit;
         
+        $table = new TableChart();
+        $table->getData()->setArrayToDataTable($tabla); 
+
+        $chart2 = new BarChart();
+        $chart2->getData()->setArrayToDataTable($final);
+        $chart2->getOptions()->setTitle('Ingresos de los últimos meses');
+        $chart2->getOptions()->getHAxis()->setTitle('Ingresos');
+        $chart2->getOptions()->getHAxis()->setMinValue(0);
+        $chart2->getOptions()->getHAxis()->setFormat('0');
+        $chart2->getOptions()->getVAxis()->setTitle('Meses');
+        #$chart1->getOptions()->setWidth(900);
+        $chart2->getOptions()->setHeight(400);
+
         $chart1 = new LineChart();
         $chart1->getData()->setArrayToDataTable($final);
         $chart1->getOptions()->setTitle('Ingresos de los últimos meses');
@@ -121,14 +149,12 @@ class ActividadController extends AdminController
         $chart1->getOptions()->setHeight(400);
 
         $now =  new \DateTime();
-        return $this->render('/informes/informes2.html.twig',
-        array('table'=> $chart1,
-            'chart1' => $chart1,
-        'chart2' => $chart1,
-        'titulo' => 'Informe de Actividades',
-        'sub1' => 'Cantidad de Alumnos e ingresos por Actividad',
-        'sub2' => 'Gráficos de cantidad de Alumnos',
-        'sub3' => 'Cantidad de ingresos',
+        return $this->render('/informes/informes22.html.twig',
+        array('table'=> $table,
+            'chart1' => $chart2,
+        'titulo' => 'Informe histórico de '.$actividad->getNombre(),
+        'sub1' => 'Ingresos históricos de '.$actividad->getNombre(),
+        'sub2' => 'Gráfico comparativo',
         'fechaimpresion' => ((string)$now->format('Y/m/d - H:i'))
     ));
     }
