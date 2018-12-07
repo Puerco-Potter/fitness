@@ -268,13 +268,13 @@ class CajaController extends AdminController
             array_push($elemento, (string) $movimiento->getHora()->format('H:i:s'));
             if ($movimiento->getTipo()=='Ingreso')
             {
-                array_push($elemento, ['v' => $caja->getSaldoInicial(), 'f' => '$'.(string)$caja->getSaldoInicial()]);
+                array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
                 array_push($elemento, '-');
             }
             else
             {
                 array_push($elemento, '-');
-                array_push($elemento, ['v' => $caja->getSaldoInicial(), 'f' => '$'.(string)$caja->getSaldoInicial()]);
+                array_push($elemento, ['v' => $movimiento->getMonto(), 'f' => '$'.(string)$movimiento->getMonto()]);
             }
             array_push($elemento, $movimiento->getConcepto());
             array_push($elemento, $movimiento->getObservaciones());
