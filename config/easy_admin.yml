@@ -713,7 +713,7 @@ easy_admin:
                 fields:
                     - { type: 'group', css_class: 'col-sm-5', label: '' }
                     - {property: 'descripcion', label: 'Descripción', css_class: 'col-sm-10'}
-                    - {property: 'zonaMuscular', type: 'choice', label: 'Zona muscular',type_options:{choices:{ 'Pecho':'Pecho','Espalda':'Espalda'  ,'Hombros':'Hombros' ,'Brazos':'Brazos' ,'Piernas':'Piernas' }}, css_class: 'wrap-collabsible col-sm-6'}
+                    - {property: 'zonaMuscular', type: 'choice', label: 'Zona muscular',type_options:{choices:{ 'Pecho':'Pecho','Espalda':'Espalda'  ,'Hombros':'Hombros' ,'Brazos':'Brazos' ,'Piernas':'Piernas','Pectorales':'Pectorales' }}, css_class: 'wrap-collabsible col-sm-6'}
                     
                     - { type: 'group', label: 'Equipo/Elemento requerido:', css_class: 'col-sm-5 new-row', collapsible: true}
                     - {property: 'Equipamiento', css_class: 'col-sm-6 new-row'}
