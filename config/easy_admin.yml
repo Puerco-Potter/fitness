@@ -911,12 +911,19 @@ easy_admin:
                     - {property: 'EmpleadoCierre', label: 'Empleado al cerrar'}
                     - {property: 'Movimientos'}
             list:
+                sort: ['fecha','DESC']
                 actions:
                     - { name: 'addMov', label: '+ ', title: 'Agregar Movimiento', icon: 'money', css_class: 'text-green', target: '_blank'}  
                     - { name: 'balance', icon: 'balance-scale', label: 'Balance', target: '_blank'}     
                     - { name: 'new', icon: 'plus-circle', label: 'Abrir Caja', title: 'Abrir Caja'}
                     - { name: 'cerrar', label: 'Cerrar caja', title: 'Cerrar caja', icon: 'times-circle', css_class: 'text-red'} 
-
+                fields:
+                    - 'fecha'
+                    - 'apertura'
+                    - 'cierre'
+                    - 'saldoInicial'
+                    - 'saldoFinal'
+                    - 'EmpleadoApertura'
             controller: App\Controller\CajaController
         Movimiento:
             class: App\Entity\Movimiento
