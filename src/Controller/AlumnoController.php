@@ -115,7 +115,7 @@ class AlumnoController extends AdminController
                 unset($combos[$key]);
             }
         }
-        if (($combos==[]) AND ($inscripciones=[]))
+        if (($combos==[]) AND ($inscripciones==[]))
         {
             $this->addFlash('warning',sprintf('No hay alumnos morosos'));
             return $this->redirectToRoute('easyadmin', array(
@@ -123,34 +123,41 @@ class AlumnoController extends AdminController
                 'entity' => 'Alumno'
             ));
         }
-        foreach ($inscripciones as $inscripcion)
+        //dump($inscripciones);exit;
+        if ($inscripciones!=[])
         {
-            $elemento = array();
-            $alumno = $em->getRepository(Alumno::class)->find($inscripcion->getAlumno()->getId());
-            array_push($elemento, (string) $alumno->getDNI());
-            array_push($elemento, (string) $alumno);
-            array_push($elemento, (string) $alumno->getLocalidad().' - '.$alumno->getDireccion());
-            array_push($elemento, (string) $alumno->getCorreo());
-            #dump($alumno->listaTelefonos());exit;
-            array_push($elemento, (string) $alumno->listaTelefonos());
-            array_push($elemento, (string) $inscripcion->getClase());
-            array_push($elemento, ['v' => $inscripcion->getSaldo(), 'f' => '$'.(string)$inscripcion->getSaldo()]);
-            array_push($lista,$elemento);
-        }        
-        foreach ($combos as $combo)
+            foreach ($inscripciones as $inscripcion)
+            {
+                $elemento = array();
+                $alumno = $em->getRepository(Alumno::class)->find($inscripcion->getAlumno()->getId());
+                array_push($elemento, (string) $alumno->getDNI());
+                array_push($elemento, (string) $alumno);
+                array_push($elemento, (string) $alumno->getLocalidad().' - '.$alumno->getDireccion());
+                array_push($elemento, (string) $alumno->getCorreo());
+                #dump($alumno->listaTelefonos());exit;
+                array_push($elemento, (string) $alumno->listaTelefonos());
+                array_push($elemento, (string) $inscripcion->getClase());
+                array_push($elemento, ['v' => $inscripcion->getSaldo(), 'f' => '$'.(string)$inscripcion->getSaldo()]);
+                array_push($lista,$elemento);
+            }     
+        }
+        if ($combos!=[])
         {
-            $elemento = array();
-            $alumno = $em->getRepository(Alumno::class)->find($combo->getAlumno()->getId());
-            array_push($elemento, (string) $alumno->getDNI());
-            array_push($elemento, (string) $alumno);
-            array_push($elemento, (string) $alumno->getLocalidad().' - '.$alumno->getDireccion());
-            array_push($elemento, (string) $alumno->getCorreo());
-            #dump($alumno->listaTelefonos());exit;
-            array_push($elemento, (string) $alumno->listaTelefonos());
-            array_push($elemento, (string) $combo);
-            array_push($elemento, ['v' => $combo->getSaldo(), 'f' => '$'.(string)$combo->getSaldo()]);
-            array_push($lista,$elemento);
-        }        
+            foreach ($combos as $combo)
+            {
+                $elemento = array();
+                $alumno = $em->getRepository(Alumno::class)->find($combo->getAlumno()->getId());
+                array_push($elemento, (string) $alumno->getDNI());
+                array_push($elemento, (string) $alumno);
+                array_push($elemento, (string) $alumno->getLocalidad().' - '.$alumno->getDireccion());
+                array_push($elemento, (string) $alumno->getCorreo());
+                #dump($alumno->listaTelefonos());exit;
+                array_push($elemento, (string) $alumno->listaTelefonos());
+                array_push($elemento, (string) $combo);
+                array_push($elemento, ['v' => $combo->getSaldo(), 'f' => '$'.(string)$combo->getSaldo()]);
+                array_push($lista,$elemento);
+            }     
+        }     
         $chart = new TableChart();
         $chart->getData()->setArrayToDataTable($lista);
         #$chart->getOptions()->setHeight('100%');

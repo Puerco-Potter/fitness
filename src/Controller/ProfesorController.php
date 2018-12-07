@@ -219,11 +219,12 @@ GROUP BY clase.id
         foreach ($eses as $ese)
         {
             $elemento = array();
-            setlocale(LC_ALL,"es_ES");
-            $dia =  (string)idate('d',$ese->getFechaYHora()->getTimestamp());
-            $mes =  strftime("%B",$ese->getFechaYHora()->getTimestamp());
-            $diames = (string)$dia.' de '.$mes;
-            array_push($elemento, $diames);
+            //setlocale(LC_ALL,"es_ES");
+            //$dia =  (string)idate('d',$ese->getFechaYHora()->getTimestamp());
+            //$mes =  strftime("%B",$ese->getFechaYHora()->getTimestamp());
+            //$diames = (string)$dia.' de '.$mes;
+            $dia =(string)$ese->getFechaYHora()->format('Y/m/d');
+            array_push($elemento, $dia);
             $hora =(string)$ese->getFechaYHora()->format('H:i:s');
             array_push($elemento, $hora);
             array_push($elemento, $ese->getTipo());

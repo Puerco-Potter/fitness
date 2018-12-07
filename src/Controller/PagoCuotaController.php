@@ -193,7 +193,7 @@ class PagoCuotaController extends AdminController
             $comboPago = $pagoCuota->getCombo();
              if ($comboPago == NULL)
             {     
-            $this->addFlash('warning',sprintf('No se cargó la inscrición o el combo, verifíquelo y vuelva a intentarlo'));
+            $this->addFlash('warning',sprintf('No se cargó la inscripción o el combo, verifíquelo y vuelva a intentarlo'));
             return $this->redirectToRoute('easyadmin', array(
                 'action' => 'list',
                 'entity' => 'PagoCuota'
