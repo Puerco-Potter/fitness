@@ -81,7 +81,7 @@ class Entrenamiento
 
         return $this;
     }
-
+    /*
     public function getRutina(): ?Rutina
     {
         return $this->Rutina;
@@ -93,7 +93,7 @@ class Entrenamiento
 
         return $this;
     }
-
+    */
     public function getEjercicio(): ?Ejercicio
     {
         return $this->Ejercicio;

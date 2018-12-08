@@ -153,7 +153,7 @@ class ClaseController extends AdminController
         $chart1->getOptions()->getHAxis()->setFormat('0');
         $chart1->getOptions()->getVAxis()->setTitle('Clases');
         #$chart1->getOptions()->setWidth(900);
-        $chart1->getOptions()->setHeight(400);
+        $chart1->getOptions()->setHeight(600);
 
         $chart2 = new BarChart();
         $chart2->getData()->setArrayToDataTable($ar_dinero);
@@ -162,7 +162,7 @@ class ClaseController extends AdminController
         $chart2->getOptions()->getHAxis()->setMinValue(0);
         $chart2->getOptions()->getVAxis()->setTitle('Clases');
         #$chart2->getOptions()->setWidth(900);
-        $chart2->getOptions()->setHeight(400);
+        $chart2->getOptions()->setHeight(600);
         $now =  new \DateTime();
         #dump($table);exit;
 
