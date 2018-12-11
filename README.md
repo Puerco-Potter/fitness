@@ -4,6 +4,8 @@ php bin/console make:entity
 </br>
 php bin/console doctrine:schema:update --force
 </br>
+php bin/console cache:clear --env=dev
+</br>
 
 public function createEntityFormBuilder($entity, $view)
 {
